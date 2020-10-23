@@ -9,16 +9,20 @@ class MainPage extends Component {
   render() {
     return(
       <div className = 'mainPage'>
-        {<LocationPopup/>}
+        <div className = 'locationPopup'>
+          {<LocationPopup/>}
+        </div>
       </div>
     )
   }
 }
+
 const mapStateToProps = state => {
   return {
 
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
 
