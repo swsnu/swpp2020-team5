@@ -8,7 +8,7 @@ function App() {
   return (
     // temporarily using path '/' for MainPage for testing
     <BrowserRouter>
-      <div className="App">
+      <div className = "App">
         <Switch>
           <Route path = '/' exact render = {() => <MainPage/>} />
           <Route render={() => <h1>Not Found</h1>} />

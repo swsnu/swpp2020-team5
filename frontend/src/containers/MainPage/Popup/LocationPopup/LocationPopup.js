@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Popup from 'reactjs-popup'
+
 class LocationPopup extends Component {
   render(){
     return(
-      <Popup className = "locationPopup"></Popup>
+      <Popup trigger = {<button>Location</button>} position = 'right center' className = 'locationPopup'>
+        <div>
+          LocationPopup
+        </div>
+      </Popup>
     )
   }
 }
