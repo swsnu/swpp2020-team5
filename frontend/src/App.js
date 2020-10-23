@@ -11,6 +11,7 @@ function App() {
       <div className = "App">
         <Switch>
           <Route path = '/' exact render = {() => <MainPage/>} />
+          <Route path='/main'exact component={MainPage}></Route>
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </div>
