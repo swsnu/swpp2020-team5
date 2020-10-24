@@ -66,7 +66,7 @@ class PreferenceVectorPopup extends Component {
                     <p>Factor 1: </p>
                     <div className='Factor_one'>
                         <input type='radio' name='Factor1' id='one' value={1}
-                            checked={this.state.preferenceVector.factor_one === 1}
+                            checked={this.state.preferenceVector.factor_one == 1}
                             onChange={this.onFactorOneChange}/>
                         <label htmlFor='one'>1</label>
                         
