@@ -84,7 +84,7 @@ class LocationPopup extends Component {
           break;
         }
       } catch (error) {
-      location = '현위치';
+        location = '현위치';
     }
 
     return(
