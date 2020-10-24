@@ -8,7 +8,7 @@ const getUser_ = user => {
   }
 }
 
-export getUser = (id) => {
+export const getUser = (id) => {
   return dispatch => {
     return axios.get('/api/user/'+id)
       .then(res => dispatch(getUser_(res.data)))
@@ -45,6 +45,19 @@ export const editUser = user => {
     return axios.put('/api/user/'+user.id, user)
       .then(res => {
         dispatch(editUser_(res.data))
+      })
+  }
+}
+
+// is it better changing getUser -> new func?
+//
+const editUserFoodCategory_ = getUser_;
+
+export const editUserFoodCategory = id_and_foodCategory => {
+  return dispatch => {
+    return axios.put('/api/user/foodCategory', id_and_foodCategory)
+      .then(res => {
+        dispatch(editUserFoodCategory_(res.data))
       })
   }
 }

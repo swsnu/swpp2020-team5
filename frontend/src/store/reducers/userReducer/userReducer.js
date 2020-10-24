@@ -9,8 +9,9 @@ const initialState = {
       loginID: 'swpp',
       loginPW: 'iluv',
       foodCategory: {
-        korean: true,
-        chinese: false,
+        Korean: true,
+        Western: true,
+        Chinese: false,
       },
       searchLocation: 'kwanak',
       logged_in: false,
