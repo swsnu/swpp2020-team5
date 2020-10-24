@@ -36,7 +36,7 @@ class LocationPopup extends Component {
   }
 
   //
-  // close the popup and change searchingLocation
+  // close the popup and change searchLocation
   //
   changeLocationHandler(location) {
     this.props.onChangeLocation(location);
@@ -71,10 +71,10 @@ class LocationPopup extends Component {
       )
     })
 
-    // set the displayed name on the button to searchingLocation
+    // set the displayed name on the button to searchLocation
     let location = 'NULL';
     try {
-      location = this.props.searchingLocation;
+      location = this.props.searchLocation;
       switch(location.address_type) {
         case 'REGION':
           location = location.address.region_2depth_name;
@@ -105,7 +105,7 @@ class LocationPopup extends Component {
 }
 const mapStateToProps = state => {
   return {
-    searchingLocation: state.us.searchingLocation,
+    searchLocation: state.us.searchLocation,
   }
 }
 const mapDispatchToProps = dispatch => {
