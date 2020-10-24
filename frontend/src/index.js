@@ -3,9 +3,14 @@ import store, { history } from './store/store'
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import React from 'react';
+import { createStore } from 'redux';
+import userReducer from './store/reducers/userReducer/userReducer.js';
 
 import App from './App';
 import './index.css';
+
+
+const rootReducer = userReducer;
 
 ReactDOM.render(
     <Provider store = {store}>

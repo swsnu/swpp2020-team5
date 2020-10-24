@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import LocationPopup from './Popup/LocationPopup/LocationPopup'
+import PreferenceVectorPopup from './Popup/PreferenceVectorPopup/PreferenceVectorPopup.js'
 
 class MainPage extends Component {
 
@@ -11,6 +12,9 @@ class MainPage extends Component {
       <div className = 'mainPage'>
         <div className = 'locationPopup'>
           {<LocationPopup/>}
+        </div>
+        <div className='preferencePopup'>
+          {<PreferenceVectorPopup/>}
         </div>
       </div>
     )
