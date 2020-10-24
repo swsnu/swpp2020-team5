@@ -55,6 +55,7 @@ class FoodCategoryPopup extends Component {
   render() {
     return (
     <div className='FoodCategoryPopup'>
+      <h1>Select what you want!</h1>
         <img className={this.state.foodCategory.Korean ? 'ClickedImage' : 'unClickedImage'}
           src={KoreanImage}
           alt="Korean" 
@@ -82,7 +83,7 @@ class FoodCategoryPopup extends Component {
         </img>
       <br/>
       <button onClick={() => this.postClickSaveHandler()}>
-        Save
+        SAVE
       </button>
     </div>
     )
