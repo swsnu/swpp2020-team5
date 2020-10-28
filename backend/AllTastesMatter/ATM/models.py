@@ -43,7 +43,6 @@ class Review(models.Model):
             on_delete=models.CASCADE)
     author = models.ForeignKey('Profile',
             on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
     content = models.CharField(max_length=1000)
     link = models.URLField(max_length=200)
     rating = models.FloatField()
