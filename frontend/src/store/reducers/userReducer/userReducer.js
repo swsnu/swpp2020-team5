@@ -1,6 +1,7 @@
 import * as actionTypes from '../../actions/actionTypes'
 
 const initialState = {
+  searchLocation: null,
   selectedUser: [
     { 
       id: 0,
@@ -16,12 +17,14 @@ const initialState = {
       searchLocation: 'kwanak',
       logged_in: false,
     },
-  ]
+  ],
 }
 const reducer = (state = initialState, action) => {
-  switch (action.types) {
-    case actionTypes.GET_USER:
+  switch(action.type){
+		case actionTypes.GET_USER:
       return { ...state, selectedUser: action.target }
+    case actionTypes.CHANGE_LOCATION:
+      return {...state, searchLocation: action.searchLocation};
   }
   return state;
 }

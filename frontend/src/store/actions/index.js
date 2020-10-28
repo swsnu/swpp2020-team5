@@ -1,2 +1,3 @@
-export { loginUser, editUser, getUser, editUserFoodCategory }
-  from './userActions/userActions';
+export {
+  changeLocation, loginUser, editUser, getUser, editUserFoodCategory
+} from './userActions/userActions'
