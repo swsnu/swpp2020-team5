@@ -8,7 +8,6 @@ from django.db.models.signals import post_save
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    user_pk = models.IntegerField(blank=True)
     name = models.CharField(max_length=200)
     loginID = models.CharField(max_length=20)
     loginPW = models.CharField(max_length=20)
