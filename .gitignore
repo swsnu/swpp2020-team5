@@ -1,6 +1,5 @@
 yarn.lock
 
-#dependency directories
 node_modules
-*.pyc
 coverage
+*.pyc
