@@ -6,7 +6,6 @@ import SearchResult from '../../../../components/SearchResult/SearchResult'
 import * as actionCreators from '../../../../store/actions/index'
 import './LocationPopup.css'
 
-
 class LocationPopup extends Component {
 
   state = {
@@ -89,7 +88,6 @@ class LocationPopup extends Component {
     }
 
     return(
-
       <div className = 'locationPopup'>검색 위치
         <button onClick = {() => this.togglePopupHandler()} className = 'searchButton'>{location}</button>
         <div id = 'searchPopup' className = 'searchPopup'>
@@ -102,7 +100,6 @@ class LocationPopup extends Component {
           {searchResultList}
         </div>
       </div>
-
     )
   }
 }

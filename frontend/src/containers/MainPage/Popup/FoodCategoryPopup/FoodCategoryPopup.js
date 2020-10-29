@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
 import './FoodCategoryPopup.css';
-
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../../store/actions/actionTypes';
 import { withRouter } from 'react-router';
 import * as actionCreators from '../../../../store/actions/index';
-
 import KoreanImage from './img/Korean.jpeg'
 import VietnamImage from './img/Vietnam.jpeg'
 import ChineseImage from './img/Chinese.jpeg'
@@ -50,7 +48,6 @@ class FoodCategoryPopup extends Component {
       id: this.props.user_id,
       foodCategory: this.state.foodCategory
     } 
-
     this.props.onEditUserFoodCategory(id_and_foodCategory)
 
     this.props.closepopup()
@@ -61,7 +58,6 @@ class FoodCategoryPopup extends Component {
     return (
     <div className='FoodCategoryPopup'>
       <h1>Select what you want!</h1>
-
         <img className={this.state.foodCategory.Korean ? 'ClickedImage' : 'unClickedImage'}
           src={KoreanImage}
           alt="Korean" 
@@ -88,8 +84,7 @@ class FoodCategoryPopup extends Component {
         >
         </img>
       <br/>
-
-      <button onClick={() => this.postClickSaveHandler()}>
+     <button onClick={() => this.postClickSaveHandler()}>
         SAVE
       </button>
     </div>
