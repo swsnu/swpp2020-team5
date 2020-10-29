@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import RestaurantReview from '../../../components/RestaurantDetail/RestaurantReview/RestaurantReview.js';
+import RestaurantReview from '../../../components/RestaurantDetail/RestaurantReview/RestaurantReview';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import * as actionCraetors from '../../../store/actions/index.js';
+import * as actionCraetors from '../../../store/actions/index';
 
 
 class RestaurantReviewList extends Component {

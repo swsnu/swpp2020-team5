@@ -1,4 +1,4 @@
-import * as actionTypes from '../actionTypes.js';
+import * as actionTypes from '../actionTypes';
 import axios from 'axios';
 
 
