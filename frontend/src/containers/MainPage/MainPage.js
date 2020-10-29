@@ -2,8 +2,9 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import LocationPopup from './Popup/LocationPopup/LocationPopup'
-import PreferenceVectorPopup from './Popup/PreferenceVectorPopup/PreferenceVectorPopup.js'
+import LocationPopup from './Popup/LocationPopup/LocationPopup';
+import PreferencePopup from './Popup/PreferencePopup/PreferencePopup.js';
+import RestaurantReviewList from '../DetailPage/RestaurantReviewList/RestaurantReviewList.js';
 
 class MainPage extends Component {
 
@@ -14,7 +15,10 @@ class MainPage extends Component {
           {<LocationPopup/>}
         </div>
         <div className='preferencePopup'>
-          {<PreferenceVectorPopup/>}
+          {<PreferencePopup/>}
+        </div>
+        <div className='reviewList test'>
+          {<RestaurantReviewList/>}
         </div>
       </div>
     )
