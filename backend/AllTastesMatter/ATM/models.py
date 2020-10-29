@@ -7,10 +7,9 @@ from django.db.models.signals import post_save
 # Create your models here.
 
 class Profile(models.Model):
+    # user include email and password
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    loginID = models.CharField(max_length=20)
-    loginPW = models.CharField(max_length=20)
     searchLocation = models.CharField(max_length=100)
     foodCategory = models.OneToOneField('FoodCategory',
             on_delete=models.CASCADE)
