@@ -9,10 +9,12 @@ class RestaurantSummary extends Component{
             <div className='restaurantSummary'>
                 <div className='left'>
                     
-                    <img src={this.props.img_url} width='100' height='100'/>
+                    <img src={this.props.img_url} width='100' height='100' 
+                    onClick={()=>this.props.clickrestaurant()}/>
                 </div>
                 <div className='right'>
-                    <p>{this.props.title}</p>
+                    <p onClick={()=> this.props.clickrestaurant() }>
+                        {this.props.title}</p>
                     <p>{this.props.rate} </p>
                 </div>
      
