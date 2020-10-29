@@ -1,5 +1,5 @@
 export {
-  getUser, changePreferenceVector,
+  changeLocation, loginUser, editUser, getUser, editUserFoodCategory, changePreferenceVector,
 } from './userActions/userActions.js';
 
 export {

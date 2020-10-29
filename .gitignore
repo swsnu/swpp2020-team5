@@ -2,5 +2,5 @@ yarn.lock
 
 #dependency directories
 node_modules
-coverage
 *.pyc
+coverage
