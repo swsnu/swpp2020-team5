@@ -1,3 +1,4 @@
+
 export {
   changeLocation, loginUser, editUser, getUser, editUserFoodCategory
   , changePreferenceVector,
@@ -6,3 +7,9 @@ export {
 export {
   getRestaurantReviews,
 } from './reviewActions/reviewActions';
+
+export {
+    getRestaurantList,
+    getRestaurantName,
+    getRestaurantDetail,
+} from './restaurantActions/restauraunActions';

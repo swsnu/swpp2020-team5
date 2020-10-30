@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './FoodCategoryPopup.css';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../../store/actions/actionTypes';
@@ -48,6 +49,7 @@ class FoodCategoryPopup extends Component {
       foodCategory: this.state.foodCategory
     } 
     this.props.onEditUserFoodCategory(id_and_foodCategory)
+
     this.props.closepopup()
   }
   // we need to add hover and clicked img showing
@@ -82,7 +84,7 @@ class FoodCategoryPopup extends Component {
         >
         </img>
       <br/>
-      <button onClick={() => this.postClickSaveHandler()}>
+     <button onClick={() => this.postClickSaveHandler()}>
         SAVE
       </button>
     </div>
