@@ -31,11 +31,14 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=50)
     menu = models.CharField(max_length=1000)
     location = models.CharField(max_length=100)
-    thumbNail = models.ImageField()
+    thumbNail = models.URLField()
     keywords = models.JSONField()
     avgRating = models.FloatField()
     preference = models.ForeignKey('TasteVector',
             on_delete=models.OneToOneField)
+    foodCategory = models.CharField(max_length=100)
+    openTime = models.CharField(max_length=100)
+
 
 class Review(models.Model):
     restaurant = models.ForeignKey('Restaurant',
