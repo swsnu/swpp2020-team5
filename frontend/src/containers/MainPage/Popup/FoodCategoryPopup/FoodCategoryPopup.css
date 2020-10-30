@@ -1,0 +1,16 @@
+.FoodCategoryPopup {
+  padding: 10px;  
+  text-align: center;
+}
+
+.FoodCategoryPopup .unClickedImage {
+  width: 300px;
+  height: 200px;
+  opacity: 1;
+}
+
+.FoodCategoryPopup .ClickedImage {
+  width: 300px;
+  height: 200px;
+  opacity: 0.5;
+}

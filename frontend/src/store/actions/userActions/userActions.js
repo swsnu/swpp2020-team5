@@ -1,6 +1,5 @@
-import * as actionTypes from '../actionTypes';
-import axios from 'axios';
-
+import * as actionTypes from '../actionTypes'
+import axios from 'axios'
 
 const getUser_ = user => {
   return {
@@ -73,7 +72,6 @@ export const changeLocation = (searchLocation) => {
     dispatch(changeLocation_(searchLocation));
   }
 }
-
 
 export const changePreferenceVector_ = (user) => {
     return {

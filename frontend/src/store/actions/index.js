@@ -1,6 +1,7 @@
 export {
-  changeLocation, loginUser, editUser, getUser, editUserFoodCategory, changePreferenceVector,
-} from './userActions/userActions';
+  changeLocation, loginUser, editUser, getUser, editUserFoodCategory
+  , changePreferenceVector,
+} from './userActions/userActions'
 
 export {
   getRestaurantReviews,

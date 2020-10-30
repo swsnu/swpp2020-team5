@@ -1,4 +1,6 @@
-export const CHANGE_LOCATION = 'CHANGE_LOCATION';
+// for userActions
+
+export const CHANGE_LOCATION    = 'CHANGE_LOCATION';
 export const GET_USER = 'GET_USER';
 export const EDIT_USER = 'EDIT_USER';
 export const CHANGE_PREFERENCE_VECTOR = 'CHANGE_PREFERENCE_VECTOR';
