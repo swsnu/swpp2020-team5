@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import React from 'react';
 
 import MainPage from './containers/MainPage/MainPage'
+import PreferencePopup from './containers/MainPage/Popup/PreferencePopup/PreferencePopup.js';
 import './App.css';
 import DetailPage from './containers/DetailPage/DetailPage';
 

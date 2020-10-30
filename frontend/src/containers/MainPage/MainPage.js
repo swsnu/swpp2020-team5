@@ -1,10 +1,13 @@
 import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import RestaurantSummary from '../../components/RestaurantSummary/RestaurantSummary';
 import LocationPopup from './Popup/LocationPopup/LocationPopup';
 import PreferenceVectorPopup from './Popup/PreferenceVectorPopup/PreferenceVectorPopup';
+import PreferencePopup from './Popup/PreferencePopup/PreferencePopup.js';
 import FoodCategoryPopup from './Popup/FoodCategoryPopup/FoodCategoryPopup';
+import RestaurantReviewList from '../DetailPage/RestaurantReviewList/RestaurantReviewList.js';
 import * as actionCreators from '../../store/actions/index';
 
 class MainPage extends Component {
@@ -60,7 +63,6 @@ class MainPage extends Component {
           </button>
         </h1>
         {restaurantlists}
-
       </div>
 
 

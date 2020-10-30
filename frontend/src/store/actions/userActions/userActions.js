@@ -72,3 +72,20 @@ export const changeLocation = (searchLocation) => {
     dispatch(changeLocation_(searchLocation));
   }
 }
+
+export const changePreferenceVector_ = (user) => {
+    return {
+        type: actionTypes.CHANGE_PREFERENCE_VECTOR,
+        target: user,
+    }
+}
+
+export const changePreferenceVector = (user) => {
+    return (dispatch) => {
+        return axios.put('api/user/preference/' + user.id, user)
+            .then(res => {
+                dispatch(changePreferenceVector_(user));
+            })
+    }
+}
+
