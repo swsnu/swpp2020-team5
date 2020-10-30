@@ -1,7 +1,3 @@
 yarn.lock
 node_modules
 *.pyc
-<<<<<<< HEAD
-=======
-coverage
->>>>>>> ba88d48ab5634a728b0df6d595155059a0825a71
