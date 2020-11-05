@@ -28,7 +28,7 @@ class LocationPopup extends Component {
   //
   // open popup if closed, and vice versa
   //
-  togglePopupHandler() {
+  onTogglePopupHandler() {
     const popup = document.getElementById('searchPopup');
     popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
     document.getElementById('searchBox').value = '';
@@ -38,22 +38,22 @@ class LocationPopup extends Component {
   //
   // close the popup and change searchLocation
   //
-  changeLocationHandler(location) {
+  onClickLocationHandler(location) {
     this.props.onChangeLocation(location);
-    this.togglePopupHandler();
+    this.onTogglePopupHandler();
   }
 
   //
-  // list the possible results of the searched word
+  // list the possible results of the input location
   //
-  searchResultListHandler(searchValue) {
+  onChangeLocationInputHandler(location) {
     kakao.maps.load(() => {
       let places = new kakao.maps.services.Geocoder();
       let callback = (result) => {
         this.setState({searchResultList: result});
       };
-      if(searchValue) {
-        places.addressSearch(searchValue, callback, {page:10, size:10});
+      if(location) {
+        places.addressSearch(location, callback, {page:10, size:10});
       }else {
         this.setState({searchResultList: []});
       }
@@ -64,7 +64,7 @@ class LocationPopup extends Component {
 
     const searchResultList = this.state.searchResultList.map((location) => {
       return (
-        <div onClick = {() => this.changeLocationHandler(location)}>
+        <div onClick = {() => this.onClickLocationHandler(location)} className = 'LocationCandidate'>
           <SearchResult address_name = {location.address_name}/>
           <hr className = 'searchResultBorder'/>
         </div>
@@ -89,16 +89,17 @@ class LocationPopup extends Component {
 
     return(
       <div className = 'locationPopup'>검색 위치
-        <button onClick = {() => this.togglePopupHandler()} className = 'searchButton'>{location}</button>
+        <button onClick = {() => this.onTogglePopupHandler()} className = 'searchButton'>{location}</button>
         <div id = 'searchPopup' className = 'searchPopup'>
           <input  className = 'searchBox'
                   id = 'searchBox'
-                  onChange = {(event) => this.searchResultListHandler(event.target.value)}
+                  onChange = {(event) => this.onChangeLocationInputHandler(event.target.value)}
                   placeholder = '장소 검색...'>
           </input>
           <hr className = 'searchResultBorder'/>
           {searchResultList}
         </div>
+        <h1>Hello, world!Hello, world!Hello, world!Hello, world!</h1>
       </div>
     )
   }
