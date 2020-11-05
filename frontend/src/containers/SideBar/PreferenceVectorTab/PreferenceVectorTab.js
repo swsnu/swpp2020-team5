@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Popup from 'reactjs-popup';
-import * as actionTypes from '../../../../store/actions/actionTypes.js';
-import * as actionCreators from '../../../../store/actions/index.js';
+import * as actionTypes from '../../../store/actions/actionTypes';
+import * as actionCreators from '../../../store/actions/index.js';
 
 class PreferenceVectorTab extends Component {
 

@@ -2,8 +2,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import SearchResult from '../../../../components/SearchResult/SearchResult'
-import * as actionCreators from '../../../../store/actions/index'
+import SearchResult from '../../../components/SearchResult/SearchResult'
+import * as actionCreators from '../../../store/actions/index'
 import './LocationTab.css'
 
 class LocationTab extends Component {

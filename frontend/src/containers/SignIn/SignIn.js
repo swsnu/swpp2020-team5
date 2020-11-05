@@ -6,8 +6,8 @@ import * as actionCreators from '../../store/actions/index';
 
 class SignIn extends Component{
   state = {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   }
   onClickSignInHandler = () => {
     this.props.onPostSignIn(this.state.email, this.state.password);
@@ -26,7 +26,9 @@ class SignIn extends Component{
           <input type="text" id="password-input" value={this.state.password}
             onChange={(event) => this.setState({ password: event.target.value })} />
           <button id="sign-in-button" onClick = {()=>this.onClickSignInHandler()} >로그인</button>
-          <a id="sign-up-link" href={this.props.history.push("/sign-up/")}>회원 가입</a>
+          <div>
+            아직 회원이 아니신가요? <a id="sign-up-link" href='/sign-up'>회원 가입</a>
+          </div>
         </div>
       </div>
     );

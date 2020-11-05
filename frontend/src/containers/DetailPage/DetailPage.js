@@ -1,10 +1,11 @@
+import ReactStars from "react-rating-stars-component";
 import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import Keywords from '../../components/DetailPage/Keywords/Keywords';
 import * as actionCreators from '../../store/actions/index';
-import { getRestaurantDetail } from '../../store/actions/restaurantActions/restauraunActions';
-import RestaurantKeywords from '../../components/RestaurantDetail/RestaurantKeywords/RestaurantKeywords';
-import ReactStars from "react-rating-stars-component";
+
 class DetailPage extends Component{
     componentDidMount() {
         this.props.onGetRestaurantDetail(parseInt(this.props.match.params.id));
@@ -30,7 +31,7 @@ class DetailPage extends Component{
                 <p>{this.props.selectedrestaurant.time}</p>
               </div>
               <div className='keywords'>
-                  <RestaurantKeywords keywords={this.props.selectedrestaurant.keywords} />
+                  <Keywords keywords={this.props.selectedrestaurant.keywords} />
               </div>
               <div className='rating'>
               평가하기

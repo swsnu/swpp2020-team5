@@ -7,7 +7,6 @@ import MyInfoTab from '../SideBar/MyInfoTab/MyInfoTab';
 import LocationTab from '../SideBar/LocationTab/LocationTab';
 import FoodCategoryTab from '../SideBar/FoodCategoryTab/FoodCategoryTab';
 import PreferenceVectorTab from '../SideBar/PreferenceVectorTab/PreferenceVectorTab';
-import RestaurantReviewList from '../DetailPage/RestaurantReviewList/RestaurantReviewList.js';
 import * as actionCreators from '../../store/actions/index';
 
 class MainPage extends Component {
@@ -44,7 +43,7 @@ class MainPage extends Component {
 
     return(
       <div className = 'mainPage'>
-        <div className='MyInfoTab'>
+        <div className='myInfoTab'>
         <MyInfoTab />
         </div>
         <div className='locationTab'>

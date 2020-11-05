@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import './FoodCategoryTab.css';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../../store/actions/actionTypes';
+import * as actionTypes from '../../../store/actions/actionTypes';
 import { withRouter } from 'react-router';
-import * as actionCreators from '../../../../store/actions/index';
+import * as actionCreators from '../../../store/actions/index';
 import KoreanImage from './img/Korean.jpeg'
 import VietnamImage from './img/Vietnam.jpeg'
 import ChineseImage from './img/Chinese.jpeg'
