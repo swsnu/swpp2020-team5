@@ -1,6 +1,10 @@
 import * as actionTypes from '../actionTypes'
 import axios from 'axios'
 
+// for later use
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
 const getUser_ = user => {
   return {
     type: actionTypes.GET_USER,
@@ -17,18 +21,9 @@ export const getUser = (id) => {
 
 export const postSignIn = (email, password) => {
   return dispatch => {
-    return axios.post('/api/sign-in', {email: email, password: password})
-      .then(res => {
-        dispatch(getUser_(res.data))
-      })
-      .catch(err => {
-        if (err.response.status == 401) { // this is for double login
-
-        }
-        else if(err.response.status == 404) { // this is for incorrect ID or PW
-
-        }
-      })
+    // backend sign-in would return the signed in django User and http status 
+    return axios.post('/api/sign-in', { email: email, password: password })
+    .then (res => dispatch(getUser_(res.data)))
   }
 }
 

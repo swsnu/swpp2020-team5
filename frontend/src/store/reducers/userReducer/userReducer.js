@@ -4,27 +4,29 @@ const initialState = {
   searchLocation: null,
   selectedUser: [
     { 
-      id: 0,
-      preferenceVector: [0,1,2,3],
-      name: 'swppluver',
-      loginID: 'swpp',
-      loginPW: 'iluv',
+      id: 0,    // user ID
+      user: null,  // user object from backend
+      preference: {
+        'taste1': 1,
+        'taste2': 2,
+        'taste3': 3,
+      },
       foodCategory: {
         Korean: true,
         Western: true,
         Chinese: false,
+        Vietamese: false,
       },
-      searchLocation: 'kwanak',
-      logged_in: false,
+      searchLocation: '',
     },
   ],
 }
 
-//preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
+//preference form should be like {'factorOne': 3, 'factorTwo': 4}
 const reducer = (state = initialState, action) => {
   switch(action.type){
 		case actionTypes.GET_USER:
-      return { ...state, selectedUser: action.target }
+      return { ...state, user: action.target }
     case actionTypes.CHANGE_LOCATION:
       return {...state, searchLocation: action.searchLocation};
     case actionTypes.CHANGE_PREFERENCE_VECTOR:

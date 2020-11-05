@@ -2,7 +2,7 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import RestaurantSummary from '../../components/RestaurantSummary/RestaurantSummary';
+import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
 import LocationPopup from './Popup/LocationPopup/LocationPopup';
 import PreferenceVectorPopup from './Popup/PreferenceVectorPopup/PreferenceVectorPopup';
 import PreferencePopup from './Popup/PreferencePopup/PreferencePopup.js';

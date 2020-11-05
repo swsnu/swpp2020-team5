@@ -8,10 +8,10 @@ import './App.css';
 
 function App() {
   return (
-    // temporarily using path '/' for MainPage for testing
     <BrowserRouter>
       <div className = "App">
         <Switch>
+          <Redirect exact from='/'to='/sign-in' />
           <Route path='/sign-in' exact render={() => <SignIn/>}/>
           <Route path='/main' exact component={MainPage}/>
           <Route path='/main/:name' exact render={()=><MainPage/>}/>
