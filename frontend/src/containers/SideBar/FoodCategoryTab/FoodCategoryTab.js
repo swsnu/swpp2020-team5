@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './FoodCategoryPopup.css';
+import './FoodCategoryTab.css';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../../store/actions/actionTypes';
 import { withRouter } from 'react-router';
@@ -22,7 +22,7 @@ const foodCategoryName = [
 //   user_id
 //   closepopup
 // }
-class FoodCategoryPopup extends Component {
+class FoodCategoryTab extends Component {
   state = {
     foodCategory: {
       Korean: false,
@@ -100,4 +100,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(FoodCategoryPopup))
+export default connect(null, mapDispatchToProps)(withRouter(FoodCategoryTab))
