@@ -23,19 +23,22 @@ class FoodCategory(models.Model):
     vietnam = models.BooleanField()
 
 class TasteVector(models.Model):
-    taste1 = models.FloatField()
-    taste2 = models.FloatField()
-    taste3 = models.FloatField()
+    taste1 = models.IntegerField()
+    taste2 = models.IntegerField()
+    taste3 = models.IntegerField()
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=50)
     menu = models.CharField(max_length=1000)
     location = models.CharField(max_length=100)
-    thumbNail = models.ImageField()
+    thumbNail = models.URLField()
     keywords = models.JSONField()
     avgRating = models.FloatField()
     preference = models.ForeignKey('TasteVector',
             on_delete=models.OneToOneField)
+    foodCategory = models.CharField(max_length=100)
+    openTime = models.CharField(max_length=100)
+
 
 class Review(models.Model):
     restaurant = models.ForeignKey('Restaurant',
@@ -45,6 +48,7 @@ class Review(models.Model):
     content = models.CharField(max_length=1000)
     link = models.URLField(max_length=200)
     rating = models.FloatField()
+    createTime = models.DateTimeField()
     
 class CustomizedRating(models.Model):
     restaurant = models.ForeignKey('Restaurant',
