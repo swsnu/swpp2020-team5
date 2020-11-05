@@ -4,7 +4,7 @@ import Popup from 'reactjs-popup';
 import * as actionTypes from '../../../../store/actions/actionTypes.js';
 import * as actionCreators from '../../../../store/actions/index.js';
 
-class PreferenceVectorPopup extends Component {
+class PreferenceVectorTab extends Component {
 
     state = {
         preferenceVector: {
@@ -168,4 +168,4 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PreferenceVectorPopup);
+export default connect(mapStateToProps, mapDispatchToProps)(PreferenceVectorTab);

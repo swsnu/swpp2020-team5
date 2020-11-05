@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 
 import SearchResult from '../../../../components/SearchResult/SearchResult'
 import * as actionCreators from '../../../../store/actions/index'
-import './LocationPopup.css'
+import './LocationTab.css'
 
-class LocationPopup extends Component {
+class LocationTab extends Component {
 
   state = {
     script: document.createElement('script'),
@@ -88,7 +88,7 @@ class LocationPopup extends Component {
     }
 
     return(
-      <div className = 'locationPopup'>검색 위치
+      <div className = 'locationTab'>검색 위치
         <button onClick = {() => this.onTogglePopupHandler()} className = 'searchButton'>{location}</button>
         <div id = 'searchPopup' className = 'searchPopup'>
           <input  className = 'searchBox'
@@ -116,4 +116,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(LocationPopup)
+export default connect(mapStateToProps, mapDispatchToProps)(LocationTab)
