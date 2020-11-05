@@ -15,16 +15,11 @@ export const getUser = (id) => {
   }
 }
 
-const loginUser_ = getUser_;
-
-// Many people log in simultaneously to same account?
-//
-// login_ID_PW is dict
-export const loginUser = login_ID_PW => {
+export const postSignIn = (email, password) => {
   return dispatch => {
-    return axios.put('/api/user', login_ID_PW)
+    return axios.post('/api/sign-in', {email: email, password: password})
       .then(res => {
-        dispatch(loginUser_(res.data))
+        dispatch(getUser_(res.data))
       })
       .catch(err => {
         if (err.response.status == 401) { // this is for double login
