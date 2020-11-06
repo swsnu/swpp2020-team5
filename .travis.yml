@@ -4,16 +4,11 @@ matrix:
       node_js: '12'
       addons:
         sonarcloud:
-          organization: "swsnu"
-          token:
-            secure: "R+eXRdqrz/uVYtYS0h1SLwlGlIT7oUXy65jqgIV9NlYLjEhaorEYLxVAHuJL+PMs1QJvdh92sbcumQQQuODCw8Rvkxo4WNn+cY1qFux1N4LOiVVpe9NyT6cgW9SyzQ4vRoQ4nWHUG//eKHXlK7kpMVUU/wrBFSUI1dWLAFAuPH+RwCYHsBheWXiFWfEjePpFj4QMp9FRj0YvCkBmbQ+FUcXLF57w0T4pG0xdUa1D2DQjdgK7SnFVjxBlGAa9dE/Lhj/N9gz60MWRxOrjX5FPvo7k2KDj7iFvBTfZsKcCVSDxn+enjEib7PpXDCr34xGTuYd0PLAdRe0294QLiXh/aRFsIowF6pQQx0CU8+n6Y3QQLfC9xrm8//ICQdh/Kcz6ZPV5fg5uOwvv4Pqz8E4WkkxOXuhgG0vZ9tjL2nSXNdCukcs2wW40oQaHKXoZRDZM67JWI7F18AHTISU1CEsxbZRkxN+8Y24vlNW5GQWfz4CqY4MLqqzopVcFYXSjdMEFinuovcJe/WKnocjvF5cbj9CzE7wAziec4QtFa0QsTG0b/H+BA7KqaAlfhGqYvNMdqrZkFxZTTW8aU3LMmQRRhNWuGhctqlG0utj5C718CafAUb06k+37+4KByEJba5exlARn9ko931l35YTan4A1e7jU7Nar5F6zeWzsXIsXZPw="
-      cache:
-        - yarn: true
-      addons:
-        sonarcloud:
           organization: swsnu
           token:  
             secure: "zhUuxklnXXMZ+5oX+AHSN9o2dwyNHjAeyuqd3QrEsaaDU3M/fPCBnXOsJVt+XQsxfMMy8u593LdUR01xNSAtlFrNrmGC2H/vc3Azjh9OeCPSb+P1tGRZOCLNgpnaWttf4dtd3SD4/roBLLZRxKHViORf+R6oIYELQk5/7QBDzcVa21Zs8coXX06/Ql+c4pDM61Vgj1lkUgSpKKtUtkZAca3gOT8Ucp3LVmJBhRUH96kdJqcHEZ5pg5ddcO42vL0AdT02MSY2Bubk+hrAJcRhHKTWNvz/XtjTqZwY2z6r5owyh37FKo+5ARSjmVszijG2ofIQEVAlAA39iu1Ow86wNHu/Walcn1YBc5y/jNjXCLXci6YokYhs3kueWZ8GyaLG30pBRpBcZ24d5NUrej12Vqvlhyz1+b8W1lhRyHUPPhtXMs3jOvV/gdJhGFlrUf8emJNRupfUDHSOfKOarsTf31rG8DzrfdWe0KlHYhiie13bKQryAlac339XmcBcYFOCvctM45xYMxfAFzg74Tvxztja+yyrdqq1OcDuJY4ORaj1ESASKtyGKISdbfmFGAhd89XdegonEUcM5I1YWOnHfGRKPnQx090yEfYsr9n4SaRuQ0QvBo9QyOMWYhG6lDSTePf2Nk5ecz+N6SkG1zYYcNMCqEsuV0FC2kGiPgHOWXs="
+      cache:
+        - yarn: true
       before_install:
         - cd frontend
       install:
