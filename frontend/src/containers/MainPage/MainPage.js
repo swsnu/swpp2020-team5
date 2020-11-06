@@ -44,16 +44,16 @@ class MainPage extends Component {
     return(
       <div className = 'mainPage'>
         <div className='myInfoTab'>
-        <MyInfoTab />
+          <MyInfoTab />
         </div>
         <div className='locationTab'>
-        <LocationTab />
+          <LocationTab />
         </div>
         <div className='preferenceTab'>
-        <PreferenceVectorTab />
+          <PreferenceVectorTab />
         </div>
         <div className='foodTab'>
-        <FoodCategoryTab />
+          <FoodCategoryTab />
         </div>
         <h1>
           <input type='text' id='searchByName'

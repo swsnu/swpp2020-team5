@@ -2,15 +2,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import SearchResult from '../../../components/SearchResult/SearchResult'
 import * as actionCreators from '../../../store/actions/index'
+import SearchResult from '../../../components/SearchResult/SearchResult'
+
+import searchIcon from './searchIcon.png'
 import './LocationTab.css'
 
 class LocationTab extends Component {
 
   state = {
     script: document.createElement('script'),
-    searchResultList: [],
+    locationListContainer: null,
+    locationList: [],
+    map: null,
   }
 
   componentDidMount() {
@@ -23,83 +27,109 @@ class LocationTab extends Component {
       return { ...this.state, script: script };
     })
     document.head.appendChild(this.state.script);
+
+    // load map
+    this.state.script.onload = () => {
+      kakao.maps.load(() => {
+        let container = document.getElementById('current-location-map');
+        let options = {
+          center: new kakao.maps.LatLng(this.props.searchLocation.y, this.props.searchLocation.x),
+          level: 4
+        };
+        this.setState({map: new window.kakao.maps.Map(container, options)});
+      });
+    };
+
+    // load location list
+    this.setState({locationListContainer: document.getElementById('location-list')});
+
   }
 
   //
-  // open popup if closed, and vice versa
+  // show the location list only if there are locations to display
   //
-  onTogglePopupHandler() {
-    const popup = document.getElementById('searchPopup');
-    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-    document.getElementById('searchBox').value = '';
-    this.setState({searchResultList: []});
+  onToggleListHandler(length) {
+    const _locationListContainer = this.state.locationListContainer;
+    _locationListContainer.style.display = length == 0 ? 'none' : 'block';
+    this.setState({locationListContainer: _locationListContainer});
   }
-
+  
   //
-  // close the popup and change searchLocation
+  // close the location list and change searchLocation
   //
   onClickLocationHandler(location) {
+
     this.props.onChangeLocation(location);
-    this.onTogglePopupHandler();
+
+    // reset searchbox
+    document.getElementById('location-input').value = '';
+    this.setState({locationList: []});
+
+    // always close the list
+    this.onToggleListHandler(0);
+
+    // show new location on map
+    kakao.maps.load(() => {
+      this.state.map.setCenter(new kakao.maps.LatLng(location.y, location.x));
+    })
   }
 
   //
-  // list the possible results of the input location
+  // list the locations found from the current input
   //
   onChangeLocationInputHandler(location) {
-    kakao.maps.load(() => {
-      let places = new kakao.maps.services.Geocoder();
-      let callback = (result) => {
-        this.setState({searchResultList: result});
-      };
-      if(location) {
-        places.addressSearch(location, callback, {page:10, size:10});
-      }else {
-        this.setState({searchResultList: []});
-      }
-    });
+    let places = new kakao.maps.services.Geocoder();
+    let callback = (result) => {
+      this.setState({locationList: result});
+      this.onToggleListHandler(result.length);
+    };
+    
+    if(location) {
+      places.addressSearch(location, callback, {page:10, size:10});
+    }else {
+      // empty list if no results are found
+      this.setState({locationList: []});
+    }
   }
 
   render(){
-
-    const searchResultList = this.state.searchResultList.map((location) => {
+    
+    const locationList = this.state.locationList.map((location) => {
       return (
-        <div onClick = {() => this.onClickLocationHandler(location)} className = 'LocationCandidate'>
-          <SearchResult address_name = {location.address_name}/>
-          <hr className = 'searchResultBorder'/>
+        <div>
+          <button onClick={() => this.onClickLocationHandler(location)}
+                  id='location-candidate-button'
+                  className='candidate'>
+            <SearchResult address_name = {location.address_name}/>
+          </button>
         </div>
       )
     })
 
     // set the displayed name on the button to searchLocation
-    let location = 'NULL';
-    try {
-      location = this.props.searchLocation;
-      switch(location.address_type) {
-        case 'REGION':
-          location = location.address.region_2depth_name;
-          break;
-        case 'ROAD':
-          location = location.road_address.region_2depth_name;
-          break;
-        }
-      } catch (error) {
-        location = '현위치';
-    }
-
+    let locationString = this.props.searchLocation.address_name;
+    
     return(
-      <div className = 'locationTab'>검색 위치
-        <button onClick = {() => this.onTogglePopupHandler()} className = 'searchButton'>{location}</button>
-        <div id = 'searchPopup' className = 'searchPopup'>
-          <input  className = 'searchBox'
-                  id = 'searchBox'
-                  onChange = {(event) => this.onChangeLocationInputHandler(event.target.value)}
-                  placeholder = '장소 검색...'>
-          </input>
-          <hr className = 'searchResultBorder'/>
-          {searchResultList}
+      <div className='location-tab'>
+        <div className='location'>
+          현재 위치ㅣ
+          <text className='current-location'>
+            {locationString}
+          </text>
         </div>
-        <h1>Hello, world!Hello, world!Hello, world!Hello, world!</h1>
+        <hr className='line'/>
+        <div id='search-box' className='box'>
+          <img src={searchIcon} className='search-icon'/>
+          <input  className='input'
+                  id='location-input'
+                  onChange={(event) => this.onChangeLocationInputHandler(event.target.value)}
+                  placeholder='장소 검색...'>
+          </input>
+          <div id='location-list' className='list'>
+            {locationList}
+          </div>
+        </div>
+        <div id='current-location-map' className='map'></div>
       </div>
     )
   }

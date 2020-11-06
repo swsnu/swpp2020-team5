@@ -3,17 +3,22 @@ import React from 'react';
 
 import DetailPage from './containers/DetailPage/DetailPage';
 import MainPage from './containers/MainPage/MainPage'
+import LocationTab from './containers/SideBar/LocationTab/LocationTab'
 import SignIn from "./containers/SignIn/SignIn";
+import SignUp from "./containers/SignUp/SignUp";
 import './App.css';
 
 function App() {
   return (
+    // /loc: for debugging purposes
     <BrowserRouter>
       <div className = "App">
         <Switch>
           <Redirect exact from='/'to='/sign-in' />
-          <Route path='/sign-in' exact render={() => <SignIn/>}/>
+          <Route path='/loc' exact render={() => <LocationTab/>}/>
           <Route path='/main' exact component={MainPage}/>
+          <Route path='/sign-in' exact render={() => <SignIn/>}/>
+          <Route path='/sign-up' exact render={() => <SignUp/>}/>
           <Route path='/main/:name' exact render={()=><MainPage/>}/>
           <Route paht='/main/detail/:id' exact render={()=><DetailPage/>}/>
           <Route render={() => <h1>Not Found</h1>} />

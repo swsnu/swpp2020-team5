@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8006f99c.chunk.css",
+    "main.js": "/static/js/main.0c0d5caf.chunk.js",
+    "main.js.map": "/static/js/main.0c0d5caf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.762a6c11.js",
+    "runtime-main.js.map": "/static/js/runtime-main.762a6c11.js.map",
+    "static/js/2.3fc82463.chunk.js": "/static/js/2.3fc82463.chunk.js",
+    "static/js/2.3fc82463.chunk.js.map": "/static/js/2.3fc82463.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7d34b7f06efebdacc7831359dc6d80ee.js": "/precache-manifest.7d34b7f06efebdacc7831359dc6d80ee.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.8006f99c.chunk.css.map": "/static/css/main.8006f99c.chunk.css.map",
+    "static/js/2.3fc82463.chunk.js.LICENSE.txt": "/static/js/2.3fc82463.chunk.js.LICENSE.txt",
+    "static/media/Chicken.jpeg": "/static/media/Chicken.085e273d.jpeg",
+    "static/media/Korean.jpeg": "/static/media/Korean.be264779.jpeg",
+    "static/media/Vietnam.jpeg": "/static/media/Vietnam.8d57ace1.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.762a6c11.js",
+    "static/js/2.3fc82463.chunk.js",
+    "static/css/main.8006f99c.chunk.css",
+    "static/js/main.0c0d5caf.chunk.js"
+  ]
+}
