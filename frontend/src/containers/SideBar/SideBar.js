@@ -11,6 +11,7 @@ import PreferenceVectorTab from './PreferenceVectorTab/PreferenceVectorTab';
 import './SideBar.css';
 
 class SideBar extends Component {
+
   // State
   state = {
     searchWord: '',
@@ -37,16 +38,16 @@ class SideBar extends Component {
     let tab;
     switch (this.state.tabMode) {
       case 'MyInfo': 
-        tab = <MyInfoTab id='my-info-tab' restaurantID={this.props.restaurantID}/>;
+        tab = <MyInfoTab id='my-info-tab' restaurantID={this.props.restaurantID} />;
         break;
       case 'Location': 
-        tab = <LocationTab id='location-tab' restaurantID={this.props.restaurantID}/>;
+        tab = <LocationTab id='location-tab' restaurantID={this.props.restaurantID} />;
         break;
       case 'FoodCategory': 
-        tab = <FoodCategoryTab id='food-category-tab' restaurantID={this.props.restaurantID}/>;
+        tab = <FoodCategoryTab id='food-category-tab' restaurantID={this.props.restaurantID} />;
         break;
       case 'PreferenceVector': 
-        tab = <PreferenceVectorTab id='preference-vector-tab' restaurantID={this.props.restaurantID}/>;
+        tab = <PreferenceVectorTab id='preference-vector-tab' restaurantID={this.props.restaurantID} />;
         break;
       default:
         const error = new Error('Invalid tabMode');
@@ -58,14 +59,14 @@ class SideBar extends Component {
           AllTastsMatter
           {/*<img logo/>*/}
         </button> 
-        <br/>
+        <br />
           {/*<img magnifying/>*/}
         <input id='search-input' type='text' value={this.state.searchWord} 
-          onChange={ event => this.setState({ searchWord: event.target.value }) }/>
+          onChange={ event => this.setState({ searchWord: event.target.value }) } />
         <button id='search-button' onClick={ () => this.onClickSearchButtonHandler() }>
           Search
         </button> 
-        <br/>
+        <br />
         <button id='my-info-tab-button' onClick={ () => this.onClickTabButtonHandler('MyInfo') }>
           myinfo 
           {/*<img/>*/}
@@ -82,7 +83,7 @@ class SideBar extends Component {
           preference vector 
           {/*<img/>*/}
         </button>
-        <br/>
+        <br />
       </div>
     )
   }
