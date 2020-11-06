@@ -30,10 +30,10 @@ export const loginUser = login_ID_PW => {
         dispatch(loginUser_(res.data))
       })
       .catch(err => {
-        if (err.response.status == 401) { // this is for double login
+        if (err.response.status === 401) { // this is for double login
 
         }
-        else if(err.response.status == 404) { // this is for incorrect ID or PW
+        else if(err.response.status === 404) { // this is for incorrect ID or PW
 
         }
       })
