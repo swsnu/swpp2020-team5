@@ -5,5 +5,5 @@ Status](https://sonarcloud.io/api/project_badges/measure?project=swsnu_swpp2020-
 [![Coverage
 Status](https://coveralls.io/repos/github/swsnu/swpp2020-team5/badge.svg?branch=main)](https://coveralls.io/github/swsnu/swpp2020-team5?branch=main)
 # swpp2020-team5
- 관악 **노루** 마운틴 점핑 
+ 관악 **노루** 마운틴 점핑
  
