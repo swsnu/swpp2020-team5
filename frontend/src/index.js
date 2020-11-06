@@ -11,7 +11,7 @@ import './index.css';
 
 
 const rootReducer = userReducer;
-
+// OHCOMEON
 ReactDOM.render(
     <Provider store = {store}>
       <App history = {history} />
