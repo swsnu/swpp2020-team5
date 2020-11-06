@@ -11,7 +11,7 @@ import './index.css';
 
 
 const rootReducer = userReducer;
-
+// Hello, SonarCloud!
 ReactDOM.render(
     <Provider store = {store}>
       <App history = {history} />
