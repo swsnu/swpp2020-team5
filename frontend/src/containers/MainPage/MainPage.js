@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
-import PreferenceVectorTab from '../SideBar/PreferenceVectorTab/PreferenceVectorTab';
-import MyInfoTab from '../SideBar/MyInfoTab/MyInfoTab';
 import ReviewList from '../DetailPage/ReviewList/ReviewList/ReviewList';
+import MyInfoTab from '../SideBar/MyInfoTab/MyInfoTab';
+import LocationTab from '../SideBar/LocationTab/LocationTab';
+import FoodCategoryTab from '../SideBar/FoodCategoryTab/FoodCategoryTab';
+import PreferenceVectorTab from '../SideBar/PreferenceVectorTab/PreferenceVectorTab';
 import * as actionCreators from '../../store/actions/index';
 
 class MainPage extends Component {
@@ -42,14 +44,17 @@ class MainPage extends Component {
 
     return(
       <div className = 'mainPage'>
-        <div className='MyInfoTab'>
+        <div className='myInfoTab'>
           <MyInfoTab />
         </div>
-        <div className='PreferenceVectorTab'>
+        <div className='locationTab'>
+          <LocationTab />
+        </div>
+        <div className='preferenceTab'>
           <PreferenceVectorTab />
         </div>
-        <div className='ReviewList'>
-          <ReviewList />
+        <div className='foodTab'>
+          <FoodCategoryTab />
         </div>
         <h1>
           <input type='text' id='searchByName'

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import StarRatings from 'react-star-ratings';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../store/actions/actionTypes';
@@ -113,10 +114,23 @@ class MyInfoTab extends Component {
           <button id='sign-out' onClick={this.props.onGetSignOut}>로그아웃</button>
         </div>
         {myInfo}
+=======
+
+import { connect } from 'react-redux';
+import * as actionTypes from '../../../store/actions/actionTypes';
+import { withRouter } from 'react-router';
+import * as actionCreators from '../../../store/actions/index';
+
+class MyInfoTab extends Component {
+  render() {
+    return (
+      <div>
+>>>>>>> 5afe51a538de10a57c7a5db2d3f527e6e692e108
       </div>
     );
   }
 }
+<<<<<<< HEAD
 
 const mapStateToProps = state => {
   return {
@@ -141,3 +155,16 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyInfoTab);
+=======
+const mapStateToProps = state => {
+  return {
+
+  }
+}
+const maDispatchToProps = dispatch => {
+  return {
+
+  }
+}
+export default connect(mapStateToProps, maDispatchToProps)(MyInfoTab)
+>>>>>>> 5afe51a538de10a57c7a5db2d3f527e6e692e108

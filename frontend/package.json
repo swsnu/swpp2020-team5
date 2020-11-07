@@ -17,8 +17,12 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
+<<<<<<< HEAD
     "react-star-rating": "^1.4.2",
     "react-star-ratings": "^2.3.0",
+=======
+    "react-wordcloud": "^1.2.7",
+>>>>>>> 5afe51a538de10a57c7a5db2d3f527e6e692e108
     "reactjs-popup": "^2.0.4",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"

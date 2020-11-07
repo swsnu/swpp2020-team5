@@ -1,7 +1,10 @@
-
 export {
-  changeLocation, loginUser, editUser, getUser, editUserFoodCategory
-  , changePreferenceVector,
+  getUser,
+  editUser,
+  postSignIn,
+  changeLocation,
+  editUserFoodCategory,
+  changePreferenceVector,
 } from './userActions/userActions'
 
 export {

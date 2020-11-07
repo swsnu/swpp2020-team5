@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import StarRatings from 'react-star-ratings';
 import './OtherReview.css';
 
@@ -40,6 +41,19 @@ class OtherReview extends Component {
     );
 
   }
+=======
+
+const OtherReview = props => {
+  return (
+    <div className='RestaurantReview'>
+      <p>Title: {props.title} </p>
+      <button id='restaurant-review-detail-button' onClick={props.onClickDetail}>
+        {props.content}
+      </button>
+      <p>Link: {props.reviewLink} </p>
+    </div>
+  );
+>>>>>>> 5afe51a538de10a57c7a5db2d3f527e6e692e108
 }
 
 export default OtherReview;
