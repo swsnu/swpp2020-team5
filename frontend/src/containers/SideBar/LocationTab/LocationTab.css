@@ -1,0 +1,53 @@
+.location-tab .location {
+  margin-left: 20px;
+  color: #808080;
+  font-size: 25px;
+}
+.location-tab .current-location {
+  margin-left: 10px;
+  color: #E44142;
+}
+.location-tab .map {
+  width: calc(100% - 40px);
+  height: 350px;
+  margin: 20px;
+  z-index: -1;
+}
+.location-tab .box {
+  margin: 10px 20px 10px 20px;
+  width: calc(100% - 40px);
+  border-color: #E44142;
+  border-radius: 30px;
+  border-style: solid;
+  height: 50px;
+}
+.location-tab .box .input {
+  background-color: transparent;
+  width: calc(100% - 120px);
+  position: absolute;
+  margin-top: 15px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+}
+.location-tab .search-icon {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+.location-tab .list {
+  background-color: #FFFFFF;
+  box-shadow: 0px 5px 10px #808080;
+  border-radius: 10px;
+  padding: 10px 0px 10px 0px;
+  display: none;
+}
+.candidate {
+  padding: 0px;
+  width: 100%;
+  background: none;
+  text-align: left;
+  font-size: 16px;
+  border: none;
+  display: run-in;
+}

@@ -2,12 +2,11 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import RestaurantSummary from '../../components/RestaurantSummary/RestaurantSummary';
-import LocationPopup from './Popup/LocationPopup/LocationPopup';
-import PreferenceVectorPopup from './Popup/PreferenceVectorPopup/PreferenceVectorPopup';
-import PreferencePopup from './Popup/PreferencePopup/PreferencePopup.js';
-import FoodCategoryPopup from './Popup/FoodCategoryPopup/FoodCategoryPopup';
-import RestaurantReviewList from '../DetailPage/RestaurantReviewList/RestaurantReviewList.js';
+import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
+import MyInfoTab from '../SideBar/MyInfoTab/MyInfoTab';
+import LocationTab from '../SideBar/LocationTab/LocationTab';
+import FoodCategoryTab from '../SideBar/FoodCategoryTab/FoodCategoryTab';
+import PreferenceVectorTab from '../SideBar/PreferenceVectorTab/PreferenceVectorTab';
 import * as actionCreators from '../../store/actions/index';
 
 class MainPage extends Component {
@@ -44,14 +43,17 @@ class MainPage extends Component {
 
     return(
       <div className = 'mainPage'>
-        <div className='locationPopup'>
-        <LocationPopup />
+        <div className='myInfoTab'>
+          <MyInfoTab />
         </div>
-        <div className='preferencePopup'>
-        <PreferenceVectorPopup />
+        <div className='locationTab'>
+          <LocationTab />
         </div>
-        <div className='foodPopup'>
-        <FoodCategoryPopup />
+        <div className='preferenceTab'>
+          <PreferenceVectorTab />
+        </div>
+        <div className='foodTab'>
+          <FoodCategoryTab />
         </div>
         <h1>
           <input type='text' id='searchByName'
