@@ -8,7 +8,9 @@ export {
 } from './userActions/userActions'
 
 export {
-  getRestaurantReviews,
+  getReviews,
+  putReview,
+  deleteReview,
 } from './reviewActions/reviewActions';
 
 export {
@@ -16,3 +18,7 @@ export {
     getRestaurantName,
     getRestaurantDetail,
 } from './restaurantActions/restauraunActions';
+
+export {
+  postSignUp,
+} from './userActions/userActions';
