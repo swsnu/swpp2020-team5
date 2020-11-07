@@ -5,7 +5,7 @@ export const getRestaurantList_ = (restaurantlist) => {
     return {type:actionTypes.GET_RESTAURANTLIST,restaurantlist};
 };
 
-export const getRestaurantList = () => {
+export const getRestaurantList = (name) => {
     return dispatch => {
         return axois.get()
           .then(res => dispatch(getRestaurantList_(res.data)));

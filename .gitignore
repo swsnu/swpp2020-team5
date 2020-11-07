@@ -4,4 +4,3 @@ coverage
 *.pyc
 *.log
 frontend/build
-frontend/public
