@@ -46,4 +46,11 @@ input::placeholder {
   color: white;
 }
 
+#welcome-img {
+  position: absolute;
+  opacity: 0.5;
+}
+#welcome-text {
+  margin-bottom: 200px;
+}
 
