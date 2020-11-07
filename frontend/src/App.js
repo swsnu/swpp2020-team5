@@ -2,8 +2,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import React from 'react';
 
 import DetailPage from './containers/DetailPage/DetailPage';
-import MainPage from './containers/MainPage/MainPage'
-import DetailPage from './containers/DetailPage/DetailPage';
+import MainPage from './containers/MainPage/MainPage';
 import CreateID from './containers/SignUp/CreateID/CreateID';
 import SignIn from "./containers/SignIn/SignIn";
 import SignUp from "./containers/SignUp/SignUp";

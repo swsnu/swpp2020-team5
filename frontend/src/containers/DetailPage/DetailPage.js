@@ -1,4 +1,4 @@
-import ReactStars from "react-rating-stars-component";
+
 import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
