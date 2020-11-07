@@ -46,7 +46,6 @@ class CreatePreferenceVector extends Component {
     const foodImages = [];
     const foodListLength = this.state.foodList.length;
     for (let i = 0; i < foodListLength; i++) {
-      console.log(i);
       foodImages.push(
         <img id='food-image' 
           onClick={() => this.onClickFoodHandler(i)} 

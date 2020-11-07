@@ -20,6 +20,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
     "react-star-rating-input": "^8.0.1",
+    "react-wordcloud": "^1.2.7",
     "reactjs-popup": "^2.0.4",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"

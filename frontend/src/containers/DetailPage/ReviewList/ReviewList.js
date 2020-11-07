@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import * as actionCraetors from '../../../store/actions/index';
 
 
-class RestaurantReviewList extends Component {
+class ReviewList extends Component {
 
   componentDidMount() {
     //TODO backend needed!!
@@ -48,4 +48,4 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantReviewList); 
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewList); 
