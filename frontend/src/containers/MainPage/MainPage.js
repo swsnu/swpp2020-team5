@@ -2,12 +2,10 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import RestaurantSummary from '../../components/RestaurantSummary/RestaurantSummary';
-import LocationPopup from './Popup/LocationPopup/LocationPopup';
-import PreferenceVectorPopup from './Popup/PreferenceVectorPopup/PreferenceVectorPopup';
-import PreferencePopup from './Popup/PreferencePopup/PreferencePopup.js';
-import FoodCategoryPopup from './Popup/FoodCategoryPopup/FoodCategoryPopup';
-import RestaurantReviewList from '../DetailPage/RestaurantReviewList/RestaurantReviewList.js';
+import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
+import PreferenceVectorTab from '../SideBar/PreferenceVectorTab/PreferenceVectorTab';
+import MyInfoTab from '../SideBar/MyInfoTab/MyInfoTab';
+import ReviewList from '../DetailPage/ReviewList/ReviewList/ReviewList';
 import * as actionCreators from '../../store/actions/index';
 
 class MainPage extends Component {
@@ -44,14 +42,14 @@ class MainPage extends Component {
 
     return(
       <div className = 'mainPage'>
-        <div className='locationPopup'>
-        <LocationPopup />
+        <div className='MyInfoTab'>
+          <MyInfoTab />
         </div>
-        <div className='preferencePopup'>
-        <PreferenceVectorPopup />
+        <div className='PreferenceVectorTab'>
+          <PreferenceVectorTab />
         </div>
-        <div className='foodPopup'>
-        <FoodCategoryPopup />
+        <div className='ReviewList'>
+          <ReviewList />
         </div>
         <h1>
           <input type='text' id='searchByName'

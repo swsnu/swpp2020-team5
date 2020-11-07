@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import RestaurantSummary from '../../RestaurantSummary/RestaurantSummary';
+import RestaurantSummary from '../../MainPage/RestaurantSummary/RestaurantSummary';
 import './RestaurantKeywords.css';
 
 

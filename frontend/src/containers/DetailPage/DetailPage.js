@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../store/actions/index';
 import { getRestaurantDetail } from '../../store/actions/restaurantActions/restauraunActions';
-import RestaurantKeywords from '../../components/RestaurantDetail/RestaurantKeywords/RestaurantKeywords';
+import RestaurantKeywords from '../../components/DetailPage/Keywords/RestaurantKeywords';
 import ReactStars from "react-rating-stars-component";
 class DetailPage extends Component{
     componentDidMount() {

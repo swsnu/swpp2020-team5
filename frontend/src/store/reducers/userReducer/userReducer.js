@@ -2,8 +2,7 @@ import * as actionTypes from '../../actions/actionTypes'
 
 const initialState = {
   searchLocation: null,
-  selectedUser: [
-    { 
+  selectedUser: { 
       id: 0,
       preferenceVector: [0,1,2,3],
       name: 'swppluver',
@@ -17,7 +16,6 @@ const initialState = {
       searchLocation: 'kwanak',
       logged_in: false,
     },
-  ],
 }
 
 //preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
