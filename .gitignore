@@ -3,3 +3,5 @@ node_modules
 coverage
 *.pyc
 *.log
+frontend/build
+frontend/public

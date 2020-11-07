@@ -1,11 +1,11 @@
+import ReactStars from "react-rating-stars-component";
 import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import Keywords from '../../components/DetailPage/Keywords/Keywords';
 import * as actionCreators from '../../store/actions/index';
-import ReactStars from "react-rating-stars-component";
 import SideBar from '../SideBar/SideBar';
-import RestaurantKeywords from './ReviewList/RestaurantKeywords/RestaurantKeywords'
-import RestaurantReviewList from './ReviewList/RestaurantReviewList/RestaurantReviewList';
 import './DetailPage.css';
 class DetailPage extends Component{
     componentDidMount() {
@@ -70,12 +70,10 @@ class DetailPage extends Component{
                   </div>
                   </div>
               </div>
-              <div className='keywords' id='detail'>
-                <RestaurantKeywords keywords={this.props.selectedrestaurant.keywords}/>
+              <div className='keywords'>
+                  <Keywords keywords={this.props.selectedrestaurant.keywords} />
               </div>
-              <div className='reviewlist' id='detail'>
-                <RestaurantReviewList restaurantID={parseInt(this.props.match.params.id)}/>
-              </div>
+              
             </div>
               
               

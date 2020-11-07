@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
 import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
+
 import * as actionCreators from '../../store/actions/index';
 import './MainPage.css';
 class MainPage extends Component {
@@ -27,6 +28,7 @@ class MainPage extends Component {
         </div>
         <div className='restaurantList'>
           {list}
+
         </div>
       </div>
 
