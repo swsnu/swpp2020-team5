@@ -1,6 +1,19 @@
 import * as actionTypes from '../../actions/actionTypes'
 
 const initialState = {
+  id: 0,
+  username: '',
+  preferenceVector: {
+    taste1: 1,
+    taste2: 2,
+    taste3: 3,
+  },
+  foodCategory: {
+    Korean: true,
+    Western: true,
+    Chinese: false,
+    Vietnamese: false,
+  },
   searchLocation: {
     address: {
       address_name: '서울 관악구',
@@ -22,29 +35,6 @@ const initialState = {
     x: '126.951561853868',
     y: '37.4783683761333'
   },
-  selectedUser: [
-    { 
-      id: 0,
-      username: '',
-      preferenceVector: {
-        taste1: 1,
-        taste2: 2,
-        taste3: 3,
-      },
-      foodCategory: {
-        Korean: true,
-        Western: true,
-        Chinese: false,
-        Vietnamese: false,
-      },
-      searchLocation: {
-        address_name: '',
-        latiture: 0,
-        longitute: 0,
-      },
-      logged_in: false,
-    },
-  ],
 }
 
 //preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
