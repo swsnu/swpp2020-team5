@@ -3,6 +3,7 @@ import StarRatings from 'react-star-ratings';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../store/actions/actionTypes';
 import * as actionCreators from '../../../store/actions/index';
+import welcomeImage from '../../../../src/images/that_bonobono.jpg';
 import './MyInfoTab.css';
 
 
@@ -43,7 +44,7 @@ class MyInfoTab extends Component {
     let onDetailPage = '';
     let onMainPage = (
       <div className='on-main-page'>
-        <img id='welcome-img' src={'../../../../public/logo192.png'} alt='' width='100' height='100'/>
+        <img id='welcome-img' src={welcomeImage} alt='' width='300' height='200'/>
         <p id='welcome-text'> 
           #AllTastesMatter에 오신것을 환영합니다!<br/>
           천천히 둘러보세요
@@ -69,8 +70,7 @@ class MyInfoTab extends Component {
 
 
     //if current page is not Mainpage, myInfoTab should show onDetailPage. otherwise, should show onMainPage
-   // if(this.props.restaurantID != -1) {
-    if(true) {
+    if(this.props.restaurantID != -1) {
       myReview = this.props.myReviewList.map((review) => {
         return (//TODO It should be changed into <Review> component when the component is implemented.
           <div className='Review'>

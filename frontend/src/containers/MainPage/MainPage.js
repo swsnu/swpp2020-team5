@@ -32,7 +32,6 @@ class MainPage extends Component {
         </div>
         <div className='restaurantList'>
           {list}
-
         </div>
       </div>
 
