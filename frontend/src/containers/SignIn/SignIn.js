@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 import * as actionCreators from '../../store/actions/index';
 
-import logo from '../../../images/logo.png'
-import background from '../../../images/background.jpg'
+import logo from '../../images/logo.png'
+import background from '../../images/background.jpg'
 import './SignIn.css'
 
 class SignIn extends Component{
