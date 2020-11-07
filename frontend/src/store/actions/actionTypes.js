@@ -1,4 +1,3 @@
-
 export const CHANGE_LOCATION    = 'CHANGE_LOCATION';
 export const GET_USER = 'GET_USER';
 export const EDIT_USER = 'EDIT_USER';
@@ -7,8 +6,5 @@ export const GET_RESTAURANTNAME = 'GET_RESTAURANTNAME';
 export const GET_RESTAUARANTDETAIL='GET_RESTAURANTDETAIL';
 export const CHANGE_PREFERENCE_VECTOR = 'CHANGE_PREFERENCE_VECTOR';
 export const GET_REVIEWS = 'GET_REVIEWS';
-<<<<<<< HEAD
-=======
 export const PUT_REVIEW = 'PUT_REVIEW';
 export const DELETE_REVIEW = 'DELETE_REVIEW';
->>>>>>> 8489738c3b0a578df4e78ca09bb96a0050e212f6

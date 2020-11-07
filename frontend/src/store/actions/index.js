@@ -9,11 +9,8 @@ export {
 
 export {
   getReviews,
-<<<<<<< HEAD
-=======
   putReview,
   deleteReview,
->>>>>>> 8489738c3b0a578df4e78ca09bb96a0050e212f6
 } from './reviewActions/reviewActions';
 
 export {
