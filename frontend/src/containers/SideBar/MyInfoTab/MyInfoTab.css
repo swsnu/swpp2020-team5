@@ -1,0 +1,56 @@
+.MyInfoTab #name {
+  position: relative;
+  color: red;
+}
+.upper-bar {
+  margin-bottom: 100px;
+}
+
+.upper-bar-welcome {
+  margin-right: 20px;
+}
+.upper-bar-welcome #name {
+  margin-left: 10px;
+}
+
+input::placeholder {
+  vertical-align: text-top;
+  text-align: left;
+}
+
+.review-input-set {
+  display: flex;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+#review-input {
+  width: 200px;
+  height: 100px;
+}
+
+#review-confirm {
+  width: 50px;
+  height: 105px;
+  text-align: center;
+  background-color: red;
+  color: white;
+}
+
+#restaurantName {
+  color: red;
+}
+
+#sign-out {
+  background-color: red;
+  color: white;
+}
+
+#welcome-img {
+  position: absolute;
+  opacity: 0.5;
+}
+#welcome-text {
+  margin-bottom: 200px;
+}
+
