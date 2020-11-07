@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../../../store/actions/index'
 import SearchResult from '../../../components/SearchResult/SearchResult'
 
-import searchIcon from './searchIcon.png'
+import searchIcon from '../../../../images/searchIcon_red.png'
 import './LocationTab.css'
 
 class LocationTab extends Component {
