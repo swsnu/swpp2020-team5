@@ -1,0 +1,67 @@
+
+.detailPage .sideBar{
+    width: 400px;
+    float: left;
+}
+
+.detailPage .right{
+    width: 1000px;
+    float: left;
+    display: flexbox;
+    flex-direction: column;
+}
+#detail{
+    width: 800px;
+    height: 300px;
+}
+.detailPage .right .restaurant .image{
+    float: left;
+    margin-top: 20px;
+    width: 300px;
+}
+.detailPage .right .restaurant .imageright{
+    float:left;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.detailPage .right .restaurant .imageright .up{
+    height: 50px;
+    width: 500px;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: grey;
+    
+}
+.detailPage .right .restaurant .imageright .up .title{
+    
+    font-size: 40px;
+    float: left;
+    width: 120px;
+    margin-top: 10px;
+}
+.detailPage .right .restaurant .imageright .up .rate{
+  
+    font-size: xx-large;
+    color: orange;
+    float: left;
+    width: 70px;
+   
+    margin-top: 20px;
+   
+}
+.detailPage .right .restaurant .imageright .up .diff{
+   margin-top: 30px;
+   color: orange;
+   float: left;
+}
+.detailPage .right .restaurant .imageright .detailinfo{
+    height: 200px;
+    width: 470px;
+  
+    border: solid;
+    border-color:gray;
+    border-width: 1px;
+    overflow-y: scroll;
+}

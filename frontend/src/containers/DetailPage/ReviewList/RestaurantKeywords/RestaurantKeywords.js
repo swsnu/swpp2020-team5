@@ -1,16 +1,13 @@
 import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../../../store/actions/index';
-
 class RestaurantKeywords extends Component{
     componentDidMount(){
-        this.onGetRestaurantDetail()
-    }
+      }
     render(){
         return(
           <div>
-              hi
+              HI
           </div>
         );
     };
