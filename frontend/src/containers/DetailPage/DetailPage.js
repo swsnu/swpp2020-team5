@@ -17,22 +17,22 @@ class DetailPage extends Component{
         //해야할거 화살표 만드는거랑
         //주소 하는거
         let text;
-        if(this.props.selectedrestaurant.difference>0) 
-            text=this.props.selectedrestaurant.difference+'점 상승!'
-        else if(this.props.selectedrestaurant.difference<0)
-            text= this.props.selectedrestaurant.difference+'점 하락!'
+        if(this.props.selectedRestaurant.difference>0) 
+            text=this.props.selectedRestaurant.difference+'점 상승!'
+        else if(this.props.selectedRestaurant.difference<0)
+            text= this.props.selectedRestaurant.difference+'점 하락!'
         else 
             text='변동없음!'
 
 
         let category=null;
-        for(var i in this.props.selectedrestaurant.category){
+        for(var i in this.props.selectedRestaurant.category){
             if(category===null)
-              category=this.props.selectedrestaurant.category[i];
+              category=this.props.selectedRestaurant.category[i];
             else
-              category+='/'+this.props.selectedrestaurant.category[i];    
+              category+='/'+this.props.selectedRestaurant.category[i];    
         }
-        const menu=this.props.selectedrestaurant.menu.map(el=>{
+        const menu=this.props.selectedRestaurant.menu.map(el=>{
         return <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;{el}</p>
         })
@@ -45,15 +45,15 @@ class DetailPage extends Component{
             <div className='right'>
                 <div className='restaurant'id='detail'>
                   <div className='image'>
-                    <img src={this.props.selectedrestaurant.img_url} width='280' height='230' />
+                    <img src={this.props.selectedRestaurant.img_url} width='280' height='230' />
                   </div>
                   <div className='imageright'>
                   <div className ='up' id='new'>
                     <div className='title' >
-                      {this.props.selectedrestaurant.title}
+                      {this.props.selectedRestaurant.title}
                     </div>
                     <div className='rate'>
-                      {this.props.selectedrestaurant.rate}
+                      {this.props.selectedRestaurant.rate}
                     </div>
                     <div className='diff'>
                         {text}
@@ -62,7 +62,7 @@ class DetailPage extends Component{
                   <div className='detailinfo' id='new' >
                     <p>카테고리&nbsp;&nbsp;&nbsp;{category}</p>
                     <p>주소&nbsp;&nbsp;&nbsp;{}</p>
-                    <p>영업시간&nbsp;&nbsp;&nbsp;{this.props.selectedrestaurant.time}</p>
+                    <p>영업시간&nbsp;&nbsp;&nbsp;{this.props.selectedRestaurant.time}</p>
                     <p>메뉴&nbsp;&nbsp;&nbsp;{menu}</p>
                     
                     
@@ -70,7 +70,7 @@ class DetailPage extends Component{
                   </div>
               </div>
               <div className='keywords'>
-                  <Keywords keywords={this.props.selectedrestaurant.keywords} />
+                  <Keywords keywords={this.props.selectedRestaurant.keywords} />
               </div>
               
             </div>
@@ -98,7 +98,7 @@ const mapDispatchToProps= dispatch =>{
 };
 const mapStateToProps= state =>{
     return{
-        selectedrestaurant:state.rs.selectedrestaurant
+        selectedRestaurant:state.rs.selectedRestaurant
     };
 };
 
