@@ -84,6 +84,7 @@ class SideBar extends Component {
           {/*<img/>*/}
         </button>
         <br />
+        <div>{tab}</div>
       </div>
     )
   }
