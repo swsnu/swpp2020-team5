@@ -5,7 +5,9 @@ export {
 } from './userActions/userActions'
 
 export {
-  getRestaurantReviews,
+  getReviews,
+  putReview,
+  deleteReview,
 } from './reviewActions/reviewActions';
 
 export {
