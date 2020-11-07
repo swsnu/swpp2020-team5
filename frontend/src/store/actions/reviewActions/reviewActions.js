@@ -17,4 +17,36 @@ export const getReviews = (id) => {
     }
 }
 
+const putReview_ = (reviewInfo) => {
+  return {
+    type: actionTypes.PUT_REVIEW,
+    target: reviewInfo,
+  }
+}
+
+export const putReview = (reviewID, reviewInfo) => {
+  return (dispatch) => {
+    return axios.put(`api/review/:${reviewID}`, reviewInfo)
+      .then(res => {
+        dispatch(putReview_(res.data));
+      })
+  }
+}
+
+const deleteReview_ = (reviewID) => {
+  return {
+    type: actionTypes.DELETE_REVIEW,
+    target: reviewID,
+  }
+}
+
+export const deleteReview = (reviewID) => {
+  return (dispatch) => {
+    return axios.delete(`api/review/:${reviewID}`)
+      .then(res => {
+        dispatch(deleteReview_(reviewID));
+      })
+  }
+}
+
 

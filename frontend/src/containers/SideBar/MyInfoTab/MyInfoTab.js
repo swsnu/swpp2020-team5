@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 <<<<<<< HEAD
 import StarRatings from 'react-star-ratings';
@@ -168,3 +169,6 @@ const maDispatchToProps = dispatch => {
 }
 export default connect(mapStateToProps, maDispatchToProps)(MyInfoTab)
 >>>>>>> 5afe51a538de10a57c7a5db2d3f527e6e692e108
+=======
+
+>>>>>>> 8489738c3b0a578df4e78ca09bb96a0050e212f6

@@ -78,3 +78,12 @@ export const changePreferenceVector = (user) => {
     }
 }
 
+export const postSignUp = (userInfo) => {
+  return (dispatch) => {
+    return axios.post('api/sign-up/', userInfo)
+      .then(res => {})
+      .catch(err => {
+        console.log('Error in postSignUp');      
+      })
+  }
+}

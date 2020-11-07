@@ -1,0 +1,12 @@
+.mainPage .sideBar{
+    width: 400px;
+    float: left;
+}
+.mainPage .restaurantList{
+    float: left;
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    height: 650px;
+    overflow-y:scroll;
+}
