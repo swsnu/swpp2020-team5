@@ -121,7 +121,7 @@ class MyInfoTab extends Component {
 const mapStateToProps = state => {
   return {
     selectedUser: state.us.selectedUser,
-    myReviewList: state.rv.myReview,
+    myReviewList: state.rv.myReviews,
     selectedRestaurant: state.rs.selectedRestaurant,
   };
 }
