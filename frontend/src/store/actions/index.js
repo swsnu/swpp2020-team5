@@ -13,3 +13,7 @@ export {
     getRestaurantName,
     getRestaurantDetail,
 } from './restaurantActions/restauraunActions';
+
+export {
+  postSignUp,
+} from './userActions/userActions';
