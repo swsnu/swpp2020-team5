@@ -11,6 +11,10 @@ const initialState = {
     category:['한식','중식','일식'],
     difference:0.43,
   },
+<<<<<<< HEAD
+    {id:2, title:'jjjjj', rate:3.5, img_url:'https://upload.wikimedia.org/wikipedia/commons/e/e9/Korean.cuisine-Jajangmyeon-01.jpg'}],
+    selectedRestaurant:{id:1, name:'swpp', 
+=======
     {id:2, title:'jjjjj', rate:3.5, img_url:'https://upload.wikimedia.org/wikipedia/commons/e/e9/Korean.cuisine-Jajangmyeon-01.jpg'
    ,category:['한식']
   },
@@ -37,6 +41,7 @@ const initialState = {
 
 ],
     selectedrestaurant:{id:1, title:'swpp', 
+>>>>>>> 8489738c3b0a578df4e78ca09bb96a0050e212f6
     rate:3.3,
     img_url:'https://upload.wikimedia.org/wikipedia/commons/4/4d/Tangsuyuk_%28Korean_Chinese_sweet_and_sour_pork%29.jpg?download',
     menu:['짜장면 6000원', '탕수육 2000원','15000원대표반쎄오25000원대표보느'

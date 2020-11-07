@@ -1,6 +1,7 @@
 import * as actionTypes from '../../actions/actionTypes'
 
 const initialState = {
+  selectedUser: { 
   id: 0,
   username: '',
   preferenceVector: {
@@ -35,6 +36,7 @@ const initialState = {
     x: '126.951561853868',
     y: '37.4783683761333'
   },
+  }
 }
 
 //preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
