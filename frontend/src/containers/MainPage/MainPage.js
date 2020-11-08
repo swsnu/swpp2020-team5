@@ -22,7 +22,7 @@ class MainPage extends Component {
     const list=this.props.storedList.map((el)=>{
       order++;
       return <RestaurantSummary title={el.title} id={el.id} /*img_url={el.img_url}*/ img_src={el.img_src} rate={el.rate} 
-          menu={el.menu} category={el.category} order={order} preferenceVector={el.preferenceVector} />
+          category={el.category} order={order} preferenceVector={el.preferenceVector} />
     })
 
     return(

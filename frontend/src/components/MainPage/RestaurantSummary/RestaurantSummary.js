@@ -43,7 +43,7 @@ class RestaurantSummary extends Component{
               {categorylist}
             </div>
             <hr className='border'/>
-            <div className='keywords'>
+            <div className='factors'>
                 {topFactors}
             </div>
           </div>
