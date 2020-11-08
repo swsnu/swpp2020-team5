@@ -9,7 +9,9 @@ import food4 from '../../../images/4_CreatePreferenceVector.jpg'
 import food5 from '../../../images/5_CreatePreferenceVector.jpg'
 import food6 from '../../../images/6_CreatePreferenceVector.jpg'
 import checkImage from '../../../images/check.png';
+import { withAlert } from 'react-alert';
 import './CreatePreferenceVector.css';
+
 
 class CreatePreferenceVector extends Component {
   state = {
@@ -37,6 +39,7 @@ class CreatePreferenceVector extends Component {
 
   // image selection is not complete
   render() {
+    const alert = this.props.alert;
     const foodImageList = [food1, food2, food3, food4, food5, food6];
     const foodCaptionList = ['해산물', '피자', '떡볶이', '스테이크', '샐러드', '오꼬노미야끼'];
     const foodImages = [];
@@ -51,7 +54,7 @@ class CreatePreferenceVector extends Component {
             src={foodImageList[i]}
           />
 
-        {this.state.foodList[i] ? <img className='check-image' onClick={() => this.onClickFoodHandler(i)} src={checkImage}/>: <></> }
+        {this.state.foodList[i] ? <img className='check-image' onClick={() => this.onClickFoodHandler(i)} src={checkImage} /> : <></> }
           <text>{foodCaptionList[i]}</text>
         </div>
       );
@@ -76,7 +79,8 @@ class CreatePreferenceVector extends Component {
           <div className='images'>
             {foodImages}
           </div>          
-          <div id='confirm-button' onClick={() => this.onClickConfirmHandler()}>
+          <div id='confirm-button' onClick={() => {this.onClickConfirmHandler();alert.show('가입 완료!')
+}}>
             가입 완료
           </div>
         </div>
@@ -91,4 +95,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(CreatePreferenceVector));
+export default connect(null, mapDispatchToProps)(withAlert()(withRouter(CreatePreferenceVector)));
