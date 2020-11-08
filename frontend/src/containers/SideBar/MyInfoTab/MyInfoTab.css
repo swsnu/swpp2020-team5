@@ -3,7 +3,9 @@
   color: red;
 }
 .upper-bar {
-  margin-bottom: 100px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 2px -2px gray;
+  padding-bottom: 10px;
 }
 
 .upper-bar-welcome {
@@ -18,10 +20,18 @@ input::placeholder {
   text-align: left;
 }
 
+.second-line {
+  margin-bottom: 0px;
+}
+#restaurantName {
+  color: red;
+}
 .review-input-set {
   display: flex;
   margin-bottom: 50px;
-  margin-top: 50px;
+  margin-top: 20px;
+  border-bottom: 1px gray solid;
+  padding-bottom: 20px;
 }
 
 #review-input {
@@ -30,20 +40,26 @@ input::placeholder {
 }
 
 #review-confirm {
-  width: 50px;
+  width: 45px;
   height: 105px;
   text-align: center;
-  background-color: red;
-  color: white;
+  background-color: #E44142;
+  color: #FFFFFF;
+  border: none;
 }
 
-#restaurantName {
-  color: red;
-}
 
-#sign-out {
-  background-color: red;
-  color: white;
+#sign-out {  
+  background-color: #E44142;
+  border-radius: 10px;
+  color: #FFFFFF;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  width: 65px;
+  height: 30px;
+  outline: none;
+  border: none;
 }
 
 #welcome-img {

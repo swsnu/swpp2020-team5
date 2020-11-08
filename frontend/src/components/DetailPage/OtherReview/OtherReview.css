@@ -1,4 +1,31 @@
-#content {
+.OtherReview {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px gray solid;
+  margin-bottom: 10px;
+}
+.other-review-right {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.other-review-stars {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.OtherReview #author-name {
+  margin-left: 25px;
+  margin-top: 5px;
+}
+.OtherReview #rating-text {
+  margin-left: 10px;
+}
+.OtherReview #createTime {
+  margin-left: 10px;
+}
+.other-review-content {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
