@@ -1,18 +1,34 @@
-
-.createID .box{
-    width: 400px;
-    height: 500px;
-    border: solid;
+.createID .box {
+  width: 400px;
+  height: 500px;
+  border: solid;
    
-    margin: auto;
-    position: absolute;
-    top:20%;
-    left: 37%;
-    background-color: white;
-    border-radius: 2em;
-border-top-left-radius: 2em;
-border-top-right-radius: 2em;
-border-bottom-left-radius: 2em;
-border-bottom-right-radius: 2em;
-    
+  margin: auto;
+  position: absolute;
+  top:20%;
+  left: 37%;
+  background-color: white;
+  border-radius: 2em;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+  border-bottom-right-radius: 2em;
+}
+.createID p {
+  margin: 10px 10px 0 30px;
+}
+.createID input {
+  margin: 10px 10px 20px 30px;
+}
+.createID button {
+  margin: 10px 10px 10px 30px;
+}
+.createID .box .signup {
+  font-size: 30pt;
+  margin: 0 0 0 30px;
+}
+.createID .box .step1 {
+  font-size: 20pt;
+  color: grey;
+  margin: 0 0 0 10px;
 }

@@ -108,7 +108,7 @@ class Keywords extends Component {
       deterministic: true,
       spiral: 'archimedean',
     };
-    const size = [400, 100];
+    const size = [1000, 200];
     const callbacks = {
       getWordColor: word => word.value > 20 ? '#000000' : '#AAAAAA',
     }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import CreateID from './CreateID/CreateID';
 import CreatePreferenceVector from './CreatePreferenceVector/CreatePreferenceVector';
-
-let Background = 'https://t1.daumcdn.net/cfile/tistory/99C145465C875C1C30';
+import backgroundImage from '../../images/background.jpg';
+import './SignUp.css';
 
 var backgroundStyle = {
   width: '100%',
   height: '400px',
-  backgroundImage: `url(${Background})`
+  backgroundImage: backgroundImage
 }
 
 class SignUp extends Component {
@@ -58,8 +58,9 @@ class SignUp extends Component {
         console.log(error.message);
     }
     return (
-      <div className='SignUp' style={backgroundStyle}>
-        {signUpStage}
+      <div className='SignUp'>
+        <img className='background' src={backgroundImage}></img>
+          {signUpStage}
       </div>
     );
   }

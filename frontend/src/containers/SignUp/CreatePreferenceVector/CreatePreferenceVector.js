@@ -14,6 +14,7 @@ import food5 from './img/5.jpeg';
 import food5_clicked from './img/5_checked.jpeg';
 import food6 from './img/6.jpeg';
 import food6_clicked from './img/6_checked.jpeg';
+import './CreatePreferenceVector.css';
 
 class CreatePreferenceVector extends Component {
   state = {
@@ -59,10 +60,12 @@ class CreatePreferenceVector extends Component {
 
     return (
       <div className='CreatePreferenceVector'>
-        {foodImages}
-        <button id='confirm-button' onClick={() => this.onClickConfirmHandler()}>
-          Confirm
-        </button>
+        <div className='box'>
+          {foodImages}
+          <button id='confirm-button' onClick={() => this.onClickConfirmHandler()}>
+            Confirm
+          </button>
+        </div>
       </div>
     );
   }

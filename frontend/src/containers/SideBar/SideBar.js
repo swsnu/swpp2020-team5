@@ -5,9 +5,10 @@ import { withRouter } from 'react-router';
 import * as actionTypes from '../../store/actions/actionTypes';
 import * as actionCreators from '../../store/actions/index';
 import MyInfoTab from './MyInfoTab/MyInfoTab';
-import LocationTab from './LocationTab/LocationTab.js';
+import LocationTab from './LocationTab/LocationTab';
 import FoodCategoryTab from './FoodCategoryTab/FoodCategoryTab';
 import PreferenceVectorTab from './PreferenceVectorTab/PreferenceVectorTab';
+import logoImage from '../../images/logo.png';
 import './SideBar.css';
 
 class SideBar extends Component {
@@ -55,10 +56,8 @@ class SideBar extends Component {
     }
     return (
       <div className='SideBar'>
-        <button id='logo-button' onClick={ () => this.onClickLogoButtonHandler() }>
-          AllTastsMatter
-          {/*<img logo/>*/}
-        </button> 
+        <img id='logo-button' src={logoImage} onClick={() => this.onClickLogoButtonHandler()}>
+        </img> 
         <br />
           {/*<img magnifying/>*/}
         <input id='search-input' type='text' value={this.state.searchWord} 

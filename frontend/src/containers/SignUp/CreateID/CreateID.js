@@ -36,9 +36,10 @@ class CreateID extends Component{
     render()
     {
         if(this.state.mode==='Preference')
-        return(
-            <CreatePreferenceVector  userInfo={this.state.userInfo}/>
-        );
+            this.props.onChangeStageHandler(this.state.userInfo)
+      //return(
+          //<CreatePreferenceVector  userInfo={this.state.userInfo}/>
+      //);
         let isverified;
         if(this.state.userInfo.password===null
             ||this.state.userInfo.password!=this.state.verifyPassword) 
@@ -46,10 +47,12 @@ class CreateID extends Component{
         else isverified='Ok'
         return(
 
-            <div className='createID' style={ backgroundStyle} >
+          //<div className='createID' style={ backgroundStyle} >
+            <div className='createID'>
                 <div className='box'>
-                <h1>회원가입</h1>
-
+                  <text className='signup'>회원가입</text>
+                  <text className='step1'>STEP1</text>
+                
                 <p>이름</p><input id='username-input' type='text'
                 value={this.state.userInfo.username}
                 onChange={(ev)=>{

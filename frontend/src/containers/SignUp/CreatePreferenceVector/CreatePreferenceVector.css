@@ -1,0 +1,16 @@
+.CreatePreferenceVector .box {
+  width: 1000px;
+  height: 500px;
+  border: solid;
+   
+  margin: auto;
+  position: absolute;
+  top:20%;
+  left: 20%;
+  background-color: white;
+  border-radius: 2em;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+  border-bottom-right-radius: 2em;
+}
