@@ -36,7 +36,6 @@ class CreatePreferenceVector extends Component {
 
 
   // image selection is not complete
-  // check is not complete
   render() {
     const foodImageList = [food1, food2, food3, food4, food5, food6];
     const foodCaptionList = ['해산물', '피자', '떡볶이', '스테이크', '샐러드', '오꼬노미야끼'];
@@ -52,7 +51,7 @@ class CreatePreferenceVector extends Component {
             src={foodImageList[i]}
           />
 
-        {this.state.foodList[i] ? <img className='check-image' src={checkImage}/>: <></>}
+        {this.state.foodList[i] ? <img className='check-image' onClick={() => this.onClickFoodHandler(i)} src={checkImage}/>: <></> }
           <text>{foodCaptionList[i]}</text>
         </div>
       );
