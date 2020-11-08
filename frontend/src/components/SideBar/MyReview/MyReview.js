@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import {$} from 'jquery';
 import { StarRatingInput, StarRating, css } from 'react-star-rating-input';
 import insertCss from 'insert-css';
+import './MyReview.css';
 
 class MyReview extends Component {
   state = {
@@ -65,35 +66,44 @@ class MyReview extends Component {
     let EditOrDone = (
       this.state.isEdit
         ? <text id='review-edit-done-button' 
-            onClick={() => this.onClickEditDoneHandler()}>Done</text>
+            onClick={() => this.onClickEditDoneHandler()}>저장</text>
         : <text id='review-edit-button'
-            onClick={() => this.onClickEditHandler()}>Edit</text>
+            onClick={() => this.onClickEditHandler()}>수정</text>
     );
     let DeleteOrCancel = (
       this.state.isEdit
         ? <text id='review-cancel-button' 
-            onClick={() => this.onClickCancelHandler()}>Cancel</text>
+            onClick={() => this.onClickCancelHandler()}>취소</text>
         : <text id='review-delete-button'
-            onClick={() => this.onClickDeleteHandler()}>Delete</text>
+            onClick={() => this.onClickDeleteHandler()}>삭제</text>
     );
     let TextOrInput = (
       this.state.isEdit
-        ? <textarea id='content-input' value={this.state.content} 
+        ? <input id='content-input' className='review-input' value={this.state.content} 
             onChange={event => this.setState({content: event.target.value})}>
-            {this.state.content}</textarea>
+            </input>
         : <text id='content-text'>{this.state.content}</text>
     );
+    // we need to fix star
     return (
       <div className='MyReview'>
-        {StarInputOrShow}
-        <text id='rating-text'>{this.state.rating}</text> 
-        <text id='modified-time-text'>{this.props.modifiedTime}</text> 
-        <text> | </text>
-        {EditOrDone}
-        <text> | </text>
-        {DeleteOrCancel}
-        <br />
-        {TextOrInput}
+        <div className='review-info'>
+          <div className='review-rating-stars'>
+            {StarInputOrShow}
+          </div>
+          <div className='review-detail'>
+            <text id='rating-text'>{this.state.rating}</text> 
+            <text> | </text>
+            <text id='modified-time-text'>{this.props.modifiedTime}</text> 
+            <text> | </text>
+            {EditOrDone}
+            <text> | </text>
+            {DeleteOrCancel}
+          </div>
+        </div>
+        <div className='review-content'>
+          {TextOrInput}
+        </div>
       </div>
     );
   } 

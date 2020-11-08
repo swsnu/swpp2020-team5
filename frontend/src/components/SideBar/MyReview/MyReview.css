@@ -1,0 +1,36 @@
+.MyReview {
+  width: 100%;
+  height: 80px;
+  padding-left: 30px;
+}
+
+.MyReview .review-info {
+  width: 100%;
+  height: 30px;
+}
+.MyReview .review-info .review-rating-stars {
+  padding-left: 50px;
+  vertical-align: middle;
+}
+.MyReview .review-info .review-detail {
+  color: #444444;
+  text-align: right;
+  align-items: end;
+  padding-left: auto;
+  padding-right: 50px;
+  vertical-align: middle;
+}
+
+.MyReview .review-content {
+  width: 70%;
+  font-size: 13pt;
+  height: 30px;
+}
+.MyReview .review-input {
+  background-color: transparent;
+  border: none;
+  outlier: none;
+  width: 100%;
+  height: 30px;
+  font-size: 13pt;
+}

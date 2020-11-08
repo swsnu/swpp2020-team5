@@ -2,18 +2,13 @@ import React, { Component } from 'react';
 import * as actionCreators from '../../../store/actions/index';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import food1 from './img/1.jpeg';
-import food1_clicked from './img/1_checked.jpeg';
-import food2 from './img/2.jpeg';
-import food2_clicked from './img/2_checked.jpeg';
-import food3 from './img/3.jpeg';
-import food3_clicked from './img/3_checked.jpeg';
-import food4 from './img/4.jpeg';
-import food4_clicked from './img/4_checked.jpeg';
-import food5 from './img/5.jpeg';
-import food5_clicked from './img/5_checked.jpeg';
-import food6 from './img/6.jpeg';
-import food6_clicked from './img/6_checked.jpeg';
+import food1 from '../../../images/1_CreatePreferenceVector.jpg'
+import food2 from '../../../images/2_CreatePreferenceVector.jpg'
+import food3 from '../../../images/3_CreatePreferenceVector.jpg'
+import food4 from '../../../images/4_CreatePreferenceVector.jpg'
+import food5 from '../../../images/5_CreatePreferenceVector.jpg'
+import food6 from '../../../images/6_CreatePreferenceVector.jpg'
+import checkImage from '../../../images/check.png';
 import './CreatePreferenceVector.css';
 
 class CreatePreferenceVector extends Component {
@@ -40,18 +35,25 @@ class CreatePreferenceVector extends Component {
   }
 
 
+  // image selection is not complete
   render() {
     const foodImageList = [food1, food2, food3, food4, food5, food6];
-    const foodImageClickedList = [food1_clicked, food2_clicked, food3_clicked, food4_clicked, food5_clicked, food6_clicked];
-
+    const foodCaptionList = ['해산물', '피자', '떡볶이', '스테이크', '샐러드', '오꼬노미야끼'];
     const foodImages = [];
     const foodListLength = this.state.foodList.length;
     for (let i = 0; i < foodListLength; i++) {
       foodImages.push(
-        <img id='food-image' 
-          onClick={() => this.onClickFoodHandler(i)} 
-          src={this.state.foodList[i] ? foodImageList[i] : foodImageClickedList[i]}
-        />
+        <div className='image-and-caption'>
+          <img className={this.state.foodList[i]
+            ? 'food-image-checked'
+            : 'food-image'}
+            onClick={() => this.onClickFoodHandler(i)} 
+            src={foodImageList[i]}
+          />
+
+        {this.state.foodList[i] ? <img className='check-image' src={checkImage}/>: <></>}
+          <text>{foodCaptionList[i]}</text>
+        </div>
       );
       if (i % 3 === 2) {
         foodImages.push(<br />);
@@ -61,10 +63,22 @@ class CreatePreferenceVector extends Component {
     return (
       <div className='CreatePreferenceVector'>
         <div className='box'>
-          {foodImages}
-          <button id='confirm-button' onClick={() => this.onClickConfirmHandler()}>
-            Confirm
-          </button>
+          <text className='signup'>회원가입</text>
+          <text className='step2'>STEP2</text>
+          <p>
+            <text className='name-text'>{this.props.username}</text>
+            &nbsp;님, 환영합니다!
+            <br />
+            마지막으로 아래의 목록에서 선호하시는 음식을 모두 골라주시면, 
+            <br />
+            준비 완료입니다!
+          </p>
+          <div className='images'>
+            {foodImages}
+          </div>          
+          <div id='confirm-button' onClick={() => this.onClickConfirmHandler()}>
+            가입 완료
+          </div>
         </div>
       </div>
     );

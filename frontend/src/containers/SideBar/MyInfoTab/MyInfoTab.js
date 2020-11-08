@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actionTypes from '../../../store/actions/actionTypes';
 import * as actionCreators from '../../../store/actions/index';
 import welcomeImage from '../../../../src/images/that_bonobono.jpg';
+import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
 
 
@@ -73,10 +74,12 @@ class MyInfoTab extends Component {
     if(this.props.restaurantID != -1) {
       myReview = this.props.myReviewList.map((review) => {
         return (//TODO It should be changed into <Review> component when the component is implemented.
-          <div className='Review'>
-            <p>id: {review.id}</p>
-            <p>content: {review.content}</p>
-          </div>
+          <MyReview className='Review' 
+            reviewID={review.id}
+            content={review.content}
+            rating={review.rating}
+            modifiedTime={review.modifiedTime} >
+          </MyReview>
         );})
 
 
@@ -121,7 +124,13 @@ class MyInfoTab extends Component {
 const mapStateToProps = state => {
   return {
     selectedUser: state.us.selectedUser,
-    myReviewList: state.rv.myReviews,
+    //myReviewList: state.rv.myReviews,
+    myReviewList: [{
+      id: 1,
+      content: '내스타일의 매운맛은 아니었던 걸로',
+      rating: 1,
+      modifiedTime: '2020.11.01'
+    },],
     selectedRestaurant: state.rs.selectedRestaurant,
   };
 }
