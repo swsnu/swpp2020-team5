@@ -1,0 +1,23 @@
+.factor {
+  height: 20px;
+  color: #AAAAAA;
+  margin: 5px;
+  font-size: 16px;
+}
+.bar {
+  text-indent: 8px;
+  width: 75%;
+  margin-right: 50px;
+  margin-top: 5px;
+  background-color: #DDDDDD;
+  height: 80%;
+  color: white;
+  float: right;
+  overflow: hidden;
+  
+  border-radius: 10px;
+}
+.gauge {
+  float: 'left';
+  height: 100%;
+}

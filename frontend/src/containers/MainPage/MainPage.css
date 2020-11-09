@@ -6,6 +6,10 @@
     float: left;
     display: flex;
     flex-direction: column;
-    width: 1000px;
-   
+
+    width: calc(100% - 400px);
+    min-width: 1000px;
+    height: 3000px;
+    overflow-y:scroll;
+
 }
