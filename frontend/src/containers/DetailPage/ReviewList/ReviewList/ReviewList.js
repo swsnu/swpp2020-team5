@@ -49,10 +49,28 @@ class ReviewList extends Component {
     
     //TODO other review 분류작업? + <OtherReview> 로 렌더링
     //
-    //
 
+    let naverReview = this.props.otherReviews.naver.map(review => {
+      return (
+        <OtherReview content={review.content} author={review.authorName} createTime={review.createTime.toLocaleDateString()} rating={review.rating}/>
+      )
+    });
 
+    let kakaoReview = this.props.otherReviews.kakao.map(review => {
+      return (
+        <OtherReview content={review.content} author={review.authorName} createTime={review.createTime.toLocaleDateString()} rating={review.rating}/>
+      )
+    });
 
+    let atmReview = this.props.otherReviews.atm.map(review => {
+      return (
+        <OtherReview content={review.content} author={review.authorName} createTime={review.createTime.toLocaleDateString()} rating={review.rating}/>
+      )
+    });
+
+    let naverCnt = naverReview.length;
+    let kakaoCnt = kakaoReview.length;
+    let atmCnt = atmReview.length;
 
     return (
       <div className='ReviewList'>
@@ -63,13 +81,16 @@ class ReviewList extends Component {
         </div>
 
         <div className='tabcontent' id='naver-content'>
-          <OtherReview content='this is naver sosososososo very Long content is here.' author='swpp' createTime='minute ago' rating='4'/>
+          <p>다른 사용자들이 총 {naverCnt}개의 리뷰를 남겼습니다.</p>
+          {naverReview}
         </div>
         <div className='tabcontent' id='kakao-content'>
-          <p>this is kakao</p>
+          <p>다른 사용자들이 총 {kakaoCnt}개의 리뷰를 남겼습니다.</p>
+          {kakaoReview}
         </div>
         <div className='tabcontent' id='atm-content'>
-          <p>this is atm</p>
+          <p>다른 사용자들이 총 {atmCnt}개의 리뷰를 남겼습니다.</p>
+          {atmReview}
         </div>
       </div>
     )
@@ -79,7 +100,7 @@ class ReviewList extends Component {
 
 const mapStateToProps = state => {
   return {
-    selectedReviews: state.rv.otherReview,
+    otherReviews: state.rv.otherReviews,
   };
 }
 

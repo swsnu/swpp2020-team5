@@ -2,6 +2,7 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import ReviewList from './ReviewList/ReviewList/ReviewList';
 import Keywords from '../../components/DetailPage/Keywords/Keywords';
 import * as actionCreators from '../../store/actions/index';
 import SideBar from '../SideBar/SideBar';
@@ -72,21 +73,16 @@ class DetailPage extends Component{
               <div className='keywords'>
                   <Keywords keywords={this.props.selectedRestaurant.keywords} />
               </div>
-              
+              <div className='reviewlist'>
+                <ReviewList restaurantID={this.props.selectedRestaurant.id}/>
+              </div>    
             </div>
               
               
           </div>
           
         );
-  /*      <div className='keywords'>
-        <Keywords keywords={this.props.selectedrestaurant.keywords}/>
-    </div>
-   <div className='reviewlist'>
-       <RestaurantReviewList restaurantID={parseInt(this.props.match.params.id)}/>
-   </div>
-  */
-    };
+   };
 }
 const mapDispatchToProps= dispatch =>{
     return{

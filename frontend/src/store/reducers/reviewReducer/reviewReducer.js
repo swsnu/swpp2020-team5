@@ -9,15 +9,50 @@ const initialState = {
       modifiedTime: new Date(),
     },
   ],
-  otherReviews: [
-    {
-      content: 'Nice for me',
-      rating: 2.5,
-      modifiedTime: new Date(),
-      authorName: 'zebra',
-      link: 'naver',
-    },
-  ],
+  otherReviews: {
+    naver: [
+      {
+        content: '맛있으나 불친절하다.',
+        rating: 2.5,
+        createTime: new Date(),
+        authorName: '사용자1',
+      },
+      {
+        content: '불친절해서 좋아요',
+        rating: 1.5,
+        createTime: new Date(),
+        authorName: '사용자3',
+      },
+      {
+        content: '너무 매웠던 것 빼고는 그런대로 만족합니다.',
+        rating: 3.5,
+        createTime: new Date(),
+        authorName: '사용자4',
+      },
+    ],
+    kakao: [
+      {
+        content: '최고인듯',
+        rating: 5.0,
+        createTime: new Date(),
+        authorName: '사용자2',
+      },
+    ],
+    atm: [
+      {
+        content: '최고인듯',
+        rating: 5.0,
+        createTime: new Date(),
+        authorName: '사용자2',
+      },
+      {
+        content: '불친절해서 좋아요',
+        rating: 1.5,
+        createTime: new Date(),
+        authorName: '사용자3',
+      },
+    ],
+  }
 }
 const reducer = (state = initialState, action) => {
   switch (action.type) {

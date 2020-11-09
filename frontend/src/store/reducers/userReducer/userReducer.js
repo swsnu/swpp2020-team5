@@ -3,7 +3,7 @@ import * as actionTypes from '../../actions/actionTypes'
 const initialState = {
   selectedUser: { 
     id: 0,
-    username: '',
+    username: '우렁쌈밥',
   },
   preferenceVector: {
     taste1: 1,
