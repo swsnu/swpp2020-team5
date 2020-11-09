@@ -21,4 +21,5 @@ export {
 
 export {
   postSignUp,
+  getFoodCategory,
 } from './userActions/userActions';

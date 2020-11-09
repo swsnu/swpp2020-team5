@@ -11,10 +11,11 @@ const initialState = {
     taste3: 3,
   },
   foodCategory: {
-    Korean: true,
-    Western: true,
-    Chinese: false,
-    Vietnamese: false,
+    한식: true,
+    양식: false,
+    중식: false,
+    일식: true,
+    
   },
   searchLocation: {
     address: {
@@ -49,7 +50,10 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CHANGE_PREFERENCE_VECTOR:
       let updatedUser = action.target;
       return {...state, currentUser: updatedUser};
+    case actionTypes.GET_FOODCATEGORY:
+      return {...state,foodCategory:action.foodCategory};
     default: break;
+
   }
   return state;
 }

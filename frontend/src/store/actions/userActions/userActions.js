@@ -87,3 +87,16 @@ export const postSignUp = (userInfo) => {
       })
   }
 }
+
+export const getFoodCategory_ = (foodCategory) => {
+  return {type: actionTypes.GET_FOODCATEGORY,foodCategory };
+};
+
+export const getFoodCategory = () => {
+  return (dispatch) => {
+    return axios.get()
+      .then(res => {
+        dispatch(getFoodCategory_(res.data))
+      })
+  }
+}
