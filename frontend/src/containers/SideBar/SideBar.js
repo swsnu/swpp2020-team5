@@ -9,6 +9,9 @@ import LocationTab from './LocationTab/LocationTab';
 import FoodCategoryTab from './FoodCategoryTab/FoodCategoryTab';
 import PreferenceVectorTab from './PreferenceVectorTab/PreferenceVectorTab';
 import logoImage from '../../images/logo.png';
+import { faSearch, faUser, faMapMarkerAlt, faFilter, faSlidersH } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import './SideBar.css';
 
 class SideBar extends Component {
@@ -59,31 +62,61 @@ class SideBar extends Component {
         <img id='logo-button' src={logoImage} onClick={() => this.onClickLogoButtonHandler()}>
         </img> 
         <br />
-          {/*<img magnifying/>*/}
-        <input id='search-input' type='text' value={this.state.searchWord} 
-          onChange={ event => this.setState({ searchWord: event.target.value }) } />
-        <button id='search-button' onClick={ () => this.onClickSearchButtonHandler() }>
-          Search
-        </button> 
+        <div className='search-box'>
+          <FontAwesomeIcon className='search-icon' icon={faSearch} />
+          <button id='search-button' onClick={() => this.onClickSearchButtonHandler()}>
+            검&emsp;색
+          </button> 
+          <input id='search-input' type='text' placeholder='식당 또는 음식...' value={this.state.searchWord} 
+            onChange={event => this.setState({searchWord: event.target.value })} />
+        </div>
         <br />
-        <button id='my-info-tab-button' onClick={ () => this.onClickTabButtonHandler('MyInfo') }>
-          myinfo 
-          {/*<img/>*/}
-        </button>
-        <button id='location-tab-button' onClick={ () => this.onClickTabButtonHandler('Location') }>
-          location 
-          {/*<img/>*/}
-        </button>
-        <button id='food-category-tab-button' onClick={ () => this.onClickTabButtonHandler('FoodCategory') }>
-          food category 
-          {/*<img/>*/}
-        </button>
-        <button id='preference-vector-tab-button' onClick={ () => this.onClickTabButtonHandler('PreferenceVector') }>
-          preference vector 
-          {/*<img/>*/}
-        </button>
+        <div className='tab-button-image-line'>
+          <div id='my-info-tab-button' className='tab-button' onClick={ () => this.onClickTabButtonHandler('MyInfo') }>
+            <FontAwesomeIcon icon={faUser} size='3x' />
+          </div>
+          <div id='location-tab-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('Location')}>
+            <FontAwesomeIcon icon={faMapMarkerAlt} size='3x' />
+          </div>
+          <div id='food-category-tab-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('FoodCategory')}>
+            <FontAwesomeIcon icon={faFilter} size='3x' />
+          </div>
+          <div id='preference-vector-tab-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('PreferenceVector')}>
+            <FontAwesomeIcon icon={faSlidersH} size='3x' /> 
+          </div>
+        </div>
+        <div className='tab-button-name-line'>
+          <div id='my-info-tab-button' 
+            className={this.state.tabMode == 'MyInfo' 
+              ? 'tab-button-selected' 
+              : 'tab-button'} 
+            onClick={() => this.onClickTabButtonHandler('MyInfo')}>
+            나의 정보 
+          </div>
+          <div id='location-tab-button'
+            className={this.state.tabMode == 'Location' 
+              ? 'tab-button-selected' 
+              : 'tab-button'} 
+            onClick={() => this.onClickTabButtonHandler('Location')}>
+            위치
+          </div>
+          <div id='food-category-tab-button' 
+            className={this.state.tabMode == 'FoodCategory' 
+              ? 'tab-button-selected' 
+              : 'tab-button'} 
+            onClick={() => this.onClickTabButtonHandler('FoodCategory')}>
+            필터
+          </div>
+          <div id='preference-vector-tab-button' 
+            className={this.state.tabMode == 'PreferenceVector' 
+              ? 'tab-button-selected' 
+              : 'tab-button'} 
+            onClick={() => this.onClickTabButtonHandler('PreferenceVector')}>
+            나의 취향
+          </div>
+        </div>
         <br />
-        <div>{tab}</div>
+        {tab}
       </div>
     )
   }

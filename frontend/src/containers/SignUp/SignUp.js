@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CreateID from './CreateID/CreateID';
 import CreatePreferenceVector from './CreatePreferenceVector/CreatePreferenceVector';
 import backgroundImage from '../../images/background.jpg';
+import logoImage from '../../images/logo.png'
 import './SignUp.css';
 
 var backgroundStyle = {
@@ -60,6 +61,7 @@ class SignUp extends Component {
     return (
       <div className='SignUp'>
         <img className='background' src={backgroundImage}></img>
+        <img className='logo' alt='#AllTastesMatterLogo' src={logoImage}></img>
           {signUpStage}
       </div>
     );
