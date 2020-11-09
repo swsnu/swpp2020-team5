@@ -1,52 +1,53 @@
-.restaurantSummary .image{
-    width: 300px;
-    height: 200px;
+.image{
+    padding-top: 25px;
+    width: 260px;
+    height: 180px;
     cursor: pointer;
     float: left;
-
 }
-.restaurantSummary {
-    margin-top: 10px;
+.summary {
+    height: 230px;
+    width: 100%;
     border-bottom: solid;
-    border-bottom-color: grey;
-    border-bottom-width: 2px;
-    
+    border-color: #AAAAAA;
+    border-width: 2px;
 }
-.restaurantSummary .right{
-
-    float:left;
-}
-.restaurantSummary .order{
-  
-    width: 30px;
-    height: 70px;
-    margin-top: 70px;   
+.order{
     font-size: 30px;
-    color: grey;
+    padding: 100px 40px 0px 40px;
+    color: #666666;
     float: left;
 }
-.restaurantSummary .right .rate{
+.text{
+    float:left;
+    width: calc(100% - 371.69px);
+    padding-top: 20px;
+    padding-left: 15px;
+}
+.text .head {
     height: 50px;
-    width: 90px;
+    padding-bottom: 10px;
+}
+.text .rate {
     font-size: 50px;
-    color:orange;
+    padding-right: 10px;
     cursor: pointer;
+    color: #FFCA59;
     float: left;
 }
 
-.restaurantSummary .right .title{
-    height: 50px;
-    width: 500px;
+.text .title {
     margin-top: 10px;
     font-size: 30px;
     cursor: pointer;
-    float: left;   
+    float: left; 
 }
-.restaurantSummary .right .category{
+.text .category {
     font-size: large;
     color: gray;
-    border-bottom: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: grey;
-    
+}
+.text .border {
+    margin-right: 20px;
+    margin-bottom: 0px;
+    border: 1px solid #CCCCCC;
 }
