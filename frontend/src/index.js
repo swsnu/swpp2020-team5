@@ -5,18 +5,31 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { createStore } from 'redux';
 import userReducer from './store/reducers/userReducer/userReducer.js';
-
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
 import App from './App';
 import './index.css';
 
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.CENTER,
+  timeout: 5000,
+  offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.SCALE,
+  type: 'success'
+}
 
 const rootReducer = userReducer;
 
 ReactDOM.render(
+  <AlertProvider template={AlertTemplate} {...options}>
     <Provider store = {store}>
       <App history = {history} />
-    </Provider>,
-    document.getElementById('root'));
+    </Provider>
+  </AlertProvider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
