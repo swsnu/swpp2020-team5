@@ -40,37 +40,38 @@
   width: 980px;
   height: 400px;
   text-align: center;
-  float:right;
 }
 
 .CreatePreferenceVector .images .image-and-caption {
-  width: 30%;
-  height: auto;
+  width: 300px;
+  height: 250px;
   font-size: 15pt;
-  float:right;
+  float: left;
   margin: 10px;
+  position: relative;
+  
 }
 
 .CreatePreferenceVector .images .food-image {
-  width: 300px;
+  width: 280px;
   height: 190px;
   margin: 10px;
   cursor: pointer;
 }
 
 .CreatePreferenceVector .images .food-image-checked {
-  width: 300px;
+  width: 280px;
   height: 190px;
   opacity: 0.3;
   border: 5px solid red;
   cursor: pointer;
+  margin: 5px;
 }
 
 .CreatePreferenceVector .images .check-image {
-  width: 300px;
-  height: 190px;
-  margin: -200px 0 0 -110px;
-  padding: 0;
+  width: 250px;
+  height: 150px;
+  margin: 20px 0 0 -270px;
   cursor: pointer;
   position: absolute;
   z-value: -1;
