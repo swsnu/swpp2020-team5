@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions/actionTypes.js';
-import * as actionCreators from '../../../store/actions/index.js';
+import * as actionTypes from '../../../store/actions/actionTypes';
+import * as actionCreators from '../../../store/actions/index';
+import './PreferenceVectorTab.css';
+import Slider from '@material-ui/core/Slider'
 
 class PreferenceVectorTab extends Component {
 
   state = {
     currentPreferenceVector: {
-        'factor_one': 1,
-        'factor_two': 3,
-        'factor_three': 5,
+        factor_one: 1,
+        factor_two: 3,
+        factor_three: 5,
     },
   }
 
@@ -30,9 +32,9 @@ class PreferenceVectorTab extends Component {
   }
 
 
-  onChangeFactor = (event) => {
+  onChangeFactor = (event, value) => {
     let temp_preferenceVector = this.state.currentPreferenceVector;
-    temp_preferenceVector[event.target.name] = event.target.value;
+    temp_preferenceVector[event.target.id] = Math.round(value);
     console.log('working');
     console.log(this.state.currentPreferenceVector);
     this.setState({currentPreferenceVector: temp_preferenceVector});
@@ -41,34 +43,26 @@ class PreferenceVectorTab extends Component {
   render() {
     return (
       <div className='PreferenceVectorTab'>
-        <h1>Configure your current preference vector</h1>
-          <p>Factor 1: </p>
-            <div className='Factor_one'>
-              <input type='range' name='factor_one' id='one' value={this.state.currentPreferenceVector.factor_one}
-                        min="0" max="20"
-                        onChange={this.onChangeFactor}/>
-              <label htmlFor='one'>1</label>
+        <div className='upper-bar'>
+          <span>원하는 대로 취향을 변경하신 후 적용 버튼을 누르세요!</span>
+          <button id='preference-vector-button' onClick={()=> this.onClickConfirmHandler()}>적용</button>
+        </div>
+           <div className='Slider'>
+              <p>Factor 1</p>
+              <Slider id='factor_one' value={this.state.currentPreferenceVector.factor_one} 
+               onChange={this.onChangeFactor} onChangeCommitted={this.onChangeFactor}/>
             </div>
-
-          <p>Factor 2: </p>
-            <div className='Factor_two'>
-              <input type='range' name='factor_two' id='two' value={this.state.currentPreferenceVector.factor_two}
-                        min="0" max="20"
-                        onChange={this.onChangeFactor}/>
-              <label htmlFor='two'>1</label>
+           <div className='Slider'>
+              <p>Factor 2</p>
+              <Slider id='factor_two' value={this.state.currentPreferenceVector.factor_two} max={41} 
+                onChange={this.onChangeFactor} onChangeCommitted={this.onChangeFactor}/>
             </div>
-
-          <p>Factor 3: </p>
-            <div className='Factor_three'>
-              <input type='range' name='factor_three' id='three' value={this.state.currentPreferenceVector.factor_three}
-                        min="0" max="20"
-                        onChange={this.onChangeFactor}/>
-              <label htmlFor='three'>1</label>
+ 
+           <div className='Slider'>
+              <p>Factor 3</p>
+              <Slider id='factor_three' value={this.state.currentPreferenceVector.factor_three} max={41}
+               step={0.1} onChange={this.onChangeFactor} onChangeCommitted={this.onChangeFactor}/>
             </div>
-
-          <div>
-            <button id='preference-vector-button' onClick={()=> this.onClickConfirmHandler()}>Change</button>
-          </div>
     </div>
     )
   }

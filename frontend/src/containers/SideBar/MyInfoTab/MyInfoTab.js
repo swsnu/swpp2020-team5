@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StarRatings from 'react-star-ratings';
+import ReactStars from 'react-rating-stars-component';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../store/actions/actionTypes';
 import * as actionCreators from '../../../store/actions/index';
@@ -32,8 +32,6 @@ class MyInfoTab extends Component {
 
   onChangeRating = (newRating) => {
     this.setState({rating: newRating});
-    //TODO rating star is not properly set the rating. why? and making there is no way to make it zero
-    console.log(this.state.rating);
   }
 
 
@@ -56,16 +54,15 @@ class MyInfoTab extends Component {
     //components that should be shown when detail page
     let myReview = [];
     let reviewInput = (
-        <input id='review-input' type='text' placeholder='리뷰를 작성해주세요' value={this.state.content} 
+        <textarea id='review-input' placeholder='리뷰를 작성해주세요. 작성하신 리뷰와 평점은 현재 내 취향을 업데이트하는데 사용됩니다.' value={this.state.content} 
           onChange={this.onChangeReviewInputHandler}/>
       );
     let reviewConfirmButton = (
         <button id='review-confirm' onClick={this.onClickConfirmHandler}>리뷰작성</button>
       );
-    //TODO rateStar 작동 이상함.
     let rateStar = (
-        <StarRatings id='rate-star' rating={this.state.rating} starRatedColor='red' changeRating={this.onChangeRating}
-          numberOfStars={5} />
+        <ReactStars id='rate-star' value={this.state.rating} count={5} size={40} 
+          isHalf={true} onChange={this.onChangeRating} />
       );
 
 
@@ -73,6 +70,8 @@ class MyInfoTab extends Component {
     //if current page is not Mainpage, myInfoTab should show onDetailPage. otherwise, should show onMainPage
     if(this.props.restaurantID != -1) {
       myReview = this.props.myReviewList.map((review) => {
+
+        //let time = review.modifiedTime.toLocaleDateString(); //for parsing time object
         return (//TODO It should be changed into <Review> component when the component is implemented.
           <MyReview className='Review' 
             reviewID={review.id}
@@ -83,19 +82,18 @@ class MyInfoTab extends Component {
         );})
 
 
-      //TODO review 갯수 카운트하는 거 수정해야함. reviewlist 받아온 후에 len method 쓰면 될듯.
       onDetailPage = (
         <div className='on-detail-page'>
-          <p><span id='restaurantName'>{this.props.selectedRestaurant.name}</span> 평가하기</p>
+          <p className='second-line'><span id='restaurantName'>&nbsp;&nbsp;{this.props.selectedRestaurant.title}&nbsp;&nbsp;</span> 평가하기</p>
           <div>{rateStar}</div>
           <div className='review-input-set'>
             {reviewInput}
             {reviewConfirmButton}
           </div>
           <div className='my-review-count-text'>
-            <span id='name'>{this.props.selectedUser.name}&nbsp;</span>님은 &nbsp;
-            <span id='restaurantName'>{this.props.selectedRestaurant.name}</span> 에<br/>
-            총 &nbsp;<span id='review-count'>{'test number'}</span> 개의 리뷰를 남겼습니다.
+            <span id='name'>{this.props.selectedUser.username}&nbsp;</span>님은 &nbsp;
+            <span id='restaurantName'>{this.props.selectedRestaurant.title}</span> 에<br/>
+            총 &nbsp;<span id='review-count'>{myReview.length}</span> 개의 리뷰를 남겼습니다.
           </div>
           {myReview}
         </div>
@@ -111,7 +109,7 @@ class MyInfoTab extends Component {
       <div className='MyInfoTab'>
         <div className='upper-bar'>
           <span className='upper-bar-welcome'>
-            안녕하세요, <span id='name'>{this.props.selectedUser.name}</span> 님!
+            안녕하세요, <span id='name'>{this.props.selectedUser.username}</span> 님!
           </span>
           <button id='sign-out' onClick={this.props.onGetSignOut}>로그아웃</button>
         </div>
