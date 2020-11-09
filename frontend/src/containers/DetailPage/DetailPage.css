@@ -3,7 +3,10 @@
     width: 400px;
     float: left;
 }
-
+#arrow{
+    width: 20px;
+    height: 20px;
+}
 .detailPage .right{
     width: 1000px;
     float: left;
@@ -17,12 +20,14 @@
 .detailPage .right .restaurant .image{
     float: left;
     margin-top: 20px;
-    width: 300px;
+    margin-left: 30px;
+    width: 350px;
 }
 .detailPage .right .restaurant .imageright{
     float:left;
     display: flex;
     flex-direction: column;
+    width: 400px;
 }
 
 
@@ -41,6 +46,7 @@
     width: 120px;
     margin-top: 10px;
 }
+
 .detailPage .right .restaurant .imageright .up .rate{
   
     font-size: xx-large;
@@ -52,18 +58,25 @@
    
 }
 .detailPage .right .restaurant .imageright .up .diff{
-   margin-top: 30px;
+   margin-top: 27px;
    color: orange;
    float: left;
 }
 .detailPage .right .restaurant .imageright .detailinfo{
     height: 200px;
-    width: 470px;
+    width: 500px;
   
     border: solid;
     border-color:gray;
     border-width: 1px;
     overflow-y: scroll;
+}
+.moreImage{
+    margin-left: 30px;
+    display:flex;
+    width: 1000px;
+    height: 240px;
+    overflow-x: scroll;
 }
 .keywords {
   width: 100%;

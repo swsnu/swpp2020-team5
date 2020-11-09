@@ -8,6 +8,7 @@ import chex from '../../../images/chex.png'
 
 const initialState = {
   restaurantlist:[
+
     {id:1, title:'맘스터치', 
       rate:4.78,
       // img_url:'https://upload.wikimedia.org/wikipedia/commons/4/4d/Tangsuyuk_%28Korean_Chinese_sweet_and_sour_pork%29.jpg?download',
