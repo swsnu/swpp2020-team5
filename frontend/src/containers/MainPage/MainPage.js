@@ -13,16 +13,27 @@ import './MainPage.css';
 class MainPage extends Component {
   componentDidMount(){
     this.props.onGetRestaurantList(this.props.match.params.name);
+    this.props.onGetFoodCategory();
   }
 
 
 
   render() {
+    
     let order=0;
     const list=this.props.storedList.map((el)=>{
+      let pos=false;
+      for (var i in el.category){
+        let tmp=el.category[i];
+        if(this.props.foodCategory[tmp]===true) pos=true;
+      }
+
+      if(pos===true){ 
       order++;
-      return <RestaurantSummary title={el.title} id={el.id} img_url={el.img_url} rate={el.rate} 
-          menu={el.menu} category={el.category} order={order} keywords={el.keywords} />
+
+      return <RestaurantSummary title={el.title} id={el.id} /*img_url={el.img_url}*/ img_src={el.img_src} rate={el.rate} 
+          category={el.category} order={order} preferenceVector={el.preferenceVector} />}
+
     })
 
     return(
@@ -43,7 +54,8 @@ class MainPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    storedList: state.rs.restaurantlist
+    storedList: state.rs.restaurantlist,
+    foodCategory: state.us.foodCategory,
   };
 };
 
@@ -51,7 +63,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onGetRestaurantList: (name) =>
       dispatch(actionCreators.getRestaurantList(name)),
-
+    onGetFoodCategory: () =>
+      dispatch(actionCreators.getFoodCategory()),
 
   };
 };

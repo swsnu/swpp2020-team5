@@ -2,38 +2,21 @@ import React, { Component } from 'react';
 
 import './FoodCategoryTab.css';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions/actionTypes';
 import { withRouter } from 'react-router';
 import * as actionCreators from '../../../store/actions/index';
-import KoreanImage from './img/Korean.jpeg'
-import VietnamImage from './img/Vietnam.jpeg'
-import ChineseImage from './img/Chinese.jpeg'
-import ChickenImage from './img/Chicken.jpeg'
-
-const foodCategoryName = [
-  "Korean",
-  "Chinese",
-  "Western",
-  "Vietnam",
-]
-
-
-// props = {
-//   user_id
-//   closepopup
-// }
+import img from '../../../images/background.jpg';
 class FoodCategoryTab extends Component {
   state = {
     foodCategory: {
-      Korean: false,
-      Western: false,
-      Chinese: false,
-      Vietnam: false,
-      Chicken: false,
+      한식: false,
+      양식: false,
+      중식: false,
+      일식: false,
     },
   }
 
   componentDidMount() {
+    this.props.onGetFoodCategory();
   }
 
   postClickFoodCategoryHandler = category => {
@@ -43,47 +26,32 @@ class FoodCategoryTab extends Component {
   }
 
   // before onGetUser ends, this func can make problem
+  //id 추가해야되나?
+
   postClickSaveHandler = () => {
-    const id_and_foodCategory = {
-      id: this.props.user_id,
+    const foodCategory = {
       foodCategory: this.state.foodCategory
     } 
-    this.props.onEditUserFoodCategory(id_and_foodCategory)
+    this.props.onEditUserFoodCategory(foodCategory)
 
-    this.props.closepopup()
+    
   }
   // we need to add hover and clicked img showing
   // DB needed for image
   render() {
+    let foodcategoryname=['한식','양식','중식','일식'];
+    let categorylist=[];
+    for (var i=0;i<foodcategoryname.length;i++)
+       {categorylist.push( 
+       <div>
+          <img src={img} width='50' height='50'></img>
+          <text>{foodcategoryname[i]}</text>
+        </div>)
+       }
     return (
-    <div className='FoodCategoryPopup'>
+    <div className='foodCategory'>
       <h1>Select what you want!</h1>
-        <img className={this.state.foodCategory.Korean ? 'ClickedImage' : 'unClickedImage'}
-          src={KoreanImage}
-          alt="Korean" 
-          onClick={ () => this.postClickFoodCategoryHandler("Korean") }
-        >
-        </img>
-        <img className={this.state.foodCategory.Chinese? 'ClickedImage' : 'unClickedImage'}
-          src={ChineseImage}
-          alt="Chinese" 
-          onClick={ () => this.postClickFoodCategoryHandler("Chinese") }
-        >
-        </img>
-        <br/>
-        <img className={this.state.foodCategory.Vietnam ? 'ClickedImage' : 'unClickedImage'}
-          src={VietnamImage}
-          alt="Vietnam" 
-          onClick={ () => this.postClickFoodCategoryHandler("Vietnam") }
-        >
-        </img>
-        <img className={this.state.foodCategory.Chicken ? 'ClickedImage' : 'unClickedImage'}
-          src={ChickenImage}
-          alt="Chicken" 
-          onClick={ () => this.postClickFoodCategoryHandler("Chicken") }
-        >
-        </img>
-      <br/>
+        {categorylist}
      <button onClick={() => this.postClickSaveHandler()}>
         SAVE
       </button>
@@ -91,13 +59,20 @@ class FoodCategoryTab extends Component {
     )
   }
 }
+//만약에 유저에서 가져올거면 그거있어야함
+const mapStateToProps = state =>{
+  
+}
 
 // we can assume this popup occurs when the user is logging in
 const mapDispatchToProps = dispatch => {
   return {
-    onEditUserFoodCategory: id_and_foodCategory => 
-      dispatch(actionCreators.editUserFoodCategory(id_and_foodCategory)),
+    onEditUserFoodCategory: foodCategory => 
+      dispatch(actionCreators.editUserFoodCategory(foodCategory)),
+    onGetFoodCategory: () =>
+      dispatch(actionCreators.getFoodCategory()),
+
   }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(FoodCategoryTab))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FoodCategoryTab))

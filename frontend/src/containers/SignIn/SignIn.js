@@ -16,6 +16,7 @@ class SignIn extends Component{
 
   onClickSignInHandler = () => {
     this.props.onPostSignIn(this.state.email, this.state.password);
+    this.props.history.push('/main');
   }
   
   render(){
@@ -30,7 +31,7 @@ class SignIn extends Component{
           <input type="text" id="email-input" className='input' value={this.state.email}
             onChange={(event) => this.setState({ email: event.target.value })} />
           <div className='box-text'>비밀번호</div>
-          <input type="text" id="password-input" className='input' value={this.state.password}
+          <input type="password" id="password-input" className='input' value={this.state.password}
             onChange={(event) => this.setState({ password: event.target.value })} />
           <div>
             <button id="sign-in-button" onClick = {()=>this.onClickSignInHandler()} >로그인</button>
