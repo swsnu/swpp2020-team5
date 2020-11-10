@@ -2,6 +2,7 @@
 .detailPage .sideBar{
     width: 400px;
     float: left;
+    position: fixed;
 }
 #arrow{
     width: 20px;
@@ -12,6 +13,7 @@
     float: left;
     display: flexbox;
     flex-direction: column;
+    padding-left: 400px;
 }
 #detail{
     width: 800px;

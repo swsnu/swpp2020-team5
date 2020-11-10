@@ -40,11 +40,16 @@ export const editUser = user => {
 
 // is it better changing getUser -> new func?
 //
-const editUserFoodCategory_ = getUser_;
+const editUserFoodCategory_ = foodCategory =>{
+  return {
+    type: actionTypes.PUT_FOODCATEGORY,
+    target: foodCategory,
+  }
+};
 
-export const editUserFoodCategory = id_and_foodCategory => {
+export const editUserFoodCategory = foodCategory => {
   return dispatch => {
-    return axios.put('/api/user/foodCategory', id_and_foodCategory)
+    return axios.put('/api/user/foodCategory', foodCategory)
       .then(res => {
         dispatch(editUserFoodCategory_(res.data))
       })
@@ -89,7 +94,9 @@ export const postSignUp = (userInfo) => {
 }
 
 export const getFoodCategory_ = (foodCategory) => {
-  return {type: actionTypes.GET_FOODCATEGORY,foodCategory };
+  return {
+    type: actionTypes.GET_FOODCATEGORY,
+    target: foodCategory };
 };
 
 export const getFoodCategory = () => {

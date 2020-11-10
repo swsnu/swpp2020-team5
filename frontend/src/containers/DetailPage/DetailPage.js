@@ -79,17 +79,19 @@ class DetailPage extends Component{
                     
                   </div>
                   </div>
-              </div>
-              <div className='moreImage'>
-              <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
-              <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
-              <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
-              <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
               
               </div>
               <div className='keywords'>
-                  <Keywords keywords={this.props.selectedRestaurant.keywords} />
+                <Keywords keywords={this.props.selectedRestaurant.keywords} />
               </div>
+              <div className='moreImage'>
+                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
+                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
+                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
+                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
+              
+              </div>
+              
               <div className='reviewlist'>
                 <ReviewList restaurantID={this.props.selectedRestaurant.id}/>
               </div>    

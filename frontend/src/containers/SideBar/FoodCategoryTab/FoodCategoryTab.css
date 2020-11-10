@@ -1,16 +1,43 @@
-.FoodCategoryPopup {
-  padding: 10px;  
+.foodCategory {
+  background-color: white;
+}
+.foodCategory .images{
   text-align: center;
+  display: flex;
+  
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-
-.FoodCategoryPopup .unClickedImage {
-  width: 300px;
-  height: 200px;
+.foodCategory .category{
+  height:80px
+}
+.foodCategory .unchecked {
+  width: 70px;
+  height: 70px;
   opacity: 1;
+  cursor: pointer;
 }
 
-.FoodCategoryPopup .ClickedImage {
-  width: 300px;
-  height: 200px;
+.foodCategory .checked {
+  width: 70px;
+  height: 70px;
   opacity: 0.5;
+  cursor: pointer;
+}
+#savebutton{
+  width:100px;
+  background-color: #E44142;
+  border: none;
+  font-weight: bold;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;  
+  margin-top: 50px;
+  margin-left: 280px;
 }

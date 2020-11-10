@@ -12,10 +12,15 @@ const initialState = {
   },
   foodCategory: {
     한식: true,
-    양식: false,
-    중식: false,
+    양식: true,
+    중식: true,
     일식: true,
-    
+    카페: false,
+    패스트푸드: true,
+    베트남식: true,
+    분식: false,
+    디저트: true,
+    주점: false,
   },
   searchLocation: {
     address: {
@@ -45,13 +50,15 @@ const reducer = (state = initialState, action) => {
   switch(action.type){
 		case actionTypes.GET_USER:
       return { ...state, selectedUser: action.target }
+    case actionTypes.PUT_FOODCATEGORY:
+      return {...state,foodCategory:action.target};
     case actionTypes.CHANGE_LOCATION:
       return {...state, searchLocation: action.searchLocation};
     case actionTypes.CHANGE_PREFERENCE_VECTOR:
       let updatedUser = action.target;
       return {...state, currentUser: updatedUser};
     case actionTypes.GET_FOODCATEGORY:
-      return {...state,foodCategory:action.foodCategory};
+      return {...state,foodCategory:action.target};
     default: break;
 
   }
