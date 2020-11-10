@@ -9,8 +9,9 @@
   height: 30px;
 }
 .MyReview .review-info .review-rating-stars {
-  padding-left: 50px;
+  margin-right: 50px;
   vertical-align: middle;
+  margin-left: 50px;
 }
 .MyReview .review-info .review-detail {
   color: #444444;
