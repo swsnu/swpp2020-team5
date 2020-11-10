@@ -17,7 +17,7 @@ const initialState = {
     일식: true,
     카페: false,
     패스트푸드: true,
-    베트남식: true,
+    베트남음식: true,
     분식: false,
     디저트: true,
     주점: false,
