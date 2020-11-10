@@ -3,6 +3,10 @@
   height: 100%;
   background-color: #E44142;
 }
+.SideBar .tab {
+  width: 100%;
+  height: 600px;
+}
 
 #logo-button {
   width: 100%;

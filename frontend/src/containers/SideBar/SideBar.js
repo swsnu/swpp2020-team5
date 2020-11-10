@@ -116,7 +116,9 @@ class SideBar extends Component {
           </div>
         </div>
         <br />
-        {tab}
+        <div className='tab'>
+          {tab}
+        </div>
       </div>
     )
   }
