@@ -1,5 +1,6 @@
 .PreferenceVectorTab {
   background-color: white;
+  overflow: scroll;
 }
 
 .preference-upper-bar {
