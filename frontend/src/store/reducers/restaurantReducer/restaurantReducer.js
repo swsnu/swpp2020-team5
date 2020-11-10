@@ -73,10 +73,8 @@ const initialState = {
     selectedRestaurant:{id:1, title:'swpp', 
     rate:3.3,
     img_url:'https://upload.wikimedia.org/wikipedia/commons/4/4d/Tangsuyuk_%28Korean_Chinese_sweet_and_sour_pork%29.jpg?download',
-    menu:['짜장면 6000원', '탕수육 2000원','15000원대표반쎄오25000원대표보느'
-    ,'12000원'
-    ,'분짜'
-    ],
+    menu:['짜장면 -------------------------- 6000원', '탕수육 -------------------------- 2000원',
+    '반쎄오 -------------------------- 12000원','분짜 ----------------------------- 15000원'],
     time:'9;00-12:00',keywords:['맵다','짜다','분위기가 좋다']
   ,category:['한식','중식','일식'],
   difference:0.43,

@@ -4,7 +4,7 @@ import './FoodCategoryTab.css';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import * as actionCreators from '../../../store/actions/index';
-import img from '../../../images/background.jpg';
+import img from '../../../images/logo.png';
 class FoodCategoryTab extends Component {
   state = {
     foodCategory: {
@@ -17,6 +17,13 @@ class FoodCategoryTab extends Component {
 
   componentDidMount() {
     this.props.onGetFoodCategory();
+    let changed=false;
+    for(let category in this.props.foodCategory){
+      if(this.props.foodCategory[category]===false) 
+        changed=true;
+    }
+    if(changed===true)
+      this.setState({foodCategory:this.props.foodCategory});
   }
 
   postClickFoodCategoryHandler = category => {
@@ -39,20 +46,25 @@ class FoodCategoryTab extends Component {
   // we need to add hover and clicked img showing
   // DB needed for image
   render() {
-    let foodcategoryname=['한식','양식','중식','일식'];
+    
     let categorylist=[];
-    for (var i=0;i<foodcategoryname.length;i++)
-       {categorylist.push( 
-       <div>
-          <img src={img} width='50' height='50'></img>
-          <text>{foodcategoryname[i]}</text>
+    for(let category in this.state.foodCategory){
+      categorylist.push( 
+       <div className='category'>
+          <img src={img} className={this.state.foodCategory[category]?
+          'checked':'unchecked'} width='50' height='50' 
+          onClick={() => this.postClickFoodCategoryHandler(category)}
+          ></img>
+          
         </div>)
-       }
+    }  
     return (
     <div className='foodCategory'>
       <h1>Select what you want!</h1>
+      <div className='images'>
         {categorylist}
-     <button onClick={() => this.postClickSaveHandler()}>
+      </div>
+     <button id='savebutton' onClick={() => this.postClickSaveHandler()}>
         SAVE
       </button>
     </div>
@@ -61,7 +73,7 @@ class FoodCategoryTab extends Component {
 }
 //만약에 유저에서 가져올거면 그거있어야함
 const mapStateToProps = state =>{
-  
+  return{foodCategory:state.us.foodCategory};
 }
 
 // we can assume this popup occurs when the user is logging in
