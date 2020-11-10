@@ -125,8 +125,8 @@ const mapStateToProps = state => {
     //myReviewList: state.rv.myReviews,
     myReviewList: [{
       id: 1,
-      content: '내스타일의 매운맛은 아니었던 걸로',
-      rating: 1,
+      content: '내스타일의 매운맛',
+      rating: 5,
       modifiedTime: '2020.11.01'
     },],
     selectedRestaurant: state.rs.selectedRestaurant,
