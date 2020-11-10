@@ -40,16 +40,16 @@ input::placeholder {
 }
 
 #review-input {
-  width: 200px;
-  height: 100px;
+  width: 70%;
+  height: 65px;
 }
 
 #review-confirm {
-  width: 105px;
-  height: 75px;
+  width: 30%;
+  height: 70px;
   text-align: center;
   background-color: #E44142;
- 
+  color: white;
   border: none;
 }
 
