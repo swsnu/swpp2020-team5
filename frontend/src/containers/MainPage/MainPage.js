@@ -32,17 +32,16 @@ class MainPage extends Component {
     })
 
     return(
-      <div className = 'mainPage'>
+      <div>
         <div className='sideBar'>
           <SideBar restaurantID={-1}/>
         </div>
-        <div className='restaurantList'>
-          {list}
+        <div className = 'mainPage'>
+          <div className='restaurantList'>
+            {list}
+          </div>
         </div>
       </div>
-
-
-
     )
   }
 }

@@ -47,59 +47,56 @@ class DetailPage extends Component{
           return <img src={el} width='280' height='200'/>
         })
         return(
-          <div className='detailPage'>
+          <div>
             <div className='sideBar'>
                   <SideBar restaurantID={parseInt(this.props.match.params.id)}/>
             </div>
-
-            <div className='right'>
-                <div className='restaurant'id='detail'>
-                  <div className='image'>
-                    <img src={this.props.selectedRestaurant.img_url} width='280' height='230' />
-                  </div>
-                  <div className='imageright'>
-                  <div className ='up' id='new'>
-                    <div className='title' >
-                      {this.props.selectedRestaurant.title}
+            <div className='detailPage'>
+              <div className='right'>
+                  <div className='restaurant'id='detail'>
+                    <div className='image'>
+                      <img src={this.props.selectedRestaurant.img_url} width='280' height='230' />
                     </div>
-                    <div className='rate'>
-                      {this.props.selectedRestaurant.rate}
+                    <div className='imageright'>
+                    <div className ='up' id='new'>
+                      <div className='title' >
+                        {this.props.selectedRestaurant.title}
+                      </div>
+                      <div className='rate'>
+                        {this.props.selectedRestaurant.rate}
+                      </div>
+                      <div className='diff'>
+                          {image}
+                          {text}
+                      </div>
                     </div>
-                    <div className='diff'>
-                        {image}
-                        {text}
+                    <div className='detailinfo' id='new' >
+                      <p>카테고리&nbsp;&nbsp;&nbsp;{category}</p>
+                      <p>주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {"서울 관악구 관악로14길 70 지하1층 (우)08789"}&nbsp;&nbsp;
+                      <a href="https://map.kakao.com/?urlX=490331&urlY=1105229&urlLevel=3&itemId=41742921&q=%EC%95%88%EB%85%95%EB%B2%A0%ED%8A%B8%EB%82%A8&srcid=41742921&map_type=TYPE_MAP" >
+                        카카오맵</a></p>
+                      <p>영업시간&nbsp;&nbsp;&nbsp;{this.props.selectedRestaurant.time}</p>
+                      <p>메뉴&nbsp;&nbsp;&nbsp;{menu}</p>
+                      
+                      
                     </div>
-                  </div>
-                  <div className='detailinfo' id='new' >
-                    <p>카테고리&nbsp;&nbsp;&nbsp;{category}</p>
-                    <p>주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {"서울 관악구 관악로14길 70 지하1층 (우)08789"}&nbsp;&nbsp;
-                    <a href="https://map.kakao.com/?urlX=490331&urlY=1105229&urlLevel=3&itemId=41742921&q=%EC%95%88%EB%85%95%EB%B2%A0%ED%8A%B8%EB%82%A8&srcid=41742921&map_type=TYPE_MAP" >
-                      카카오맵</a></p>
-                    <p>영업시간&nbsp;&nbsp;&nbsp;{this.props.selectedRestaurant.time}</p>
-                    <p>메뉴&nbsp;&nbsp;&nbsp;{menu}</p>
-                    
-                    
-                  </div>
-                  </div>
-              
+                    </div>
+                
+                </div>
+                <div className='keywords'>
+                  <Keywords keywords={this.props.selectedRestaurant.keywords} />
+                </div>
+                <div className='moreImage'>
+                  {imgList}
+                
+                </div>
+                <div className='reviewlist'>
+                  <ReviewList restaurantID={this.props.selectedRestaurant.id}/>
+                </div>    
               </div>
-              <div className='keywords'>
-                <Keywords keywords={this.props.selectedRestaurant.keywords} />
-              </div>
-              <div className='moreImage'>
-                {imgList}
-              
-              </div>
-              
-              <div className='reviewlist'>
-                <ReviewList restaurantID={this.props.selectedRestaurant.id}/>
-              </div>    
             </div>
-              
-              
           </div>
-          
         );
    };
 }

@@ -1,14 +1,16 @@
-.mainPage .sideBar{
+.sideBar{
     width: 400px;
     float: left;
     position: fixed;
     
 }
+.mainPage{
+    float: left;
+}
 .mainPage .restaurantList{
     float: left;
     display: flex;
     flex-direction: column;
-
     width: calc(100% - 400px);
     min-width: 1000px;
     height: 100%;
