@@ -6,100 +6,84 @@ class Keywords extends Component {
   render() {
     const words = [ // would be given as props in actual implementation
       {
-        text: '조금큰',
-        value: 64,
+        text: '존맛',
+        value: 3,
       },
       {
-        text: '많이작은',
-        value: 11,
+        text: '샤로수길',
+        value: 3,
       },
       {
-        text: '기깔나게작은',
+        text: '반세오',
+        value: 3,
+      },
+      {
+        text: '새우',
+        value: 3,
+      },
+      {
+        text: '정리',
+        value: 3,
+      },
+      {
+        text: '추천',
+        value: 3,
+      },
+      {
+        text: '볶음밥',
+        value: 4,
+      },
+      {
+        text: '비싸',
+        value: 4,
+      },
+      {
+        text: '괜찮',
+        value: 4,
+      },
+      {
+        text: '라이스페이퍼',
+        value: 4,
+      },
+      {
+        text: '보통',
+        value: 4,
+      },
+      {
+        text: '분위기',
+        value: 4,
+      },
+      {
+        text: '자리',
+        value: 4,
+      },
+      {
+        text: '웨이팅',
         value: 6,
       },
       {
-        text: '적당히조그만',
-        value: 17,
-      },
-      {
-        text: '적절한',
-        value: 30,
-      },
-      {
-        text: '어마무시한',
-        value: 130,
-      },
-      {
-        text: '조금큰',
-        value: 64,
-      },
-      {
-        text: '많이작은',
-        value: 11,
-      },
-      {
-        text: '기깔나게작은',
+        text: '느끼',
         value: 6,
       },
       {
-        text: '적당히조그만',
-        value: 17,
+        text: '베트남',
+        value: 8,
       },
       {
-        text: '적절한',
-        value: 30,
+        text: '쌀국수',
+        value: 12,
       },
       {
-        text: '진짜겁나어마무시한',
-        value: 160,
+        text: '반쎄오',
+        value: 13,
       },
       {
-        text: '조금큰',
-        value: 64,
+        text: '분짜',
+        value: 16,
       },
       {
-        text: '많이작은',
-        value: 11,
-      },
-      {
-        text: '기깔나게작은',
-        value: 6,
-      },
-      {
-        text: '적당히조그만',
-        value: 17,
-      },
-      {
-        text: '적절한',
-        value: 30,
-      },
-      {
-        text: '어마무시한',
-        value: 130,
-      },
-      {
-        text: '조금큰',
-        value: 64,
-      },
-      {
-        text: '많이작은',
-        value: 11,
-      },
-      {
-        text: '기깔나게작은',
-        value: 6,
-      },
-      {
-        text: '적당히조그만',
-        value: 17,
-      },
-      {
-        text: '적절한',
-        value: 30,
-      },
-      {
-        text: '어마무시한',
-        value: 130,
+        text: '맛있',
+        value: 23,
       },
     ]
     const options = {
@@ -109,15 +93,31 @@ class Keywords extends Component {
       spiral: 'archimedean',
     };
     const size = [1000, 200];
+    let maxKeywordValue = 0;
+    words.forEach(keyword => {
+      if (keyword.value > maxKeywordValue) {
+        maxKeywordValue = keyword.value;
+      }
+    })
     const callbacks = {
-      getWordColor: word => word.value > 20 ? '#000000' : '#AAAAAA',
+      getWordColor: word => word.value > Math.log(maxKeywordValue/2) ? '#000000' : '#AAAAAA',
     }
+    const expandRatio = 50;
+    const expandedWords = [];
+    words.forEach(keyword => {
+      expandedWords.push({
+        text: keyword.text,
+        value: Math.log(keyword.value),
+      });
+      console.log(keyword)
+    });
+    console.log(expandedWords)
     return (
       <div id>
         <WordCloud
           callbacks={callbacks}
           options={options}
-          words={words}
+          words={expandedWords}
           size={size}
         />
       </div>
