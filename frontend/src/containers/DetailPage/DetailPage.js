@@ -43,6 +43,9 @@ class DetailPage extends Component{
         return <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;{el}</p>
         })
+        const imgList=this.props.selectedRestaurant.img_url_list.map(el=>{
+          return <img src={el} width='280' height='200'/>
+        })
         return(
           <div className='detailPage'>
             <div className='sideBar'>
@@ -85,10 +88,7 @@ class DetailPage extends Component{
                 <Keywords keywords={this.props.selectedRestaurant.keywords} />
               </div>
               <div className='moreImage'>
-                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
-                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
-                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
-                <img src={this.props.selectedRestaurant.img_url} width='280' height='200' />
+                {imgList}
               
               </div>
               
