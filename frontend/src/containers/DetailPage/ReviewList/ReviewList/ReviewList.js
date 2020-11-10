@@ -19,6 +19,9 @@ class ReviewList extends Component {
   componentDidMount() {
     //TODO backend needed!!
     //this.props.onGetReviews(this.props.match.params.id);
+    
+    //setting the default button.
+    document.getElementById('naver-tab-button').click();
   }
 
   onClickTabButtonHandler= (event, siteName) => {
