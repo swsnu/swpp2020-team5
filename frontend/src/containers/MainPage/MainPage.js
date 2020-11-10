@@ -3,11 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
 import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
-import ReviewList from '../DetailPage/ReviewList/ReviewList/ReviewList';
-import MyInfoTab from '../SideBar/MyInfoTab/MyInfoTab';
-import LocationTab from '../SideBar/LocationTab/LocationTab';
-import FoodCategoryTab from '../SideBar/FoodCategoryTab/FoodCategoryTab';
-import PreferenceVectorTab from '../SideBar/PreferenceVectorTab/PreferenceVectorTab';
 import * as actionCreators from '../../store/actions/index';
 import './MainPage.css';
 class MainPage extends Component {
