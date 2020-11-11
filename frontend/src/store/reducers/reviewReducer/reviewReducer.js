@@ -52,31 +52,31 @@ const initialState = {
         authorName: '사용자3',
       },
     ],
-  }
-}
+  },
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_REVIEWS:
-      return {...state, selectedReviews: action.target};
+      return { ...state, selectedReviews: action.target };
     case actionTypes.PUT_REVIEW: {
-      const deleted = state.myReviews.filter(review => { return review.id !== action.id; });
+      const deleted = state.myReviews.filter((review) => review.id !== action.id);
       const newReview = {
         id: action.id,
         content: action.content,
         rating: action.rating,
         modifiedTime: action.modifiedTime,
-      }
-      return {...state, myReviews: [...deleted, newReview]};
+      };
+      return { ...state, myReviews: [...deleted, newReview] };
     }
     case actionTypes.DELETE_REVIEW: {
-      const deleted = state.myReviews.filter(review => { return review.id !== action.id; });
-      return {...state, myReviews: [...deleted]};
+      const deleted = state.myReviews.filter((review) => review.id !== action.id);
+      return { ...state, myReviews: [...deleted] };
     }
-    default: 
+    default:
       break;
   }
 
   return state;
-}
+};
 
 export default reducer;

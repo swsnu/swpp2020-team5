@@ -12,7 +12,7 @@ class LocationTab extends Component {
 
   state = {
     script: document.createElement('script'),
-    locationListContainer: null,
+    locationListWrapper: null,
     locationList: [],
     map: null,
   }
@@ -41,7 +41,7 @@ class LocationTab extends Component {
     };
 
     // load location list
-    this.setState({locationListContainer: document.getElementById('location-list')});
+    this.setState({locationListWrapper: document.getElementById('location-list')});
 
   }
 
@@ -49,9 +49,9 @@ class LocationTab extends Component {
   // show the location list only if there are locations to display
   //
   onToggleListHandler(length) {
-    const _locationListContainer = this.state.locationListContainer;
-    _locationListContainer.style.display = length == 0 ? 'none' : 'block';
-    this.setState({locationListContainer: _locationListContainer});
+    const _locationListWrapper = this.state.locationListWrapper;
+    _locationListWrapper.style.display = length == 0 ? 'none' : 'block';
+    this.setState({locationListWrapper: _locationListWrapper});
   }
   
   //
@@ -113,9 +113,9 @@ class LocationTab extends Component {
       <div className='location-tab'>
         <div className='location'>
           현재 위치ㅣ
-          <text className='current-location'>
+          <strong className='current-location'>
             {locationString}
-          </text>
+          </strong>
         </div>
         <hr className='line'/>
         <div id='search-box' className='box'>

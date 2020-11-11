@@ -10,6 +10,7 @@
 .location-tab .current-location {
   margin-left: 10px;
   color: #E44142;
+  font-weight: lighter;
 }
 .location-tab .map {
   width: calc(100% - 40px);
