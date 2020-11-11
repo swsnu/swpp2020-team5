@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 
 import DetailPage from './containers/DetailPage/DetailPage';
@@ -9,9 +10,9 @@ import SignUp from "./containers/SignUp/SignUp";
 import './App.css';
 
 
-function App() {
+function App(props) {
   return (
-    <BrowserRouter>
+    <ConnectedRouter history={props.history}>
       <div className = "App">
         <Switch>
           <Redirect exact from='/'to='/sign-in' />
@@ -24,7 +25,7 @@ function App() {
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </div>
-    </BrowserRouter>
+    </ConnectedRouter>
   );
 }
 

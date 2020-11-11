@@ -65,13 +65,13 @@ class CreateID extends Component{
                     this.setState({userInfo:{...this.state.userInfo,email:ev.target.value}});
                 }}/>
 
-                <p>비밀번호</p><input id='password-input' type='text'
+                <p>비밀번호</p><input id='password-input' type='password'
                 value={this.state.userInfo.password}
                 onChange={(ev)=>{
                     this.setState({userInfo:{...this.state.userInfo,password:ev.target.value}});
                 }}/>
                 <p>비밀번호확인</p>
-                    <input id='verify-password-input' type='text'
+                    <input id='verify-password-input' type='password'
                     value={this.state.verifyPassword}
                     onChange={(ev)=>{
                         this.setState({verifyPassword:ev.target.value});

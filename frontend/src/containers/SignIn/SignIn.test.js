@@ -1,50 +1,21 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { connectRouter, ConnectedRouter } from 'connected-react-router';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route, Switch } from 'react-router-dom';
 
-import Signin from './SignIn';
+import SignIn from './SignIn';
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
-import * as actionCreators from '../../store/actions/actionTypes';
+import * as userActionCreators from '../../store/actions/userActions/userActions';
 
 const stubInitialState = {
   user: {
     id: 0,
     username: '',
-    preferenceVector: {
-      taste1: 1,
-      taste2: 2,
-      taste3: 3,
-    },
-    foodCategory: {
-      Korean: true,
-      Western: true,
-      Chinese: false,
-      Vietnamese: false,
-    },
-    searchLocation: {
-      address: {
-        address_name: '서울 관악구',
-        b_code: '1162000000',
-        h_code: '1162000000',
-        main_address_no: '',
-        mountain_yn: 'N',
-        region_1depth_name: '서울',
-        region_2depth_name: '관악구',
-        region_3depth_h_name: '',
-        region_3depth_name: '',
-        sub_address_no: '',
-        x: '126.951561853868',
-        y: '37.4783683761333'
-      },
-      address_name: '서울 관악구',
-      address_type: 'REGION',
-      road_address: null,
-      x: '126.951561853868',
-      y: '37.4783683761333'
-    },
+    preferenceVector: null,
+    foodCategory: null,
+    searchLocation: null,
   },
   keyword: null,
   restaurant: null,
@@ -52,8 +23,48 @@ const stubInitialState = {
 }
 
 const mockStore = getMockStore(stubInitialState);
+
 describe('<SignIn />', () => {
-  it ('does nothing', () => {
-    expect(1).toBe(1);
+  let signIn;
+  beforeEach(() => {
+    signIn = (
+      <Provider store={mockStore}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path='/' exact
+              render={() => <SignIn />} />
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
+    );
+  });
+  
+  it ('should set state properly on email input', () => {
+    const email = 'yeet@naver.com'
+    const component = mount(signIn);
+    const wrapper = component.find('#email-input');
+    wrapper.simulate('change', { target: { value: email } });
+    const newSignInInstance = component.find(SignIn.WrappedComponent).instance();
+    expect(newSignInInstance.state.email).toEqual(email);
+    expect(newSignInInstance.state.password).toEqual('');
+  });
+
+  it ('should set state properly on password input', () => {
+    const password = 'yeet1234'
+    const component = mount(signIn);
+    const wrapper = component.find('#password-input');
+    wrapper.simulate('change', { target: { value: password } });
+    const newSignInInstance = component.find(SignIn.WrappedComponent).instance();
+    expect(newSignInInstance.state.email).toEqual('');
+    expect(newSignInInstance.state.password).toEqual(password);
+  });
+
+  it ('should call "onClickSigninHandler"', () => {
+    const spyPostSigIn = jest.spyOn(userActionCreators, 'postSignIn')
+    .mockImplementation((email, password) => { return dispatch => {};});
+    const component = mount(signIn);
+    const wrapper = component.find('#sign-in-button');
+    wrapper.simulate('click');
+    expect(spyPostSigIn).toBeCalledTimes(1);
   });
 });
