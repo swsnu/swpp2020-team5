@@ -3,6 +3,6 @@ import SideBar from './SideBar';
 
 describe('<SideBar />', () => {
   it('should go ', () => {
-    
+
   });
 });

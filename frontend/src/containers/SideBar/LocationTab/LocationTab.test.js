@@ -1,11 +1,11 @@
-/*global kakao*/
+/* global kakao */
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import SideBar from '../SideBar'
+import SideBar from '../SideBar';
 import LocationTab from './LocationTab';
 import { history } from '../../../store/store';
 import { getMockStore } from '../../../test-utils/mocks';
@@ -30,49 +30,50 @@ const stubInitialState = {
         region_3depth_name: '',
         sub_address_no: '',
         x: '126.951561853868',
-        y: '37.4783683761333'
+        y: '37.4783683761333',
       },
       address_name: '서울 관악구',
       address_type: 'REGION',
       road_address: null,
       x: '126.951561853868',
-      y: '37.4783683761333'
+      y: '37.4783683761333',
     },
   },
   keyword: null,
   restaurant: null,
   review: null,
-}
+};
 
 const mockStore = getMockStore(stubInitialState);
 
 describe('<LocationTab />', () => {
-
   let locationTab;
   beforeEach(() => {
     locationTab = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path='/' exact
-              render={() => <LocationTab />}/>
+            <Route
+              path="/"
+              exact
+              render={() => <LocationTab />}
+            />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
   });
 
-  it ('does nothing', () => {
+  it('does nothing', () => {
     expect(1).toBe(1);
   });
-  
-  it ('should call "onChangeLocationInputHandler"', () => {
-    const locationInput= '낙성대로';
+
+  it('should call "onChangeLocationInputHandler"', () => {
+    const locationInput = '낙성대로';
     const component = mount(locationTab);
     console.log(component.find(LocationTab.WrappedComponent).instance().state);
     const wrapper = component.find('#location-input');
     // wrapper.simulate('change', { target: { value: locationInput }});
     expect(1).toBe(1);
-    
   });
 });

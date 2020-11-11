@@ -10,10 +10,10 @@ describe('<CreatePreferenceVector />', () => {
   });
 
   beforeEach(() => {
-    
-  })
+
+  });
 
   it('should call postSignUp when click confirm-button', () => {
-    let spyPostSignUp = jest.spyOn(actionCreators, 'postSignUp')
-  })
-})
+    const spyPostSignUp = jest.spyOn(actionCreators, 'postSignUp');
+  });
+});

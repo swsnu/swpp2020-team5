@@ -20,7 +20,7 @@ const stubInitialState = {
   keyword: null,
   restaurant: null,
   review: null,
-}
+};
 
 const mockStore = getMockStore(stubInitialState);
 
@@ -31,16 +31,19 @@ describe('<SignIn />', () => {
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path='/' exact
-              render={() => <SignIn />} />
+            <Route
+              path="/"
+              exact
+              render={() => <SignIn />}
+            />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
   });
-  
-  it ('should set state properly on email input', () => {
-    const email = 'yeet@naver.com'
+
+  it('should set state properly on email input', () => {
+    const email = 'yeet@naver.com';
     const component = mount(signIn);
     const wrapper = component.find('#email-input');
     wrapper.simulate('change', { target: { value: email } });
@@ -49,8 +52,8 @@ describe('<SignIn />', () => {
     expect(newSignInInstance.state.password).toEqual('');
   });
 
-  it ('should set state properly on password input', () => {
-    const password = 'yeet1234'
+  it('should set state properly on password input', () => {
+    const password = 'yeet1234';
     const component = mount(signIn);
     const wrapper = component.find('#password-input');
     wrapper.simulate('change', { target: { value: password } });
@@ -59,9 +62,9 @@ describe('<SignIn />', () => {
     expect(newSignInInstance.state.password).toEqual(password);
   });
 
-  it ('should call "onClickSigninHandler"', () => {
+  it('should call "onClickSigninHandler"', () => {
     const spyPostSigIn = jest.spyOn(userActionCreators, 'postSignIn')
-    .mockImplementation((email, password) => { return dispatch => {};});
+      .mockImplementation((email, password) => (dispatch) => {});
     const component = mount(signIn);
     const wrapper = component.find('#sign-in-button');
     wrapper.simulate('click');

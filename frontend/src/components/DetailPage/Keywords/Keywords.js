@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import WordCloud from 'react-wordcloud'
-import './Keywords.css'
-class Keywords extends Component {
+import React, { Component } from 'react';
+import WordCloud from 'react-wordcloud';
+import './Keywords.css';
 
+class Keywords extends Component {
   render() {
     const words = [ // would be given as props in actual implementation
       {
@@ -85,33 +85,33 @@ class Keywords extends Component {
         text: '맛있',
         value: 23,
       },
-    ]
+    ];
     const options = {
       rotations: 0,
-      rotationAngles: [0,0],
+      rotationAngles: [0, 0],
       deterministic: true,
       spiral: 'archimedean',
     };
     const size = [1000, 200];
     let maxKeywordValue = 0;
-    words.forEach(keyword => {
+    words.forEach((keyword) => {
       if (keyword.value > maxKeywordValue) {
         maxKeywordValue = keyword.value;
       }
-    })
+    });
     const callbacks = {
-      getWordColor: word => word.value > Math.log(maxKeywordValue/2) ? '#000000' : '#AAAAAA',
-    }
+      getWordColor: (word) => (word.value > Math.log(maxKeywordValue / 2) ? '#000000' : '#AAAAAA'),
+    };
     const expandRatio = 50;
     const expandedWords = [];
-    words.forEach(keyword => {
+    words.forEach((keyword) => {
       expandedWords.push({
         text: keyword.text,
         value: Math.log(keyword.value),
       });
-      console.log(keyword)
+      console.log(keyword);
     });
-    console.log(expandedWords)
+    console.log(expandedWords);
     return (
       <div id>
         <WordCloud
@@ -121,8 +121,7 @@ class Keywords extends Component {
           size={size}
         />
       </div>
-    )
+    );
   }
-
 }
- export default Keywords;
+export default Keywords;

@@ -1,7 +1,7 @@
-import * as actionTypes from '../../actions/actionTypes'
+import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
-  selectedUser: { 
+  selectedUser: {
     id: 0,
     username: '우렁쌈밥',
   },
@@ -35,34 +35,33 @@ const initialState = {
       region_3depth_name: '',
       sub_address_no: '',
       x: '126.951561853868',
-      y: '37.4783683761333'
+      y: '37.4783683761333',
     },
     address_name: '서울 관악구',
     address_type: 'REGION',
     road_address: null,
     x: '126.951561853868',
-    y: '37.4783683761333'
+    y: '37.4783683761333',
   },
-}
+};
 
-//preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
+// preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
 const reducer = (state = initialState, action) => {
-  switch(action.type){
-		case actionTypes.GET_USER:
-      return { ...state, selectedUser: action.target }
+  switch (action.type) {
+    case actionTypes.GET_USER:
+      return { ...state, selectedUser: action.target };
     case actionTypes.PUT_FOODCATEGORY:
-      return {...state,foodCategory:action.target};
+      return { ...state, foodCategory: action.target };
     case actionTypes.CHANGE_LOCATION:
-      return {...state, searchLocation: action.searchLocation};
+      return { ...state, searchLocation: action.searchLocation };
     case actionTypes.CHANGE_PREFERENCE_VECTOR:
-      let updatedUser = action.target;
-      return {...state, currentUser: updatedUser};
+      const updatedUser = action.target;
+      return { ...state, currentUser: updatedUser };
     case actionTypes.GET_FOODCATEGORY:
-      return {...state,foodCategory:action.target};
+      return { ...state, foodCategory: action.target };
     default: break;
-
   }
   return state;
-}
+};
 
 export default reducer;
