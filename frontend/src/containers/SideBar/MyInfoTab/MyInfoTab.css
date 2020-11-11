@@ -3,14 +3,14 @@
 }
 .MyInfoTab #name {
   position: relative;
-  color: orange;
+  color: #E44142;
 }
 .upper-bar {
   margin-bottom: 20px;
   box-shadow: 0 4px 2px -2px gray;
   padding-bottom: 30px;
   border-top: 3px black solid;
-  background-color: #E44142;
+  background-color: white;
 }
 
 .upper-bar-welcome {
@@ -29,7 +29,7 @@ input::placeholder {
   margin-bottom: 0px;
 }
 #restaurantName {
-  color: orange;
+  color: #E44142;
 }
 .review-input-set {
   display: flex;
@@ -40,22 +40,22 @@ input::placeholder {
 }
 
 #review-input {
-  width: 200px;
-  height: 100px;
+  width: 70%;
+  height: 65px;
 }
 
 #review-confirm {
-  width: 45px;
-  height: 105px;
+  width: 30%;
+  height: 70px;
   text-align: center;
   background-color: #E44142;
- 
+  color: white;
   border: none;
 }
 
 
 #sign-out {  
-  background-color: orange;
+  background-color: #E44142;
   border-radius: 10px;
   color: #FFFFFF;
   width: 90px;
@@ -65,6 +65,7 @@ input::placeholder {
   border: none;
   position: absolute;
   margin-left: 110px;
+  margin-top: 5px;
 }
 
 .on-main-page {
