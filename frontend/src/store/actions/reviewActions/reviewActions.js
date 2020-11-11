@@ -11,12 +11,25 @@ export const getReviews = (id) => (dispatch) => axios.get(`api/restaurant/:${id}
     dispatch(getReviews_(res.data));
   });
 
+const postReview_ = (reviewInfo) => ({
+  type: actionTypes.PUT_REVIEW,
+  target: reviewInfo,
+});
+
+export const postReview = (reviewInfo) => (dispatch) => axios.post(`api/review`, reviewInfo)
+  .then((res) => {
+    dispatch(postReview_(res.data));
+  })
+.catch((res) => {
+    dispatch(postReview_(reviewInfo));
+})
+
 const putReview_ = (reviewInfo) => ({
   type: actionTypes.PUT_REVIEW,
   target: reviewInfo,
 });
 
-export const putReview = (reviewID, reviewInfo) => (dispatch) => axios.put(`api/review/:${reviewID}`, reviewInfo)
+export const putReview = (reviewInfo) => (dispatch) => axios.put(`api/review/:${reviewInfo.id}`, reviewInfo)
   .then((res) => {
     dispatch(putReview_(res.data));
   });
@@ -26,7 +39,10 @@ const deleteReview_ = (reviewID) => ({
   target: reviewID,
 });
 
-export const deleteReview = (reviewID) => (dispatch) => axios.delete(`api/review/:${reviewID}`)
+export const deleteReview = (reviewID) => (dispatch) => axios.put(`api/review/:${reviewID}`)
   .then((res) => {
     dispatch(deleteReview_(reviewID));
-  });
+  })
+.catch((res) => {
+    dispatch(deleteReview_(reviewID));
+})

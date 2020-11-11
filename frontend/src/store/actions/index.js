@@ -11,6 +11,7 @@ export {
   getReviews,
   putReview,
   deleteReview,
+  postReview,
 } from './reviewActions/reviewActions';
 
 export {

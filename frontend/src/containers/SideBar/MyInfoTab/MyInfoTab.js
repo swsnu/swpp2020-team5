@@ -18,7 +18,7 @@ class MyInfoTab extends Component {
 
   componentDidMount() {
     //this.props.onGetUser();
-    //this.props.onGetMyReviewList(this.props.restaurantID);
+    this.props.onGetReviews(this.props.restaurantID);
   }
 
   onChangeReviewInputHandler = (event) => {
@@ -26,8 +26,9 @@ class MyInfoTab extends Component {
   }
 
   onClickConfirmHandler = (event) => {
-    this.props.onPostMyReview(this.props.restaurantID, this.state.content, this.state.rating, new Date());
+    this.props.onPostReview(this.props.restaurantID, this.state.content, this.state.rating, new Date());
     this.setState({content: ''});
+    console.log('sgs')
   }
 
   onChangeRating = (newRating) => {
@@ -58,11 +59,11 @@ class MyInfoTab extends Component {
           onChange={this.onChangeReviewInputHandler}/>
       );
     let reviewConfirmButton = (
-        <button id='review-confirm' onClick={this.onClickConfirmHandler}>리뷰작성</button>
+      <button id='review-confirm' onClick={this.onClickConfirmHandler}>리뷰작성</button>
       );
     let rateStar = (
         <ReactStars id='rate-star' value={this.state.rating} count={5} size={40} 
-          isHalf={true} onChange={this.onChangeRating} />
+        isHalf={true} onChange={() => this.onChangeRating(this.state.rating)} />
       );
 
 
@@ -77,7 +78,7 @@ class MyInfoTab extends Component {
             reviewID={review.id}
             content={review.content}
             rating={review.rating}
-            modifiedTime={review.modifiedTime} >
+            modifiedTime={review.modifiedTime.toLocaleDateString()} >
           </MyReview>
         );})
 
@@ -111,7 +112,7 @@ class MyInfoTab extends Component {
           <span className='upper-bar-welcome'>
             안녕하세요, <span id='name'>{this.props.selectedUser.username}</span> 님!
           </span>
-          <button id='sign-out' onClick={this.props.onGetSignOut}>로그아웃</button>
+          <button id='sign-out' onClick={() => this.props.onGetSignOut()}>로그아웃</button>
         </div>
         {myInfo}
       </div>
@@ -123,12 +124,15 @@ const mapStateToProps = state => {
   return {
     selectedUser: state.us.selectedUser,
     //myReviewList: state.rv.myReviews,
-    myReviewList: [{
+    myReviewList: state.rv.myReviews,
+    /*
+    [{
       id: 1,
       content: '내스타일의 매운맛',
       rating: 5,
       modifiedTime: '2020.11.01'
     },],
+    */
     selectedRestaurant: state.rs.selectedRestaurant,
   };
 }
@@ -137,13 +141,18 @@ const mapDispatchToProps = dispatch => {
   return {
    // onGetUser: () => dispatch(actionCreators.getUser()),
    // onGetSignOut: () => dispatch(actionCreators.getSignOut()),
-   // onGetMyReviewList: (restaurantID) => {
-   //   if (restaurantID !== -1) {
-   //     dispatch(actionCreators.getMyReviewList(restaurantID));
-   //   }
-   // },
-   // onPostMyReview: (restaurantID, content, rating, createTime) => 
-   //   dispatch(actionCreators.postMyReview(restaurantID, content, rating, createTime)),
+    onGetReviews: (restaurantID) => {
+      if (restaurantID !== -1) {
+        dispatch(actionCreators.getReviews(restaurantID));
+      }
+    },
+    onPostReview: (restaurantID, content, rating, createTime) => 
+    dispatch(actionCreators.postReview({
+      restaurantID: restaurantID,
+      content: content,
+      rating: rating,
+      modifiedTime: createTime
+    })),
   };
 }
 

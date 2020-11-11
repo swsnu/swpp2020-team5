@@ -51,6 +51,7 @@ input::placeholder {
   background-color: #E44142;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 

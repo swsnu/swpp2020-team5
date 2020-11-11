@@ -12,6 +12,7 @@ class MyReview extends Component {
     content: 'Hi',
     rating: 0,
     isEdit: false,
+    preContent: '',
   }
 
   constructor(props) {
@@ -23,7 +24,10 @@ class MyReview extends Component {
   }
 
   onClickEditHandler = () => {
-    this.setState({isEdit: true});
+    this.setState({
+      isEdit: true,
+      preContent: this.state.content
+    });
   }
 
   onClickEditDoneHandler = () => {
@@ -36,13 +40,16 @@ class MyReview extends Component {
   }
 
   onClickDeleteHandler = () => {
-    if ($.confirm("Do you really want to Remove?")) {
+    if (window.confirm("Do you really want to Remove?")) {
       this.props.onDeleteReview(this.props.reviewID);
     }
   }
 
   onClickCancelHandler = () => {
-    this.setState({isEdit: false});
+    this.setState({
+      isEdit: false,
+      content: this.state.preContent
+    });
   }
 
   onChangeRatingHandler = (newRating) => {
@@ -111,7 +118,10 @@ class MyReview extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onPutReview: (reviewID, reviewInfo) =>
-      dispatch(actionCreators.putReview(reviewID, reviewInfo)),
+    dispatch(actionCreators.putReview({
+      id: reviewID,
+      ...reviewInfo
+    })),
     onDeleteReview: reviewID =>
       dispatch(actionCreators.deleteReview(reviewID)),
   }

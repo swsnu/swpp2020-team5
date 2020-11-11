@@ -3,10 +3,10 @@ import * as actionTypes from '../../actions/actionTypes';
 const initialState = {
   myReviews: [
     {
-      id: 0,
-      content: 'Nice food',
-      rating: 3.5,
-      modifiedTime: new Date(),
+      id: 10,
+      content: '국물 맛이 좋다',
+      rating: 5,
+      modifiedTime: new Date()
     },
   ],
   otherReviews: {
@@ -69,7 +69,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, myReviews: [...deleted, newReview] };
     }
     case actionTypes.DELETE_REVIEW: {
-      const deleted = state.myReviews.filter((review) => review.id !== action.id);
+      console.log(action.target)
+      const deleted = state.myReviews.filter((review) => review.id !== action.target);
       return { ...state, myReviews: [...deleted] };
     }
     default:
