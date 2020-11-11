@@ -43,10 +43,11 @@
 }
 .detailPage .right .restaurant .imageright .up .title{
     
+    
     font-size: 30px;
     float: left;
     
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .detailPage .right .restaurant .imageright .up .rate{

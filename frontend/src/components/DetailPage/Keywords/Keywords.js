@@ -113,7 +113,7 @@ class Keywords extends Component {
     });
     console.log(expandedWords)
     return (
-      <div id>
+      <div id='keywords'>
         <WordCloud
           callbacks={callbacks}
           options={options}
