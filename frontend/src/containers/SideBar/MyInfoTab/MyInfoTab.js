@@ -62,7 +62,7 @@ class MyInfoTab extends Component {
       );
     let rateStar = (
         <ReactStars id='rate-star' value={this.state.rating} count={5} size={40} 
-        isHalf={true} onChange={() => this.onChangeRating(this.state.rating)} />
+        isHalf={true} onChange={this.onChangeRating} />
       );
 
 
