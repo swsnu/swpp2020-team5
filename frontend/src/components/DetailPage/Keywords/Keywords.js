@@ -91,6 +91,7 @@ class Keywords extends Component {
       rotationAngles: [0, 0],
       deterministic: true,
       spiral: 'archimedean',
+      fontSizes: [30,100],
     };
     const size = [1000, 200];
     let maxKeywordValue = 0;
@@ -101,6 +102,7 @@ class Keywords extends Component {
     });
     const callbacks = {
       getWordColor: (word) => (word.value > Math.log(maxKeywordValue / 2) ? '#000000' : '#AAAAAA'),
+
     };
     const expandRatio = 50;
     const expandedWords = [];
