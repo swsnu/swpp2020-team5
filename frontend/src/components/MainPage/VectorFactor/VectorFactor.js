@@ -4,7 +4,6 @@ import './VectorFactor.css';
 class VectorFactor extends Component {
   render() {
     const width = (this.props.weight * 20).toString().concat('%');
-    console.log(width);
     return (
       <div className="factor">
         {this.props.factor}

@@ -19,7 +19,10 @@ class RestaurantSummary extends Component {
     const factors = this.props.preferenceVector;
     const topFactors = [];
     for (const factor in factors) {
-      topFactors.push(<VectorFactor factor={factor} weight={factors[factor]} />);
+      topFactors.push(<VectorFactor
+        key={factor}
+        factor={factor}
+        weight={factors[factor]} />);
     }
     return (
       <div className="summary">

@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 import Keywords from './Keywords';
 
 jest.mock('react-wordcloud', () => () => <mock-widget />);
+
 describe('<Keywords />', () => {
   it('should differ word color by size', () => {
     const component = mount(<Keywords/>);
