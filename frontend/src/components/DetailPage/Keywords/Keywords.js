@@ -6,10 +6,6 @@ class Keywords extends Component {
   render() {
     const words = [ // would be given as props in actual implementation
       {
-        text: '존맛',
-        value: 3,
-      },
-      {
         text: '샤로수길',
         value: 3,
       },
