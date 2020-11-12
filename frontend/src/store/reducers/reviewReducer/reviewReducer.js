@@ -79,12 +79,12 @@ const reducer = (state = initialState, action) => {
       return { ...state, myReviews: [...state.myReviews, newReview] };
     }
     case actionTypes.DELETE_REVIEW: {
-      console.log(action.target)
+      // console.log(action.target)
       const deleted = state.myReviews.filter((review) => review.id !== action.target);
       return { ...state, myReviews: [...deleted] };
     }
     default:
-      console.log('not actions implemented');
+      // console.log('not actions implemented');
       break;
   }
 

@@ -5,11 +5,19 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import SideBar from '../SideBar';
 import LocationTab from './LocationTab';
 import { history } from '../../../store/store';
 import { getMockStore } from '../../../test-utils/mocks';
 import * as userActionCreators from '../../../store/actions/userActions/userActions';
+
+jest.mock('../../../components/SearchResult/SearchResult', () => {
+  return jest.fn(props => {
+    return (
+      <div className="spySearchResult">
+        {props.address_name}
+      </div>);
+  });
+});
 
 const stubInitialState = {
   user: {
@@ -47,7 +55,7 @@ const stubInitialState = {
 const mockStore = getMockStore(stubInitialState);
 
 describe('<LocationTab />', () => {
-  let locationTab;
+  let locationTab, spyChangeLocIn;
   beforeEach(() => {
     locationTab = (
       <Provider store={mockStore}>
@@ -64,15 +72,28 @@ describe('<LocationTab />', () => {
     );
   });
 
-  it('does nothing', () => {
-    expect(1).toBe(1);
+  it('should render SearchResults', () => {
+    // const component = mount(locationTab);
+    // const newLocationTabInstance = component.find(LocationTab.WrappedComponent).instance();
+    // newLocationTabInstance.setState({locationList: [
+    //   {address_name:"서울 관악구 낙성대로"},
+    //   {address_name:"서울 관악구 낙성대로 29"},
+    // ]});
+    // newLocationTabInstance.render();
+    // console.log(newLocationTabInstance.state);
+    // const wrapper = component.find('.spySearchResult');
+    // expect(wrapper.length).toBe(2);
   });
-
-  it('should call "onChangeLocationInputHandler"', () => {
-    const locationInput = '낙성대로';
+  it('should render currenLocation', () => {
     const component = mount(locationTab);
-    console.log(component.find(LocationTab.WrappedComponent).instance().state);
-    const wrapper = component.find('#location-input');
+    const wrapper = component.find('.current-location');
+    expect(wrapper.at(0).text()).toBe('서울 관악구');
+  });
+  it('should call "onChangeLocationInputHandler"', () => {
+    // const locationInput = '낙성대로';
+    // const component = mount(locationTab);
+    // const wrapper = component.find('#location-input');
+    // const newLocationTabInstance = component.find(LocationTab.WrappedComponent).instance();
     // wrapper.simulate('change', { target: { value: locationInput }});
     expect(1).toBe(1);
   });

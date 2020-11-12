@@ -98,7 +98,6 @@ class Keywords extends Component {
     });
     const callbacks = {
       getWordColor: (word) => (word.value > Math.log(maxKeywordValue / 2) ? '#000000' : '#AAAAAA'),
-
     };
     const expandRatio = 50;
     const expandedWords = [];
@@ -107,12 +106,11 @@ class Keywords extends Component {
         text: keyword.text,
         value: Math.log(keyword.value),
       });
-      console.log(keyword);
     });
-    console.log(expandedWords);
     return (
       <div id='keywords'>
         <WordCloud
+          id="cloud"
           callbacks={callbacks}
           options={options}
           words={expandedWords}

@@ -98,7 +98,6 @@ class LocationTab extends Component {
       return (
         <div>
           <button onClick={() => this.onClickLocationHandler(location)}
-                  id='location-candidate-button'
                   className='candidate'>
             <SearchResult address_name = {location.address_name}/>
           </button>
