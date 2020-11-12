@@ -19,9 +19,9 @@ const initialState = {
       time: '9;00-12:00',
       keywords: ['맵다', '짜다', '분위기가 좋다'],
       preferenceVector: {
-        맛있: 4.8,
-        분짜: 4.5,
-        반쎄오: 4.4,
+        느끼하다: 4.8,
+        분위기: 4.5,
+        웨이팅: 4.4,
       },
       category: ['베트남음식'],
       difference: 0.43,
