@@ -72,29 +72,13 @@ describe('<LocationTab />', () => {
     );
   });
 
-  it('should render SearchResults', () => {
-    // const component = mount(locationTab);
-    // const newLocationTabInstance = component.find(LocationTab.WrappedComponent).instance();
-    // newLocationTabInstance.setState({locationList: [
-    //   {address_name:"서울 관악구 낙성대로"},
-    //   {address_name:"서울 관악구 낙성대로 29"},
-    // ]});
-    // newLocationTabInstance.render();
-    // console.log(newLocationTabInstance.state);
-    // const wrapper = component.find('.spySearchResult');
-    // expect(wrapper.length).toBe(2);
-  });
-  it('should render currenLocation', () => {
-    const component = mount(locationTab);
-    const wrapper = component.find('.current-location');
-    expect(wrapper.at(0).text()).toBe('서울 관악구');
-  });
   it('should call "onChangeLocationInputHandler"', () => {
-    // const locationInput = '낙성대로';
-    // const component = mount(locationTab);
-    // const wrapper = component.find('#location-input');
-    // const newLocationTabInstance = component.find(LocationTab.WrappedComponent).instance();
-    // wrapper.simulate('change', { target: { value: locationInput }});
+    const locationInput = '낙성대로';
+    const component = mount(locationTab);
+    const wrapper = component.find('#location-input');
+    const newLocationTabInstance = component.find(LocationTab.WrappedComponent).instance();
+    wrapper.simulate('change', { target: { value: locationInput }});
+
     expect(1).toBe(1);
   });
 });

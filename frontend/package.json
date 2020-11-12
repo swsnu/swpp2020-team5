@@ -19,6 +19,7 @@
     "react-alert": "^7.0.2",
     "react-alert-template-basic": "^1.0.0",
     "react-dom": "^16.0.0",
+    "react-load-script": "^0.0.6",
     "react-meter-bar": "^1.0.2",
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^7.2.1",
