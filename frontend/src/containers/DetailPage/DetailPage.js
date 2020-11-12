@@ -2,7 +2,7 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ReviewList from './ReviewList/ReviewList/ReviewList';
+import ReviewList from './ReviewList/ReviewList';
 import Keywords from '../../components/DetailPage/Keywords/Keywords';
 import * as actionCreators from '../../store/actions/index';
 import SideBar from '../SideBar/SideBar';

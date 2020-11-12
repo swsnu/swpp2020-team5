@@ -12,11 +12,11 @@ export const getReviews = (id) => (dispatch) => axios.get(`api/restaurant/:${id}
   });
 
 const postReview_ = (reviewInfo) => ({
-  type: actionTypes.PUT_REVIEW,
-  target: reviewInfo,
+  type: actionTypes.POST_REVIEW,
+  ...reviewInfo,
 });
 
-export const postReview = (reviewInfo) => (dispatch) => axios.post(`api/review`, reviewInfo)
+export const postReview = (reviewInfo) => (dispatch) => axios.post(`api/restaurant/:${reviewInfo.restaurantID}/review`, reviewInfo)
   .then((res) => {
     dispatch(postReview_(res.data));
   })
@@ -26,7 +26,7 @@ export const postReview = (reviewInfo) => (dispatch) => axios.post(`api/review`,
 
 const putReview_ = (reviewInfo) => ({
   type: actionTypes.PUT_REVIEW,
-  target: reviewInfo,
+  ...reviewInfo,
 });
 
 export const putReview = (reviewInfo) => (dispatch) => axios.put(`api/review/:${reviewInfo.id}`, reviewInfo)

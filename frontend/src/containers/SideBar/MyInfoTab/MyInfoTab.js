@@ -28,7 +28,6 @@ class MyInfoTab extends Component {
   onClickConfirmHandler = (event) => {
     this.props.onPostReview(this.props.restaurantID, this.state.content, this.state.rating, new Date());
     this.setState({content: ''});
-    console.log('sgs')
   }
 
   onChangeRating = (newRating) => {
@@ -69,8 +68,9 @@ class MyInfoTab extends Component {
 
 
     //if current page is not Mainpage, myInfoTab should show onDetailPage. otherwise, should show onMainPage
-    if(this.props.restaurantID != -1) {
+    if(this.props.restaurantID !== -1) {
       myReview = this.props.myReviewList.map((review) => {
+        console.log(review);
 
         //let time = review.modifiedTime.toLocaleDateString(); //for parsing time object
         return (//TODO It should be changed into <Review> component when the component is implemented.
@@ -146,14 +146,14 @@ const mapDispatchToProps = dispatch => {
         dispatch(actionCreators.getReviews(restaurantID));
       }
     },
-    onPostReview: (restaurantID, content, rating, createTime) => 
+    onPostReview: (restaurantID, content, rating, modifiedTime) => 
     dispatch(actionCreators.postReview({
       restaurantID: restaurantID,
       content: content,
       rating: rating,
-      modifiedTime: createTime
+      modifiedTime: modifiedTime
     })),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyInfoTab);
+export default connect(mapStateToProps, mapDispatchToProps)(MyInfoTab)

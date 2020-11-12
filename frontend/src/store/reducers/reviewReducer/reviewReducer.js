@@ -68,12 +68,23 @@ const reducer = (state = initialState, action) => {
       };
       return { ...state, myReviews: [...deleted, newReview] };
     }
+    case actionTypes.POST_REVIEW: {
+      const newReview = {
+        // THis needs to be fixed when backend imple
+        id: action.id || 1,
+        content: action.content,
+        rating: action.rating,
+        modifiedTime: action.modifiedTime,
+      };
+      return { ...state, myReviews: [...state.myReviews, newReview] };
+    }
     case actionTypes.DELETE_REVIEW: {
       console.log(action.target)
       const deleted = state.myReviews.filter((review) => review.id !== action.target);
       return { ...state, myReviews: [...deleted] };
     }
     default:
+      console.log('not actions implemented');
       break;
   }
 

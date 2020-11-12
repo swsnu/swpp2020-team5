@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import * as actionCraetors from '../../../../store/actions/index';
+import * as actionCraetors from '../../../store/actions/index';
 import './ReviewList.css';
-import OtherReview from '../../../../components/DetailPage/OtherReview/OtherReview';
+import OtherReview from '../../../components/DetailPage/OtherReview/OtherReview';
 
 class ReviewList extends Component {
 
