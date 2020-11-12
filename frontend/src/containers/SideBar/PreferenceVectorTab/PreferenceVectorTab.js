@@ -48,18 +48,18 @@ class PreferenceVectorTab extends Component {
           <button id='preference-vector-button' onClick={()=> this.onClickConfirmHandler()}>적용</button>
         </div>
            <div className='Slider'>
-              <p>Factor 1</p>
+              <p>매운맛</p>
               <Slider id='factor_one' value={this.state.currentPreferenceVector.factor_one} 
                onChange={this.onChangeFactor} onChangeCommitted={this.onChangeFactor}/>
             </div>
            <div className='Slider'>
-              <p>Factor 2</p>
+              <p>느끼한맛</p>
               <Slider id='factor_two' value={this.state.currentPreferenceVector.factor_two} max={41} 
                 onChange={this.onChangeFactor} onChangeCommitted={this.onChangeFactor}/>
             </div>
  
            <div className='Slider'>
-              <p>Factor 3</p>
+              <p>웨이팅</p>
               <Slider id='factor_three' value={this.state.currentPreferenceVector.factor_three} max={41}
                step={0.1} onChange={this.onChangeFactor} onChangeCommitted={this.onChangeFactor}/>
             </div>
