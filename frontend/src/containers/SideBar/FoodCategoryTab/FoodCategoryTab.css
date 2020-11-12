@@ -13,15 +13,15 @@
   height:80px
 }
 .foodCategory .unchecked {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   opacity: 1;
   cursor: pointer;
 }
 
 .foodCategory .checked {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   opacity: 0.5;
   cursor: pointer;
 }

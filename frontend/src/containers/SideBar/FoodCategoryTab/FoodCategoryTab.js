@@ -46,17 +46,24 @@ class FoodCategoryTab extends Component {
   // we need to add hover and clicked img showing
   // DB needed for image
   render() {
-    
+    let foodimg=['https://image.ytn.co.kr/general/jpg/2016/0424/201604241752313492_t.jpg','https://media.istockphoto.com/photos/japanese-deep-fried-pork-cutlet-with-white-cabbage-salad-picture-id1164831977',
+    'https://lh3.googleusercontent.com/proxy/ztMRN1Wey-nVftrIsSjFRCuBo9Ws5MesfbPOf0UJO1jx4HoosKWQhBvhzKmgnJLYZgDJMqytot0dUlMT6Y1LOWxkotiYeLPysPsMdHAAx2_1g7xGT0y-6jFyjMaYr1AEDeDSEiNcQmT5hEIzTnPF6LrfMQ',
+    'https://t1.daumcdn.net/cfile/blog/995FA8485BFFA07012','https://cdn.koreahealthlog.com/news/photo/202004/23745_12548_945.jpg',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSUNyFIhrZjJwD5tBRbgQl6SpJCA5vtZtgi1A&usqp=CAU','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRPojAjUzHpJGgt8w9AsUtzJSS_EHyPh_8RWw&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSbAVL6Ary5UJt88nTJxBu8UDcQfYkntPH4MA&usqp=CAU','https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQaqsOYZ1PmXe87ArhNIwhd5_YRBA5f1_du1w&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTM8slOqomlXtNTIcceB4rW5ovYw2qwTTNVTQ&usqp=CAU']
     let categorylist=[];
+    let id=0;
     for(let category in this.state.foodCategory){
       categorylist.push( 
        <div className='category'>
-          <img src={img} className={this.state.foodCategory[category]?
+          <img src={foodimg[id]} className={this.state.foodCategory[category]?
           'checked':'unchecked'} width='50' height='50' 
           onClick={() => this.postClickFoodCategoryHandler(category)}
           ></img>
           
-        </div>)
+        </div>);
+        id++;
     }  
     return (
     <div className='foodCategory'>
