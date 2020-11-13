@@ -60,14 +60,14 @@ describe('<RestaurantSummary />', () => {
 
     let wrapper = component.find('.rate').at(0);
     wrapper.simulate('click');
-    expect(spyHistoryPush).toHaveBeenCalledWith('/main/detail/1');
+    expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
     
     wrapper = component.find('.title').at(0);
     wrapper.simulate('click');
-    expect(spyHistoryPush).toHaveBeenCalledWith('/main/detail/1');
+    expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
 
     wrapper = component.find('.image').at(0);
     wrapper.simulate('click');
-    expect(spyHistoryPush).toHaveBeenCalledWith('/main/detail/1');
+    expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
   })
 });
