@@ -1,6 +1,7 @@
 import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
+  selectedReviews: [],
   myReviews: [
     {
       id: 10,
@@ -71,7 +72,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.POST_REVIEW: {
       const newReview = {
         // THis needs to be fixed when backend imple
-        id: action.id || 1,
+        id: action.id,
         content: action.content,
         rating: action.rating,
         modifiedTime: action.modifiedTime,

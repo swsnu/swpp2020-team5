@@ -4,7 +4,7 @@ export {
   postSignIn,
   changeLocation,
   editUserFoodCategory,
-  changePreferenceVector,
+  putPreferenceVector,
 } from './userActions/userActions';
 
 export {

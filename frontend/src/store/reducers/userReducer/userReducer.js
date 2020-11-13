@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, foodCategory: action.target };
     case actionTypes.CHANGE_LOCATION:
       return { ...state, searchLocation: action.searchLocation };
-    case actionTypes.CHANGE_PREFERENCE_VECTOR:
+    case actionTypes.PUT_PREFERENCE_VECTOR:
       const updatedUser = action.target;
       return { ...state, currentUser: updatedUser };
     case actionTypes.GET_FOODCATEGORY:

@@ -35,8 +35,6 @@ class PreferenceVectorTab extends Component {
   onChangeFactor = (event, value) => {
     let temp_preferenceVector = this.state.currentPreferenceVector;
     temp_preferenceVector[event.target.id] = Math.round(value);
-    console.log('working');
-    console.log(this.state.currentPreferenceVector);
     this.setState({currentPreferenceVector: temp_preferenceVector});
   }
 
@@ -77,7 +75,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onGetUser: () => dispatch(actionCreators.getUser()),
-    onChangePreferenceVector: (user) => dispatch(actionCreators.changePreferenceVector(user)),
+    onPutPreferenceVector: (user) => dispatch(actionCreators.putPreferenceVector(user)),
   };
 }
 
