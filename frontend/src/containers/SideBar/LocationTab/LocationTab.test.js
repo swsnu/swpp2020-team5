@@ -4,21 +4,16 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
-
 import LocationTab from './LocationTab';
 import { history } from '../../../store/store';
 import { getMockStore } from '../../../test-utils/mocks';
 import * as userActionCreators from '../../../store/actions/userActions/userActions';
 
-jest.mock('../../../components/SearchResult/SearchResult', () => {
-  return jest.fn(props => {
-    return (
-      <div className="spySearchResult">
-        {props.address_name}
-      </div>);
-  });
-});
-
+jest.mock('../../../components/SearchResult/SearchResult', () => jest.fn((props) => (
+  <div className="spySearchResult">
+    {props.address_name}
+  </div>
+)));
 const stubInitialState = {
   user: {
     id: 0,
@@ -54,8 +49,13 @@ const stubInitialState = {
 
 const mockStore = getMockStore(stubInitialState);
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 describe('<LocationTab />', () => {
-  let locationTab, spyChangeLocIn;
+  let locationTab; let
+    spyChangeLocIn;
   beforeEach(() => {
     locationTab = (
       <Provider store={mockStore}>
@@ -71,14 +71,13 @@ describe('<LocationTab />', () => {
       </Provider>
     );
   });
-
+  
   it('should call "onChangeLocationInputHandler"', () => {
     const locationInput = '낙성대로';
     const component = mount(locationTab);
+    console.log(component.debug());
     const wrapper = component.find('#location-input');
-    const newLocationTabInstance = component.find(LocationTab.WrappedComponent).instance();
     wrapper.simulate('change', { target: { value: locationInput }});
-
     expect(1).toBe(1);
   });
 });
