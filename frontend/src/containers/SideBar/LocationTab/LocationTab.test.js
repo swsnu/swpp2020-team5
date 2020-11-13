@@ -3,22 +3,45 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { Route, Redirect, Switch } from 'react-router-dom';
-
+import { Route, Switch } from 'react-router-dom';
+import { fireEvent } from '@testing-library/react';
 import LocationTab from './LocationTab';
 import { history } from '../../../store/store';
 import { getMockStore } from '../../../test-utils/mocks';
 import * as userActionCreators from '../../../store/actions/userActions/userActions';
 
-jest.mock('../../../components/SearchResult/SearchResult', () => {
-  return jest.fn(props => {
-    return (
-      <div className="spySearchResult">
-        {props.address_name}
-      </div>);
-  });
-});
+jest.mock('../../../components/SearchResult/SearchResult', () => jest.fn((props) => (
+  <div className="spySearchResult">
+    {props.address_name}
+  </div>
+)));
 
+global.kakao = {
+  maps: {
+    load: (func) => {},
+    services: {
+      Geocoder: function Geocoder() {
+        this.addressSearch = (location, callback, dict) => {
+          callback(["F", "T", "S"]);
+        };
+      },
+    },
+    LatLng: function LatLng(y, x) {
+      this.y = y;
+      this.x = x;
+    },
+    load: (func) => {func()},
+    Map: function Map(container, options) {
+      this.container = container;
+      this.optons = options;
+    }
+  },
+};
+const lLW = {
+  style: {
+    display: "shit",
+  },
+};
 const stubInitialState = {
   user: {
     id: 0,
@@ -55,7 +78,7 @@ const stubInitialState = {
 const mockStore = getMockStore(stubInitialState);
 
 describe('<LocationTab />', () => {
-  let locationTab, spyChangeLocIn;
+  let locationTab;
   beforeEach(() => {
     locationTab = (
       <Provider store={mockStore}>
@@ -71,14 +94,27 @@ describe('<LocationTab />', () => {
       </Provider>
     );
   });
-
-  it('should call "onChangeLocationInputHandler"', () => {
-    const locationInput = '낙성대로';
+  
+  it('should do everything', () => {
+    const spyChangeLocation = jest.spyOn(userActionCreators, 'changeLocation')
+      .mockImplementation(loc => { return dispatch => {}; });
     const component = mount(locationTab);
-    const wrapper = component.find('#location-input');
-    const newLocationTabInstance = component.find(LocationTab.WrappedComponent).instance();
-    wrapper.simulate('change', { target: { value: locationInput }});
-
+    const inputWrapper = component.find('#location-input');
+    const locTabInstance = component.find(LocationTab.WrappedComponent).instance();
+    locTabInstance.setState({locationListWrapper: lLW});
+    locTabInstance.setState({map: {setCenter: () => {}}});
+    
+    inputWrapper.simulate('change', { target: { value: '반야심경' }});
+    
+    const candidateWrapper = component.find('.candidate').at(0);
+    let input = document.createElement('input');
+    input.id = "location-input";
+    document.body.appendChild(input);
+    candidateWrapper.simulate('click');
+    
+    expect(spyChangeLocation).toHaveBeenCalledTimes(1);
+    inputWrapper.simulate('change', { target: { value: '' }});
     expect(1).toBe(1);
-  });
+    fireEvent.load(locTabInstance.state.script);
+    });
 });
