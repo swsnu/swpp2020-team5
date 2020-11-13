@@ -7,14 +7,25 @@ import { Provider } from 'react-redux';
 import { connectRouter, ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import {history} from '../../store/store';
-import { faItalic } from '@fortawesome/free-solid-svg-icons';
-import { ExpansionPanelActions } from '@material-ui/core';
-
 jest.mock('../SideBar/SideBar', () => {
     return jest.fn((props) => {
         return (
             <div className='spySideBar'>
-               Hi
+              SideBar
+              <button>검색</button>
+              <input type='text'></input>
+              <div className='myinfo'>
+                나의정보
+              </div>
+              <div className='preferncevector'>
+                나의취향
+              </div>
+              <div className='category'>
+                카테고리
+              </div>
+              <div className='location'>
+                지도
+              </div>
             </div>
         );
     });

@@ -148,8 +148,8 @@ describe('<DetailPage />', () => {
       </Provider>
     );
     const component = mount(otherdetailpage);
-    // const wrapper = component.find('.diff');   
-    // expect(wrapper).toBe('1점 하락!');
+    const wrapper = component.find('#arrow');   
+    expect(wrapper.length).toBe(1);
   });
   it('should render properly when difference is 0', () => {
     const tempstubInitialState = {
@@ -188,7 +188,8 @@ describe('<DetailPage />', () => {
         </ConnectedRouter>
       </Provider>
     );
-    const component=mount(otherdetailpage);
-
+    const component = mount(otherdetailpage);
+    const wrapper = component.find('.diff');
+    expect(wrapper.at(0).text()).toEqual('변동없음!');
   })
 });
