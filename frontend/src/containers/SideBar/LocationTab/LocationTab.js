@@ -11,6 +11,7 @@ import './LocationTab.css'
 class LocationTab extends Component {
   
   state = {
+    script: null, // for "testting"
     locationListWrapper: null,
     locationList: [],
     map: null,
@@ -35,9 +36,9 @@ class LocationTab extends Component {
         this.setState({map: new window.kakao.maps.Map(container, options)});
       });
     };
-
     // load location list
-    this.setState({locationListWrapper: document.getElementById('location-list')});
+    this.setState({locationListWrapper: document.getElementById('location-list'),
+                   script: script});
 
   }
 
@@ -87,11 +88,15 @@ class LocationTab extends Component {
   }
 
   render(){
+    let id = 0;
     const locationList = this.state.locationList.map((location) => {
+      id++;
       return (
         <button onClick={() => this.onClickLocationHandler(location)}
-                className='candidate'>
-          <SearchResult address_name = {location.address_name}/>
+                className='candidate'
+                key={id.toString()}>
+          <SearchResult address_name = {location.address_name}
+                        key = {id.toString()}/>
         </button>
       )
     })
