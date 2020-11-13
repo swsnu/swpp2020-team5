@@ -25,9 +25,4 @@
 .OtherReview #createTime {
   margin-left: 10px;
 }
-.other-review-content {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100px;
-}
+

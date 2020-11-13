@@ -70,3 +70,4 @@ export const getFoodCategory = () => (dispatch) => axios.get()
   .then((res) => {
     dispatch(getFoodCategory_(res.data));
   });
+

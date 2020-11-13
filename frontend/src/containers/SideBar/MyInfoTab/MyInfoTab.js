@@ -70,7 +70,6 @@ class MyInfoTab extends Component {
     //if current page is not Mainpage, myInfoTab should show onDetailPage. otherwise, should show onMainPage
     if(this.props.restaurantID !== -1) {
       myReview = this.props.myReviewList.map((review) => {
-        console.log(review);
 
         //let time = review.modifiedTime.toLocaleDateString(); //for parsing time object
         return (//TODO It should be changed into <Review> component when the component is implemented.
