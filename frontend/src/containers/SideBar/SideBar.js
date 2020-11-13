@@ -54,14 +54,13 @@ class SideBar extends Component {
         tab = <PreferenceVectorTab id='preference-vector-tab' restaurantID={this.props.restaurantID} />;
         break;
       default:
-        const error = new Error('Invalid tabMode');
-        console.log(error.message);
+        throw new Error('Invalid tabMode');
     }
     return (
       <div className='SideBar'>
         <img id='logo-button' src={logoImage} onClick={() => this.onClickLogoButtonHandler()}>
         </img> 
-        <br />
+        <br/>
         <div className='search-box'>
           <FontAwesomeIcon className='search-icon' icon={faSearch} />
           <button id='search-button' onClick={() => this.onClickSearchButtonHandler()}>
@@ -70,44 +69,44 @@ class SideBar extends Component {
           <input id='search-input' type='text' placeholder='식당 또는 음식...' value={this.state.searchWord} 
             onChange={event => this.setState({searchWord: event.target.value })} />
         </div>
-        <br />
+        <br/>
         <div className='tab-button-image-line'>
-          <div id='my-info-tab-button' className='tab-button' onClick={ () => this.onClickTabButtonHandler('MyInfo') }>
+          <div id='my-info-tab-image-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('MyInfo')}>
             <FontAwesomeIcon icon={faUser} size='3x' />
           </div>
-          <div id='location-tab-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('Location')}>
+          <div id='location-tab-image-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('Location')}>
             <FontAwesomeIcon icon={faMapMarkerAlt} size='3x' />
           </div>
-          <div id='food-category-tab-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('FoodCategory')}>
+          <div id='food-category-tab-image-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('FoodCategory')}>
             <FontAwesomeIcon icon={faFilter} size='3x' />
           </div>
-          <div id='preference-vector-tab-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('PreferenceVector')}>
+          <div id='preference-vector-tab-image-button' className='tab-button' onClick={() => this.onClickTabButtonHandler('PreferenceVector')}>
             <FontAwesomeIcon icon={faSlidersH} size='3x' /> 
           </div>
         </div>
         <div className='tab-button-name-line'>
-          <div id='my-info-tab-button' 
+          <div id='my-info-tab-name-button' 
             className={this.state.tabMode == 'MyInfo' 
               ? 'tab-button-selected' 
               : 'tab-button'} 
             onClick={() => this.onClickTabButtonHandler('MyInfo')}>
             나의 정보 
           </div>
-          <div id='location-tab-button'
+          <div id='location-tab-name-button'
             className={this.state.tabMode == 'Location' 
               ? 'tab-button-selected' 
               : 'tab-button'} 
             onClick={() => this.onClickTabButtonHandler('Location')}>
             위치
           </div>
-          <div id='food-category-tab-button' 
+          <div id='food-category-tab-name-button' 
             className={this.state.tabMode == 'FoodCategory' 
               ? 'tab-button-selected' 
               : 'tab-button'} 
             onClick={() => this.onClickTabButtonHandler('FoodCategory')}>
             필터
           </div>
-          <div id='preference-vector-tab-button' 
+          <div id='preference-vector-tab-name-button' 
             className={this.state.tabMode == 'PreferenceVector' 
               ? 'tab-button-selected' 
               : 'tab-button'} 
@@ -115,7 +114,7 @@ class SideBar extends Component {
             나의 취향
           </div>
         </div>
-        <br />
+        <br/>
         <div className='tab'>
           {tab}
         </div>

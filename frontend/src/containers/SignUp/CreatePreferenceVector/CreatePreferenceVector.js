@@ -21,8 +21,6 @@ class CreatePreferenceVector extends Component {
   onClickFoodHandler = (foodIndex) => {
     let newFoodList = this.state.foodList;
     newFoodList[foodIndex] = !newFoodList[foodIndex];
-    console.log(foodIndex);
-    console.log(newFoodList);
     this.setState({ foodList: newFoodList })
   }
 

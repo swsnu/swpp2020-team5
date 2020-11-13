@@ -8,18 +8,13 @@ import insertCss from 'insert-css';
 import './MyReview.css';
 
 class MyReview extends Component {
-  state = {
-    content: 'Hi',
-    rating: 0,
-    isEdit: false,
-    preContent: '',
-  }
-
   constructor(props) {
     super(props);
     this.state = {
       content: props.content,
       rating: props.rating,
+      isEdit: false,
+      preContent: '',
     }
   }
 
@@ -54,6 +49,7 @@ class MyReview extends Component {
 
   onChangeRatingHandler = (newRating) => {
     this.setState({rating: newRating});
+    console.log('HI')
   };
 
   render() {
