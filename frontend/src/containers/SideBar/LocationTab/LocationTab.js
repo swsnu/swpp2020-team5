@@ -9,9 +9,9 @@ import searchIcon from '../../../images/searchIcon_red.png'
 import './LocationTab.css'
 
 class LocationTab extends Component {
-
+  
   state = {
-    script: document.createElement('script'),
+    script: null, // for "testting"
     locationListWrapper: null,
     locationList: [],
     map: null,
@@ -20,16 +20,13 @@ class LocationTab extends Component {
   componentDidMount() {
 
     // load Kakaomap API script
-    this.setState(prevState => {
-      let script = prevState.script;
-      script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=f4eda0526e95ec9c05400d0a69066c5a&libraries=services&autoload=false";
-      script.async = true;
-      return { ...this.state, script: script };
-    })
-    document.head.appendChild(this.state.script);
+    const script = document.createElement('script');
+    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=f4eda0526e95ec9c05400d0a69066c5a&libraries=services&autoload=false";
+    script.async = true;
+    document.head.appendChild(script);
 
     // load map
-    this.state.script.onload = () => {
+    script.onload = () => {
       kakao.maps.load(() => {
         let container = document.getElementById('current-location-map');
         let options = {
@@ -39,9 +36,9 @@ class LocationTab extends Component {
         this.setState({map: new window.kakao.maps.Map(container, options)});
       });
     };
-
     // load location list
-    this.setState({locationListWrapper: document.getElementById('location-list')});
+    this.setState({locationListWrapper: document.getElementById('location-list'),
+                   script: script});
 
   }
 
@@ -49,9 +46,9 @@ class LocationTab extends Component {
   // show the location list only if there are locations to display
   //
   onToggleListHandler(length) {
-    const _locationListWrapper = this.state.locationListWrapper;
-    _locationListWrapper.style.display = length == 0 ? 'none' : 'block';
-    this.setState({locationListWrapper: _locationListWrapper});
+    const tempWrapper = this.state.locationListWrapper;
+    tempWrapper.style.display = length == 0 ? 'none' : 'grid';
+    this.setState({locationListWrapper: tempWrapper});
   }
   
   //
@@ -69,9 +66,7 @@ class LocationTab extends Component {
     this.onToggleListHandler(0);
 
     // show new location on map
-    kakao.maps.load(() => {
-      this.state.map.setCenter(new kakao.maps.LatLng(location.y, location.x));
-    })
+    this.state.map.setCenter(new kakao.maps.LatLng(location.y, location.x));
   }
 
   //
@@ -93,21 +88,21 @@ class LocationTab extends Component {
   }
 
   render(){
-    
+    let id = 0;
     const locationList = this.state.locationList.map((location) => {
+      id++;
       return (
-        <div>
-          <button onClick={() => this.onClickLocationHandler(location)}
-                  className='candidate'>
-            <SearchResult address_name = {location.address_name}/>
-          </button>
-        </div>
+        <button onClick={() => this.onClickLocationHandler(location)}
+                className='candidate'
+                key={id.toString()}>
+          <SearchResult address_name = {location.address_name}
+                        key = {id.toString()}/>
+        </button>
       )
     })
 
     // set the displayed name on the button to searchLocation
     let locationString = this.props.searchLocation.address_name;
-    
     return(
       <div className='location-tab'>
         <div className='location'>
