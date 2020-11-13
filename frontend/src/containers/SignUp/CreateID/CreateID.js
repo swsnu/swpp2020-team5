@@ -76,9 +76,9 @@ class CreateID extends Component{
                     onChange={(ev)=>{
                         this.setState({verifyPassword:ev.target.value});
                     }}/>
-                   <p>{isverified}</p>
+                   <p id='verified'>{isverified}</p>
                 
-                <button 
+                <button id='confirm-button'
                 disabled={this.onChangeButtonHandler()}
                 onClick={()=>this.onClickConfirmHandler()}>확인</button>
 

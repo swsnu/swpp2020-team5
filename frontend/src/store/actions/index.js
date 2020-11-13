@@ -16,7 +16,7 @@ export {
 
 export {
   getRestaurantList,
-  getRestaurantName,
+ // getRestaurantName,
   getRestaurantDetail,
 } from './restaurantActions/restauraunActions';
 

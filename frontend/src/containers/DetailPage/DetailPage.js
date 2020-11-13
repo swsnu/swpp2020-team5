@@ -15,16 +15,12 @@ class DetailPage extends Component {
   }
 
   render() {
-    // detailinfo에 레스토랑 디테일 넣고
-
-    // 해야할거 화살표 만드는거랑
-    // 주소 하는거
     let text; let image;
     if (this.props.selectedRestaurant.difference > 0) {
       text = `${this.props.selectedRestaurant.difference}점 상승!`;
       image = <img src={UpArrow} id="arrow" />;
     } else if (this.props.selectedRestaurant.difference < 0) {
-      text = `${this.props.selectedRestaurant.difference}점 하락!`;
+      text = `${-this.props.selectedRestaurant.difference}점 하락!`;
       image = <img src={DownArrow} id="arrow" />;
     } else text = '변동없음!';
 
