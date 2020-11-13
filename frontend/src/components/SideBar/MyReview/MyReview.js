@@ -49,6 +49,7 @@ class MyReview extends Component {
 
   onChangeRatingHandler = (newRating) => {
     this.setState({rating: newRating});
+    console.log('HI')
   };
 
   render() {

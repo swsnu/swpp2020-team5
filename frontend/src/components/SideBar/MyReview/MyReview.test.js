@@ -58,32 +58,43 @@ describe('<MyReview />', () => {
     wrapper = component.find('MyReview');
     wrapper.find('#content-input').simulate('change', {target: {value: 'EDITED_CONTENT'}})
     expect(wrapper.state().content).toBe('EDITED_CONTENT');
+    expect(wrapper.find('StarRatingInput').length).toBe(1)
+    console.log(wrapper.find('StarRatingInput').find('Clear').debug())
+    wrapper.find('StarRatingInput').find('Clear').find('a').simulate('click')
+    expect(wrapper.state().rating).toBe(0)
+
     let spyPutReview = jest.spyOn(actionCreators, 'putReview')
       .mockImplementation((id, info) => {return dispatch => {}})
 
-    const mockDate = new Date(1466424490000)
-    const spy = jest
-      .spyOn(global, 'Date')
-      .mockImplementation(() => mockDate)
+    const DATE_TO_USE = new Date('2016');
+    const _Date = Date;
+    global.Date = jest.fn(() => DATE_TO_USE);
+    global.Date.UTC = _Date.UTC;
+    global.Date.parse = _Date.parse;
+    global.Date.now = _Date.now;
 
-    wrapper.find('#review-edit-done-button').simulate('click')
+    expect(wrapper.find('#review-edit-done-button').length).toBe(1);
+    wrapper.find('#review-edit-done-button').simulate('click');
 
-    expect(spyPutReview).toHaveBeenCalledTimes(1)
+    expect(spyPutReview).toHaveBeenCalledTimes(1);
     expect(spyPutReview).toHaveBeenCalledWith({
       id: 1,
       content: 'EDITED_CONTENT',
-      rating: 3,
-      modifiedTime: mockDate.toLocaleDateString()
+      rating: 0,
+      modifiedTime: DATE_TO_USE 
     })
+    expect(wrapper.state().isEdit).toBe(false);
   });
 
-  it('should edit rating, modifiedTime and content', () => {
+  it('should delete comment', () => {
     const component = mount(myReview);
     let wrapper = component.find('MyReview');
-    let spyPutReview = jest.spyOn(actionCreators, 'deleteReview')
+    let spyDeleteReview = jest.spyOn(actionCreators, 'deleteReview')
       .mockImplementation((id) => {return dispatch => {}})
+    window.confirm = jest.fn(() => false)
     wrapper.find('#review-delete-button').simulate('click');
-
-    
+    window.confirm = jest.fn(() => true)
+    wrapper.find('#review-delete-button').simulate('click');
+    expect(spyDeleteReview).toHaveBeenCalledTimes(1);
   })
 })
