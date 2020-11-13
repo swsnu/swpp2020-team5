@@ -5,7 +5,7 @@ import backgroundImage from '../../images/background.jpg';
 import logoImage from '../../images/logo.png'
 import './SignUp.css';
 
-var backgroundStyle = {
+let backgroundStyle = {
   width: '100%',
   height: '400px',
   backgroundImage: backgroundImage
@@ -35,8 +35,7 @@ class SignUp extends Component {
         break;
       */
       default:
-        const error = new Error('Invalid SignUpMode');
-        console.log(error.message);
+        throw new Error('Invalid SignUpMode');
     }
   }
 
@@ -55,8 +54,7 @@ class SignUp extends Component {
         />
         break;
       default:
-        const error = new Error('Invalid SignUpMode');
-        console.log(error.message);
+        throw new Error('Invalid SignUpMode');
     }
     return (
       <div className='SignUp'>
