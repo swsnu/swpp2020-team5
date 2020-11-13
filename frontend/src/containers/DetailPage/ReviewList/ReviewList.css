@@ -1,10 +1,10 @@
+/*
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
 }
 
-/*the tab button*/
 .tab button {
   background-color: inherit;
   float: left;
@@ -20,7 +20,6 @@
 }
 
 .tab button.active {
-  /*background-color: #ccc;*/
   background-color: #E44142;
 }
 
@@ -29,4 +28,4 @@
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
-}
+}*/
