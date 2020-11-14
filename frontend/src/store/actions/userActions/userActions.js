@@ -12,10 +12,9 @@ const getUser_ = (user) => ({
 export const getUser = (id) => (dispatch) => axios.get(`/api/user/${id}`)
   .then((res) => dispatch(getUser_(res.data)));
 
-export const postSignIn = (email, password) => (dispatch) =>
 // backend sign-in would return the signed in django User and http status
-  axios.post('/api/sign-in', { email, password })
-    .then((res) => dispatch(getUser_(res.data)));
+export const postSignIn = (email, password) => (dispatch) => axios.post('/api/sign-in', { email, password })
+  .then((res) => dispatch(getUser_(res.data)));
 
 // This includes foodCategory, searchLocation, preferenceVector
 const editUser_ = getUser_;
@@ -37,12 +36,13 @@ export const editUserFoodCategory = (foodCategory) => (dispatch) => axios.put('/
     dispatch(editUserFoodCategory_(res.data));
   });
 
-export const changeLocation_ = (searchLocation) => ({ type: actionTypes.CHANGE_LOCATION, target: searchLocation });
+export const changeLocation_ = (searchLocation) => ({
+  type: actionTypes.CHANGE_LOCATION, target: searchLocation,
+});
 
-export const changeLocation = (searchLocation) =>
-  // no db managements yet
-  (dispatch) => axios.put('/api/user/search-location', searchLocation)
-    .then((res) => {
+// no db managements yet
+export const changeLocation = (searchLocation) => (dispatch) => axios.put('/api/user/search-location', searchLocation)
+  .then((res) => {
     dispatch(changeLocation_(res.data));
   });
 
@@ -51,7 +51,7 @@ export const putPreferenceVector_ = (preferenceVector) => ({
   target: preferenceVector,
 });
 
-export const putPreferenceVector = (preferenceVector) => (dispatch) => axios.put(`api/user/preferenceVector`, preferenceVector)
+export const putPreferenceVector = (preferenceVector) => (dispatch) => axios.put('api/user/preferenceVector', preferenceVector)
   .then((res) => {
     dispatch(putPreferenceVector_(res.data));
   });
@@ -59,7 +59,6 @@ export const putPreferenceVector = (preferenceVector) => (dispatch) => axios.put
 export const postSignUp = (userInfo) => (dispatch) => axios.post('api/sign-up/', userInfo)
   .then((res) => {})
   .catch((err) => {
-    console.log('Error in postSignUp');
   });
 
 export const getFoodCategory_ = (foodCategory) => ({
