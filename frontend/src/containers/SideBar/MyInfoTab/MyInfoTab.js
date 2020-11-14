@@ -3,115 +3,138 @@ import ReactStars from 'react-rating-stars-component';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../../store/actions/actionTypes';
 import * as actionCreators from '../../../store/actions/index';
-import welcomeImage from '../../../../src/images/that_bonobono.jpg';
+import welcomeImage from '../../../images/that_bonobono.jpg';
 import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
 
-
-
 class MyInfoTab extends Component {
-  
   state = {
     rating: 0,
-    content: ''
+    content: '',
   }
 
   componentDidMount() {
-    //this.props.onGetUser();
+    // this.props.onGetUser();
     this.props.onGetReviews(this.props.restaurantID);
   }
 
   onChangeReviewInputHandler = (event) => {
-    this.setState({content: event.target.value});
+    this.setState({ content: event.target.value });
   }
 
   onClickConfirmHandler = (event) => {
     this.props.onPostReview(this.props.restaurantID, this.state.content, this.state.rating, new Date());
-    this.setState({content: ''});
+    this.setState({ content: '' });
   }
 
   onChangeRating = (newRating) => {
-    this.setState({rating: newRating});
+    this.setState({ rating: newRating });
   }
 
-
-
   render() {
-
-    //page selectors
+    // page selectors
     let myInfo = '';
     let onDetailPage = '';
-    let onMainPage = (
-      <div className='on-main-page'>
-        <img id='welcome-img' src={welcomeImage} alt='' width='400' height='300'/>
-        <p id='welcome-text'> 
-          #AllTastesMatter에 오신것을 환영합니다!<br/>
+    const onMainPage = (
+      <div className="on-main-page">
+        <img id="welcome-img" src={welcomeImage} alt="" width="400" height="300" />
+        <p id="welcome-text">
+          #AllTastesMatter에 오신것을 환영합니다!
+          <br />
           천천히 둘러보세요
         </p>
       </div>
     );
 
-    //components that should be shown when detail page
+    // components that should be shown when detail page
     let myReview = [];
-    let reviewInput = (
-        <textarea id='review-input' placeholder='리뷰를 작성해주세요. 작성하신 리뷰와 평점은 현재 내 취향을 업데이트하는데 사용됩니다.' value={this.state.content} 
-          onChange={this.onChangeReviewInputHandler}/>
-      );
-    let reviewConfirmButton = (
-      <button id='review-confirm' onClick={this.onClickConfirmHandler}>리뷰작성</button>
-      );
-    let rateStar = (
-        <ReactStars id='rate-star' value={this.state.rating} count={5} size={40} 
-        isHalf={true} onChange={this.onChangeRating} />
-      );
+    const reviewInput = (
+      <textarea
+        id="review-input"
+        placeholder="리뷰를 작성해주세요. 작성하신 리뷰와 평점은 현재 내 취향을 업데이트하는데 사용됩니다."
+        value={this.state.content}
+        onChange={this.onChangeReviewInputHandler}
+      />
+    );
+    const reviewConfirmButton = (
+      <button id="review-confirm" onClick={this.onClickConfirmHandler}>리뷰작성</button>
+    );
+    const rateStar = (
+      <ReactStars
+        id="rate-star"
+        value={this.state.rating}
+        count={5}
+        size={40}
+        isHalf
+        onChange={this.onChangeRating}
+      />
+    );
 
+    // if current page is not Mainpage, myInfoTab should show onDetailPage. otherwise, should show onMainPage
+    if (this.props.restaurantID !== -1) {
+      myReview = this.props.myReviewList.map((review) =>
 
-
-    //if current page is not Mainpage, myInfoTab should show onDetailPage. otherwise, should show onMainPage
-    if(this.props.restaurantID !== -1) {
-      myReview = this.props.myReviewList.map((review) => {
-
-        //let time = review.modifiedTime.toLocaleDateString(); //for parsing time object
-        return (//TODO It should be changed into <Review> component when the component is implemented.
-          <MyReview className='Review' 
+        // let time = review.modifiedTime.toLocaleDateString(); //for parsing time object
+        (// TODO It should be changed into <Review> component when the component is implemented.
+          <MyReview
+            className="Review"
             reviewID={review.id}
             content={review.content}
             rating={review.rating}
-            modifiedTime={review.modifiedTime.toLocaleDateString()} >
-          </MyReview>
-        );})
-
+            modifiedTime={review.modifiedTime.toLocaleDateString()}
+          />
+        ));
 
       onDetailPage = (
-        <div className='on-detail-page'>
-          <p className='second-line'><span id='restaurantName'>&nbsp;&nbsp;{this.props.selectedRestaurant.title}&nbsp;&nbsp;</span> 평가하기</p>
+        <div className="on-detail-page">
+          <p className="second-line">
+            <span id="restaurantName">
+              {this.props.selectedRestaurant.title}
+&nbsp;&nbsp;
+            </span>
+            {' '}
+            평가하기
+          </p>
           <div>{rateStar}</div>
-          <div className='review-input-set'>
+          <div className="review-input-set">
             {reviewInput}
             {reviewConfirmButton}
           </div>
-          <div className='my-review-count-text'>
-            <span id='name'>{this.props.selectedUser.username}&nbsp;</span>님은 &nbsp;
-            <span id='restaurantName'>{this.props.selectedRestaurant.title}</span> 에<br/>
-            총 &nbsp;<span id='review-count'>{myReview.length}</span> 개의 리뷰를 남겼습니다.
+          <div className="my-review-count-text">
+            <span id="name">
+              {this.props.selectedUser.username}
+&nbsp;
+            </span>
+            님은 &nbsp;
+            <span id="restaurantName">{this.props.selectedRestaurant.title}</span>
+            {' '}
+            에
+            <br />
+            총 &nbsp;
+            <span id="review-count">{myReview.length}</span>
+            {' '}
+            개의 리뷰를 남겼습니다.
           </div>
           {myReview}
         </div>
       );
 
       myInfo = onDetailPage;
-    }
-    else {
+    } else {
       myInfo = onMainPage;
     }
 
     return (
-      <div className='MyInfoTab'>
-        <div className='upper-bar'>
-          <span className='upper-bar-welcome'>
-            안녕하세요, <span id='name'>{this.props.selectedUser.username}</span> 님!
+      <div className="MyInfoTab">
+        <div className="upper-bar">
+          <span className="upper-bar-welcome">
+            안녕하세요,
+            {' '}
+            <span id="name">{this.props.selectedUser.username}</span>
+            {' '}
+            님!
           </span>
-          <button id='sign-out' onClick={() => this.props.onGetSignOut()}>로그아웃</button>
+          <button id="sign-out" onClick={() => this.props.onGetSignOut()}>로그아웃</button>
         </div>
         {myInfo}
       </div>
@@ -119,12 +142,11 @@ class MyInfoTab extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    selectedUser: state.us.selectedUser,
-    //myReviewList: state.rv.myReviews,
-    myReviewList: state.rv.myReviews,
-    /*
+const mapStateToProps = (state) => ({
+  selectedUser: state.us.selectedUser,
+  // myReviewList: state.rv.myReviews,
+  myReviewList: state.rv.myReviews,
+  /*
     [{
       id: 1,
       content: '내스타일의 매운맛',
@@ -132,27 +154,23 @@ const mapStateToProps = state => {
       modifiedTime: '2020.11.01'
     },],
     */
-    selectedRestaurant: state.rs.selectedRestaurant,
-  };
-}
+  selectedRestaurant: state.rs.selectedRestaurant,
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-   // onGetUser: () => dispatch(actionCreators.getUser()),
-   // onGetSignOut: () => dispatch(actionCreators.getSignOut()),
-    onGetReviews: (restaurantID) => {
-      if (restaurantID !== -1) {
-        dispatch(actionCreators.getReviews(restaurantID));
-      }
-    },
-    onPostReview: (restaurantID, content, rating, modifiedTime) => 
-    dispatch(actionCreators.postReview({
-      restaurantID: restaurantID,
-      content: content,
-      rating: rating,
-      modifiedTime: modifiedTime
-    })),
-  };
-}
+const mapDispatchToProps = (dispatch) => ({
+  // onGetUser: () => dispatch(actionCreators.getUser()),
+  // onGetSignOut: () => dispatch(actionCreators.getSignOut()),
+  onGetReviews: (restaurantID) => {
+    if (restaurantID !== -1) {
+      dispatch(actionCreators.getReviews(restaurantID));
+    }
+  },
+  onPostReview: (restaurantID, content, rating, modifiedTime) => dispatch(actionCreators.postReview({
+    restaurantID,
+    content,
+    rating,
+    modifiedTime,
+  })),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyInfoTab)
+export default connect(mapStateToProps, mapDispatchToProps)(MyInfoTab);

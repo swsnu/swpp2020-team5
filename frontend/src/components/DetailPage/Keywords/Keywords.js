@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import WordCloud from 'react-wordcloud';
 import './Keywords.css';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Keywords extends Component {
   render() {
     const words = [ // would be given as props in actual implementation
@@ -99,7 +100,7 @@ class Keywords extends Component {
     const callbacks = {
       getWordColor: (word) => (word.value > Math.log(maxKeywordValue / 2) ? '#000000' : '#AAAAAA'),
     };
-    const expandRatio = 50;
+    // const expandRatio = 50;
     const expandedWords = [];
     words.forEach((keyword) => {
       expandedWords.push({
