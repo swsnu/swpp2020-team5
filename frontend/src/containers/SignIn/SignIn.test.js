@@ -64,7 +64,7 @@ describe('<SignIn />', () => {
 
   it('should call "onClickSigninHandler"', () => {
     const spyPostSigIn = jest.spyOn(userActionCreators, 'postSignIn')
-      .mockImplementation((email, password) => (dispatch) => {});
+      .mockImplementation(() => () => {});
     const component = mount(signIn);
     const wrapper = component.find('#sign-in-button');
     wrapper.simulate('click');
