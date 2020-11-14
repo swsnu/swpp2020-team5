@@ -37,22 +37,23 @@ export const editUserFoodCategory = (foodCategory) => (dispatch) => axios.put('/
     dispatch(editUserFoodCategory_(res.data));
   });
 
-export const changeLocation_ = (searchLocation) => ({ type: actionTypes.CHANGE_LOCATION, searchLocation });
+export const changeLocation_ = (searchLocation) => ({ type: actionTypes.CHANGE_LOCATION, target: searchLocation });
 
 export const changeLocation = (searchLocation) =>
   // no db managements yet
-  (dispatch) => {
-    dispatch(changeLocation_(searchLocation));
-  };
+  (dispatch) => axios.put('/api/user/search-location', searchLocation)
+    .then((res) => {
+    dispatch(changeLocation_(res.data));
+  });
 
-export const putPreferenceVector_ = (user) => ({
+export const putPreferenceVector_ = (preferenceVector) => ({
   type: actionTypes.PUT_PREFERENCE_VECTOR,
-  target: user,
+  target: preferenceVector,
 });
 
-export const putPreferenceVector = (user) => (dispatch) => axios.put(`api/user/preference/${user.id}`, user)
+export const putPreferenceVector = (preferenceVector) => (dispatch) => axios.put(`api/user/preferenceVector`, preferenceVector)
   .then((res) => {
-    dispatch(putPreferenceVector_(user));
+    dispatch(putPreferenceVector_(res.data));
   });
 
 export const postSignUp = (userInfo) => (dispatch) => axios.post('api/sign-up/', userInfo)
@@ -66,7 +67,7 @@ export const getFoodCategory_ = (foodCategory) => ({
   target: foodCategory,
 });
 
-export const getFoodCategory = () => (dispatch) => axios.get()
+export const getFoodCategory = () => (dispatch) => axios.get('/api/user/food-category')
   .then((res) => {
     dispatch(getFoodCategory_(res.data));
   });
