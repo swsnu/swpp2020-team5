@@ -5,7 +5,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { history } from './store/store';
 import App from './App';
-import { getMockStore } from './test-utils/mocks';
+import getMockStore from './test-utils/mocks';
 
 jest.mock('./containers/SignIn/SignIn', () => jest.fn((props) => (
   <div className="spySignIn" />

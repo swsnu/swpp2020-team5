@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import { fireEvent } from '@testing-library/react';
 import LocationTab from './LocationTab';
 import { history } from '../../../store/store';
-import { getMockStore } from '../../../test-utils/mocks';
+import getMockStore from '../../../test-utils/mocks';
 import * as userActionCreators from '../../../store/actions/userActions/userActions';
 
 jest.mock('../../../components/SideBar/SearchResult/SearchResult', () => jest.fn((props) => (

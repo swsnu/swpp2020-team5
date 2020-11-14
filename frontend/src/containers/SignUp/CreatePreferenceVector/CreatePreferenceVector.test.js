@@ -7,7 +7,7 @@ import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 
 import CreatePreferenceVector from './CreatePreferenceVector';
-import { getMockStore } from '../../../test-utils/mocks';
+import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
 import * as actionCreators from '../../../store/actions/userActions/userActions';
 

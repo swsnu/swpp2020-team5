@@ -20,6 +20,7 @@ module.exports = {
   plugins: [
     'react',
   ],
+  ignorePatterns: ["serviceWorker.js"],
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]  }],
     "jsx-a11y/click-events-have-key-events": "off",
@@ -30,5 +31,6 @@ module.exports = {
     "react/button-has-type": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "no-unused-vars": "off",
+    "no-underscore-dangle": "off",
   },
 };

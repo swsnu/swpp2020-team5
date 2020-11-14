@@ -5,7 +5,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import ReviewList from './ReviewList';
 import * as reviewActionCreator from '../../../store/actions/reviewActions/reviewActions';
-import { getMockStore } from '../../../test-utils/mocks';
+import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
 import OtherReview from '../../../components/DetailPage/OtherReview/OtherReview';
 

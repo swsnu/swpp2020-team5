@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import { mount } from 'enzyme';
 import { history } from '../../../store/store';
-import { getMockStore } from '../../../test-utils/mocks';
+import getMockStore from '../../../test-utils/mocks';
 import FoodCategoryTab from './FoodCategoryTab';
 import * as actionCreators from '../../../store/actions/index';
 

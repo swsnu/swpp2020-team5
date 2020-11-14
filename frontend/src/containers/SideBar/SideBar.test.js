@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { history } from '../../store/store';
 import SideBar from './SideBar';
-import { getMockStore } from '../../test-utils/mocks';
+import getMockStore from '../../test-utils/mocks';
 
 jest.mock('./MyInfoTab/MyInfoTab', () => jest.fn((props) => (
   <div className="spyMyInfoTab">

@@ -5,7 +5,7 @@ import { connectRouter, ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import MainPage from './MainPage';
 import * as actionCreators from '../../store/actions/index';
-import { getMockStore } from '../../test-utils/mocks';
+import getMockStore from '../../test-utils/mocks';
 import { history } from '../../store/store';
 
 jest.mock('../SideBar/SideBar', () => jest.fn((props) => (

@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import MyInfoTab from './MyInfoTab';
 import * as userActionCreator from '../../../store/actions/userActions/userActions';
 import * as reviewActionCreator from '../../../store/actions/reviewActions/reviewActions';
-import { getMockStore } from '../../../test-utils/mocks';
+import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
 
 const stubInitialState = {

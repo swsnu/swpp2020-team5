@@ -44,7 +44,7 @@ const getMockUserReducer = jest.fn(
   },
 );
 
-export const getMockStore = (initialState) => {
+const getMockStore = (initialState) => {
   const mockKeywordReducer = getMockKeywordReducer(initialState.keyword);
   const mockRestaurantReducer = getMockRestaurantReducer(initialState.restaurant);
   const mockReviewReducer = getMockReviewReducer(initialState.review);
@@ -61,3 +61,4 @@ export const getMockStore = (initialState) => {
     composeEnhancers(applyMiddleware(...middlewares)));
   return mockStore;
 };
+export default getMockStore;
