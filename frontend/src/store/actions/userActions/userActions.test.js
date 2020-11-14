@@ -111,5 +111,58 @@ describe('actionCreators', () => {
       done();
     });
   });
-  it('');
+  it('should edit user searchLocation correctly', (done) => {
+    const spy = jest.spyOn(axios, 'put')
+      .mockImplementation((url,searchLocation) => {
+        return new Promise((resolve, reject) => {
+          const result = {
+            status : 200,
+            data : stubSearchLocation
+          };
+          resolve(result);
+        });
+      });
+    store.dispatch(actionCreators.changeLocation(stubSearchLocation)).then(() => {
+      const newState = store.getState();
+      expect(newState.us.searchLocation).toBe(stubSearchLocation);
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('edit preferenceVector should edit user preferenceVector correctly', (done) => {
+    const spy = jest.spyOn(axios, 'put')
+      .mockImplementation((url,preferenceVector) => {
+        return new Promise((resolve, reject) => {
+          const result = {
+            status : 200,
+            data : stubPreferenceVector
+          };
+          resolve(result);
+        });
+      });
+    store.dispatch(actionCreators.putPreferenceVector(stubPreferenceVector)).then(() => {
+      const newState = store.getState();
+      expect(newState.us.preferenceVector).toBe(stubPreferenceVector);
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('should get user foodCategory correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation(url => {
+        return new Promise((resolve, reject) => {
+          const result = {
+            status : 200,
+            data : stubFoodCategory 
+          };
+          resolve(result);
+        });
+      })
+    store.dispatch(actionCreators.getFoodCategory()).then(() => {
+      const newState = store.getState();
+      expect(newState.us.foodCategory).toBe(stubFoodCategory);
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    })
+  });
 });
