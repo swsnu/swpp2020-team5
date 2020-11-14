@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import OtherReview from './OtherReview.js';
+import OtherReview from './OtherReview';
 
 describe('</OtherReview />', () => {
   it('should render without errors', () => {

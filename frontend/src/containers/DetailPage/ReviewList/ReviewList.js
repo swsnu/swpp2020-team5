@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import * as actionCraetors from '../../../store/actions/index';
-import './ReviewList.css';
-import OtherReview from '../../../components/DetailPage/OtherReview/OtherReview';
 import {
   Tab, Tabs, TabList, TabPanel,
 } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
+import * as actionCraetors from '../../../store/actions/index';
+import OtherReview from '../../../components/DetailPage/OtherReview/OtherReview';
+import './ReviewList.css';
+
 class ReviewList extends Component {
-  state = {
-    currentReviews: {
-      naver: [],
-      kakao: [],
-      atm: [],
-    },
-    tab_index: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      // NOT USED YET
+      // currentReviews: {
+      //   naver: [],
+      //   kakao: [],
+      //   atm: [],
+      // },
+      tab_index: 0,
+    };
+  }
 
   componentDidMount() {
     this.props.onGetReviews(this.props.RestaurantID);
@@ -32,15 +37,30 @@ class ReviewList extends Component {
     //
 
     const naverReview = this.props.otherReviews.naver.map((review) => (
-      <OtherReview content={review.content} author={review.authorName} createTime={review.createTime.toLocaleDateString()} rating={review.rating} />
+      <OtherReview
+        content={review.content}
+        author={review.authorName}
+        createTime={review.createTime.toLocaleDateString()}
+        rating={review.rating}
+      />
     ));
 
     const kakaoReview = this.props.otherReviews.kakao.map((review) => (
-      <OtherReview content={review.content} author={review.authorName} createTime={review.createTime.toLocaleDateString()} rating={review.rating} />
+      <OtherReview
+        content={review.content}
+        author={review.authorName}
+        createTime={review.createTime.toLocaleDateString()}
+        rating={review.rating}
+      />
     ));
 
     const atmReview = this.props.otherReviews.atm.map((review) => (
-      <OtherReview content={review.content} author={review.authorName} createTime={review.createTime.toLocaleDateString()} rating={review.rating} />
+      <OtherReview
+        content={review.content}
+        author={review.authorName}
+        createTime={review.createTime.toLocaleDateString()}
+        rating={review.rating}
+      />
     ));
 
     const naverCnt = naverReview.length;

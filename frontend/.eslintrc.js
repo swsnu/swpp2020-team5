@@ -33,5 +33,6 @@ module.exports = {
     "jsx-a11y/control-has-associated-label": "off",
     "no-unused-vars": "off",
     "no-underscore-dangle": "off",
+    "no-alert": "off",
   },
 };

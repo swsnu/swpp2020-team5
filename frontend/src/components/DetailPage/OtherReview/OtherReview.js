@@ -4,8 +4,11 @@ import userImage from '../../../images/user_image.png';
 import './OtherReview.css';
 
 class OtherReview extends Component {
-  state = {
-    isSummary: true,
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSummary: true,
+    };
   }
 
   onClickContentHandler = () => {

@@ -22,7 +22,7 @@ class MainPage extends Component {
       }
 
       if (pos === true) {
-        order++;
+        order += 1;
 
         return (
           <RestaurantSummary

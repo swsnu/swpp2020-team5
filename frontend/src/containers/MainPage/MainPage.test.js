@@ -33,7 +33,7 @@ jest.mock('../../components/MainPage/RestaurantSummary/RestaurantSummary', () =>
     {props.title}
     {props.id}
     {props.rate}
-    <img src={props.img_url} />
+    <img src={props.img_url} alt="img" />
 
   </div>
 )));
