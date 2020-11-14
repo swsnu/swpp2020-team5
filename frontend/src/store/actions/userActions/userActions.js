@@ -57,7 +57,7 @@ export const putPreferenceVector = (preferenceVector) => (dispatch) => axios.put
   });
 
 export const postSignUp = (userInfo) => (dispatch) => axios.post('api/sign-up/', userInfo)
-  .then((res) => {})
+  .then((res) => {});
   .catch((err) => {
   });
 
