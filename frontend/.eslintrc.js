@@ -20,7 +20,7 @@ module.exports = {
   plugins: [
     'react',
   ],
-  ignorePatterns: ["serviceWorker.js"],
+  ignorePatterns: ["serviceWorker.js", "index.js", "index.test.js"],
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]  }],
     "jsx-a11y/click-events-have-key-events": "off",
