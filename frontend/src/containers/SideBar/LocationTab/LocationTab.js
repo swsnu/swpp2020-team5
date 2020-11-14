@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import * as actionCreators from '../../../store/actions/index';
-import SearchResult from '../../../components/SearchResult/SearchResult';
+import SearchResult from '../../../components/SideBar/SearchResult/SearchResult';
 
 import searchIcon from '../../../images/searchIcon_red.png';
 import './LocationTab.css';
@@ -113,7 +113,7 @@ class LocationTab extends Component {
           key={id.toString()}
         >
           <SearchResult
-            address_name={location.address_name}
+            addressName={location.address_name}
             key={id.toString()}
           />
         </button>
