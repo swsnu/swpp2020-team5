@@ -45,14 +45,14 @@ export const changeLocation = (searchLocation) =>
     dispatch(changeLocation_(searchLocation));
   };
 
-export const changePreferenceVector_ = (user) => ({
-  type: actionTypes.CHANGE_PREFERENCE_VECTOR,
+export const putPreferenceVector_ = (user) => ({
+  type: actionTypes.PUT_PREFERENCE_VECTOR,
   target: user,
 });
 
-export const changePreferenceVector = (user) => (dispatch) => axios.put(`api/user/preference/${user.id}`, user)
+export const putPreferenceVector = (user) => (dispatch) => axios.put(`api/user/preference/${user.id}`, user)
   .then((res) => {
-    dispatch(changePreferenceVector_(user));
+    dispatch(putPreferenceVector_(user));
   });
 
 export const postSignUp = (userInfo) => (dispatch) => axios.post('api/sign-up/', userInfo)

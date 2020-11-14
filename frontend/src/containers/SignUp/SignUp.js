@@ -2,27 +2,25 @@ import React, { Component } from 'react';
 import CreateID from './CreateID/CreateID';
 import CreatePreferenceVector from './CreatePreferenceVector/CreatePreferenceVector';
 import backgroundImage from '../../images/background.jpg';
-import logoImage from '../../images/logo.png'
+import logoImage from '../../images/logo.png';
 import './SignUp.css';
 
-var backgroundStyle = {
-  width: '100%',
-  height: '400px',
-  backgroundImage: backgroundImage
-}
-
 class SignUp extends Component {
-  state = {
-    signUpMode: 'CreateID',
-    username: '',
-    email: '',
-    password: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      signUpMode: 'CreateID',
+      username: '',
+      email: '',
+      password: '',
+    };
   }
 
   onChangeStageHandler = (stateDict) => {
-    switch (this.state.signUpMode) {
+    const { signUpMode } = this.state;
+    switch (signUpMode) {
       case 'CreateID':
-        this.setState({ 
+        this.setState({
           signUpMode: 'CreatePreferenceVector',
           username: stateDict.username,
           email: stateDict.email,
@@ -35,34 +33,37 @@ class SignUp extends Component {
         break;
       */
       default:
-        const error = new Error('Invalid SignUpMode');
-        console.log(error.message);
+        throw new Error('Invalid SignUpMode');
     }
   }
 
   render() {
     let signUpStage;
-    switch (this.state.signUpMode) {
+    const { signUpMode } = this.state;
+    switch (signUpMode) {
       case 'CreateID':
-        signUpStage = <CreateID onChangeStageHandler={this.onChangeStageHandler}></CreateID>
+        signUpStage = <CreateID onChangeStageHandler={this.onChangeStageHandler} />;
         break;
-      case 'CreatePreferenceVector':
-        signUpStage = <CreatePreferenceVector 
-          onChangeStageHandler={this.onChangeStageHandler}
-          username={this.state.username}
-          email={this.state.email}
-          password={this.state.password}
-        />
+      case 'CreatePreferenceVector': {
+        const { username, email, password } = this.state;
+        signUpStage = (
+          <CreatePreferenceVector
+            onChangeStageHandler={this.onChangeStageHandler}
+            username={username}
+            email={email}
+            password={password}
+          />
+        );
         break;
+      }
       default:
-        const error = new Error('Invalid SignUpMode');
-        console.log(error.message);
+        throw new Error('Invalid SignUpMode');
     }
     return (
-      <div className='SignUp'>
-        <img className='background' src={backgroundImage}></img>
-        <img className='logo' alt='#AllTastesMatterLogo' src={logoImage}></img>
-          {signUpStage}
+      <div className="SignUp">
+        <img className="background" src={backgroundImage} alt="background" />
+        <img className="logo" alt="#AllTastesMatterLogo" src={logoImage} />
+        {signUpStage}
       </div>
     );
   }

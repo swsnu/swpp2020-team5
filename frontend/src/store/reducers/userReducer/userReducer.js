@@ -53,13 +53,17 @@ const reducer = (state = initialState, action) => {
     case actionTypes.PUT_FOODCATEGORY:
       return { ...state, foodCategory: action.target };
     case actionTypes.CHANGE_LOCATION:
-      return { ...state, searchLocation: action.searchLocation };
-    case actionTypes.CHANGE_PREFERENCE_VECTOR:
-      const updatedUser = action.target;
-      return { ...state, currentUser: updatedUser };
+      return { ...state, searchLocation: action.target };
+    case actionTypes.PUT_PREFERENCE_VECTOR:
+      return { ...state, preferenceVector: action.target };
     case actionTypes.GET_FOODCATEGORY:
       return { ...state, foodCategory: action.target };
-    default: break;
+    case actionTypes.GET_LOCATION:
+      return { ...state, searchLocation: action.target };
+    case actionTypes.GET_PREFERENCE_VECTOR:
+      return { ...state, preferenceVector: action.target };
+    default:
+      break;
   }
   return state;
 };

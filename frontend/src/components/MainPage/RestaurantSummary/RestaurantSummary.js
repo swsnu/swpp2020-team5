@@ -6,7 +6,7 @@ import VectorFactor from '../VectorFactor/VectorFactor';
 
 class RestaurantSummary extends Component {
   onClickRestaurantHandler(restaurantID) {
-    this.props.history.push(`/main/detail/${restaurantID}`);
+    this.props.history.push(`/detail/${restaurantID}`);
   }
 
   render() {
@@ -22,7 +22,8 @@ class RestaurantSummary extends Component {
       topFactors.push(<VectorFactor
         key={factor}
         factor={factor}
-        weight={factors[factor]} />);
+        weight={factors[factor]}
+      />);
     }
     return (
       <div className="summary">

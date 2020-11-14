@@ -12,17 +12,23 @@ class FoodCategoryTab extends Component {
       양식: false,
       중식: false,
       일식: false,
+      카페: false,
+      패스트푸드: false,
+      베트남음식: false,
+      분식: false,
+      디저트: false,
+      주점: false,
     },
   }
 
   componentDidMount() {
     this.props.onGetFoodCategory();
-    let changed=false;
+    let changed = false;
     for(let category in this.props.foodCategory){
-      if(this.props.foodCategory[category]===false) 
-        changed=true;
+      if(this.props.foodCategory[category] === false) 
+        changed = true;
     }
-    if(changed===true)
+    if(changed === true)
       this.setState({foodCategory:this.props.foodCategory});
   }
 

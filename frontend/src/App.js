@@ -15,12 +15,10 @@ function App(props) {
       <div className="App">
         <Switch>
           <Redirect exact from="/" to="/sign-in" />
-          <Route path="/main" exact component={MainPage} />
           <Route path="/sign-in" exact render={() => <SignIn />} />
           <Route path="/sign-up" exact render={() => <SignUp />} />
           <Route path="/main/:name" exact render={() => <MainPage />} />
-          <Route path="/main/detail/:id" exact render={() => <DetailPage />} />
-          <Route path="/signup/createid" exact render={() => <CreateID />} />
+          <Route path="/detail/:id" exact render={() => <DetailPage />} />
           <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </div>

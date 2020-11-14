@@ -4,7 +4,7 @@ export {
   postSignIn,
   changeLocation,
   editUserFoodCategory,
-  changePreferenceVector,
+  putPreferenceVector,
 } from './userActions/userActions';
 
 export {
@@ -16,7 +16,7 @@ export {
 
 export {
   getRestaurantList,
-  getRestaurantName,
+  // getRestaurantName,
   getRestaurantDetail,
 } from './restaurantActions/restauraunActions';
 

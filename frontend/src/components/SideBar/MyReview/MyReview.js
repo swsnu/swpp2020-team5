@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
-import * as actionCreators from '../../../store/actions/index';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import {$} from 'jquery';
 import { StarRatingInput, StarRating, css } from 'react-star-rating-input';
 import insertCss from 'insert-css';
+import * as actionCreators from '../../../store/actions/index';
 import './MyReview.css';
 
 class MyReview extends Component {
-  state = {
-    content: 'Hi',
-    rating: 0,
-    isEdit: false,
-    preContent: '',
-  }
-
   constructor(props) {
     super(props);
     this.state = {
       content: props.content,
       rating: props.rating,
-    }
+      isEdit: false,
+      preContent: '',
+    };
   }
 
   onClickEditHandler = () => {
+    const { content } = this.state;
     this.setState({
       isEdit: true,
-      preContent: this.state.content
+      preContent: content,
     });
   }
 
@@ -36,24 +31,25 @@ class MyReview extends Component {
       rating: this.state.rating,
       modifiedTime: new Date(),
     });
-    this.setState({isEdit: false});
+    this.setState({ isEdit: false });
   }
 
   onClickDeleteHandler = () => {
-    if (window.confirm("Do you really want to Remove?")) {
+    if (window.confirm('Do you really want to Remove?')) {
       this.props.onDeleteReview(this.props.reviewID);
     }
   }
 
   onClickCancelHandler = () => {
+    const { preContent } = this.state;
     this.setState({
       isEdit: false,
-      content: this.state.preContent
+      content: preContent,
     });
   }
 
   onChangeRatingHandler = (newRating) => {
-    this.setState({rating: newRating});
+    this.setState({ rating: newRating });
   };
 
   render() {
@@ -64,69 +60,99 @@ class MyReview extends Component {
     starList.push(<StarRating value={4} />);
     starList.push(<StarRating value={5} />);
 
-    let StarInputOrShow = (
+    const StarInputOrShow = (
       this.state.isEdit
-      ? <StarRatingInput size={5} value={this.state.rating} onChange={this.onChangeRatingHandler}>
-        </StarRatingInput> 
-      : starList[this.state.rating-1]
+        ? (
+          <StarRatingInput
+            size={5}
+            value={this.state.rating}
+            onChange={this.onChangeRatingHandler}
+          />
+        )
+        : starList[this.state.rating - 1]
     );
-    let EditOrDone = (
+    const EditOrDone = (
       this.state.isEdit
-        ? <text id='review-edit-done-button' 
-            onClick={() => this.onClickEditDoneHandler()}>저장</text>
-        : <text id='review-edit-button'
-            onClick={() => this.onClickEditHandler()}>수정</text>
+        ? (
+          <text
+            id="review-edit-done-button"
+            onClick={() => this.onClickEditDoneHandler()}
+          >
+            저장
+          </text>
+        )
+        : (
+          <text
+            id="review-edit-button"
+            onClick={() => this.onClickEditHandler()}
+          >
+            수정
+          </text>
+        )
     );
-    let DeleteOrCancel = (
+    const DeleteOrCancel = (
       this.state.isEdit
-        ? <text id='review-cancel-button' 
-            onClick={() => this.onClickCancelHandler()}>취소</text>
-        : <text id='review-delete-button'
-            onClick={() => this.onClickDeleteHandler()}>삭제</text>
+        ? (
+          <text
+            id="review-cancel-button"
+            onClick={() => this.onClickCancelHandler()}
+          >
+            취소
+          </text>
+        )
+        : (
+          <text
+            id="review-delete-button"
+            onClick={() => this.onClickDeleteHandler()}
+          >
+            삭제
+          </text>
+        )
     );
-    let TextOrInput = (
+    const TextOrInput = (
       this.state.isEdit
-        ? <input id='content-input' className='review-input' value={this.state.content} 
-            onChange={event => this.setState({content: event.target.value})}>
-            </input>
-        : <text id='content-text'>{this.state.content}</text>
+        ? (
+          <input
+            id="content-input"
+            className="review-input"
+            value={this.state.content}
+            onChange={(event) => this.setState({ content: event.target.value })}
+          />
+        )
+        : <text id="content-text">{this.state.content}</text>
     );
     // we need to fix star
     return (
-      <div className='MyReview'>
-        <div className='review-info'>
-          <div className='review-rating-stars'>
+      <div className="MyReview">
+        <div className="review-info">
+          <div className="review-rating-stars">
             {StarInputOrShow}
           </div>
-          <div className='review-detail'>
-            <text id='rating-text'>{this.state.rating}</text> 
+          <div className="review-detail">
+            <text id="rating-text">{this.state.rating}</text>
             <text> | </text>
-            <text id='modified-time-text'>{this.props.modifiedTime}</text> 
+            <text id="modified-time-text">{this.props.modifiedTime}</text>
             <text> | </text>
             {EditOrDone}
             <text> | </text>
             {DeleteOrCancel}
           </div>
         </div>
-        <div className='review-content'>
+        <div className="review-content">
           {TextOrInput}
         </div>
       </div>
     );
-  } 
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    onPutReview: (reviewID, reviewInfo) =>
-    dispatch(actionCreators.putReview({
-      id: reviewID,
-      ...reviewInfo
-    })),
-    onDeleteReview: reviewID =>
-      dispatch(actionCreators.deleteReview(reviewID)),
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.putReview({
+    id: reviewID,
+    ...reviewInfo,
+  })),
+  onDeleteReview: (reviewID) => dispatch(actionCreators.deleteReview(reviewID)),
+});
 
-insertCss(css)
+insertCss(css);
 
 export default connect(null, mapDispatchToProps)(withRouter(MyReview));

@@ -102,11 +102,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_RESTAURANTLIST:
       return { ...state, restaurantlist: action.restaurantlist };
-
-    case actionTypes.GET_RESTAURANTNAME:
-      return { ...state, restaurantlist: action.searchedlist };
     case actionTypes.GET_RESTAUARANTDETAIL:
-      return { ...state, selectedrestaurant: action.selectedrestaurant };
+      return { ...state, selectedRestaurant: action.selectedRestaurant };
     default:
       break;
   }

@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import * as actionCraetors from '../../../store/actions/index';
 import './ReviewList.css';
 import OtherReview from '../../../components/DetailPage/OtherReview/OtherReview';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 class ReviewList extends Component {
 
@@ -13,38 +15,17 @@ class ReviewList extends Component {
       kakao: [],
       atm: [],
     },
-    selectedTab: '',
+    tab_index: 0,
   };
   
+
+
   componentDidMount() {
-    //TODO backend needed!!
-    //this.props.onGetReviews(this.props.match.params.id);
+    this.props.onGetReviews(this.props.RestaurantID);
     
-    //setting the default button.
-    document.getElementById('naver-tab-button').click();
   }
-
-  onClickTabButtonHandler= (event, siteName) => {
-    let i;
-    let tabcontent;
-    let tablinks;
-
-    // set the content hidden
-    tabcontent = document.getElementsByClassName('tabcontent');
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = 'none';
-    }
-
-    //
-    tablinks = document.getElementsByClassName('tablinks');
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(' active', '');
-    }
-
-    document.getElementById(siteName).style.display = 'block';
-    event.target.className += ' active';
-
-    this.setState({selectedTab: siteName});
+  onClickTabHandler = (index) => {
+    this.setState({tab_index: index});
   }
 
   
@@ -77,24 +58,26 @@ class ReviewList extends Component {
 
     return (
       <div className='ReviewList'>
-        <div className='tab'>
-          <button className='tablinks' id='naver-tab-button' onClick={(event) => {this.onClickTabButtonHandler(event, 'naver-content')}}>네이버 리뷰</button> 
-          <button className='tablinks' id='kakao-tab-button' onClick={(event) => {this.onClickTabButtonHandler(event,'kakao-content')}}>카카오 리뷰</button> 
-          <button className='tablinks' id='atm-tab-button' onClick={(event) => {this.onClickTabButtonHandler(event,'atm-content')}}>ATM 리뷰</button> 
-        </div>
+        <Tabs selectedIndex={this.state.tab_index} onSelect={this.onClickTabHandler}>
+          <TabList>
+            <Tab>네이버 리뷰</Tab> 
+            <Tab>카카오 리뷰</Tab> 
+            <Tab>ATM 리뷰</Tab> 
+          </TabList>
 
-        <div className='tabcontent' id='naver-content'>
-          <p>다른 사용자들이 총 {naverCnt}개의 리뷰를 남겼습니다.</p>
-          {naverReview}
-        </div>
-        <div className='tabcontent' id='kakao-content'>
-          <p>다른 사용자들이 총 {kakaoCnt}개의 리뷰를 남겼습니다.</p>
-          {kakaoReview}
-        </div>
-        <div className='tabcontent' id='atm-content'>
-          <p>다른 사용자들이 총 {atmCnt}개의 리뷰를 남겼습니다.</p>
-          {atmReview}
-        </div>
+          <TabPanel className='tabcontent' id='naver-content'>
+            <p>다른 사용자들이 총 {naverCnt}개의 리뷰를 남겼습니다.</p>
+            {naverReview}
+          </TabPanel>
+          <TabPanel className='tabcontent' id='kakao-content'>
+            <p>다른 사용자들이 총 {kakaoCnt}개의 리뷰를 남겼습니다.</p>
+            {kakaoReview}
+          </TabPanel>
+          <TabPanel className='tabcontent' id='atm-content'>
+            <p>다른 사용자들이 총 {atmCnt}개의 리뷰를 남겼습니다.</p>
+            {atmReview}
+          </TabPanel>
+        </Tabs>
       </div>
     )
   }
