@@ -62,7 +62,6 @@ describe('<MyReview />', () => {
     wrapper.find('#content-input').simulate('change', { target: { value: 'EDITED_CONTENT' } });
     expect(wrapper.state().content).toBe('EDITED_CONTENT');
     expect(wrapper.find('StarRatingInput').length).toBe(1);
-    console.log(wrapper.find('StarRatingInput').find('Clear').debug());
     wrapper.find('StarRatingInput').find('Clear').find('a').simulate('click');
     expect(wrapper.state().rating).toBe(0);
 

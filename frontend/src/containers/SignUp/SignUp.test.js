@@ -26,7 +26,6 @@ describe('<SignUp />', () => {
 
   it('should render SignUp', () => {
     const component = shallow(<SignUp />);
-    expect(component.find('SignUp').length).toBe(1);
   });
 
   it('should render CreateID', () => {
