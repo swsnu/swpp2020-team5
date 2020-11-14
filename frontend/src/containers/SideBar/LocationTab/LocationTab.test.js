@@ -1,4 +1,3 @@
-/* global kakao */
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -18,11 +17,10 @@ jest.mock('../../../components/SearchResult/SearchResult', () => jest.fn((props)
 
 global.kakao = {
   maps: {
-    load: (func) => {},
     services: {
       Geocoder: function Geocoder() {
-        this.addressSearch = (location, callback, dict) => {
-          callback(["F", "T", "S"]);
+        this.addressSearch = (location, callback) => {
+          callback(['F', 'T', 'S', location]);
         };
       },
     },
@@ -30,16 +28,16 @@ global.kakao = {
       this.y = y;
       this.x = x;
     },
-    load: (func) => {func()},
+    load: (func) => func(),
     Map: function Map(container, options) {
       this.container = container;
       this.optons = options;
-    }
+    },
   },
 };
 const lLW = {
   style: {
-    display: "shit",
+    display: 'shit',
   },
 };
 const stubInitialState = {
@@ -94,27 +92,31 @@ describe('<LocationTab />', () => {
       </Provider>
     );
   });
-  
+
   it('should do everything', () => {
+    //
+    // DISCLAIMER: This test is a total mess: it has no usability whatsoever.
+    //             Do not attempt to understand the fucntioalities of the LocationTab
+    //             by this unittest.
+    //
     const spyChangeLocation = jest.spyOn(userActionCreators, 'changeLocation')
-      .mockImplementation(loc => { return dispatch => {}; });
+      .mockImplementation(() => () => {});
     const component = mount(locationTab);
     const inputWrapper = component.find('#location-input');
     const locTabInstance = component.find(LocationTab.WrappedComponent).instance();
-    locTabInstance.setState({locationListWrapper: lLW});
-    locTabInstance.setState({map: {setCenter: () => {}}});
-    
-    inputWrapper.simulate('change', { target: { value: '반야심경' }});
-    
+    locTabInstance.setState({ locationListWrapper: lLW });
+    locTabInstance.setState({ map: { setCenter: () => {} } });
+    inputWrapper.simulate('change', { target: { value: '반야심경' } });
     const candidateWrapper = component.find('.candidate').at(0);
-    let input = document.createElement('input');
-    input.id = "location-input";
+    const input = document.createElement('input');
+    input.id = 'location-input';
     document.body.appendChild(input);
     candidateWrapper.simulate('click');
-    
     expect(spyChangeLocation).toHaveBeenCalledTimes(1);
-    inputWrapper.simulate('change', { target: { value: '' }});
+    inputWrapper.simulate('change', { target: { value: '' } });
     expect(1).toBe(1);
     fireEvent.load(locTabInstance.state.script);
-    });
+    locTabInstance.setState({ script: null });
+    inputWrapper.simulate('change', { target: { value: '반야심경' } });
+  });
 });
