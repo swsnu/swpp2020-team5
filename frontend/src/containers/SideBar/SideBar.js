@@ -16,13 +16,11 @@ import './SideBar.css';
 
 class SideBar extends Component {
 
-  // State
   state = {
     searchWord: '',
     tabMode: 'MyInfo',
   }
 
-  // Method
   onClickSearchButtonHandler = () => {
     this.props.history.push('/main/'+this.state.searchWord);
   }

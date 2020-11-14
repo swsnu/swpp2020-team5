@@ -1,7 +1,7 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { ConnectedRouter } from 'connected-react-router';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { history } from '../../store/store';
 import SideBar from './SideBar';

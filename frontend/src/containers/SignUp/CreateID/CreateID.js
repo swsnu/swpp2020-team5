@@ -4,103 +4,115 @@ import { connect } from 'react-redux';
 import CreatePreferenceVector from '../CreatePreferenceVector/CreatePreferenceVector';
 import './CreateID.css';
 
-let Background = 'https://thewiki.ewr1.vultrobjects.com/data/4d61744672617365722e6a7067.jpg'
+const Background = 'https://thewiki.ewr1.vultrobjects.com/data/4d61744672617365722e6a7067.jpg';
 
-var backgroundStyle = {
+const backgroundStyle = {
   width: '1425px',
   height: '650px',
-  backgroundImage: `url(${Background})`
-}
+  backgroundImage: `url(${Background})`,
+};
 
-
-class CreateID extends Component{
+class CreateID extends Component {
     state={
-        userInfo: {
-            username:null,
-            email:null,
-            password:null,
-            foodList:[],
-            },
-        verifyPassword:null,
-        mode:'ID',
+      userInfo: {
+        username: null,
+        email: null,
+        password: null,
+        foodList: [],
+      },
+      verifyPassword: null,
+      mode: 'ID',
     }
-    onClickConfirmHandler(){
-        this.setState({mode:'Preference'})
+
+    onClickConfirmHandler() {
+      this.setState({ mode: 'Preference' });
     }
-    onChangeButtonHandler(){
-        if(this.state.userInfo.username===null||this.state.userInfo.password===null
-            ||this.state.userInfo.email===null) return true;
-        if(this.state.userInfo.password===this.state.verifyPassword) return false;
-        else return true;
+
+    onChangeButtonHandler() {
+      if (this.state.userInfo.username === null || this.state.userInfo.password === null
+            || this.state.userInfo.email === null) return true;
+      if (this.state.userInfo.password === this.state.verifyPassword) return false;
+      return true;
     }
-    render()
-    {
-        if(this.state.mode==='Preference')
-            this.props.onChangeStageHandler(this.state.userInfo)
-      //return(
-          //<CreatePreferenceVector  userInfo={this.state.userInfo}/>
-      //);
-        let isverified;
-        if(this.state.userInfo.password===null
-            ||this.state.userInfo.password!=this.state.verifyPassword) 
-                isverified='Password not verified'
-        else isverified='Ok'
-        return(
 
-          //<div className='createID' style={ backgroundStyle} >
-            <div className='createID'>
-                <div className='box'>
-                  <text className='signup'>회원가입</text>
-                  <text className='step1'>STEP1</text>
-                
-                <p>이름</p><input id='username-input' type='text'
-                value={this.state.userInfo.username}
-                onChange={(ev)=>{
-                    this.setState({userInfo:{...this.state.userInfo,username:ev.target.value}});
-                }}/>
+    render() {
+      if (this.state.mode === 'Preference') this.props.onChangeStageHandler(this.state.userInfo);
+      // return(
+      // <CreatePreferenceVector  userInfo={this.state.userInfo}/>
+      // );
+      let isverified;
+      if (this.state.userInfo.password === null
+            || this.state.userInfo.password != this.state.verifyPassword) isverified = 'Password not verified';
+      else isverified = 'Ok';
+      return (
 
-                <p>이메일</p><input id='email-input' type='text'
-                value={this.state.userInfo.email}
-                onChange={(ev)=>{
-                    this.setState({userInfo:{...this.state.userInfo,email:ev.target.value}});
-                }}/>
+      // <div className='createID' style={ backgroundStyle} >
+        <div className="createID">
+          <div className="box">
+            <text className="signup">회원가입</text>
+            <text className="step1">STEP1</text>
 
-                <p>비밀번호</p><input id='password-input' type='password'
-                value={this.state.userInfo.password}
-                onChange={(ev)=>{
-                    this.setState({userInfo:{...this.state.userInfo,password:ev.target.value}});
-                }}/>
-                <p>비밀번호확인</p>
-                    <input id='verify-password-input' type='password'
-                    value={this.state.verifyPassword}
-                    onChange={(ev)=>{
-                        this.setState({verifyPassword:ev.target.value});
-                    }}/>
-                   <p id='verified'>{isverified}</p>
-                
-                <button id='confirm-button'
-                disabled={this.onChangeButtonHandler()}
-                onClick={()=>this.onClickConfirmHandler()}>확인</button>
+            <p>이름</p>
+            <input
+              id="username-input"
+              type="text"
+              value={this.state.userInfo.username}
+              onChange={(ev) => {
+                this.setState({ userInfo: { ...this.state.userInfo, username: ev.target.value } });
+              }}
+            />
 
-            </div>
+            <p>이메일</p>
+            <input
+              id="email-input"
+              type="text"
+              value={this.state.userInfo.email}
+              onChange={(ev) => {
+                this.setState({ userInfo: { ...this.state.userInfo, email: ev.target.value } });
+              }}
+            />
 
+            <p>비밀번호</p>
+            <input
+              id="password-input"
+              type="password"
+              value={this.state.userInfo.password}
+              onChange={(ev) => {
+                this.setState({ userInfo: { ...this.state.userInfo, password: ev.target.value } });
+              }}
+            />
+            <p>비밀번호확인</p>
+            <input
+              id="verify-password-input"
+              type="password"
+              value={this.state.verifyPassword}
+              onChange={(ev) => {
+                this.setState({ verifyPassword: ev.target.value });
+              }}
+            />
+            <p id="verified">{isverified}</p>
 
+            <button
+              id="confirm-button"
+              disabled={this.onChangeButtonHandler()}
+              onClick={() => this.onClickConfirmHandler()}
+            >
+              확인
+            </button>
 
-            </div>
-        );
-    };
+          </div>
 
+        </div>
+      );
+    }
 }
 
+const mapStateToProps = (state) => {
 
+};
 
-const mapStateToProps = state => {
-    
-  };
-  
-  const mapDispatchToProps = dispatch => {
-    
-  };
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateID));
-  
+const mapDispatchToProps = (dispatch) => {
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateID));
