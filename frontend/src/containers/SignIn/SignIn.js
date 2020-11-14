@@ -76,7 +76,7 @@ class SignIn extends Component {
 
 SignIn.propTypes = {
   onPostSignIn: PropTypes.func,
-  history: PropTypes.arrayOf(PropTypes.any),
+  history: PropTypes.objectOf(PropTypes.any),
 };
 
 SignIn.defaultProps = {

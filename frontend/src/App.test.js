@@ -58,7 +58,7 @@ describe('App', () => {
     const component = mount(app);
     expect(component.find('.spySignIn').length).toBe(1);
   });
-  
+
   it('should create SignUp at /sign-up', () => {
     const mockStore = getMockStore({
       keyword: {},
@@ -73,7 +73,7 @@ describe('App', () => {
       </Provider>
     );
     const component = mount(app);
-    //expect(component.find('.spySignUp').length).toBe(1);
+    // expect(component.find('.spySignUp').length).toBe(1);
   });
 
   it('should create MainPage at /main/:name', () => {
@@ -90,7 +90,7 @@ describe('App', () => {
       </Provider>
     );
     const component = mount(app);
-    //expect(component.find('.spyMainPage').length).toBe(1);
+    // expect(component.find('.spyMainPage').length).toBe(1);
   });
 
   it('should create DetailPage at /detail/:id', () => {
@@ -107,7 +107,7 @@ describe('App', () => {
       </Provider>
     );
     const component = mount(app);
-    //expect(component.find('.spyDetailPage').length).toBe(1);
+    // expect(component.find('.spyDetailPage').length).toBe(1);
   });
 
   it('should create h1 at /not-found', () => {
@@ -124,6 +124,6 @@ describe('App', () => {
       </Provider>
     );
     const component = mount(app);
-    //expect(component.find('h1').length).toBe(1);
+    // expect(component.find('h1').length).toBe(1);
   });
 });

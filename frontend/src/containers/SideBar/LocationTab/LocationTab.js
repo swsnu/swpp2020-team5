@@ -79,7 +79,6 @@ class LocationTab extends Component {
   // list the locations found from the current input
   //
   onChangeLocationInputHandler(location) {
-
     // absolutely redundant, but included to satisfy the all mighty eslinter-sama
     const { script } = this.state;
     if (!script) return;
