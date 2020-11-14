@@ -22,7 +22,7 @@ global.kakao = {
     services: {
       Geocoder: function Geocoder() {
         this.addressSearch = (location, callback, dict) => {
-          callback(["F", "T", "S"]);
+          callback(['F', 'T', 'S']);
         };
       },
     },
@@ -30,16 +30,16 @@ global.kakao = {
       this.y = y;
       this.x = x;
     },
-    load: (func) => {func()},
+    load: (func) => { func(); },
     Map: function Map(container, options) {
       this.container = container;
       this.optons = options;
-    }
+    },
   },
 };
 const lLW = {
   style: {
-    display: "shit",
+    display: 'shit',
   },
 };
 const stubInitialState = {
@@ -94,27 +94,27 @@ describe('<LocationTab />', () => {
       </Provider>
     );
   });
-  
+
   it('should do everything', () => {
     const spyChangeLocation = jest.spyOn(userActionCreators, 'changeLocation')
-      .mockImplementation(loc => { return dispatch => {}; });
+      .mockImplementation((loc) => (dispatch) => {});
     const component = mount(locationTab);
     const inputWrapper = component.find('#location-input');
     const locTabInstance = component.find(LocationTab.WrappedComponent).instance();
-    locTabInstance.setState({locationListWrapper: lLW});
-    locTabInstance.setState({map: {setCenter: () => {}}});
-    
-    inputWrapper.simulate('change', { target: { value: '반야심경' }});
-    
+    locTabInstance.setState({ locationListWrapper: lLW });
+    locTabInstance.setState({ map: { setCenter: () => {} } });
+
+    inputWrapper.simulate('change', { target: { value: '반야심경' } });
+
     const candidateWrapper = component.find('.candidate').at(0);
-    let input = document.createElement('input');
-    input.id = "location-input";
+    const input = document.createElement('input');
+    input.id = 'location-input';
     document.body.appendChild(input);
     candidateWrapper.simulate('click');
-    
+
     expect(spyChangeLocation).toHaveBeenCalledTimes(1);
-    inputWrapper.simulate('change', { target: { value: '' }});
+    inputWrapper.simulate('change', { target: { value: '' } });
     expect(1).toBe(1);
     fireEvent.load(locTabInstance.state.script);
-    });
+  });
 });

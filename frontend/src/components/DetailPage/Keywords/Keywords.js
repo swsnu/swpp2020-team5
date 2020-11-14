@@ -87,7 +87,7 @@ class Keywords extends Component {
       rotationAngles: [0, 0],
       deterministic: true,
       spiral: 'archimedean',
-      fontSizes: [30,100],
+      fontSizes: [30, 100],
     };
     const size = [1000, 200];
     let maxKeywordValue = 0;
@@ -108,7 +108,7 @@ class Keywords extends Component {
       });
     });
     return (
-      <div id='keywords'>
+      <div id="keywords">
         <WordCloud
           id="cloud"
           callbacks={callbacks}

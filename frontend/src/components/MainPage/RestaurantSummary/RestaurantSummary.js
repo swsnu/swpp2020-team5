@@ -22,7 +22,8 @@ class RestaurantSummary extends Component {
       topFactors.push(<VectorFactor
         key={factor}
         factor={factor}
-        weight={factors[factor]} />);
+        weight={factors[factor]}
+      />);
     }
     return (
       <div className="summary">

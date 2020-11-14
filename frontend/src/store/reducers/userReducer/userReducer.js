@@ -62,7 +62,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, searchLocation: action.target };
     case actionTypes.GET_PREFERENCE_VECTOR:
       return { ...state, preferenceVector: action.target };
-    default: 
+    default:
       break;
   }
   return state;

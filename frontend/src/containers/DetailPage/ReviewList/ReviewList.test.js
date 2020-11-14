@@ -1,9 +1,9 @@
 import React from 'react';
-import ReviewList from './ReviewList';
 import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import ReviewList from './ReviewList';
 import * as reviewActionCreator from '../../../store/actions/reviewActions/reviewActions';
 import { getMockStore } from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
@@ -16,11 +16,10 @@ const stubInitialState = {
     preferenceVector: null,
     foodCategory: null,
     searchLocation: null,
-    selectedUser: { name:'TEST_USER'},
+    selectedUser: { name: 'TEST_USER' },
   },
   keyword: null,
-  restaurant: {
-    selectedRestaurant: {id: 1, title: 'TEST'}},
+  restaurant: { selectedRestaurant: { id: 1, title: 'TEST' } },
   review: {
     otherReviews: {
       naver: [
@@ -69,11 +68,9 @@ const stubInitialState = {
   },
 };
 
-
 const mockStore = getMockStore(stubInitialState);
 
 describe('<ReviewList /', () => {
-
   let reviewList;
   let spyGetReviews;
 
@@ -87,10 +84,10 @@ describe('<ReviewList /', () => {
     );
 
     spyGetReviews = jest.spyOn(reviewActionCreator, 'getReviews')
-        .mockImplementation(() => {return dispatch => {};});
+      .mockImplementation(() => (dispatch) => {});
   });
 
-  afterEach(() => {jest.clearAllMocks()});
+  afterEach(() => { jest.clearAllMocks(); });
 
   it('should render without errors', () => {
     const component = mount(reviewList);
@@ -98,20 +95,15 @@ describe('<ReviewList /', () => {
 
     expect(wrapper.length).toBe(1);
   });
-  
+
   it('should call getReviews', () => {
     const component = mount(reviewList);
     expect(spyGetReviews).toBeCalledTimes(1);
   });
-
 
   it('should handle Other Reviews', () => {
     const component = mount(reviewList);
     const wrapper = component.find(OtherReview);
     expect(wrapper.length).toBe(3);
   });
-
-
-
-})
-
+});

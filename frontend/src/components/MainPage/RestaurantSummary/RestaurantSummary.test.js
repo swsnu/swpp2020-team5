@@ -7,7 +7,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { history } from '../../../store/store';
 import { getMockStore } from '../../../test-utils/mocks';
 
-import RestaurantSummary from './RestaurantSummary'
+import RestaurantSummary from './RestaurantSummary';
 
 describe('<RestaurantSummary />', () => {
   const stubInitialState = {
@@ -27,19 +27,22 @@ describe('<RestaurantSummary />', () => {
             <Route
               path="/"
               exact
-              render={() => <RestaurantSummary
-                              id={1}
-                              category={[
-                                '한식',
-                                '두식',
-                              ]}
-                              preferenceVector={
+              render={() => (
+                <RestaurantSummary
+                  id={1}
+                  category={[
+                    '한식',
+                    '두식',
+                  ]}
+                  preferenceVector={
                                 {
                                   삼삼: 1,
                                   슴슴: 2,
                                   심심: 3,
                                 }
-                              }/>}
+                              }
+                />
+              )}
             />
           </Switch>
         </ConnectedRouter>
@@ -53,15 +56,15 @@ describe('<RestaurantSummary />', () => {
     expect(wrapper.length).toBe(1);
   });
 
-  it(`should call 'onClickRestaurantHandler'`, () => {
+  it('should call \'onClickRestaurantHandler\'', () => {
     const spyHistoryPush = jest.spyOn(history, 'push')
-      .mockImplementation(path => {});
+      .mockImplementation((path) => {});
     const component = mount(restaurantSummary);
 
     let wrapper = component.find('.rate').at(0);
     wrapper.simulate('click');
     expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
-    
+
     wrapper = component.find('.title').at(0);
     wrapper.simulate('click');
     expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
@@ -69,5 +72,5 @@ describe('<RestaurantSummary />', () => {
     wrapper = component.find('.image').at(0);
     wrapper.simulate('click');
     expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
-  })
+  });
 });

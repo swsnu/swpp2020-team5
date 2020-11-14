@@ -7,7 +7,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import MyReview from './MyReview';
 import { getMockStore } from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
-import * as actionCreators from '../../../store/actions/reviewActions/reviewActions'
+import * as actionCreators from '../../../store/actions/reviewActions/reviewActions';
 
 describe('<MyReview />', () => {
   let myReview;
@@ -17,28 +17,31 @@ describe('<MyReview />', () => {
       keyword: {},
       restaurant: {},
       user: {},
-      review: {}
+      review: {},
     });
     myReview = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path='/' exact
-              render={() => <MyReview reviewID={1} content='TEST_CONTENT' rating={3} modifiedTime='TEST_TIME'/>}/>
+            <Route
+              path="/"
+              exact
+              render={() => <MyReview reviewID={1} content="TEST_CONTENT" rating={3} modifiedTime="TEST_TIME" />}
+            />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
-  })
+  });
 
   it('should render MyReview', () => {
     const component = mount(myReview);
-    expect(component.find('MyReview').length).toBe(1)
+    expect(component.find('MyReview').length).toBe(1);
   });
 
   it('should show rating, modifiedTime and content', () => {
     const component = mount(myReview);
-    let wrapper = component.find('MyReview');
+    const wrapper = component.find('MyReview');
     expect(wrapper.find('#rating-text').text()).toBe('3');
     expect(wrapper.find('#modified-time-text').text()).toBe('TEST_TIME');
     expect(wrapper.find('#content-text').text()).toBe('TEST_CONTENT');
@@ -56,15 +59,15 @@ describe('<MyReview />', () => {
     expect(wrapper.state().isEdit).toBe(false);
     wrapper.find('#review-edit-button').simulate('click');
     wrapper = component.find('MyReview');
-    wrapper.find('#content-input').simulate('change', {target: {value: 'EDITED_CONTENT'}})
+    wrapper.find('#content-input').simulate('change', { target: { value: 'EDITED_CONTENT' } });
     expect(wrapper.state().content).toBe('EDITED_CONTENT');
-    expect(wrapper.find('StarRatingInput').length).toBe(1)
-    console.log(wrapper.find('StarRatingInput').find('Clear').debug())
-    wrapper.find('StarRatingInput').find('Clear').find('a').simulate('click')
-    expect(wrapper.state().rating).toBe(0)
+    expect(wrapper.find('StarRatingInput').length).toBe(1);
+    console.log(wrapper.find('StarRatingInput').find('Clear').debug());
+    wrapper.find('StarRatingInput').find('Clear').find('a').simulate('click');
+    expect(wrapper.state().rating).toBe(0);
 
-    let spyPutReview = jest.spyOn(actionCreators, 'putReview')
-      .mockImplementation((id, info) => {return dispatch => {}})
+    const spyPutReview = jest.spyOn(actionCreators, 'putReview')
+      .mockImplementation((id, info) => (dispatch) => {});
 
     const DATE_TO_USE = new Date('2016');
     const _Date = Date;
@@ -81,20 +84,20 @@ describe('<MyReview />', () => {
       id: 1,
       content: 'EDITED_CONTENT',
       rating: 0,
-      modifiedTime: DATE_TO_USE 
-    })
+      modifiedTime: DATE_TO_USE,
+    });
     expect(wrapper.state().isEdit).toBe(false);
   });
 
   it('should delete comment', () => {
     const component = mount(myReview);
-    let wrapper = component.find('MyReview');
-    let spyDeleteReview = jest.spyOn(actionCreators, 'deleteReview')
-      .mockImplementation((id) => {return dispatch => {}})
-    window.confirm = jest.fn(() => false)
+    const wrapper = component.find('MyReview');
+    const spyDeleteReview = jest.spyOn(actionCreators, 'deleteReview')
+      .mockImplementation((id) => (dispatch) => {});
+    window.confirm = jest.fn(() => false);
     wrapper.find('#review-delete-button').simulate('click');
-    window.confirm = jest.fn(() => true)
+    window.confirm = jest.fn(() => true);
     wrapper.find('#review-delete-button').simulate('click');
     expect(spyDeleteReview).toHaveBeenCalledTimes(1);
-  })
-})
+  });
+});

@@ -20,9 +20,9 @@ export const postReview = (reviewInfo) => (dispatch) => axios.post(`api/restaura
   .then((res) => {
     dispatch(postReview_(res.data));
   })
-.catch((res) => {
+  .catch((res) => {
     dispatch(postReview_(reviewInfo));
-})
+  });
 
 const putReview_ = (reviewInfo) => ({
   type: actionTypes.PUT_REVIEW,
@@ -43,6 +43,6 @@ export const deleteReview = (reviewID) => (dispatch) => axios.put(`api/review/:$
   .then((res) => {
     dispatch(deleteReview_(reviewID));
   })
-.catch((res) => {
+  .catch((res) => {
     dispatch(deleteReview_(reviewID));
-})
+  });

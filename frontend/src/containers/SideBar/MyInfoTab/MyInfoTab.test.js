@@ -1,13 +1,14 @@
 import React from 'react';
-import MyInfoTab from './MyInfoTab';
 import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import MyInfoTab from './MyInfoTab';
 import * as userActionCreator from '../../../store/actions/userActions/userActions';
 import * as reviewActionCreator from '../../../store/actions/reviewActions/reviewActions';
 import { getMockStore } from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
+
 const stubInitialState = {
   user: {
     id: 0,
@@ -15,69 +16,66 @@ const stubInitialState = {
     preferenceVector: null,
     foodCategory: null,
     searchLocation: null,
-    selectedUser: { name:'TEST_USER'},
+    selectedUser: { name: 'TEST_USER' },
   },
   keyword: null,
-  restaurant: {
-    selectedRestaurant: {id: 1, title: 'TEST'}},
+  restaurant: { selectedRestaurant: { id: 1, title: 'TEST' } },
   review: {
     myReviews: [
       {
         id: 10,
         content: '국물 맛이 좋다',
         rating: 5,
-        modifiedTime: new Date()
+        modifiedTime: new Date(),
       },
-     {
+      {
         id: 12,
         content: '그냥 맛이 좋다',
         rating: 5,
-        modifiedTime: new Date()
+        modifiedTime: new Date(),
       },
-    ]
+    ],
   },
 };
-
 
 const mockStore = getMockStore(stubInitialState);
 
 describe('<MyInfoTab /', () => {
-
-  let myInfoTabOnMainPage, myInfoTabOnDetailPage;
-  let spyGetUser, spyGetSignOut, spyGetReviews, spyPostReview;
+  let myInfoTabOnMainPage; let
+    myInfoTabOnDetailPage;
+  let spyGetUser; let spyGetSignOut; let spyGetReviews; let
+    spyPostReview;
 
   beforeEach(() => {
     myInfoTabOnMainPage = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
-          <MyInfoTab restaurantID={-1}/>
+          <MyInfoTab restaurantID={-1} />
         </ConnectedRouter>
       </Provider>
     );
-    
+
     myInfoTabOnDetailPage = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
-          <MyInfoTab restaurantID={1}/>
+          <MyInfoTab restaurantID={1} />
         </ConnectedRouter>
       </Provider>
     );
 
-
     spyGetUser = jest.spyOn(userActionCreator, 'getUser')
-        .mockImplementation(() => {return dispatch => {};});
+      .mockImplementation(() => (dispatch) => {});
 
-    //TODO SignOut should be implemented!!!
-   // spyGetSignOut = jest.spyOn(userActionCreator, 'getSignOut')
+    // TODO SignOut should be implemented!!!
+    // spyGetSignOut = jest.spyOn(userActionCreator, 'getSignOut')
     //    .mockImplementation(() => {return dispatch => {};});
     spyGetReviews = jest.spyOn(reviewActionCreator, 'getReviews')
-        .mockImplementation(() => {return dispatch => {};});
+      .mockImplementation(() => (dispatch) => {});
     spyPostReview = jest.spyOn(reviewActionCreator, 'postReview')
-        .mockImplementation(() => {return dispatch => {};});
-
+      .mockImplementation(() => (dispatch) => {});
   });
 
-  afterEach(() => {jest.clearAllMocks()});
+  afterEach(() => { jest.clearAllMocks(); });
 
   it('should render without errors', () => {
     const component = mount(myInfoTabOnMainPage);
@@ -95,7 +93,6 @@ describe('<MyInfoTab /', () => {
     expect(wrapper.length).toBe(1);
     expect(upperBar.length).toBe(1);
     expect(wrapperToBeFalse.length).toBe(0);
-
   });
 
   it('should render my review and review input and rating component when page is detail page', () => {
@@ -113,31 +110,26 @@ describe('<MyInfoTab /', () => {
     expect(upperBar.length).toBe(1);
     expect(wrapperToBeFalse.length).toBe(0);
 
-    
-   // expect(myReview.length).toBe(1);   // this should be fixed. why there are three of this component?
+    // expect(myReview.length).toBe(1);   // this should be fixed. why there are three of this component?
     expect(reviewInput.length).toBe(1);
     expect(reviewConfirmButton.length).toBe(1);
     expect(rateStar.length).toBe(1);
 
-    //review input
-    reviewInput.simulate('change', {target: {value: 'test'}});
+    // review input
+    reviewInput.simulate('change', { target: { value: 'test' } });
     const MyInfoInstance = component.find(MyInfoTab.WrappedComponent).instance();
     expect(MyInfoInstance.state.content).toBe('test');
 
-    //review confirm
+    // review confirm
     reviewConfirmButton.simulate('click');
     expect(spyPostReview).toBeCalledTimes(1);
-
-
   });
 
   it('should handle signout', () => {
     const component = mount(myInfoTabOnMainPage);
-    
   });
 
   it('should handle rating', () => {
-  
-  });
 
-})
+  });
+});

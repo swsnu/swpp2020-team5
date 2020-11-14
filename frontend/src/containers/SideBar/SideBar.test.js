@@ -1,51 +1,35 @@
 import React from 'react';
-import SideBar from './SideBar';
 import { mount, shallow } from 'enzyme';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { history } from '../../store/store';
 import { Provider } from 'react-redux';
+import { history } from '../../store/store';
+import SideBar from './SideBar';
 import { getMockStore } from '../../test-utils/mocks';
 
-jest.mock('./MyInfoTab/MyInfoTab', () => {
-  return jest.fn(props => {
-    return (
-      <div className='spyMyInfoTab'>
-        <p>{props.restaurantID}</p>
-      </div>
-    );
-  });
-});
+jest.mock('./MyInfoTab/MyInfoTab', () => jest.fn((props) => (
+  <div className="spyMyInfoTab">
+    <p>{props.restaurantID}</p>
+  </div>
+)));
 
-jest.mock('./LocationTab/LocationTab', () => {
-  return jest.fn(props => {
-    return (
-      <div className='spyLocationTab'>
-        <p>{props.restaurantID}</p>
-      </div>
-    );
-  });
-});
+jest.mock('./LocationTab/LocationTab', () => jest.fn((props) => (
+  <div className="spyLocationTab">
+    <p>{props.restaurantID}</p>
+  </div>
+)));
 
-jest.mock('./FoodCategoryTab/FoodCategoryTab', () => {
-  return jest.fn(props => {
-    return (
-      <div className='spyFoodCategoryTab'>
-        <p>{props.restaurantID}</p>
-      </div>
-    );
-  });
-});
+jest.mock('./FoodCategoryTab/FoodCategoryTab', () => jest.fn((props) => (
+  <div className="spyFoodCategoryTab">
+    <p>{props.restaurantID}</p>
+  </div>
+)));
 
-jest.mock('./PreferenceVectorTab/PreferenceVectorTab', () => {
-  return jest.fn(props => {
-    return (
-      <div className='spyPreferenceVectorTab'>
-        <p>{props.restaurantID}</p>
-      </div>
-    );
-  });
-});
+jest.mock('./PreferenceVectorTab/PreferenceVectorTab', () => jest.fn((props) => (
+  <div className="spyPreferenceVectorTab">
+    <p>{props.restaurantID}</p>
+  </div>
+)));
 
 describe('<SideBar />', () => {
   let sideBar;
@@ -54,21 +38,24 @@ describe('<SideBar />', () => {
       keyword: {},
       restaurant: {},
       user: {},
-      review: {}
+      review: {},
     });
     sideBar = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path='/' exact
-              render={() => <SideBar/>}/>
+            <Route
+              path="/"
+              exact
+              render={() => <SideBar />}
+            />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
-  })
+  });
 
-  afterEach(() => { jest.clearAllMocks() });
+  afterEach(() => { jest.clearAllMocks(); });
 
   it('should render SideBar ', () => {
     const component = mount(sideBar);
@@ -84,7 +71,7 @@ describe('<SideBar />', () => {
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
     expect(wrapper.find('.tab-button-image-line .tab-button').length).toBe(4);
-  
+
     wrapper.find('.tab-button').at(1).simulate('click');
     wrapper = component.find('SideBar');
     expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
@@ -113,31 +100,31 @@ describe('<SideBar />', () => {
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
 
-    expect(() => {wrapper.setState({tabMode: 'invalidMode'})}).toThrow(Error);
+    expect(() => { wrapper.setState({ tabMode: 'invalidMode' }); }).toThrow(Error);
   });
 
   it('should push history by searchWord', () => {
     const component = mount(sideBar);
-    let wrapper = component.find('SideBar');
+    const wrapper = component.find('SideBar');
 
     const spyHistoryPush = jest.spyOn(history, 'push')
-      .mockImplementation((path) => {})
-    wrapper.find('#search-input').simulate('change', {target: {value: 'food'}});
+      .mockImplementation((path) => {});
+    wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
     wrapper.find('#search-button').simulate('click');
-    expect(spyHistoryPush).toHaveBeenCalledWith('/main/food')
-  })
+    expect(spyHistoryPush).toHaveBeenCalledWith('/main/food');
+  });
 
   it('should push history to home and clear searchWord when clicking logo', () => {
     const component = mount(sideBar);
-    let wrapper = component.find('SideBar');
+    const wrapper = component.find('SideBar');
 
     const spyHistoryPush = jest.spyOn(history, 'push')
-      .mockImplementation((path) => {})
-    wrapper.find('#search-input').simulate('change', {target: {value: 'food'}});
+      .mockImplementation((path) => {});
+    wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
     wrapper.find('#logo-button').simulate('click');
-    expect(spyHistoryPush).toHaveBeenCalledWith('/main/')
-    expect(wrapper.state().searchWord).toBe('')
-  })
+    expect(spyHistoryPush).toHaveBeenCalledWith('/main/');
+    expect(wrapper.state().searchWord).toBe('');
+  });
 
   it('should render tabs when clicking tab-name-button', () => {
     const component = mount(sideBar);
@@ -147,7 +134,7 @@ describe('<SideBar />', () => {
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
     expect(wrapper.find('.tab-button-image-line .tab-button').length).toBe(4);
-  
+
     wrapper.find('#location-tab-name-button').simulate('click');
     wrapper = component.find('SideBar');
     expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
@@ -176,5 +163,4 @@ describe('<SideBar />', () => {
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
   });
-
 });
