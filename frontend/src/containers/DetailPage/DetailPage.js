@@ -1,59 +1,63 @@
 import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import * as actionCreators from '../../store/actions/index';
 import ReviewList from './ReviewList/ReviewList';
 import Keywords from '../../components/DetailPage/Keywords/Keywords';
-import * as actionCreators from '../../store/actions/index';
 import SideBar from '../SideBar/SideBar';
-import './DetailPage.css';
-import UpArrow from '../../images/arrow_up.png';
+
 import DownArrow from '../../images/arrow_down.png';
+import UpArrow from '../../images/arrow_up.png';
+import './DetailPage.css';
 
 class DetailPage extends Component {
   componentDidMount() {
-    this.props.onGetRestaurantDetail(parseInt(this.props.match.params.id));
+    this.props.onGetRestaurantDetail(parseInt(this.props.match.params.id, 10));
   }
 
   render() {
+    const { selectedRestaurant } = this.props;
     let text; let image;
-    if (this.props.selectedRestaurant.difference > 0) {
-      text = `${this.props.selectedRestaurant.difference}점 상승!`;
-      image = <img src={UpArrow} id="arrow" />;
-    } else if (this.props.selectedRestaurant.difference < 0) {
-      text = `${-this.props.selectedRestaurant.difference}점 하락!`;
-      image = <img src={DownArrow} id="arrow" />;
+
+    if (selectedRestaurant.difference > 0) {
+      text = `${selectedRestaurant.difference}점 상승!`;
+      image = <img src={UpArrow} id="arrow" alt="upArrow" />;
+    } else if (selectedRestaurant.difference < 0) {
+      text = `${-selectedRestaurant.difference}점 하락!`;
+      image = <img src={DownArrow} id="arrow" alt="downArrow" />;
     } else text = '변동없음!';
 
     let category = null;
-    for (const i in this.props.selectedRestaurant.category) {
-      if (category === null) category = this.props.selectedRestaurant.category[i];
-      else category += `/${this.props.selectedRestaurant.category[i]}`;
-    }
-    const menu = this.props.selectedRestaurant.menu.map((el) => (
+    Object.keys(selectedRestaurant.category).forEach((cat) => {
+      if (category === null) category = selectedRestaurant.category[cat];
+      else category += `${selectedRestaurant.category[cat]}`;
+    });
+    const menu = selectedRestaurant.menu.map((el) => (
       <p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {el}
       </p>
     ));
-    const imgList = this.props.selectedRestaurant.img_url_list.map((el) => <img src={el} width="280" height="200" />);
+    const imgList = selectedRestaurant.img_url_list.map((el) => <img src={el} width="280" height="200" alt="thumbnail" />);
     return (
       <div>
         <div className="sideBar">
-          <SideBar restaurantID={parseInt(this.props.match.params.id)} />
+          <SideBar restaurantID={parseInt(this.props.match.params.id, 10)} />
         </div>
         <div className="detailPage">
           <div className="right">
             <div className="restaurant" id="detail">
               <div className="image">
-                <img src={this.props.selectedRestaurant.img_url} width="280" height="230" />
+                <img src={selectedRestaurant.img_url} width="280" height="230" alt="thumbnail" />
               </div>
               <div className="imageright">
                 <div className="up" id="new">
                   <div className="title">
-                    {this.props.selectedRestaurant.title}
+                    {selectedRestaurant.title}
                   </div>
                   <div className="rate">
-                    {this.props.selectedRestaurant.rate}
+                    {selectedRestaurant.rate}
                   </div>
                   <div className="diff">
                     {image}
@@ -75,7 +79,7 @@ class DetailPage extends Component {
                   </p>
                   <p>
                     영업시간&nbsp;&nbsp;&nbsp;
-                    {this.props.selectedRestaurant.time}
+                    {selectedRestaurant.time}
                   </p>
                   <p>
                     메뉴&nbsp;&nbsp;&nbsp;
@@ -87,14 +91,14 @@ class DetailPage extends Component {
 
             </div>
             <div className="keywords">
-              <Keywords keywords={this.props.selectedRestaurant.keywords} />
+              <Keywords keywords={selectedRestaurant.keywords} />
             </div>
             <div className="moreImage">
               {imgList}
 
             </div>
             <div className="reviewlist">
-              <ReviewList restaurantID={this.props.selectedRestaurant.id} />
+              <ReviewList restaurantID={selectedRestaurant.id} />
             </div>
           </div>
         </div>
