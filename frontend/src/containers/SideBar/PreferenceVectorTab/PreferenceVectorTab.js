@@ -1,17 +1,20 @@
+import Slider from '@material-ui/core/Slider';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions/actionTypes';
+
 import * as actionCreators from '../../../store/actions/index';
 import './PreferenceVectorTab.css';
-import Slider from '@material-ui/core/Slider';
 
 class PreferenceVectorTab extends Component {
-  state = {
-    currentPreferenceVector: {
-      factor_one: 1,
-      factor_two: 3,
-      factor_three: 5,
-    },
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPreferenceVector: {
+        factor_one: 1,
+        factor_two: 3,
+        factor_three: 5,
+      },
+    };
   }
 
   componentDidMount() {
@@ -19,7 +22,7 @@ class PreferenceVectorTab extends Component {
     // this.props.onGetPreferenceVector();
 
     // get the current user from store and set the state with it.
-    this.setState({ preferenceVector: this.props.currentPreferenceVector });
+    // this.setState({ preferenceVector: this.props.currentPreferenceVector });
   }
 
   onClickConfirmHandler = () => {
@@ -27,9 +30,9 @@ class PreferenceVectorTab extends Component {
   }
 
   onChangeFactor = (event, value) => {
-    const temp_preferenceVector = this.state.currentPreferenceVector;
-    temp_preferenceVector[event.target.id] = Math.round(value);
-    this.setState({ currentPreferenceVector: temp_preferenceVector });
+    const { currentPreferenceVector } = this.state;
+    currentPreferenceVector[event.target.id] = Math.round(value);
+    this.setState({ currentPreferenceVector });
   }
 
   render() {

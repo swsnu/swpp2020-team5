@@ -110,7 +110,8 @@ describe('<MyInfoTab /', () => {
     expect(upperBar.length).toBe(1);
     expect(wrapperToBeFalse.length).toBe(0);
 
-    // expect(myReview.length).toBe(1);   // this should be fixed. why there are three of this component?
+    // expect(myReview.length).toBe(1);
+    // this should be fixed. why there are three of this component?
     expect(reviewInput.length).toBe(1);
     expect(reviewConfirmButton.length).toBe(1);
     expect(rateStar.length).toBe(1);
