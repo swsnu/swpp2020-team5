@@ -13,14 +13,17 @@ import checkImage from '../../../images/check.png';
 import './CreatePreferenceVector.css';
 
 class CreatePreferenceVector extends Component {
-  state = {
-    foodList: [false, false, false, false, false, false],
+  constructor(props) {
+    super(props);
+    this.state = {
+      foodList: [false, false, false, false, false, false],
+    };
   }
 
   onClickFoodHandler = (foodIndex) => {
-    const newFoodList = this.state.foodList;
-    newFoodList[foodIndex] = !newFoodList[foodIndex];
-    this.setState({ foodList: newFoodList });
+    const { foodList } = this.state;
+    foodList[foodIndex] = !foodList[foodIndex];
+    this.setState({ foodList });
   }
 
   onClickConfirmHandler = () => {
@@ -40,10 +43,11 @@ class CreatePreferenceVector extends Component {
     const foodCaptionList = ['해산물', '피자', '떡볶이', '스테이크', '샐러드', '오꼬노미야끼'];
     const foodImages = [];
     const foodListLength = this.state.foodList.length;
-    for (let i = 0; i < foodListLength; i++) {
+    for (let i = 0; i < foodListLength; i += 1) {
       foodImages.push(
         <div className="image-and-caption">
           <img
+            alt="food-checked"
             className={this.state.foodList[i]
               ? 'food-image-checked'
               : 'food-image'}
@@ -51,7 +55,7 @@ class CreatePreferenceVector extends Component {
             src={foodImageList[i]}
           />
 
-          {this.state.foodList[i] ? <img className="check-image" onClick={() => this.onClickFoodHandler(i)} src={checkImage} /> : <></> }
+          {this.state.foodList[i] ? <img alt="check" className="check-image" onClick={() => this.onClickFoodHandler(i)} src={checkImage} /> : <></> }
           <text>{foodCaptionList[i]}</text>
         </div>,
       );

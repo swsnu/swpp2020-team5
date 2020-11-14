@@ -108,7 +108,7 @@ describe('<SideBar />', () => {
     const wrapper = component.find('SideBar');
 
     const spyHistoryPush = jest.spyOn(history, 'push')
-      .mockImplementation((path) => {});
+      .mockImplementation((path) => path);
     wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
     wrapper.find('#search-button').simulate('click');
     expect(spyHistoryPush).toHaveBeenCalledWith('/main/food');
@@ -119,7 +119,7 @@ describe('<SideBar />', () => {
     const wrapper = component.find('SideBar');
 
     const spyHistoryPush = jest.spyOn(history, 'push')
-      .mockImplementation((path) => {});
+      .mockImplementation((path) => path);
     wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
     wrapper.find('#logo-button').simulate('click');
     expect(spyHistoryPush).toHaveBeenCalledWith('/main/');

@@ -70,11 +70,11 @@ describe('<MyReview />', () => {
       .mockImplementation((id, info) => (dispatch) => {});
 
     const DATE_TO_USE = new Date('2016');
-    const _Date = Date;
+    const mockDate = Date;
     global.Date = jest.fn(() => DATE_TO_USE);
-    global.Date.UTC = _Date.UTC;
-    global.Date.parse = _Date.parse;
-    global.Date.now = _Date.now;
+    global.Date.UTC = mockDate.UTC;
+    global.Date.parse = mockDate.parse;
+    global.Date.now = mockDate.now;
 
     expect(wrapper.find('#review-edit-done-button').length).toBe(1);
     wrapper.find('#review-edit-done-button').simulate('click');
