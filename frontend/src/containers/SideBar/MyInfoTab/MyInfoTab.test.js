@@ -46,7 +46,6 @@ const stubInitialState = {
 
 const mockStore = getMockStore(stubInitialState);
 
-
 describe('<MyInfoTab /', () => {
   let myInfoTabOnMainPage; let
     myInfoTabOnDetailPage;
