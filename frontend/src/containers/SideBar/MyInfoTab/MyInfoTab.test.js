@@ -9,6 +9,12 @@ import * as reviewActionCreator from '../../../store/actions/reviewActions/revie
 import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
 
+jest.mock('../../../components/SideBar/MyReview/MyReview', () => jest.fn((props) => (
+  <div className="MyReview">
+    <p>{props.restaurantID}</p>
+  </div>
+)));
+
 const stubInitialState = {
   user: {
     id: 0,
@@ -39,6 +45,8 @@ const stubInitialState = {
 };
 
 const mockStore = getMockStore(stubInitialState);
+
+jest.mock
 
 describe('<MyInfoTab /', () => {
   let myInfoTabOnMainPage; let
@@ -110,7 +118,7 @@ describe('<MyInfoTab /', () => {
     expect(upperBar.length).toBe(1);
     expect(wrapperToBeFalse.length).toBe(0);
 
-    // expect(myReview.length).toBe(1);
+    expect(myReview.length).toBe(2);
     // this should be fixed. why there are three of this component?
     expect(reviewInput.length).toBe(1);
     expect(reviewConfirmButton.length).toBe(1);
