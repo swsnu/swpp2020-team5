@@ -1,40 +1,33 @@
 matrix:
   include:
-    - language: node_js
-      node_js: '12'
-      cache:
-        - yarn: true
-      before_install:
-        - cd frontend
-      install:
-        - yarn
-        - yarn add coveralls
-      script:
-        - ./node_modules/.bin/eslint src/
-        - yarn test --coverage --watchAll=false
-        - where sonar-scanner
-        - cd .. && sonar-scanner
-      after_success:
-        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-
-    - language: python
-      python: 3.7
-      addons:
+    - addons:
         sonarcloud:
           organization: swsnu
           token:
             secure: "ZzZrEBnCja4aJjGZsLOnZCOxaxBA7Vl0O5A1vDX58xZ0H8Kn5sWp8GjmPi+k1nTx+DFq/hW/7fpWnN2hj7JZumRvgzREP1HW+WyRxH4GAKpex/pJNMOkrF92d486fo35E9wwZv5bukpXX43Sk5DzzefE+mWntjAphBEyEda39NcSWMCfmpDrvWHausNm8rzt0hqhBi2hH8lDtSFqey57k/Zo9V5ZwZaz2wHkMjeiMndtED0i4e/hvRfQtHtt7b+EjSCfWYzlvdE2l8FL5U08A5eyvrrXc32PDCVcl241Ck8pZ8AgOrJ4lnehxLThBlxYQDw2bEgUmKHjb9VFNJf8G2qIfQg2qQkwwuG/Jc7s99sX8NKVhdEZz5bBvZgtiiprX0UvcGIFZLEVtO7NaQYfBAwBiMgMbeQbSae2ppMBxSLvFMf0bubWDCMKZE9j/iE/ZFWT50eg1NY5yczXLzTDw3BVnNQ1Q/BFrBvBFC1dBMrEx1m0HEof8p6nYFcpjALiHenXEACB/nfj2ZQugHggtlimWQS6Dqz0zMv+K90asvUofY/nGHDMAoMW4feFu9nzntEQogQPKBGpl2s5cBhGMVwzVmmwN0NnZF7lc3QqXnfRc4qg59RiqykFBQbxj0atEIQL2zum+XFAGMa3sCkKTLBiFlRnlpFGbf6MBY+h3lc="
+      node_js: '12'
+      python: 3.7
       cache:
+        - yarn: true
         - pip: true
       before_install:
-        - cd backend
       install:
+        - cd frontend
+        - yarn
+        - yarn add coveralls
+        - cd ../backend
         - pip install -r requirements.txt
+        - cd ..
       script:
+        - cd frontend
+        - ./node_modules/.bin/eslint src/
+        - yarn test --coverage --watchAll=false
+        - cd ../backend
         - pylint **/*.py --load-plugins pylint_django
         - coverage run --source='.' manage.py test
         - coverage xml
-        - cd ..
-        - sonar-scanner
+        - cd .. && sonar-scanner
       after_success:
-        - coveralls
+        - cat ./frontend/coverage/lcov.info | ./frontend/node_modules/coveralls/bin/coveralls.js
+        - ./backend/coveralls
+
