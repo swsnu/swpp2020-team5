@@ -8,6 +8,7 @@ matrix:
       node_js: '12'
       language: node_js
       python: 3.7
+      dist: bionic
       cache:
         - yarn: true
         - pip: true
@@ -16,19 +17,12 @@ matrix:
         - cd frontend
         - yarn install
         - yarn add coveralls
-        - cd ../backend
-        - pip install -r requirements.txt
         - cd ..
       script:
         - cd frontend
         - ./node_modules/.bin/eslint src/
         - yarn test --coverage --watchAll=false
-        - cd ../backend
-        - pylint **/*.py --load-plugins pylint_django
-        - coverage run --source='.' manage.py test
-        - coverage xml
         - cd .. && sonar-scanner
       after_success:
         - cat ./frontend/coverage/lcov.info | ./frontend/node_modules/coveralls/bin/coveralls.js
-        - ./backend/coveralls
 
