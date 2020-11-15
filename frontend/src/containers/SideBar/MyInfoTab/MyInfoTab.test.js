@@ -46,7 +46,6 @@ const stubInitialState = {
 
 const mockStore = getMockStore(stubInitialState);
 
-jest.mock
 
 describe('<MyInfoTab /', () => {
   let myInfoTabOnMainPage; let
