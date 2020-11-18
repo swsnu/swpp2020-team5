@@ -6,8 +6,14 @@ import { ConnectedRouter } from 'connected-react-router';
 import MyInfoTab from './MyInfoTab';
 import * as userActionCreator from '../../../store/actions/userActions/userActions';
 import * as reviewActionCreator from '../../../store/actions/reviewActions/reviewActions';
-import { getMockStore } from '../../../test-utils/mocks';
+import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
+
+jest.mock('../../../components/SideBar/MyReview/MyReview', () => jest.fn((props) => (
+  <div className="MyReview">
+    <p>{props.restaurantID}</p>
+  </div>
+)));
 
 const stubInitialState = {
   user: {
@@ -110,7 +116,8 @@ describe('<MyInfoTab /', () => {
     expect(upperBar.length).toBe(1);
     expect(wrapperToBeFalse.length).toBe(0);
 
-    // expect(myReview.length).toBe(1);   // this should be fixed. why there are three of this component?
+    expect(myReview.length).toBe(2);
+    // this should be fixed. why there are three of this component?
     expect(reviewInput.length).toBe(1);
     expect(reviewConfirmButton.length).toBe(1);
     expect(rateStar.length).toBe(1);

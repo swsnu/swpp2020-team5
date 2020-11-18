@@ -16,13 +16,13 @@ class MainPage extends Component {
     let order = 0;
     const list = this.props.storedList.map((el) => {
       let pos = false;
-      for (const i in el.category) {
-        const tmp = el.category[i];
+      Object.keys(el.category).forEach((category) => {
+        const tmp = el.category[category];
         if (this.props.foodCategory[tmp] === true) pos = true;
-      }
+      });
 
       if (pos === true) {
-        order++;
+        order += 1;
 
         return (
           <RestaurantSummary
@@ -36,6 +36,7 @@ class MainPage extends Component {
           />
         );
       }
+      return null;
     });
 
     return (

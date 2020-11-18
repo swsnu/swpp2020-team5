@@ -1,3 +1,4 @@
+
 from django.http import HttpResponse, HttpResponseNotAllowed,JsonResponse,HttpResponseBadRequest
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
@@ -7,8 +8,11 @@ from json import JSONDecodeError
 from .models import Article,Comment
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Restaurant
-# Create your views here.
 
+# Create your views here.
+#레스토랑에 커스터마이즈드 평점 계산해서 넣어줘야함
+#리스폰스 바꾸기(포린키로 되어있을 경우 어떻게 나오는지 그리고 제이슨 )
+#세션에 유저 정보있는지 확인하기
 def searched_restaurants(request,word) :
     if request.User.is_authenticated == False :
         return HttpResponse(status = 401)
@@ -41,7 +45,7 @@ def restaurant(request,id) :
             return JsonResponse(restaurant, safe = False, status = 200)
     else :
         return HttpResponseBadRequest(['GET'])
-
+def 
 
 
     

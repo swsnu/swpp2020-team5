@@ -4,7 +4,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import userReducer from './store/reducers/userReducer/userReducer.js';
+import userReducer from './store/reducers/userReducer/userReducer';
 import store, { history } from './store/store';
 import * as serviceWorker from './serviceWorker';
 import App from './App';

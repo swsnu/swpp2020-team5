@@ -8,9 +8,12 @@ import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
 
 class MyInfoTab extends Component {
-  state = {
-    rating: 0,
-    content: '',
+  constructor(props) {
+    super(props);
+    this.state = {
+      rating: 0,
+      content: '',
+    };
   }
 
   componentDidMount() {
@@ -23,7 +26,10 @@ class MyInfoTab extends Component {
   }
 
   onClickConfirmHandler = (event) => {
-    this.props.onPostReview(this.props.restaurantID, this.state.content, this.state.rating, new Date());
+    this.props.onPostReview(this.props.restaurantID,
+      this.state.content,
+      this.state.rating,
+      new Date());
     this.setState({ content: '' });
   }
 
@@ -70,20 +76,21 @@ class MyInfoTab extends Component {
       />
     );
 
-    // if current page is not Mainpage, myInfoTab should show onDetailPage. otherwise, should show onMainPage
+    // if current page is not Mainpage, myInfoTab should show onDetailPage.
+    // Otherwise, should show onMainPage
     if (this.props.restaurantID !== -1) {
-      myReview = this.props.myReviewList.map((review) =>
-
-        // let time = review.modifiedTime.toLocaleDateString(); //for parsing time object
-        (// TODO It should be changed into <Review> component when the component is implemented.
-          <MyReview
-            className="Review"
-            reviewID={review.id}
-            content={review.content}
-            rating={review.rating}
-            modifiedTime={review.modifiedTime.toLocaleDateString()}
-          />
-        ));
+      myReview = this.props.myReviewList.map((review) => (
+        // let time = review.modifiedTime.toLocaleDateString();
+        // for parsing time object
+        // TODO: It should be changed into <Review> component when the component is implemented.
+        <MyReview
+          className="Review"
+          reviewID={review.id}
+          content={review.content}
+          rating={review.rating}
+          modifiedTime={review.modifiedTime.toLocaleDateString()}
+        />
+      ));
 
       onDetailPage = (
         <div className="on-detail-page">
@@ -165,12 +172,14 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(actionCreators.getReviews(restaurantID));
     }
   },
-  onPostReview: (restaurantID, content, rating, modifiedTime) => dispatch(actionCreators.postReview({
-    restaurantID,
-    content,
-    rating,
-    modifiedTime,
-  })),
+  onPostReview: (restaurantID, content, rating, modifiedTime) => dispatch(
+    actionCreators.postReview({
+      restaurantID,
+      content,
+      rating,
+      modifiedTime,
+    }),
+  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyInfoTab);

@@ -11,26 +11,31 @@ class RestaurantSummary extends Component {
 
   render() {
     let categorylist = null;
-    for (const i in this.props.category) {
-      const category = this.props.category[i];
+    Object.keys(this.props.category).forEach((key) => {
+      const category = this.props.category[key];
       if (categorylist === null) categorylist = category;
       else categorylist += `ㅣ${category}`;
-    }
+    });
     const factors = this.props.preferenceVector;
     const topFactors = [];
-    for (const factor in factors) {
+    Object.keys(this.props.preferenceVector).forEach((factor) => {
       topFactors.push(<VectorFactor
         key={factor}
         factor={factor}
         weight={factors[factor]}
       />);
-    }
+    });
     return (
       <div className="summary">
         <div className="order">
           {this.props.order}
         </div>
-        <img src={this.props.img_src/* img_url */} className="image" onClick={() => this.onClickRestaurantHandler(this.props.id)} />
+        <img
+          alt="restautantThumbnail"
+          src={this.props.img_src/* img_url */}
+          className="image"
+          onClick={() => this.onClickRestaurantHandler(this.props.id)}
+        />
         <div className="text">
           <div className="head">
             <div className="rate" onClick={() => this.onClickRestaurantHandler(this.props.id)}>

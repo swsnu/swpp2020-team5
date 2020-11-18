@@ -13,7 +13,7 @@
   border-top-right-radius: 2em;
   border-bottom-left-radius: 2em;
   border-bottom-right-radius: 2em;
-  z-value: 0;
+  z-index: 0;
 }
 .CreatePreferenceVector .box .signup {
   font-size: 30pt;
@@ -74,7 +74,7 @@
   margin: 20px 0 0 -270px;
   cursor: pointer;
   position: absolute;
-  z-value: -1;
+  z-index: -1;
 
 }
 

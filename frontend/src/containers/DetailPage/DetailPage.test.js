@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { connectRouter, ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import DetailPage from './DetailPage';
-import { getMockStore } from '../../test-utils/mocks';
+import getMockStore from '../../test-utils/mocks';
 import { history } from '../../store/store';
 import * as actionCreators from '../../store/actions/index';
 

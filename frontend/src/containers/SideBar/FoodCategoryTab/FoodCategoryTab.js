@@ -7,27 +7,30 @@ import * as actionCreators from '../../../store/actions/index';
 import img from '../../../images/logo.png';
 
 class FoodCategoryTab extends Component {
-  state = {
-    foodCategory: {
-      한식: false,
-      양식: false,
-      중식: false,
-      일식: false,
-      카페: false,
-      패스트푸드: false,
-      베트남음식: false,
-      분식: false,
-      디저트: false,
-      주점: false,
-    },
+  constructor(props) {
+    super(props);
+    this.state = {
+      foodCategory: {
+        한식: false,
+        양식: false,
+        중식: false,
+        일식: false,
+        카페: false,
+        패스트푸드: false,
+        베트남음식: false,
+        분식: false,
+        디저트: false,
+        주점: false,
+      },
+    };
   }
 
   componentDidMount() {
     this.props.onGetFoodCategory();
     let changed = false;
-    for (const category in this.props.foodCategory) {
+    Object.keys(this.props.foodCategory).forEach((category) => {
       if (this.props.foodCategory[category] === false) { changed = true; }
-    }
+    });
     if (changed === true) this.setState({ foodCategory: this.props.foodCategory });
   }
 
@@ -58,22 +61,22 @@ class FoodCategoryTab extends Component {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTM8slOqomlXtNTIcceB4rW5ovYw2qwTTNVTQ&usqp=CAU'];
     const categorylist = [];
     let id = 0;
-    for (const category in this.state.foodCategory) {
+    Object.keys(this.state.foodCategory).forEach((category) => {
       categorylist.push(
         <div className="category">
           <img
             src={foodimg[id]}
             className={this.state.foodCategory[category]
               ? 'checked' : 'unchecked'}
+            alt="foodImage"
             width="50"
             height="50"
             onClick={() => this.postClickFoodCategoryHandler(category)}
           />
-
         </div>,
       );
-      id++;
-    }
+      id += 1;
+    });
     return (
       <div className="foodCategory">
         <text>원하는 음식 종류를 고르세요!</text>
@@ -93,7 +96,9 @@ const mapStateToProps = (state) => ({ foodCategory: state.us.foodCategory });
 
 // we can assume this popup occurs when the user is logging in
 const mapDispatchToProps = (dispatch) => ({
-  onEditUserFoodCategory: (foodCategory) => dispatch(actionCreators.editUserFoodCategory(foodCategory)),
+  onEditUserFoodCategory: (foodCategory) => dispatch(
+    actionCreators.editUserFoodCategory(foodCategory),
+  ),
   onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
 
 });
