@@ -129,7 +129,7 @@ class Review(models.Model):
     content = models.CharField(max_length=1000)
     rating = models.FloatField()
     date = models.DateTimeField()
-    sourceSite = models.CharField(max_length=10) # one of naver, kakao or atm.
+    site = models.CharField(max_length=10) # one of naver, kakao or atm.
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
