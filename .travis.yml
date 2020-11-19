@@ -18,6 +18,14 @@ matrix:
         - yarn install
         - yarn add coveralls
         - cd ..
+        - pip install virtualenv
+        - virtualenv --python=python3.7 venv
+        - source venv/bin/activate
+        - pip install django
+        - cd backend
+        - python manage.py makemigrations ATM
+        - python manage.py migrate
+        - cd ..
       script:
         - cd frontend
         - ./node_modules/.bin/eslint src/

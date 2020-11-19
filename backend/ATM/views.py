@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
+# Create your views here.
 def index():
     return
-# Create your views here.
+
+
+
