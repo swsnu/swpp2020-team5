@@ -1,10 +1,14 @@
 export {
   getUser,
-  editUser,
   postSignIn,
-  changeLocation,
-  editUserFoodCategory,
-  putPreferenceVector,
+  postSignUp,
+  getSignOut,
+  getSearchLocation,
+  getFoodCategory,
+  getPreferenceVector,
+  editSearchLocation,
+  editFoodCategory,
+  editPreferenceVector,
 } from './userActions/userActions';
 
 export {

@@ -16,22 +16,24 @@ class CreatePreferenceVector extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      foodList: [false, false, false, false, false, false],
+      selectedFoods: [false, false, false, false, false, false],
     };
   }
 
   onClickFoodHandler = (foodIndex) => {
-    const { foodList } = this.state;
-    foodList[foodIndex] = !foodList[foodIndex];
-    this.setState({ foodList });
+    const { selectedFoods } = this.state;
+    selectedFoods[foodIndex] = !selectedFoods[foodIndex];
+    this.setState({ selectedFoods });
   }
 
   onClickConfirmHandler = () => {
+    const { username, email, password } = this.props;
+    const { selectedFoods } = this.state;
     this.props.onPostSignUp({
-      username: this.props.username,
-      email: this.props.email,
-      password: this.props.password,
-      foodList: this.state.foodList,
+      username,
+      email,
+      password,
+      selectedFoods,
     });
     this.props.history.push('/sign-in/');
   }
@@ -42,20 +44,20 @@ class CreatePreferenceVector extends Component {
     const foodImageList = [food1, food2, food3, food4, food5, food6];
     const foodCaptionList = ['해산물', '피자', '떡볶이', '스테이크', '샐러드', '오꼬노미야끼'];
     const foodImages = [];
-    const foodListLength = this.state.foodList.length;
-    for (let i = 0; i < foodListLength; i += 1) {
+    const selectedFoodsLength = this.state.selectedFoods.length;
+    for (let i = 0; i < selectedFoodsLength; i += 1) {
       foodImages.push(
         <div className="image-and-caption">
           <img
             alt="food-checked"
-            className={this.state.foodList[i]
+            className={this.state.selectedFoods[i]
               ? 'food-image-checked'
               : 'food-image'}
             onClick={() => this.onClickFoodHandler(i)}
             src={foodImageList[i]}
           />
 
-          {this.state.foodList[i] ? <img alt="check" className="check-image" onClick={() => this.onClickFoodHandler(i)} src={checkImage} /> : <></> }
+          {this.state.selectedFoods[i] ? <img alt="check" className="check-image" onClick={() => this.onClickFoodHandler(i)} src={checkImage} /> : <></> }
           <text>{foodCaptionList[i]}</text>
         </div>,
       );

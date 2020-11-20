@@ -6,10 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
-def my_name(request):
+def mine(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             response_dict = {
+                'id': request.user.id,
                 'name': request.user.username,
             }
             return JsonResponse(response_dict,status=200)
@@ -23,7 +24,7 @@ def preference_vector():
         if request.user.is_authenticated:
             user = request.user.profile
             pref_vec = user.preference_vector
-            attr_list = get_attributes(pref_vec)
+            attr_list = get_preference_attributes(pref_vec)
             response_dict = {}
             for attr in attr_list:
                 response_dict[attr] = pref_vec[attr]
@@ -34,7 +35,7 @@ def preference_vector():
         if request.user.is_authenticated:
             user = request.user.profile
             old_pref_vec = user.preference_vector
-            attr_list = get_attributes(old_pref_vec)
+            attr_list = get_preference_attributes(old_pref_vec)
             try:
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
@@ -56,7 +57,7 @@ def search_location():
         if request.user.is_authenticated:
             user = request.user.profile
             search_location = user.search_location
-            attr_list = get_attributes(search_location)
+            attr_list = get_preference_attributes(search_location)
             response_dict = {}
             for attr in attr_list:
                 response_dict[attr] = search_location[attr]
@@ -67,7 +68,7 @@ def search_location():
         if request.user.is_authenticated:
             user = request.user.profile
             search_location = user.search_location
-            attr_list = get_attributes(search_location)
+            attr_list = get_preference_attributes(search_location)
             try:
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
@@ -89,7 +90,7 @@ def food_category():
         if request.user.is_authenticated:
             user = request.user.profile
             food_category = user.food_category
-            attr_list = get_attributes(food_category)
+            attr_list = get_preference_attributes(food_category)
             response_dict = {}
             for attr in attr_list:
                 response_dict[attr] = food_category[attr]
@@ -100,7 +101,7 @@ def food_category():
         if request.user.is_authenticated:
             user = request.user.profile
             food_category = user.food_category
-            attr_list = get_attributes(food_category)
+            attr_list = get_preference_attributes(food_category)
             try:
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
@@ -115,13 +116,6 @@ def food_category():
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET','PUT'])n
+        return HttpResponseNotAllowed(['GET','PUT'])
 
-def get_attributes(object):
-    no_need_attr = ['_state', 'id']
-    attr_list = list(object.__dict__.keys())
-    new_attr_list = []
-    for attr in attr_list:
-        if attr_list not in no_need_attr:
-            new_attr_list.push(attr)
-    return new_attr_list
+

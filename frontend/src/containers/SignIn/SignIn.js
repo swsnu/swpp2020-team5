@@ -24,7 +24,7 @@ class SignIn extends Component {
     const { password } = this.state;
     const { email } = this.state;
 
-    onPostSignIn(email, password);
+    onPostSignIn({ email, password });
     history.push('/main');
   }
 
@@ -88,8 +88,8 @@ const mapStatetoProps = () => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPostSignIn: (email, password) => {
-    dispatch(actionCreators.postSignIn(email, password));
+  onPostSignIn: (userInfo) => {
+    dispatch(actionCreators.postSignIn(userInfo));
   },
 });
 
