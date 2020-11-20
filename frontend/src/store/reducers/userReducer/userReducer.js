@@ -50,17 +50,14 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USER:
       return { ...state, selectedUser: action.target };
-    case actionTypes.PUT_FOODCATEGORY:
+    case actionTypes.GET_FOOD_CATEGORY:
+    case actionTypes.EDIT_FOOD_CATEGORY:
       return { ...state, foodCategory: action.target };
-    case actionTypes.CHANGE_LOCATION:
-      return { ...state, searchLocation: action.target };
-    case actionTypes.PUT_PREFERENCE_VECTOR:
-      return { ...state, preferenceVector: action.target };
-    case actionTypes.GET_FOODCATEGORY:
-      return { ...state, foodCategory: action.target };
-    case actionTypes.GET_LOCATION:
+    case actionTypes.GET_SEARCH_LOCATION:
+    case actionTypes.EDIT_SEARCH_LOCATION:
       return { ...state, searchLocation: action.target };
     case actionTypes.GET_PREFERENCE_VECTOR:
+    case actionTypes.EDIT_PREFERENCE_VECTOR:
       return { ...state, preferenceVector: action.target };
     default:
       break;
