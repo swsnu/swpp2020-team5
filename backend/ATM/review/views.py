@@ -11,8 +11,6 @@ from .models import Review, Restaurant, Profile
 from datetime import datetime
 
 
-def index():
-    return
 # Create your views here.
 def get_other_reviews(request, restaurant_id):
     if request.user.is_authenticated:
