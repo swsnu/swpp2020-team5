@@ -1,6 +1,8 @@
-# import sys
-# sys.path.append('/home/mushypeas/workspace/project/backend/')
-# from ATM.models import Restaurant
+import sys
+sys.path.append('/home/mushypeas/workspace/project/backend/')
+sys.path.append('/home/mushypeas/workspace/swpp/lib/python3.8/site-packages')
+print(sys.path)
+from ATM.models import Restaurant
 
 # from selenium.common.exceptions import ElementClickInterceptedException
 # from selenium.common.exceptions import ElementNotInteractableException
@@ -21,14 +23,30 @@ import json
 import time
 
 
-browser = webdriver.Chrome('backend/crawling/chromedriver')
-browser.implicitly_wait(3)
+driver = webdriver.Chrome('backend/crawling/chromedriver86')
+# driver = webdriver.Chrome('backend/crawling/chromedriver87')
+driver.implicitly_wait(3)
 url = 'https://map.kakao.com/'
-browser.get(url)
-browser.find_element_by_id("search.keyword.query").send_keys('샤로수길 음식점' + Keys.RETURN)
-links = browser.find_elements_by_class_name("moreview")
+driver.get(url)
+driver.find_element_by_id("search.keyword.query").send_keys('샤로수길 음식점' + Keys.RETURN)
+links = driver.find_elements_by_class_name("moreview")
 restaurants = []
-ActionChains(browser).click(links[0]).perform() # don't know why but it doesn't work without this
+ActionChains(driver).click(links[0]).perform() # don't know why but it doesn't work without this
+# for each restaurant
 for link in links:
   restaurant = {}
-  ActionChains(browser).click(link).perform()
+  restaurant['kakaoLink'] = link.get_attribute('href')
+  ActionChains(driver).click(link).perform()
+  # driver.switch_to.window(driver.window_handles[1])
+  driver.switch_to_window(driver.window_handles[1])
+  # fetch menus
+  menus = driver.find_elements_by_class_name("info_menu")
+  menu = {}
+  for _menu in menus:
+    menu_name = _menu.find_element_by_class_name("loss_word").text
+    menu_price = _menu.find_element_by_class_name("price_menu").text
+    menu[menu_name] = menu_price
+  restaurant['menu'] = menus
+  # fetch open time
+
+  # restaurant['oepnTime'] = 
