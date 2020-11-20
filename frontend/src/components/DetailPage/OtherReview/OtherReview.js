@@ -12,7 +12,6 @@ class OtherReview extends Component {
   }
 
   onClickContentHandler = () => {
-    // TODO this.props.id를 전달해주는 걸로 수정해야 제대로 작동할 것임.  //이제 없어도 됨.
     if (this.state.isSummary) {
       this.setState({ isSummary: false });
     } else {
