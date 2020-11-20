@@ -164,7 +164,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeLocation: (location) => {
-    dispatch(actionCreators.changeLocation(location));
+    dispatch(actionCreators.editSearchLocation(location));
   },
 });
 

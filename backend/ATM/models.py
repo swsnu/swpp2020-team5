@@ -7,6 +7,11 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class FoodCategory(models.Model):
+    """
+    Below function is for using model like this.
+    fc = FoodCategory()
+    fc["한식"] = true
+    """
     def __getitem__(self, key):
         return getattr(self, key)
     한식 = models.BooleanField()
@@ -19,9 +24,14 @@ class FoodCategory(models.Model):
 class Location(models.Model):
     x = models.FloatField()
     y = models.FloatField()
-    addressName = models.CharField(max_length=100)
+    address_name = models.CharField(max_length=100)
 
 class PreferenceVector(models.Model):
+    """
+    Below function is for using model like this.
+    pf = PreferenceVector()
+    pf["매운"] = 0.5
+    """
     def __getitem__(self, key):
         return getattr(self, key)
     매운 = models.FloatField()
@@ -46,17 +56,19 @@ class Profile(models.Model):
             User, 
             on_delete=models.CASCADE,
             )
-    name = models.CharField(max_length=100)
-    searchLocation = models.CharField(max_length=100)
-    foodCategory = models.ForeignKey(
+    search_location = models.ForeignKey(
+            Location,
+            on_delete=models.PROTECT,
+            )
+    food_category = models.ForeignKey(
             FoodCategory,
             on_delete=models.PROTECT,
             )
-    preferenceVector = models.ForeignKey(
+    preference_vector = models.ForeignKey(
             PreferenceVector,
             on_delete=models.PROTECT,
             )
-    searchLocation = models.ForeignKey(
+    search_location = models.ForeignKey(
             Location,
             on_delete=models.PROTECT,
             )
@@ -67,18 +79,18 @@ class Restaurant(models.Model):
             Location,
             on_delete=models.PROTECT,
             )
-    avgRating = models.FloatField()
-    preferenceVector = models.ForeignKey(
+    avg_rating = models.FloatField()
+    preference_vector = models.ForeignKey(
             PreferenceVector,
             on_delete=models.PROTECT,
             )
-    foodCategory = models.CharField(max_length=100)
+    food_category = models.CharField(max_length=100)
     # menu = models.JSONField() # dict{name(str): price(int)}
     # openTime = models.JSONField() # dict{label(str): time(str)}
     # thumbNail = ArrayField(URLField(max_length=200)) # list[thunbNail_link(str)]
     # keyword = models.JSONField() # dict{keyword(str): weight(int)}
-    kakaoLink = models.URLField()
-    naverLink = models.URLField()
+    kakao_link = models.URLField()
+    naver_link = models.URLField()
 
 class menu(models.Model):
     name = models.CharField(max_length=20)
