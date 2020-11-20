@@ -100,3 +100,27 @@ def edit_my_review(request, review_id):
             return HttpResponseNotAllowed(['PUT','DELETE'])
     else:
         return HttpResponse(status=401)
+
+
+def my_review(request,id):
+    if request.method == 'GET':
+        if request.User.is_authenticated == False:
+            return HttpResponse(status = 401)
+        try:
+            restaurant = Restaurant.objects.get(id = id).values()
+        except Restaurant.DoesNotExist:
+            restaurant = None
+        if(restaurant == None):
+            return HttpResponse(status = 404)
+        user = reqeust.user.profile
+        response_list = []
+        for review 
+            in Review.objects.filter(profile_name=user.name).select_related('profile'):
+                if review.restaurant.id == id:
+                    response_list.append({'id':review.id, 'content':review.content,
+                        'rating':review.content, 'date':review.date})
+        return HttpResponse(response_list,safe= False, status=200)
+
+    else:
+        return HttpResponseBadRequest(['GET'])            
+
