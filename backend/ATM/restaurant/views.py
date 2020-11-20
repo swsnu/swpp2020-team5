@@ -24,8 +24,7 @@ def searched_restaurants(request,word):
                 response_dict = {}
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
-                foodCategory = get_attributes(restaurant.foodCategory)
-                response_dict['foodCategory'] = get_foodCategory(foodCategory)
+                response_dict['foodCategory'] = restaurant.foodCategory
                 response_dict['rate'] = 3.5
                 thumbnail = 
                     ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
@@ -69,8 +68,7 @@ def restaurant(request,id) :
             response_dict = {}
             response_dict['id'] = restaurant.id
             response_dict['title'] = restaurant.name
-            foodCategory = get_attributes(restaurant.foodCategory)
-            response_dict['foodCategory'] = get_foodCategory(foodCategory)
+            response_dict['foodCategory'] = restaurant.foodCategory
             response_dict['rate'] = 3.5
             response_dict['difference'] = 3.5 - restaurant.avgRating
             thumbnail_list = []
@@ -133,10 +131,4 @@ def get_attributes(object):
             new_attr_list.push(attr)
     return new_attr_list
 
-def get_foodCategory(foodcategory):
-    ans = ''
-    for category in foodcategory:
-        if foodcategory[category] == True:
-            ans += category
-    return ans
 
