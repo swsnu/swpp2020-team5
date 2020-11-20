@@ -23,32 +23,33 @@ def searched_restaurants(request,word):
             for restaurant in Restaurant.objects.all().values():
                 response_dict = {}
                 response_dict['id'] = restaurant.id
-                response_dict['name'] = restaurant.name
+                response_dict['title'] = restaurant.name
                 foodCategory = get_attributes(restaurant.foodCategory)
                 response_dict['foodCategory'] = get_foodCategory(foodCategory)
-                response_dict['rating'] = 3.5
-                response_dict['ThumbNail'] = 
-                    ThumbNail.objects.filter(restaurant_name=restaurant.name).select_related('restaurant')
+                response_dict['rate'] = 3.5
+                thumbnail = 
+                    ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
+                response_dict['ThumbNail'] = thumbnail.url
                 preferenceVector = get_attributes(restaurant.preferenceVector)
                 response_dict['preferenceVector'] = preferenceVector
                 response_list.append(response_dict)
-                return JsonResponse(response_list, status = 200)
+                return JsonResponse(response_list, safe=False, status = 200)
         else:
             response_list = []
             for restaurant in Restaurant.objects.filter(name__contains=word):
                 response_dict = {}
                 response_dict['id'] = restaurant.id
-                response_dict['name'] = restaurant.name
+                response_dict['title'] = restaurant.name
                 foodCategory = get_attributes(restaurant.foodCategory)
                 response_dict['foodCategory'] = get_foodCategory(foodCategory)
-                response_dict['rating'] = 3.5
+                response_dict['rate'] = 3.5
                 thumbnail=
                     ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
                 response_dict['ThumbNail'] = thumbnail.url
                 preferenceVector = get_attributes(restaurant.preferenceVector)
                 response_dict['preferenceVector'] = preferenceVector
                 response_list.append(response_dict)
-                return JsonResponse(response_list, status = 200)
+                return JsonResponse(response_list, safe= False, status = 200)
     else :
         return HttpResponseNotAllowed(['GET'])
 
@@ -67,11 +68,11 @@ def restaurant(request,id) :
         else:
             response_dict = {}
             response_dict['id'] = restaurant.id
-            response_dict['name'] = restaurant.name
+            response_dict['title'] = restaurant.name
             foodCategory = get_attributes(restaurant.foodCategory)
             response_dict['foodCategory'] = get_foodCategory(foodCategory)
-            response_dict['rating'] = 3.5
-            response_dict['diff'] = 3.5 - restaurant.avgRating
+            response_dict['rate'] = 3.5
+            response_dict['difference'] = 3.5 - restaurant.avgRating
             thumbnail_list = []
             for thumbnail 
                 in ThumbNail.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
@@ -91,7 +92,7 @@ def restaurant(request,id) :
             for key 
                 in keyword.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
                     keyword_list.append({key.word : key.weight})
-            response_dict['keyword'] = keyword_list
+            response_dict['keywords'] = keyword_list
             response_dict['urls'] = [restaurant.kakaoLink, restaurant.naverLink]
             return JsonResponse(response_dict, status = 200)                
     else :
@@ -114,7 +115,7 @@ def my_review(request,id):
                 if review.restaurant.id == id:
                     response_list.append({'id':review.id, 'content':review.content,
                         'rating':review.content, 'date':review.date})
-        return HttpResponse(response_list, status=200)
+        return HttpResponse(response_list,safe= False, status=200)
 
     else:
         return HttpResponseBadRequest(['GET'])            
