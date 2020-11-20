@@ -9,13 +9,11 @@ from .models import Article,Comment
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Restaurant, openTime, menu, ThumbNail, keyword, Review, PreferenceVector
 
-# Create your views here.
-#레스토랑에 커스터마이즈드 평점 계산해서 넣어줘야함
-#리스폰스 바꾸기(포린키로 되어있을 경우 어떻게 나오는지 그리고 제이슨 )
-#세션에 유저 정보있는지 확인하기
+
+#preferencVector
 def searched_restaurants(request,word):
     if request.method == 'GET':
-        if request.User.is_authenticated == False:
+        if request.user.is_authenticated == False:
             return HttpResponse(status = 401)
   
         if word == '':
@@ -28,7 +26,7 @@ def searched_restaurants(request,word):
                 response_dict['rate'] = 3.5
                 thumbnail = 
                     ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
-                response_dict['ThumbNail'] = thumbnail.url
+                response_dict['thumbNail'] = thumbnail.url
                 preferenceVector = get_attributes(restaurant.preferenceVector)
                 response_dict['preferenceVector'] = preferenceVector
                 response_list.append(response_dict)
@@ -55,14 +53,12 @@ def searched_restaurants(request,word):
 
 def restaurant(request,id) :
     if request.method == 'GET':
-        if request.User.is_authenticated == False:
+        if request.user.is_authenticated == False:
             return HttpResponse(status = 401)
     
         try:
             restaurant = Restaurant.objects.get(id = id).values()
         except Restaurant.DoesNotExist:
-            restaurant = None
-        if(restaurant == None):
             return HttpResponse(status = 404)
         else:
             response_dict = {}
@@ -72,24 +68,20 @@ def restaurant(request,id) :
             response_dict['rate'] = 3.5
             response_dict['difference'] = 3.5 - restaurant.avgRating
             thumbnail_list = []
-            for thumbnail 
-                in ThumbNail.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
-                    thumbnail_list.append(thumbnail.url)
-            response_dict['ThumbNail'] = thumbnail_list
+            for thumbnail in ThumbNail.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
+                thumbnail_list.append(thumbnail.url)
+            response_dict['thumbNail'] = thumbnail_list
             menu_list = []
-            for price 
-                in menu.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
-                    menu_list.append({price.name : price.price})
+            for price in menu.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
+                menu_list.append({price.name : price.price})
             response_dict['menu'] = menu_list
             openTime_list = []
-            for time 
-                in openTime.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
-                    openTime_list.append({time.condition : time.time})
+            for time in openTime.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
+                openTime_list.append({time.condition : time.time})
             response_dict['openTime'] = openTime_list
             keyword_list = []
-            for key 
-                in keyword.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
-                    keyword_list.append({key.word : key.weight})
+            for key in keyword.objects.filter(restaurant_name=restaurant.name).select_related('restaurant'):
+                keyword_list.append({key.word : key.weight})
             response_dict['keywords'] = keyword_list
             response_dict['urls'] = [restaurant.kakaoLink, restaurant.naverLink]
             return JsonResponse(response_dict, status = 200)                
