@@ -111,7 +111,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetReviews: (restaurantID) => dispatch(actionCraetors.getReviews(restaurantID)),
+  onGetReviews: (restaurantID) => dispatch(actionCraetors.getOtherReviews(restaurantID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);

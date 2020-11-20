@@ -173,7 +173,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
   },
   onPostReview: (restaurantID, content, rating, modifiedTime) => dispatch(
-    actionCreators.postReview({
+    actionCreators.postMyReview({
       restaurantID,
       content,
       rating,

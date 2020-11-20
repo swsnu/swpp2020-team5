@@ -8,10 +8,10 @@ export {
 } from './userActions/userActions';
 
 export {
-  getReviews,
-  putReview,
-  deleteReview,
-  postReview,
+  getOtherReviews,
+  editMyReview,
+  deleteMyReview,
+  postMyReview,
 } from './reviewActions/reviewActions';
 
 export {
