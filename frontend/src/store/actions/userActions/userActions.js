@@ -9,64 +9,142 @@ const getUser_ = (user) => ({
   target: user,
 });
 
-export const getUser = (id) => (dispatch) => axios.get(`/api/user/${id}`)
-  .then((res) => dispatch(getUser_(res.data)));
+export const getUser = () => { 
+  return dispatch => {
+    axios
+      .get(`/atm/user/mine/`)
+      .then(res => dispatch(getUser_(res.data)))
+      .catch(err => {
+        alert('You need to login first!');
+      });
+  }
+}
 
-// backend sign-in would return the signed in django User and http status
-export const postSignIn = (email, password) => (dispatch) => axios.post('/api/sign-in', { email, password })
-  .then((res) => dispatch(getUser_(res.data)));
+export const postSignIn = (userInfo) => {
+  return dispatch => {
+    axios
+      .post('/atm/sign-in/', userInfo)
+      .then(res => {;})
+      .catch(err => {          
+        alert('Login failed');
+      });
+  }
+}
 
-// This includes foodCategory, searchLocation, preferenceVector
-const editUser_ = getUser_;
+export const postSignUp = (userInfo) => {
+  return dispatch => 
+    axios
+      .post('atm/sign-up/', userInfo) 
+      .then((res) => {})
+      .catch((err) => {
+        alert('SignUp Failed');
+      }
+  );
+}
 
-export const editUser = (user) => (dispatch) => axios.put(`/api/user/${user.id}`, user)
-  .then((res) => {
-    dispatch(editUser_(res.data));
-  });
 
-// is it better changing getUser -> new func?
-//
-const editUserFoodCategory_ = (foodCategory) => ({
-  type: actionTypes.PUT_FOODCATEGORY,
+const editFoodCategory_ = (foodCategory) => ({
+  type: actionTypes.EDIT_FOOD_CATEGORY,
   target: foodCategory,
 });
 
-export const editUserFoodCategory = (foodCategory) => (dispatch) => axios.put('/api/user/foodCategory', foodCategory)
-  .then((res) => {
-    dispatch(editUserFoodCategory_(res.data));
-  });
+export const editFoodCategory = (foodCategory) => {
+  return dispatch => {
+    axios
+      .put('/atm/user/foodCategory/', foodCategory)
+      .then(res => {dispatch(editFoodCategory_(res.data))})
+      .catch(err => {          
+        alert('Not logined');
+      })
+  }
+}
 
-export const changeLocation_ = (searchLocation) => ({
-  type: actionTypes.CHANGE_LOCATION, target: searchLocation,
+const editSearchLocation_ = (searchLocation) => ({
+  type: actionTypes.EDIT_SEARCH_LOCATION, 
+  target: searchLocation,
 });
 
-// no db managements yet
-export const changeLocation = (searchLocation) => (dispatch) => axios.put('/api/user/search-location', searchLocation)
-  .then((res) => {
-    dispatch(changeLocation_(res.data));
-  });
+export const editSearchLocation = (searchLocation) => {
+  return dispatch => {
+    axios
+      .put('/atm/user/search-location/', searchLocation)
+      .then(res => {
+        dispatch(editSearchLocation_(res.data));
+      })
+      .catch(err => {
+        alert('Not Logined')
+      })
+  }
+};
 
-export const putPreferenceVector_ = (preferenceVector) => ({
-  type: actionTypes.PUT_PREFERENCE_VECTOR,
+const editPreferenceVector_ = (preferenceVector) => ({
+  type: actionTypes.EDIT_PREFERENCE_VECTOR,
   target: preferenceVector,
 });
 
-export const putPreferenceVector = (preferenceVector) => (dispatch) => axios.put('api/user/preferenceVector', preferenceVector)
-  .then((res) => {
-    dispatch(putPreferenceVector_(res.data));
-  });
-
-export const postSignUp = (userInfo) => (dispatch) => axios.post('api/sign-up/', userInfo)
-  .then((res) => {})
-  .catch((err) => {
-  });
-
-export const getFoodCategory_ = (foodCategory) => ({
-  type: actionTypes.GET_FOODCATEGORY,
+export const editPreferenceVector = (preferenceVector) => {
+  return dispatch => {
+    axios
+      .put('/atm/user/preference-vector/', preferenceVector)
+      .then(res => {
+        dispatch(editPreferenceVector_(res.data));
+      })
+      .catch(err => {
+        alert('Not Logined')
+      })
+  }
+}
+  
+const getFoodCategory_ = (foodCategory) => ({
+  type: actionTypes.GET_FOOD_CATEGORY,
   target: foodCategory,
 });
 
-export const getFoodCategory = () => (dispatch) => axios.get('/api/user/food-category')
-  .then((res) => {
-    dispatch(getFoodCategory_(res.data));
-  });
+export const getFoodCategory = () => {
+  return dispatch => {
+    axios
+      .get('/atm/user/food-category/')
+      .then(res => {
+        dispatch(getFoodCategory_(res.data));
+      })
+      .catch(err => {
+        alert('Not Logined');
+      })
+  }
+}
+
+const getSearchLocation_ = (searchLocation) => ({
+  type: actionTypes.GET_SEARCH_LOCATION,
+  target: searchLocation,
+});
+
+export const getSearchLocation = () => {
+  return dispatch => {
+    axios
+      .get('/atm/user/search-location/')
+      .then(res => {
+        dispatch(getSearchLocation_(res.data));
+      })
+      .catch(err => {
+        alert('Not Logined');
+      })
+  }
+}
+
+const getPreferenceVector_ = (preferenceVector) => ({
+  type: actionTypes.GET_PREFERENCE_VECTOR,
+  target: preferenceVector,
+});
+
+export const getPrferenceVector = () => {
+  return dispatch => {
+    axios
+      .get('/atm/user/preference-vector')
+      .then(res => {
+        dispatch(getPreferenceVector_(res.data));
+      })
+      .catch(err => {
+        alert('Not Logined');
+      })
+  }
+}
