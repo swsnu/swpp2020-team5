@@ -57,38 +57,34 @@ const initialState = {
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_REVIEWS:
+    case actionTypes.GET_OTHER_REVIEWS:
       return { ...state, selectedReviews: action.target };
-    case actionTypes.PUT_REVIEW: {
+    case actionTypes.EDIT_MY_REVIEW: {
       const deleted = state.myReviews.filter((review) => review.id !== action.id);
       const newReview = {
         id: action.id,
         content: action.content,
         rating: action.rating,
-        modifiedTime: action.modifiedTime,
+        date: action.date,
       };
       return { ...state, myReviews: [...deleted, newReview] };
     }
-    case actionTypes.POST_REVIEW: {
+    case actionTypes.POST_MY_REVIEW: {
       const newReview = {
-        // THis needs to be fixed when backend imple
         id: action.id,
         content: action.content,
         rating: action.rating,
-        modifiedTime: action.modifiedTime,
+        date: action.date,
       };
       return { ...state, myReviews: [...state.myReviews, newReview] };
     }
-    case actionTypes.DELETE_REVIEW: {
-      // console.log(action.target)
+    case actionTypes.DELETE_MY_REVIEW: {
       const deleted = state.myReviews.filter((review) => review.id !== action.target);
       return { ...state, myReviews: [...deleted] };
     }
     default:
-      // console.log('not actions implemented');
       break;
   }
-
   return state;
 };
 
