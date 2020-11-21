@@ -25,14 +25,14 @@ import json
 import time
 import re
 
-
-# driver = webdriver.Chrome('backend/crawling/chromedriver86')
-driver = webdriver.Chrome('backend/crawling/chromedriver87')
+driver = webdriver.Chrome('backend/crawling/chromedriver86')
+# driver = webdriver.Chrome('backend/crawling/chromedriver87')
 driver.implicitly_wait(3)
 driver.get('https://map.kakao.com/')
 driver.find_element_by_id("search.keyword.query").send_keys('샤로수길 음식점' + Keys.RETURN)
 links = driver.find_elements_by_class_name("moreview")
 restaurants = []
+mismatched = []
 ActionChains(driver).click(links[0]).perform() # don't know why but it doesn't work without this
 # for each restaurant
 for link in links:
@@ -66,7 +66,8 @@ for link in links:
   open_time = {"영업 시간": {}, "휴무일": []}
   # determin whether the full info is in the popup or not
   try:
-    driver.find_element_by_css_selector(".location_detail.openhour_wrap .btn_more").click()
+    morebutton = driver.find_element_by_css_selector(".location_detail.openhour_wrap .btn_more")
+    ActionChains(driver).move_to_element(morebutton).click(morebutton).perform()
     optimes = driver.find_elements_by_css_selector(".inner_floor .list_operation")
   except NoSuchElementException:
     optimes = driver.find_elements_by_css_selector(".location_present .list_operation")
@@ -173,8 +174,16 @@ for link in links:
   #  save&move to naverlink
   #
   driver.get('https://www.naver.com/')
-  driver.find_element_by_css_selector(".green_window .input_text").send_keys(tosearch + Keys.RETURN)
-  driver.find_elements_by_class_name("biz_name_area")[0].click()
+  try:
+    driver.find_element_by_css_selector(".green_window .input_text").send_keys(tosearch + Keys.RETURN)
+    driver.find_element_by_class_name("biz_name_area").click()
+  except NoSuchElementException:
+    try:
+      driver.find_element_by_css_selector("._2LKql ._3CKdL").click()
+    except NoSuchElementException:
+      driver.close()
+      mismatched.append(tosearch)
+      print(mismatched)
   driver.close()
   driver.switch_to.window(driver.window_handles[1])
   naver_id = re.findall(r'place/\d+', driver.current_url)[0].replace("place/", "")
