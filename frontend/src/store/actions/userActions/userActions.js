@@ -1,6 +1,8 @@
 import axios from 'axios';
 import * as actionTypes from '../actionTypes';
+import { push } from 'connected-react-router';
 
+//Handling CSRF-Token
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
@@ -12,7 +14,7 @@ const getUser_ = (user) => ({
 export const getUser = () => { 
   return dispatch => {
     axios
-      .get(`/atm/user/mine/`)
+      .get(`/atm/user/me/`)
       .then(res => dispatch(getUser_(res.data)))
       .catch(err => {
         alert('You need to login first!');
@@ -43,6 +45,17 @@ export const postSignUp = (userInfo) => {
 }
 
 
+export const getSignOut = () => {
+  return (dispatch) => {
+    axios
+      .get('atm/sign-out/')
+      .then(res => {
+        dispatch(push('/'));})
+      .catch((err) => {
+        alert('sign-out failed!');
+      });
+  }
+}
 const editFoodCategory_ = (foodCategory) => ({
   type: actionTypes.EDIT_FOOD_CATEGORY,
   target: foodCategory,
@@ -136,7 +149,7 @@ const getPreferenceVector_ = (preferenceVector) => ({
   target: preferenceVector,
 });
 
-export const getPrferenceVector = () => {
+export const getPreferenceVector = () => {
   return dispatch => {
     axios
       .get('/atm/user/preference-vector')

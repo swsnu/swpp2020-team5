@@ -146,11 +146,11 @@ class MyReview extends Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.putReview({
+  onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.editMyReview({
     id: reviewID,
     ...reviewInfo,
   })),
-  onDeleteReview: (reviewID) => dispatch(actionCreators.deleteReview(reviewID)),
+  onDeleteReview: (reviewID) => dispatch(actionCreators.deleteMyReview(reviewID)),
 });
 
 insertCss(css);

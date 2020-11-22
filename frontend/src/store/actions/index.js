@@ -23,8 +23,3 @@ export {
   // getRestaurantName,
   getRestaurantDetail,
 } from './restaurantActions/restauraunActions';
-
-export {
-  postSignUp,
-  getFoodCategory,
-} from './userActions/userActions';

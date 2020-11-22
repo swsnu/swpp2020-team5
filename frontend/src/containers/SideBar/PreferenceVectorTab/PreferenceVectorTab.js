@@ -84,7 +84,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGetUser: () => dispatch(actionCreators.getUser()),
-  onPutPreferenceVector: (user) => dispatch(actionCreators.putPreferenceVector(user)),
+  onPutPreferenceVector: (user) => dispatch(actionCreators.editPreferenceVector(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PreferenceVectorTab);

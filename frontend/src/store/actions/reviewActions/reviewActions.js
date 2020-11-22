@@ -1,6 +1,10 @@
 import axios from 'axios';
 import * as actionTypes from '../actionTypes';
 
+//Handling CSRF-Token
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
 export const getOtherReviews_ = (reviews) => ({
   type: actionTypes.GET_OTHER_REVIEWS,
   target: reviews,
