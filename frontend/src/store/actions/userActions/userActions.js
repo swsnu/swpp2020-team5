@@ -14,7 +14,7 @@ const getUser_ = (user) => ({
 export const getUser = () => { 
   return dispatch => {
     axios
-      .get(`/atm/user/mine/`)
+      .get(`/atm/user/me/`)
       .then(res => dispatch(getUser_(res.data)))
       .catch(err => {
         alert('You need to login first!');

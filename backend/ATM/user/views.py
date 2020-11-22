@@ -4,10 +4,10 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
-
+from .utils import get_preference_attributes
 
 @ensure_csrf_cookie
-def mine(request):
+def me(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             response_dict = {
