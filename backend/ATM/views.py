@@ -4,9 +4,10 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import PreferenceVector
-from .util import cos_sim_word
-from .user.util import get_preference_attributes
+from .models import PreferenceVector, FoodCategory, Location, Profile
+from .utils import cos_sim_word
+from .user.utils import get_preference_attributes
+import json
 
 # Create your views here.
 def index():
@@ -23,10 +24,11 @@ def sign_up(request):
         except (KeyError, JSONDecodeError) as e:
             return HttpResponse(status=400)
         # This checks duplicated user
-        try:
-            user = User.objects.create_user(username=username, email=email, password=password)
-        except:
+        if User.objects.filter(email=email).exists() or \
+           User.objects.filter(username=username).exists():
             return HttpResponse(status=409)
+
+        ## By user's selected foods, initialize pref_vec
         pref_vec = PreferenceVector()
         attr_list = get_preference_attributes(pref_vec)
         true_food_list = filter(lambda food_bool: food_bool[1], selected_foods.items())
@@ -37,7 +39,21 @@ def sign_up(request):
                 weight += cos_sim_word(attr, food)
             pref_vec[attr] = weight
         pref_vec.save()
-        user.profile.preference_vector = pref_vec
+
+        food_category = FoodCategory()
+        food_category.save()
+
+        search_location = Location()
+        search_location.save()
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.save()
+
+        profile = Profile(user=user,
+                          preference_vector=pref_vec,
+                          food_category=food_category,
+                          search_location=search_location)
+        profile.save()
         return HttpResponse(status=201)
     else:
         return HttpResponseNotAllowed(['POST'])
