@@ -19,7 +19,7 @@ matrix:
         - yarn add coveralls
         - cd ..
         - pip install virtualenv
-        - virtualenv --python=python3.7 venv
+        - virtualenv --python=3.7 venv
         - source venv/bin/activate
         - pip install django
         - cd backend
