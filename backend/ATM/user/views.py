@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
+@ensure_csrf_cookie
 def mine(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -19,6 +20,8 @@ def mine(request):
     else:
         return HttpResponseNotAllowed(['GET'])
 
+
+@ensure_csrf_cookie
 def preference_vector():
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -52,6 +55,8 @@ def preference_vector():
     else:
         return HttpResponseNotAllowed(['GET','PUT'])
 
+
+@ensure_csrf_cookie
 def search_location():
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -85,6 +90,8 @@ def search_location():
     else:
         return HttpResponseNotAllowed(['GET','PUT'])
 
+
+@ensure_csrf_cookie
 def food_category():
     if request.method == 'GET':
         if request.user.is_authenticated:

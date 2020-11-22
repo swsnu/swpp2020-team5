@@ -35,7 +35,7 @@ class CreatePreferenceVector extends Component {
       password,
       selectedFoods,
     });
-    this.props.history.push('/sign-in/');
+    this.props.history.push('/');
   }
 
   // image selection is not complete

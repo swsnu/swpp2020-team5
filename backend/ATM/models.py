@@ -59,18 +59,23 @@ class Profile(models.Model):
     search_location = models.ForeignKey(
             Location,
             on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
     food_category = models.ForeignKey(
             FoodCategory,
             on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
     preference_vector = models.ForeignKey(
             PreferenceVector,
             on_delete=models.PROTECT,
-            )
-    search_location = models.ForeignKey(
-            Location,
-            on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
 
 class Restaurant(models.Model):
@@ -146,7 +151,8 @@ class Review(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance, user_pk=instance.id)
+        #Profile.objects.create(user=instance, user_pk=instance.id)
+        Profile.objects.create(user=instance)
     
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):

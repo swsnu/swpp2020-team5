@@ -5,5 +5,5 @@ def get_preference_attributes(pref_vec):
     new_attr_list = []
     for attr in attr_list:
         if attr_list not in no_need_attr:
-            new_attr_list.push(attr)
+            new_attr_list.append(attr)
     return new_attr_list
