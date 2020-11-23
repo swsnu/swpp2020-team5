@@ -9,14 +9,11 @@ import json
 import time
 import re
 
-review_db = open("reviews.json", "a")
-review_text = open("allreviews.txt", "a")
-mismismatches = open("mismismatches.txt").readlines()
-
+review_db = open("reviews0.json", "a")
+mismismatches = open("mismatches.txt").readlines()
 start_at = 0
-end_at   = 2
+end_at   = 6
 currently_at = 0
-
 # driver = webdriver.Chrome('./chromedriver86')
 driver = webdriver.Chrome('./chromedriver87')
 driver.implicitly_wait(3)
@@ -27,16 +24,16 @@ for mismatch in mismismatches:
 
   currently_at += 1
   if end_at == currently_at:
-    print("review: ending at " + str(currently_at))
+    print("review0: ending at " + str(currently_at))
     exit()
-  print("review: currently at " + str(currently_at))
+  print("review0: currently at " + str(currently_at))
   if start_at > currently_at:
     continue
 
   split_mismatch = mismatch.split(">")
-  restaurant_name = split_mismatch[0].strip()
-  kakao_id = split_mismatch[1].strip()
-  naver_id = split_mismatch[2].strip()
+  restaurant_name = split_mismatch[0]
+  kakao_id = split_mismatch[1]
+  naver_id = split_mismatch[2]
 
   time.sleep(1)
   link = "https://place.map.kakao.com/" + kakao_id
@@ -128,7 +125,6 @@ for mismatch in mismismatches:
   restaurant_reviews['name'] = restaurant_name
   restaurant_reviews['naver'] = naver_reviews
   restaurant_reviews['kakao'] = kakao_reviews
-  review_text.write(restaurant_comments)
   json.dump(restaurant_reviews, review_db, indent=2, ensure_ascii=False)
   review_db.write(",\n")
   driver.close()
