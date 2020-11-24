@@ -91,28 +91,25 @@ class Restaurant(models.Model):
     location = models.ForeignKey(
             Location,
             on_delete=models.PROTECT,
+            null=True,
             )
     avg_rating = models.FloatField()
     preference_vector = models.ForeignKey(
             PreferenceVector,
             on_delete=models.PROTECT,
+            null=True,
             )
     food_category = models.CharField(max_length=100)
-    # menu = models.JSONField() # dict{name(str): price(int)}
-    # openTime = models.JSONField() # dict{label(str): time(str)}
-    # thumbNail = ArrayField(URLField(max_length=200)) # list[thunbNail_link(str)]
+    menu = models.JSONField()# dict{name(str): price(int)}
+    openTime = models.JSONField() # dict{label(str): time(str)}
+    # thumbNail = ArrayField(models.URLField(max_length=200)) # list[thunbNail_link(str)]
     # keyword = models.JSONField() # dict{keyword(str): weight(int)}
     kakao_link = models.URLField()
     naver_link = models.URLField()
-
-class menu(models.Model):
+"""
+class Menu(models.Model):
     name = models.CharField(max_length=20)
     price = models.IntegerField()
-    restaurant = models.ForeignKey(
-            Restaurant,
-            on_delete=models.CASCADE,
-            related_name='menu',
-            )
 
 class openTime(models.Model):
     condition = models.CharField(max_length=20)
@@ -130,6 +127,7 @@ class ThumbNail(models.Model):
             on_delete=models.CASCADE,
             related_name='thumbNail',
             )
+"""
 
 class keyword(models.Model):
     word = models.CharField(max_length=20)
@@ -146,12 +144,15 @@ class Review(models.Model):
             on_delete=models.CASCADE,
             related_name='review'
             )
-    author = models.ForeignKey(
+    atm_author = models.ForeignKey(
             Profile,
             on_delete=models.CASCADE,
-            related_name='review'
+            related_name='review',
+            null=True,
             )
+    other_site_author = models.CharField(max_length=100,
+                                         null=True)
     content = models.CharField(max_length=1000)
     rating = models.FloatField()
-    date = models.DateTimeField()
+    date = models.DateField()
     site = models.CharField(max_length=10) # one of naver, kakao or atm.
