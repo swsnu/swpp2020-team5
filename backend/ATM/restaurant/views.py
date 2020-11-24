@@ -8,21 +8,21 @@ from json import JSONDecodeError
 from .models import Article,Comment
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Restaurant, openTime, menu, ThumbNail, keyword, Review, PreferenceVector, Profile, Location
-
+from haversine import haversine
 
 #preferencVector
 def searched_restaurants(request,word):
     if request.method == 'GET':
         if request.user.is_authenticated == False:
             return HttpResponse(status = 401)
-  
+        author = Profile.objects.get(user=request.user)
         if word == '':
             response_list = []
             for restaurant in Restaurant.objects.all().values():
-                author = Profile.objects.get(user=request.user)
-                dist_x = author.location.x - restaurant.location.x
-                dist_y = author.location.y - restaurant.location.y
-                if dist_x * dist_x + dist_y * dist_y > 100:
+                
+                cur = (author.y, author.x)
+                res_loc = (restaurant.location.y,restaurant.location.x)
+                if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
                 response_dict['id'] = restaurant.id
@@ -42,10 +42,9 @@ def searched_restaurants(request,word):
         else:
             response_list = []
             for restaurant in Restaurant.objects.filter(name__contains=word):
-                author = Profile.objects.get(user=request.user)
-                dist_x = author.location.x - restaurant.location.x
-                dist_y = author.location.y - restaurant.location.y
-                if dist_x * dist_x + dist_y * dist_y > 100:
+                cur = (author.y, author.x)
+                res_loc = (restaurant.location.y,restaurant.location.x)
+                if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
                 response_dict['id'] = restaurant.id
@@ -67,9 +66,9 @@ def searched_restaurants(request,word):
                 response_list.append(response_dict)
             for food in menu.objects.filter(name__contains=word):
                 restaurant = food.restaurant
-                dist_x = Profile.location.x - restaurant.location.x
-                dist_y = Profile.location.y - restaurant.location.y
-                if dist_x * dist_x + dist_y * dist_y > 100:
+                cur = (author.y, author.x)
+                res_loc = (restaurant.location.y,restaurant.location.x)
+                if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
                 response_dict['id'] = restaurant.id
