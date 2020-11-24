@@ -12435,56 +12435,6 @@
     "Id": 16709072
   },
   {
-    "name": "플립보드게임카페 샤로수길점",
-    "foodCategory": "카페",
-    "avgRating": 4.36,
-    "numOfRating": 57.0,
-    "menu": {},
-    "openTime": {
-      "영업 시간": {
-        "매일 ": "13:00 ~ 23:00"
-      },
-      "휴무일": []
-    },
-    "location": {
-      "address": {
-        "address_name": "서울 관악구 봉천동 1611-3",
-        "b_code": "1162010100",
-        "h_code": "1162058500",
-        "main_address_no": "1611",
-        "mountain_yn": "N",
-        "region_1depth_name": "서울",
-        "region_2depth_name": "관악구",
-        "region_3depth_h_name": "낙성대동",
-        "region_3depth_name": "봉천동",
-        "sub_address_no": "3",
-        "x": "126.95512117118",
-        "y": "37.4795969562841"
-      },
-      "address_name": "서울 관악구 관악로16길 46",
-      "address_type": "ROAD_ADDR",
-      "road_address": {
-        "address_name": "서울 관악구 관악로16길 46",
-        "building_name": "",
-        "main_building_no": "46",
-        "region_1depth_name": "서울",
-        "region_2depth_name": "관악구",
-        "region_3depth_name": "봉천동",
-        "road_name": "관악로16길",
-        "sub_building_no": "",
-        "underground_yn": "N",
-        "x": "126.95512117118",
-        "y": "37.4795969562841",
-        "zone_no": "08788"
-      },
-      "x": "126.95512117118",
-      "y": "37.4795969562841"
-    },
-    "kakaoLink": "https://place.map.kakao.com/358514713",
-    "naverLink": "https://pcmap.place.naver.com/restaurant/1671970088",
-    "Id": 358514713
-  },
-  {
     "name": "반조",
     "foodCategory": "카페",
     "avgRating": 4.67,
@@ -19604,57 +19554,6 @@
     "kakaoLink": "https://place.map.kakao.com/16499396",
     "naverLink": "https://pcmap.place.naver.com/restaurant/18182571",
     "Id": 16499396
-  },
-  {
-    "name": "와룸보드게임카페",
-    "foodCategory": "카페",
-    "avgRating": 4.61,
-    "numOfRating": 27.0,
-    "menu": {},
-    "openTime": {
-      "영업 시간": {
-        "월~목 ": "13:00 ~ 23:00",
-        "금~일 ": "13:00 ~ 00:30"
-      },
-      "휴무일": []
-    },
-    "location": {
-      "address": {
-        "address_name": "서울 관악구 봉천동 1599-3",
-        "b_code": "1162010100",
-        "h_code": "1162058500",
-        "main_address_no": "1599",
-        "mountain_yn": "N",
-        "region_1depth_name": "서울",
-        "region_2depth_name": "관악구",
-        "region_3depth_h_name": "낙성대동",
-        "region_3depth_name": "봉천동",
-        "sub_address_no": "3",
-        "x": "126.953501339358",
-        "y": "37.4794751441859"
-      },
-      "address_name": "서울 관악구 남부순환로226길 28",
-      "address_type": "ROAD_ADDR",
-      "road_address": {
-        "address_name": "서울 관악구 남부순환로226길 28",
-        "building_name": "수아주 서울대",
-        "main_building_no": "28",
-        "region_1depth_name": "서울",
-        "region_2depth_name": "관악구",
-        "region_3depth_name": "봉천동",
-        "road_name": "남부순환로226길",
-        "sub_building_no": "",
-        "underground_yn": "N",
-        "x": "126.953501339358",
-        "y": "37.4794751441859",
-        "zone_no": "08788"
-      },
-      "x": "126.953501339358",
-      "y": "37.4794751441859"
-    },
-    "kakaoLink": "https://place.map.kakao.com/884626391",
-    "naverLink": "https://pcmap.place.naver.com/restaurant/1001810305",
-    "Id": 884626391
   },
   {
     "name": "옛날육개장",
