@@ -29,6 +29,7 @@ def get_other_reviews(request, restaurant_id):
             return JsonResponse(other_review_list, safe=False)  ## default status is 200
         else:
             return HttpResponseNotAllowed(['GET'])
+   
     else:
         return HttpResponse(status=401)
 
