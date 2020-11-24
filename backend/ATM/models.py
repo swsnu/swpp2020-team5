@@ -14,16 +14,20 @@ class FoodCategory(models.Model):
     """
     def __getitem__(self, key):
         return getattr(self, key)
-    한식 = models.BooleanField()
-    일식 = models.BooleanField()
-    중식 = models.BooleanField()
-    양식 = models.BooleanField()
-    카페 = models.BooleanField()
-    기타 = models.BooleanField()
+
+    def __setitem__(self, key, value):
+        return setattr(self, key, value)
+
+    한식 = models.BooleanField(default=False)
+    일식 = models.BooleanField(default=False)
+    중식 = models.BooleanField(default=False)
+    양식 = models.BooleanField(default=False)
+    카페 = models.BooleanField(default=False)
+    기타 = models.BooleanField(default=False)
 
 class Location(models.Model):
-    x = models.FloatField()
-    y = models.FloatField()
+    x = models.FloatField(default=0.0)
+    y = models.FloatField(default=0.0)
     address_name = models.CharField(max_length=100)
 
 class PreferenceVector(models.Model):
@@ -34,6 +38,10 @@ class PreferenceVector(models.Model):
     """
     def __getitem__(self, key):
         return getattr(self, key)
+
+    def __setitem__(self, key, value):
+        return setattr(self, key, value)
+
     매운 = models.FloatField()
     느끼한 = models.FloatField()
     짭짤한 = models.FloatField()
@@ -59,18 +67,23 @@ class Profile(models.Model):
     search_location = models.ForeignKey(
             Location,
             on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
     food_category = models.ForeignKey(
             FoodCategory,
             on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
     preference_vector = models.ForeignKey(
             PreferenceVector,
             on_delete=models.PROTECT,
-            )
-    search_location = models.ForeignKey(
-            Location,
-            on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
 
 class Restaurant(models.Model):
@@ -142,12 +155,3 @@ class Review(models.Model):
     rating = models.FloatField()
     date = models.DateTimeField()
     site = models.CharField(max_length=10) # one of naver, kakao or atm.
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance, user_pk=instance.id)
-    
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()

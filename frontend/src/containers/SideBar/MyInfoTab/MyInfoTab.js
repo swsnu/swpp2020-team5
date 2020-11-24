@@ -18,7 +18,6 @@ class MyInfoTab extends Component {
 
   componentDidMount() {
     // this.props.onGetUser();
-    this.props.onGetReviews(this.props.restaurantID);
   }
 
   onChangeReviewInputHandler = (event) => {
@@ -166,12 +165,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   // onGetUser: () => dispatch(actionCreators.getUser()),
-  // onGetSignOut: () => dispatch(actionCreators.getSignOut()),
-  onGetReviews: (restaurantID) => {
-    if (restaurantID !== -1) {
-      dispatch(actionCreators.getReviews(restaurantID));
-    }
-  },
+  onGetSignOut: () => dispatch(actionCreators.getSignOut()),
   onPostReview: (restaurantID, content, rating, modifiedTime) => dispatch(
     actionCreators.postMyReview({
       restaurantID,

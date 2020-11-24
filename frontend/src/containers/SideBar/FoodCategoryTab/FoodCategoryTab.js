@@ -97,7 +97,7 @@ const mapStateToProps = (state) => ({ foodCategory: state.us.foodCategory });
 // we can assume this popup occurs when the user is logging in
 const mapDispatchToProps = (dispatch) => ({
   onEditUserFoodCategory: (foodCategory) => dispatch(
-    actionCreators.editUserFoodCategory(foodCategory),
+    actionCreators.editFoodCategory(foodCategory),
   ),
   onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
 

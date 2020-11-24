@@ -29,9 +29,9 @@ class DetailPage extends Component {
     } else text = '변동없음!';
 
     let category = null;
-    Object.keys(selectedRestaurant.category).forEach((cat) => {
-      if (category === null) category = selectedRestaurant.category[cat];
-      else category += `${selectedRestaurant.category[cat]}`;
+    Object.keys(selectedRestaurant.foodCategory).forEach((cat) => {
+      if (category === null) category = selectedRestaurant.foodCategory[cat];
+      else category += `${selectedRestaurant.foodCategory[cat]}`;
     });
     const menu = selectedRestaurant.menu.map((el) => (
       <p>

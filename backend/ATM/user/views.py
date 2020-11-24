@@ -4,9 +4,10 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
+from .utils import get_preference_attributes
 
-
-def mine(request):
+@ensure_csrf_cookie
+def me(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             response_dict = {
@@ -19,6 +20,8 @@ def mine(request):
     else:
         return HttpResponseNotAllowed(['GET'])
 
+
+@ensure_csrf_cookie
 def preference_vector():
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -52,6 +55,8 @@ def preference_vector():
     else:
         return HttpResponseNotAllowed(['GET','PUT'])
 
+
+@ensure_csrf_cookie
 def search_location():
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -85,6 +90,8 @@ def search_location():
     else:
         return HttpResponseNotAllowed(['GET','PUT'])
 
+
+@ensure_csrf_cookie
 def food_category():
     if request.method == 'GET':
         if request.user.is_authenticated:

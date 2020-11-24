@@ -5,14 +5,12 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import thunk from 'redux-thunk';
 
-import keywordReducer from './reducers/keywordReducer/keywordReducer';
 import restaurantReducer from './reducers/restaurantReducer/restaurantReducer';
 import reviewReducer from './reducers/reviewReducer/reviewReducer';
 import userReducer from './reducers/userReducer/userReducer';
 
 export const history = createBrowserHistory();
 const rootReducer = combineReducers({
-  kw: keywordReducer,
   rs: restaurantReducer,
   rv: reviewReducer,
   us: userReducer,

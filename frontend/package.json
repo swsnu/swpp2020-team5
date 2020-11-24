@@ -75,5 +75,6 @@
       "src/**/*.{js,jsx}",
       "!src/serviceWorker.js"
     ]
-  }
+  },
+  "proxy": "http://localhost:8000"
 }

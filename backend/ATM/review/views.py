@@ -10,8 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Review, Restaurant, Profile
 from datetime import datetime
 
-
-# Create your views here.
+@ensure_csrf_cookie
 def get_other_reviews(request, restaurant_id):
     if request.user.is_authenticated:
         if request.method == 'GET':
@@ -33,6 +32,8 @@ def get_other_reviews(request, restaurant_id):
     else:
         return HttpResponse(status=401)
 
+
+@ensure_csrf_cookie
 def post_my_review(request, restaurant_id):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -57,6 +58,8 @@ def post_my_review(request, restaurant_id):
     else:
         return HttpResponse(status=401)
 
+
+@ensure_csrf_cookie
 def edit_my_review(request, review_id):
     if request.user.is_authenticated:
         if request.method == 'PUT':
