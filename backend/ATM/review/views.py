@@ -105,12 +105,12 @@ def edit_my_review(request, review_id):
         return HttpResponse(status=401)
 
 
-def my_review(request,id):
+def my_review(request,restaurant_id):
     if request.method == 'GET':
         if request.user.is_authenticated == False:
             return HttpResponse(status = 401)
         try:
-            restaurant = Restaurant.objects.get(id = id).values()
+            restaurant = Restaurant.objects.get(id = restaurant_id).values()
         except Restaurant.DoesNotExist:
             return HttpResponse(status=404)
         user = reqeust.user.profile
