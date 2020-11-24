@@ -35,7 +35,7 @@ def searched_restaurants(request,word):
                 preferenceVector = restaurant.preferenceVector
                 preferenceList = []
                 for factor in preferenceVector:
-                    preferenceList.append({factor : preferenceVector[facotr]})
+                    preferenceList.append({factor : preferenceVector[factor]})
                 response_dict['preferenceVector'] = preferenceList
                 response_list.append(response_dict)
             return JsonResponse(response_list, safe=False, status = 200)
@@ -49,11 +49,7 @@ def searched_restaurants(request,word):
                 response_dict = {}
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
-                foodCategoryList = []
-                foodCategory = restaurant.foodCategory
-                for category in foodCategory:
-                    foodCategoryList.append({category : foodCategory[category]})
-                response_dict['category'] = foodCategoryList
+                response_dict['category'] = restaurant.foodCategory
                 response_dict['rate'] = 3.5
                 thumbnail=
                     ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
@@ -61,7 +57,7 @@ def searched_restaurants(request,word):
                 preferenceVector = restaurant.preferenceVector
                 preferenceList = []
                 for factor in preferenceVector:
-                    preferenceList.append({factor : preferenceVector[facotr]})
+                    preferenceList.append({factor : preferenceVector[factor]})
                 response_dict['preferenceVector'] = preferenceList
                 response_list.append(response_dict)
             for food in menu.objects.filter(name__contains=word):
@@ -85,7 +81,7 @@ def searched_restaurants(request,word):
                 preferenceVector = restaurant.preferenceVector
                 preferenceList = []
                 for factor in preferenceVector:
-                    preferenceList.append({factor : preferenceVector[facotr]})
+                    preferenceList.append({factor : preferenceVector[factor]})
                 response_dict['preferenceVector'] = preferenceList
                 response_list.append(response_dict)
             return JsonResponse(response_list, safe= False, status = 200)
