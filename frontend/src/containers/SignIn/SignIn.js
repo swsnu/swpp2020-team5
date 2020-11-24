@@ -23,8 +23,13 @@ class SignIn extends Component {
     const { history } = this.props;
     const { password } = this.state;
     const { email } = this.state;
-
-    onPostSignIn({ email, password });
+    let x,y;
+    navigator.geolocation.getCurrentPosition((loc) => {
+      x=loc.coords.longitude;
+      y=loc.coords.latitude;
+    });
+       
+    onPostSignIn({ email, password, x, y});
     history.push('/main');
   }
 
