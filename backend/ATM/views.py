@@ -8,7 +8,7 @@ from .models import PreferenceVector, FoodCategory, Location, Profile
 from .utils import cos_sim_word
 from .user.utils import get_preference_attributes
 import json
-
+import requests
 # Create your views here.
 def index():
     return
@@ -69,6 +69,8 @@ def sign_in(request):
             email = req_data['email']
             username = User.objects.get(email=email).username
             password = req_data['password']
+            loc_x = req_data['x']
+            loc_y = req_data['y']
         except (KeyError, JSONDecodeError) as e:
             return HttpResponse(status=400)
         user = authenticate(request, username=username, password=password)
@@ -76,6 +78,16 @@ def sign_in(request):
             return HttpResponse(status=401)
         else:
             login(request, user)
+            url = f'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x={loc_x}&y={loc_y}'
+            headers = {"Authorization": "KakaoAK aac06354b765df501b09c92813259058"}
+            api_test = requests.get(url,headers=headers)
+            url_text = json.loads(api_test.text)
+            address_name = url_text['documents'][0]['address_name']
+            #user = request.user.profile
+            user.search_location.x = loc_x
+            user.search_location.y = loc_y
+            user.search_location.address_name = address_name
+            user.search_location.save()
             return HttpResponse(status=204)
     else:
         return HttpResponseNotAllowed(['POST'])
