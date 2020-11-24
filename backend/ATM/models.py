@@ -104,6 +104,7 @@ class Restaurant(models.Model):
     # keyword = models.JSONField() # dict{keyword(str): weight(int)}
     kakao_link = models.URLField()
     naver_link = models.URLField()
+    map_link = models.URLField()
 
 class menu(models.Model):
     name = models.CharField(max_length=20)
