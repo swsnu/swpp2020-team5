@@ -1,6 +1,7 @@
 from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import ElementNotInteractableException
 from selenium.common.exceptions import ElementNotVisibleException
+from selenium.common.exceptions import JavascriptException
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium import webdriver
@@ -11,8 +12,7 @@ import time
 
 restaurants = json.loads(open("restaurants.json").read())
 reviews_db = open("reviews_mango1.json", "a")
-mismatches = open("mismango.txt", "a")
-start_at = 105
+start_at = 152
 end_at   = 210
 currently_at = 0
 
@@ -34,27 +34,37 @@ for restaurant in restaurants:
     driver.get(url)
   except ElementClickInterceptedException:
     driver.find_element_by_css_selector(".ad_btn.ad_block_btn").click()
-
+  exists = False
   try:  # the actual crawling
     url = "https://www.mangoplate.com/search/" + restaurant["name"]
     driver.get(url)
     driver.find_element_by_class_name("thumb").click()
+    exists = True
   except NoSuchElementException:
     name_token = restaurant["name"].split()
     for token in name_token:
       try:
-        url = "https://www.mangoplate.com/search/" + name_token
+        url = "https://www.mangoplate.com/search/" + token
         driver.get(url)
         driver.find_element_by_class_name("thumb").click()
+        exists = True
       except NoSuchElementException:
         pass
       else:
         break
-  addr_bundle = driver.find_element_by_css_selector(".only-desktop td").text
-  mango_road_token = addr_bundle.split("\n")[0].split()
-  mango_addr_token = addr_bundle.split("\n")[1].split()
+  if not exists:
+    print("doesn't exist: " + str(currently_at))
+    print("  ㄴ" + restaurant["name"])
+    continue
+  addr_bundle = driver.find_element_by_css_selector(".only-desktop td").text.split("\n")
+  mango_road_token = addr_bundle[0].split()
   mango_road = mango_road_token[1] + mango_road_token[2] + mango_road_token[3]
-  mango_addr = mango_addr_token[2] + mango_addr_token[3] + mango_addr_token[4]
+  if len(addr_bundle) == 2:
+    mango_addr_token = addr_bundle[1].split()
+    mango_addr = mango_addr_token[2] + mango_addr_token[3] + mango_addr_token[4]
+  else:
+    mango_addr_token = addr_bundle[0].split()
+    mango_addr = mango_road_token[1] + mango_road_token[2] + mango_road_token[3]
 
   addr_token = restaurant["location"]["address"]["address_name"].split()
   road_token = restaurant["location"]["address_name"].split()
@@ -62,7 +72,6 @@ for restaurant in restaurants:
   addr = addr_token[1] + addr_token[2] + addr_token[3]
 
   if mango_addr != addr and mango_road != road:
-    mismatches.write(restaurant["name"] + "\n")
     print("address mismatch: " + str(currently_at))
     print("  ㄴ" + restaurant["name"])
     continue
@@ -72,14 +81,19 @@ for restaurant in restaurants:
   while prevlen != len(reviews):
     prevlen = len(reviews)
     time.sleep(1)
-    morebutton = driver.find_element_by_class_name("RestaurantReviewList__MoreReviewButton")
-    ActionChains(driver).move_to_element(morebutton).click(morebutton).perform()
+    try:
+      morebutton = driver.find_element_by_class_name("RestaurantReviewList__MoreReviewButton")
+      ActionChains(driver).move_to_element(morebutton).click(morebutton).perform()
+    except JavascriptException:
+      pass
     reviews = driver.find_elements_by_class_name("RestaurantReviewItem__ReviewText")
   reviews_text = ""
   for review in reviews:
     reviews_text += review.text + "\n"
   mangoreview = {}
   mangoreview["Id"] = restaurant["Id"]
-  mangoreview["text"] = restaurant["text"]
+  mangoreview["text"] = reviews_text
   json.dump(mangoreview, reviews_db, indent=2, ensure_ascii=False)
+  reviews_db.write(",\n")
+
 driver.close()

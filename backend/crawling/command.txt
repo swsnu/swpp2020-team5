@@ -1,0 +1,5 @@
+python3 crawling_mango.py &
+python3 crawling_mango1.py &
+python3 crawling_mango2.py &
+python3 crawling_mango3.py &
+
