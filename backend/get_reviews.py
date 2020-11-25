@@ -14,7 +14,7 @@ with open('./reviews.json') as json_file:
             for review in restaurant_review[site_name]:
                 if review['rating'] is None: 
                     no_rating_review_count += 1
-                    continue
+                    review['rating'] = 0
                 date_values = review['date'].split('.')
                 new_review = Review(
                     restaurant=Restaurant.objects.get(id=review['restaurant']),
