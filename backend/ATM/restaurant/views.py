@@ -19,7 +19,6 @@ def searched_restaurants(request,word):
         if word == '':
             response_list = []
             for restaurant in Restaurant.objects.all().values():
-                
                 cur = (author.y, author.x)
                 res_loc = (restaurant.location.y,restaurant.location.x)
                 if haversine(cur, res_loc) >= 10:
@@ -32,11 +31,21 @@ def searched_restaurants(request,word):
                 thumbnail = 
                     ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
                 response_dict['img_url'] = thumbnail.url
-                preferenceVector = restaurant.preferenceVector
-                preferenceList = []
-                for factor in preferenceVector:
-                    preferenceList.append({factor : preferenceVector[factor]})
-                response_dict['preferenceVector'] = preferenceList
+                pref_vec = restaurant.preferenceVector
+                attr_list = get_preference_attributes(pref_vec)
+                preferencevector_dict = {}
+                for attr in attr_list:
+                    preferencevector_dict[attr] = pref_vec[attr]
+                res = sorted(preferencevector_dict.items, key=f2, reverse=True)
+                i = 0
+                sorted_dict = {}
+                for pref in res:
+                    if i == 3:
+                        break
+                    sorted_dict[pref] = res[pref]
+                    i += 1
+                response_dict['preferenceVector'] = sorted_dict
+
                 response_list.append(response_dict)
             return JsonResponse(response_list, safe=False, status = 200)
         else:
@@ -54,36 +63,23 @@ def searched_restaurants(request,word):
                 thumbnail=
                     ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
                 response_dict['img_url'] = thumbnail.urls
-                preferenceVector = restaurant.preferenceVector
-                preferenceList = []
-                for factor in preferenceVector:
-                    preferenceList.append({factor : preferenceVector[factor]})
-                response_dict['preferenceVector'] = preferenceList
+                pref_vec = restaurant.preferenceVector
+                attr_list = get_preference_attributes(pref_vec)
+                preferencevector_dict = {}
+                for attr in attr_list:
+                    preferencevector_dict[attr] = pref_vec[attr]
+                res = sorted(preferencevector_dict.items, key=f2, reverse=True)
+                i = 0
+                sorted_dict = {}
+                for pref in res:
+                    if i == 3:
+                        break
+                    sorted_dict[pref] = res[pref]
+                    i += 1
+                response_dict['preferenceVector'] = sorted_dict
+
                 response_list.append(response_dict)
-            for food in menu.objects.filter(name__contains=word):
-                restaurant = food.restaurant
-                cur = (author.y, author.x)
-                res_loc = (restaurant.location.y,restaurant.location.x)
-                if haversine(cur, res_loc) >= 10:
-                    continue
-                response_dict = {}
-                response_dict['id'] = restaurant.id
-                response_dict['title'] = restaurant.name
-                foodCategoryList = []
-                foodCategory = restaurant.foodCategory
-                for category in foodCategory:
-                    foodCategoryList.append({category : foodCategory[category]})
-                response_dict['category'] = foodCategoryList
-                response_dict['rate'] = 3.5
-                thumbnail=
-                    ThumbNail.objects.get(restaurant_name=restaurant.name).select_related('restaurant')
-                response_dict['img_url'] = thumbnail.urls
-                preferenceVector = restaurant.preferenceVector
-                preferenceList = []
-                for factor in preferenceVector:
-                    preferenceList.append({factor : preferenceVector[factor]})
-                response_dict['preferenceVector'] = preferenceList
-                response_list.append(response_dict)
+          
             return JsonResponse(response_list, safe= False, status = 200)
            
     else :
@@ -132,4 +128,11 @@ def restaurant(request,id) :
 
 
 
-
+def get_preference_attributes(pref_vec):
+    no_need_attr = ['_state', 'id']
+    attr_list = list(pref_vec.__dict__.keys())
+    new_attr_list = []
+    for attr in attr_list:
+        if attr not in no_need_attr:
+            new_attr_list.append(attr)
+    return new_attr_list

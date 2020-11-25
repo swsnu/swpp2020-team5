@@ -21,6 +21,7 @@ class LocationTab extends Component {
   }
 
   componentDidMount() {
+    this.props.onGetSearchLocation();
     // load Kakaomap API script
     const script = document.createElement('script');
     script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=f4eda0526e95ec9c05400d0a69066c5a&libraries=services&autoload=false';
@@ -166,6 +167,9 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeLocation: (location) => {
     dispatch(actionCreators.editSearchLocation(location));
   },
+  onGetSearchLocation: () => {
+    dispatch(actionCreators.getSearchLocation());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LocationTab);
