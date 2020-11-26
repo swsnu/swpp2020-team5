@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .utils import get_preference_attributes
+import json
 
 def me(request):
     if request.method == 'GET':
@@ -19,7 +20,7 @@ def me(request):
     else:
         return HttpResponseNotAllowed(['GET'])
 
-def preference_vector():
+def preference_vector(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             user = request.user.profile
@@ -52,7 +53,7 @@ def preference_vector():
     else:
         return HttpResponseNotAllowed(['GET','PUT'])
 
-def search_location():
+def search_location(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             user = request.user.profile
@@ -85,7 +86,7 @@ def search_location():
     else:
         return HttpResponseNotAllowed(['GET','PUT'])
 
-def food_category():
+def food_category(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             user = request.user.profile

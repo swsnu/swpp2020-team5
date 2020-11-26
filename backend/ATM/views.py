@@ -10,9 +10,8 @@ from .user.utils import get_preference_attributes
 import json
 
 # Create your views here.
-def index():
-    return
 
+@ensure_csrf_cookie
 def sign_up(request):
     if request.method == 'POST':
         try:
@@ -58,6 +57,7 @@ def sign_up(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
+@ensure_csrf_cookie
 def sign_in(request):
     if request.method == 'POST':
         try:
@@ -66,15 +66,16 @@ def sign_in(request):
             password = req_data['password']
         except (KeyError, JSONDecodeError) as e:
             return HttpResponse(status=400)
-        user = authenticate(request, email=email, password=password)
-        if user is None:
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
             return HttpResponse(status=401)
-        else:
-            login(request, user)
-            return HttpResponse(status=204)
+        login(request, user)
+        return HttpResponse(status=204)
     else:
         return HttpResponseNotAllowed(['POST'])
 
+@ensure_csrf_cookie
 def sign_out(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
