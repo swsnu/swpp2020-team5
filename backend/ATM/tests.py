@@ -25,7 +25,7 @@ class HomeTestCase(TestCase):
                     HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(400, response.status_code)
         request_body = {
-            "name": "sug",
+            "username": "sug",
             "email": "sug@sug.com",
             "password": "sug",
             "selectedFoods": {

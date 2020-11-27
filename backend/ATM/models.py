@@ -72,18 +72,23 @@ class Profile(models.Model):
     search_location = models.ForeignKey(
             Location,
             on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
     food_category = models.ForeignKey(
             FoodCategory,
             on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
     preference_vector = models.ForeignKey(
             PreferenceVector,
             on_delete=models.PROTECT,
-            )
-    search_location = models.ForeignKey(
-            Location,
-            on_delete=models.PROTECT,
+            blank=True,
+            null=True,
+            default='',
             )
 
 class Restaurant(models.Model):

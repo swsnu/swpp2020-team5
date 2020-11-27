@@ -8,15 +8,16 @@ from .models import PreferenceVector, FoodCategory, Location, Profile
 from .utils import cos_sim_word
 from .user.utils import get_preference_attributes
 import json
-
+import requests
 # Create your views here.
+
 
 @ensure_csrf_cookie
 def sign_up(request):
     if request.method == 'POST':
         try:
             req_data = json.loads(request.body.decode())
-            username = req_data['name']
+            username = req_data['username']
             email = req_data['email']
             password = req_data['password']
             selected_foods = req_data['selectedFoods']
@@ -35,7 +36,7 @@ def sign_up(request):
         for attr in attr_list:
             weight = 0.0
             for food in true_food_list:
-                weight += cos_sim_word(attr, food)
+               weight += cos_sim_word(attr, food)
             pref_vec[attr] = weight
         pref_vec.save()
 
@@ -57,6 +58,7 @@ def sign_up(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
+
 @ensure_csrf_cookie
 def sign_in(request):
     if request.method == 'POST':
@@ -75,6 +77,7 @@ def sign_in(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
+
 @ensure_csrf_cookie
 def sign_out(request):
     if request.method == 'GET':
@@ -92,7 +95,3 @@ def token(request):
         return HttpResponse(status=204)
     else:
         return HttpResponseNotAllowed(['GET'])
-
-
-
-

@@ -9,7 +9,7 @@ class UserTestCase(TestCase):
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         request_body = {
-            "name": "sug",
+            "username": "sug",
             "email": 'sug@sug.com',
             'password': 'sug',
             'selectedFoods': {
