@@ -28,7 +28,7 @@ class MainPage extends Component {
           <RestaurantSummary
             title={el.title}
             id={el.id}
-            img_src={el.img_src}
+            img_url={el.img_url}
             rate={el.rate}
             category={el.category}
             order={order}

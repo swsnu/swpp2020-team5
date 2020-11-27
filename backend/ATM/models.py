@@ -26,6 +26,11 @@ class FoodCategory(models.Model):
     기타 = models.BooleanField(default=False)
 
 class Location(models.Model):
+    def __getitem__(self, key):
+        return getattr(self, key)
+
+    def __setitem__(self, key, value):
+        return setattr(self, key, value)
     x = models.FloatField(default=0.0)
     y = models.FloatField(default=0.0)
     address_name = models.CharField(max_length=100)
