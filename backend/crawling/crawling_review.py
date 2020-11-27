@@ -31,7 +31,7 @@ ActionChains(driver).move_to_element(loctab).click(loctab).click(loctab).perform
 time.sleep(1)
 
 while True:
-  pages = driver.find_elements_by_css_selector("#info\.search\.page a")
+  pages = driver.find_elements_by_css_selector("#info\\.search\\.page a")
   for page in pages:
     page.click()
     time.sleep(1)
