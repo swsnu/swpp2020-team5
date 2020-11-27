@@ -15,7 +15,7 @@ def get_other_reviews(request, restaurant_id):
     if request.user.is_authenticated:
         if request.method == 'GET':
             try:
-                target = Restaurant.objects.get(restaurant_id)
+                target = Restaurant.objects.get(id=restaurant_id)
             except Restaurant.DoesNotExist:
                 return JsonResponse({}, status=404)
 
@@ -35,9 +35,26 @@ def get_other_reviews(request, restaurant_id):
 
 
 @ensure_csrf_cookie
-def post_my_review(request, restaurant_id):
+def get_post_my_review(request, restaurant_id):
     if request.user.is_authenticated:
-        if request.method == 'POST':
+        if request.method == 'GET':
+            try:
+                restaurant = Restaurant.objects.get(id = restaurant_id)
+            except Restaurant.DoesNotExist:
+                return HttpResponse(status=404)
+            user = reqeust.user.profile
+            response_list = [
+                    {
+                        'id':review.id, 
+                        'content': review.content, 
+                        'rating': review.rating, 
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S')
+                        }
+                for review in Review.objects.all().values() 
+                if request.user.email == review.author.user.email]
+            return HttpResponse(response_list, safe= False, status=200)
+        
+        elif request.method == 'POST':
             try:
                 req_data = json.loads(request.body.decode())
                 content = req_data['content']
@@ -55,7 +72,7 @@ def post_my_review(request, restaurant_id):
 
             return HttpResponse(content=json.dumps(response_dict), status=201)  ## default status is 200
         else:
-            return HttpResponseNotAllowed(['POST'])
+            return HttpResponseNotAllowed(['GET','POST'])
     else:
         return HttpResponse(status=401)
 
