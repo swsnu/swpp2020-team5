@@ -1,6 +1,4 @@
-from selenium.common.exceptions import ElementNotInteractableException
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import JavascriptException
+from selenium.common.exceptions import ElementNotInteractableException, NoSuchElementException, JavascriptException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
