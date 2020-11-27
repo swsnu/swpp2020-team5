@@ -26,6 +26,11 @@ class FoodCategory(models.Model):
     기타 = models.BooleanField(default=False)
 
 class Location(models.Model):
+    def __getitem__(self, key):
+        return getattr(self, key)
+
+    def __setitem__(self, key, value):
+        return setattr(self, key, value)
     x = models.FloatField(default=0.0)
     y = models.FloatField(default=0.0)
     address_name = models.CharField(max_length=100)
@@ -104,6 +109,7 @@ class Restaurant(models.Model):
     # keyword = models.JSONField() # dict{keyword(str): weight(int)}
     kakao_link = models.URLField()
     naver_link = models.URLField()
+    map_link = models.URLField()
 
 class menu(models.Model):
     name = models.CharField(max_length=20)
