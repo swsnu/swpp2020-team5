@@ -43,7 +43,7 @@ class OtherReview extends Component {
               edit={false}
             />
             <p id="rating-text">{this.props.rating}</p>
-            <p id="createTime">{this.props.createTime}</p>
+            <p id="createTime">{this.props.date}</p>
           </div>
           <div className="other-review-content" id={this.props.author} onClick={() => this.onClickContentHandler()}>{contentDisplay}</div>
         </div>
