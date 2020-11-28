@@ -70,7 +70,6 @@ disable=missing-module-docstring,
         too-many-locals,
         trailing-whitespace,
         too-many-return-statements,
-
         print-statement,
         parameter-unpacking,
         unpacking-in-except,

@@ -1,6 +1,5 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from django.contrib.auth import login
 from .utils import get_preference_attributes
 
 

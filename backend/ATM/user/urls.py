@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path(
         'me/',
-        views.me,
+        views.me_info,
         name='me'),
     path(
         'preference-vector/',
