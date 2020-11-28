@@ -4,5 +4,4 @@ coverage
 *.pyc
 *.log
 frontend/build
-backend/ATM/migrations
 backend/__pycache__

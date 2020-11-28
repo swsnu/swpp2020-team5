@@ -2,11 +2,11 @@
 restaurant backend
 '''
 from django.http import HttpResponse, HttpResponseNotAllowed,JsonResponse
-from django.core.exceptions import ObjectDoesNotExist
 from haversine import haversine
 from ..models import Restaurant, openTime, menu, ThumbNail, keyword, Profile
 
-#preferencVector
+# preferencVector
+
 def main_restaurants(request):
     '''
     default main page
@@ -17,7 +17,7 @@ def main_restaurants(request):
             response_list = []
             for restaurant in Restaurant.objects.all():
                 cur = (author.search_location.y, author.search_location.x)
-                res_loc = (restaurant.location.y,restaurant.location.x)
+                res_loc = (restaurant.location.y, restaurant.location.x)
                 if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
@@ -29,7 +29,8 @@ def main_restaurants(request):
                             .get(restaurant=restaurant)
                 response_dict['img_url'] = thumbnail.url
                 restaurant_pref_vec = restaurant.preference_vector
-                restaurant_attr_list = get_preference_attributes(restaurant_pref_vec)
+                restaurant_attr_list = get_preference_attributes(
+                    restaurant_pref_vec)
                 restaurant_pref_dict = {}
                 for attr in restaurant_attr_list:
                     restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
@@ -44,11 +45,12 @@ def searched_restaurants(request,word):
     '''
     if request.method == 'GET':
         if request.user.is_authenticated:
+
             author = Profile.objects.get(user=request.user)
             response_list = []
             for restaurant in Restaurant.objects.filter(name__contains=word):
                 cur = (author.search_location.y, author.search_location.x)
-                res_loc = (restaurant.location.y,restaurant.location.x)
+                res_loc = (restaurant.location.y, restaurant.location.x)
                 if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
@@ -60,7 +62,8 @@ def searched_restaurants(request,word):
                             .get(restaurant=restaurant)
                 response_dict['img_url'] = thumbnail.url
                 restaurant_pref_vec = restaurant.preference_vector
-                restaurant_attr_list = get_preference_attributes(restaurant_pref_vec)
+                restaurant_attr_list = get_preference_attributes(
+                    restaurant_pref_vec)
                 restaurant_pref_dict = {}
                 for attr in restaurant_attr_list:
                     restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
@@ -69,7 +72,6 @@ def searched_restaurants(request,word):
             return JsonResponse(response_list, safe= False, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
-
 
 def restaurant_detail(request,restaurant_id):
     '''
@@ -90,31 +92,31 @@ def restaurant_detail(request,restaurant_id):
             thumbnail_list = []
             for thumbnail in ThumbNail.objects.select_related('restaurant') \
             .filter(restaurant=restaurant):
+
                 thumbnail_list.append(thumbnail.url)
             response_dict['img_url'] = thumbnail_list[0]
             response_dict['img_url_list'] = thumbnail_list
             menu_list = []
-            for price in menu.objects.select_related('restaurant').filter(restaurant=restaurant):
-                menu_list.append({price.name : price.price})
+            for price in menu.objects.select_related(
+                    'restaurant').filter(restaurant=restaurant):
+                menu_list.append({price.name: price.price})
             response_dict['menu'] = menu_list
             open_list = []
             for time in openTime.objects.select_related('restaurant').filter(restaurant=restaurant):
                 open_list.append({time.condition : time.time})
             response_dict['time'] = open_list
             keyword_list = []
-            for key in keyword.objects.select_related('restaurant').filter(restaurant=restaurant):
-                keyword_list.append({key.word : key.weight})
+            for key in keyword.objects.select_related(
+                    'restaurant').filter(restaurant=restaurant):
+                keyword_list.append({key.word: key.weight})
             response_dict['keywords'] = keyword_list
-            response_dict['urls'] = [restaurant.kakao_link, restaurant.naver_link]
+            response_dict['urls'] = [
+                restaurant.kakao_link,
+                restaurant.naver_link]
             response_dict['location'] = restaurant.location.address_name
             return JsonResponse(response_dict, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
-
-
-
-
-
 
 def get_preference_attributes(pref_vec):
     '''

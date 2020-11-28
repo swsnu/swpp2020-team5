@@ -3,8 +3,9 @@ restaurant backend testing
 '''
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from ATM.models import Restaurant, openTime, menu, ThumbNail, keyword, \
+from ..models import Restaurant, openTime, menu, ThumbNail, keyword, \
 PreferenceVector, Profile, Location
+
 
 class RestaurantTestCase(TestCase):
     '''
@@ -84,9 +85,9 @@ class RestaurantTestCase(TestCase):
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/atm/restaurant/search/',
-                                HTTP_X_CSRFTOKEN=csrftoken,
-                                content_type='application/json')
-        self.assertEqual(405,response.status_code)
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
+        self.assertEqual(405, response.status_code)
         response = client.get('/atm/restaurant/search/',
                     content_type='application/json',
                     HTTP_X_CSRFTOKEN=csrftoken)
@@ -96,8 +97,8 @@ class RestaurantTestCase(TestCase):
             'password': '123123'
         }
         response = client.post('/atm/sign-in/', request_body,
-                                HTTP_X_CSRFTOKEN=csrftoken,
-                                content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/restaurant/search/',
                                 content_type='application/json',
@@ -112,9 +113,9 @@ class RestaurantTestCase(TestCase):
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/atm/restaurant/search/s',
-                                HTTP_X_CSRFTOKEN=csrftoken,
-                                content_type='application/json')
-        self.assertEqual(405,response.status_code)
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
+        self.assertEqual(405, response.status_code)
         response = client.get('/atm/restaurant/search/sa',
                                 content_type='application/json',
                                 HTTP_X_CSRFTOKEN=csrftoken)
@@ -124,8 +125,8 @@ class RestaurantTestCase(TestCase):
             'password': '123123'
         }
         response = client.post('/atm/sign-in/', request_body,
-                    HTTP_X_CSRFTOKEN=csrftoken,
-                    content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/restaurant/search/s',
                                 content_type='application/json',
@@ -148,9 +149,9 @@ class RestaurantTestCase(TestCase):
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.put('/atm/restaurant/detail/1',
-                                HTTP_X_CSRFTOKEN=csrftoken,
-                                content_type='application/json')
-        self.assertEqual(405,response.status_code)
+                              HTTP_X_CSRFTOKEN=csrftoken,
+                              content_type='application/json')
+        self.assertEqual(405, response.status_code)
         response = client.get('/atm/restaurant/detail/1',
                     content_type='application/json',
                     HTTP_X_CSRFTOKEN=csrftoken)
@@ -160,8 +161,8 @@ class RestaurantTestCase(TestCase):
             'password': '123123'
         }
         response = client.post('/atm/sign-in/', request_body,
-                                HTTP_X_CSRFTOKEN=csrftoken,
-                                content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/restaurant/detail/1',
                                 content_type='application/json',

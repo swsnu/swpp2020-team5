@@ -40,7 +40,7 @@ class ReviewList extends Component {
       <OtherReview
         content={review.content}
         author={review.authorName}
-        createTime={review.createTime.toLocaleDateString()}
+        date={review.date}
         rating={review.rating}
       />
     ));
@@ -49,7 +49,7 @@ class ReviewList extends Component {
       <OtherReview
         content={review.content}
         author={review.authorName}
-        createTime={review.createTime.toLocaleDateString()}
+        date={review.date}
         rating={review.rating}
       />
     ));
@@ -58,7 +58,7 @@ class ReviewList extends Component {
       <OtherReview
         content={review.content}
         author={review.authorName}
-        createTime={review.createTime.toLocaleDateString()}
+        date={review.date}
         rating={review.rating}
       />
     ));

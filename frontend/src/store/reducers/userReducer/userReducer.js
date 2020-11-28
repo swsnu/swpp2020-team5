@@ -46,7 +46,7 @@ const initialState = {
 };
 
 // preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
-const reducer = (state = initialState, action) => {
+const reducer = (state=initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USER:
       return { ...state, selectedUser: action.target };

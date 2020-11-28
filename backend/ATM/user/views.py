@@ -1,21 +1,19 @@
-from django.shortcuts import render
+import json
 from json import JSONDecodeError
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .utils import get_preference_attributes
-import json
+
 
 @ensure_csrf_cookie
-def me(request):
+def me_info(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             response_dict = {
                 'id': request.user.id,
                 'name': request.user.username,
             }
-            return JsonResponse(response_dict,status=200)
+            return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)
     else:
@@ -44,7 +42,7 @@ def preference_vector(request):
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
                     user.preference_vector[attr] = req_data[attr]
-            except (KeyError, JSONDecodeError) as e:
+            except (KeyError, JSONDecodeError):
                 return HttpResponse(status=400)
             user.preference_vector.save()
             response_dict = {}
@@ -54,7 +52,7 @@ def preference_vector(request):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET','PUT'])
+        return HttpResponseNotAllowed(['GET', 'PUT'])
 
 
 @ensure_csrf_cookie
@@ -62,24 +60,24 @@ def search_location(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             user = request.user.profile
-            search_location = user.search_location
-            attr_list = get_preference_attributes(search_location)
+            search_loc = user.search_location
+            attr_list = get_preference_attributes(search_loc)
             response_dict = {}
             for attr in attr_list:
-                response_dict[attr] = search_location[attr]
+                response_dict[attr] = search_loc[attr]
             return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             user = request.user.profile
-            search_location = user.search_location
-            attr_list = get_preference_attributes(search_location)
+            search_loc = user.search_location
+            attr_list = get_preference_attributes(search_loc)
             try:
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
                     user.search_location[attr] = req_data[attr]
-            except (KeyError, JSONDecodeError) as e:
+            except (KeyError, JSONDecodeError):
                 return HttpResponse(status=400)
             user.search_location.save()
             response_dict = {}
@@ -89,31 +87,32 @@ def search_location(request):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET','PUT'])
+        return HttpResponseNotAllowed(['GET', 'PUT'])
+
 
 @ensure_csrf_cookie
 def food_category(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             user = request.user.profile
-            food_category = user.food_category
-            attr_list = get_preference_attributes(food_category)
+            food_cat = user.food_category
+            attr_list = get_preference_attributes(food_cat)
             response_dict = {}
             for attr in attr_list:
-                response_dict[attr] = food_category[attr]
+                response_dict[attr] = food_cat[attr]
             return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             user = request.user.profile
-            food_category = user.food_category
-            attr_list = get_preference_attributes(food_category)
+            food_cat = user.food_category
+            attr_list = get_preference_attributes(food_cat)
             try:
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
                     user.food_category[attr] = req_data[attr]
-            except (KeyError, JSONDecodeError) as e:
+            except (KeyError, JSONDecodeError):
                 return HttpResponse(status=400)
             user.food_category.save()
             response_dict = {}
@@ -123,6 +122,4 @@ def food_category(request):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET','PUT'])
-
-
+        return HttpResponseNotAllowed(['GET', 'PUT'])
