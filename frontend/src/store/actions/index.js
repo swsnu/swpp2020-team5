@@ -22,4 +22,4 @@ export {
   getRestaurantList,
   // getRestaurantName,
   getRestaurantDetail,
-} from './restaurantActions/restauraunActions';
+} from './restaurantActions/restaurauntActions';
