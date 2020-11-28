@@ -1,5 +1,8 @@
+'''
+restaurant urls
+'''
 from django.urls import path
-from . import views
+from ATM.restaurant import views
 
 urlpatterns = [
     path(
@@ -11,7 +14,7 @@ urlpatterns = [
         views.searched_restaurants,
         name='searched_restauratns'),
     path(
-        'detail/<int:id>',
-        views.restaurant,
+        'detail/<int:restaurant_id>',
+        views.restaurant_detail,
         name='restaurant'),
 ]

@@ -1,10 +1,8 @@
-from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
+import json
+from datetime import datetime
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-import json
-from django.views.decorators.csrf import csrf_exempt
 from ATM.models import Review, Restaurant, Profile, Location, PreferenceVector
-from datetime import datetime
 
 
 class ReviewTestCase(TestCase):
