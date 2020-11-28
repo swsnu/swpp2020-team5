@@ -25,30 +25,151 @@ class ReviewTestCase(TestCase):
         mock_prevec.save()
         restaurantA = Restaurant(name='restaurantA', location=mock_location, avg_rating=4, preference_vector=mock_prevec, food_category='', naver_link='', kakao_link='') 
         restaurantA.save()
+        
+        restaurantB = Restaurant(name='restaurantB', location=mock_location, avg_rating=4, preference_vector=mock_prevec, food_category='', naver_link='', kakao_link='') 
+        restaurantB.save()
 
         review = Review(restaurant=restaurantA, author=profileA, content='A wrote this', rating=3, date=datetime.now(), site='atm')
         review.save()
         review = Review(restaurant=restaurantA, author=profileB, content='B wrote this', rating=5, date=datetime.now(), site='atm')
         review.save()
 
-    def test_review_count(self):
+    def test_count(self):
         self.assertEqual(Review.objects.all().count(), 2)
+        self.assertEqual(Restaurant.objects.all().count(), 2)
+        restaurant = Restaurant.objects.get(id=1)
+        self.assertEqual(restaurant.id, 1)
 
     def test_get_other_reviews(self):
         client = Client()
 
-        #The ideal case
-        response = client.post('/atm/sign-in', json.dumps({}))
-        response = client.get('/atm/restaurant/1/other-review')
+        ### Without login case ###
+        response = client.get('/atm/restaurant/1/other-review/')
+        self.assertEqual(response.status_code, 401)
+        
+        ### Login successfully ###
+        response = client.post('/atm/sign-in/', json.dumps({'email': 'testerA@tester.com', 'password': '123123', 'x': '', 'y': ''}), content_type='application/json')
+        self.assertEqual(response.status_code, 204)
+
+        ### Not allowed request ###
+        response = client.post('/atm/restaurant/1/other-review/')
+        self.assertEqual(response.status_code, 405)
+        response = client.put('/atm/restaurant/1/other-review/')
+        self.assertEqual(response.status_code, 405)
+        response = client.delete('/atm/restaurant/1/other-review/')
+        self.assertEqual(response.status_code, 405)
+
+        ### GET OTHER REVIEW
+
+        # The ideal case
+        response = client.get('/atm/restaurant/1/other-review/')
         self.assertEqual(response.status_code, 200)
 
-        pass
+         # Restaurant doesn't exist
+        response = client.get('/atm/restaurant/75/other-review/')
+        self.assertEqual(response.status_code, 404)
 
     def test_get_post_my_review(self):
-        pass
+        client = Client()
+
+        ### Without login case ###
+        response = client.get('/atm/restaurant/1/my-review/')
+        self.assertEqual(response.status_code, 401)
+        response = client.post('/atm/restaurant/1/my-review/')
+        self.assertEqual(response.status_code, 401)
+        
+        ### Login successfully ###
+        response = client.post('/atm/sign-in/', json.dumps({'email': 'testerA@tester.com', 'password': '123123', 'x': '', 'y': ''}), content_type='application/json')
+        self.assertEqual(response.status_code, 204)
+
+        ### Not allowed request ###
+        response = client.put('/atm/restaurant/1/my-review/')
+        self.assertEqual(response.status_code, 405)
+        response = client.delete('/atm/restaurant/1/my-review/')
+        self.assertEqual(response.status_code, 405)
+
+
+        ### GET MY REVIEW ###
+         # The ideal case
+        response = client.get('/atm/restaurant/1/my-review/')
+        self.assertEqual(response.status_code, 200)
+
+         # Restaurant doesn't exist
+        response = client.get('/atm/restaurant/75/my-review/')
+        self.assertEqual(response.status_code, 404)
+
+        ### PORST MY REVIEW ###
+
+        # The ideal case
+        response  = client.post('/atm/restaurant/1/my-review/', json.dumps({'content': 'posted successfully', 'rating': 1}), content_type='application/json')
+        self.assertEqual(response.status_code, 201) 
+
+        # Restaurant doesn't exist
+        response = client.post('/atm/restaurant/75/my-review/', json.dumps({'content': 'no restaurant', 'rating': 4}), content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+
+        # Wrong data (Bad request)
+        response = client.post('/atm/restaurant/75/my-review/', json.dumps({'WRONG_CONTENT': 'no restaurant', 'rating': 4}), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
 
     def test_edit_my_review(self):
-        pass
+        client = Client()
+
+        ### Without login case ###
+        response = client.get('/atm/my-review/1/')
+        self.assertEqual(response.status_code, 401)
+        response = client.post('/atm/my-review/1/')
+        self.assertEqual(response.status_code, 401)
+        
+        ### Login successfully ###
+        response = client.post('/atm/sign-in/', json.dumps({'email': 'testerA@tester.com', 'password': '123123', 'x': '', 'y': ''}), content_type='application/json')
+        self.assertEqual(response.status_code, 204)
+
+        ### Not allowed request ###
+        response = client.get('/atm/my-review/1/')
+        self.assertEqual(response.status_code, 405)
+        response = client.post('/atm/my-review/1/')
+        self.assertEqual(response.status_code, 405)
+
+
+        ### PUT MY REVIEW ###
+
+        # The Ideal case
+        response = client.put('/atm/my-review/1/', json.dumps({'content': 'changed', 'rating': 3}),
+                content_type='application/json')
+        self.assertEqual(response.status_code, 200) 
+
+        # Review doesn't exist
+        response = client.put('/atm/my-review/754/', json.dumps({'content': 'no review', 'rating': 2}),
+                content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+
+        # Not my review (Forbidden request)
+        response = client.put('/atm/my-review/2/', json.dumps({'content': 'changed', 'rating': 3}),
+                content_type='application/json')
+        self.assertEqual(response.status_code, 403)
+
+        # Wrong data (Bad request)
+        response = client.put('/atm/my-review/1/', json.dumps({'WRONG_content': 'changed', 'rating': 3}),
+                content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+
+
+        ### DELETE MY REIVEW ###
+
+        # The Ideal case ##
+        response = client.delete('/atm/my-review/1/')
+        self.assertEqual(response.status_code, 200) 
+        
+        # Review doesn't exist
+        response = client.delete('/atm/my-review/754/')
+        self.assertEqual(response.status_code, 404)
+
+        # Not my review (Forbidden request)
+        response = client.delete('/atm/my-review/2/')
+        self.assertEqual(response.status_code, 403)
+
+
 
 
 

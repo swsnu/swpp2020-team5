@@ -7,10 +7,10 @@ import json
 from json import JSONDecodeError
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
-from .models import Review, Restaurant, Profile
+from ATM.models import Review, Restaurant, Profile
 from datetime import datetime
 
-@ensure_csrf_cookie
+#@ensure_csrf_cookie
 def get_other_reviews(request, restaurant_id):
     if request.user.is_authenticated:
         if request.method == 'GET':
@@ -19,13 +19,14 @@ def get_other_reviews(request, restaurant_id):
             except Restaurant.DoesNotExist:
                 return JsonResponse({}, status=404)
 
-            reviews_on_target = [review for review in Review.objects.all().values() if review.restaurant.id == restaurant_id]
+            reviews_on_target = Review.objects.filter(restaurant=target)
 
-            naver = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.name } for review in reviews_on_target if review.site == 'naver']
-            kakao = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.name } for review in reviews_on_target if review.site == 'kakao']
-            atm = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.name } for review in reviews_on_target if review.site == 'atm']
+            naver = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username } for review in reviews_on_target if review.site == 'naver']
+            kakao = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username } for review in reviews_on_target if review.site == 'kakao']
+            atm = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username } for review in reviews_on_target if review.site == 'atm']
 
             other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
+            other_review_list= {}
             return JsonResponse(other_review_list, safe=False)  ## default status is 200
         else:
             return HttpResponseNotAllowed(['GET'])
@@ -42,7 +43,7 @@ def get_post_my_review(request, restaurant_id):
                 restaurant = Restaurant.objects.get(id = restaurant_id)
             except Restaurant.DoesNotExist:
                 return HttpResponse(status=404)
-            user = reqeust.user.profile
+            user = request.user.profile
             response_list = [
                     {
                         'id':review.id, 
@@ -50,9 +51,9 @@ def get_post_my_review(request, restaurant_id):
                         'rating': review.rating, 
                         'date': review.date.strftime('%Y/%m/%d, %H:%M:%S')
                         }
-                for review in Review.objects.all().values() 
+                for review in Review.objects.all() 
                 if request.user.email == review.author.user.email]
-            return HttpResponse(response_list, safe= False, status=200)
+            return HttpResponse(response_list, status=200)
         
         elif request.method == 'POST':
             try:
@@ -61,12 +62,15 @@ def get_post_my_review(request, restaurant_id):
                 rating = req_data['rating']
             except (KeyError, JSONDecodeError) as e:
                 return HttpResponseBadRequest()
-             
+            try:
+                restaurant = Restaurant.objects.get(id=restaurant_id)
+            except Restaurant.DoesNotExist:
+                return HttpResponse(status=404)
+ 
             date = datetime.now()
-            restaurant = Restaurant.objects.get(id=restaurant_id)
             author = Profile.objects.get(user=request.user)
 
-            new_review = Review(restaurant, author, content, rating, date, 'atm') 
+            new_review = Review(restaurant=restaurant, author=author, content=content, rating=rating, date=date, site='atm') 
             new_review.save()
             response_dict = {'id': new_review.id, 'content': new_review.content, 'rating': new_review.rating, 'date': new_review.date.strftime('%Y/%m/%d, %H:%M:%S')}
 
@@ -121,28 +125,3 @@ def edit_my_review(request, review_id):
             return HttpResponseNotAllowed(['PUT','DELETE'])
     else:
         return HttpResponse(status=401)
-
-
-def my_review(request,restaurant_id):
-    if request.method == 'GET':
-        if request.user.is_authenticated == False:
-            return HttpResponse(status = 401)
-        try:
-            restaurant = Restaurant.objects.get(id = restaurant_id).values()
-        except Restaurant.DoesNotExist:
-            return HttpResponse(status=404)
-        user = reqeust.user.profile
-        response_list = []
-        for review in Review.objects.filter(profile_name=user.name).select_related('profile'):
-                if review.restaurant.id == id:
-                    response_list.append({
-                        'id':review.id, 
-                        'content':review.content,
-                        'rating':review.content, 
-                        'date':review.date
-                    })
-        return HttpResponse(response_list,safe= False, status=200)
-
-    else:
-        return HttpResponseBadRequest(['GET'])            
-

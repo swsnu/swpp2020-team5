@@ -83,7 +83,7 @@ describe('<ReviewList /', () => {
       </Provider>
     );
 
-    spyGetReviews = jest.spyOn(reviewActionCreator, 'getReviews')
+    spyGetReviews = jest.spyOn(reviewActionCreator, 'getOtherReviews')
       .mockImplementation(() => (dispatch) => {});
   });
 
