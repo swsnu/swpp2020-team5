@@ -17,6 +17,5 @@ export const getRestaurantList = (name) => (dispatch) => axois.get(`/atm/restaur
 export const getRestaurantDetail_ = (selectedRestaurant) => ({
   type: actionTypes.GET_RESTAUARANTDETAIL, selectedRestaurant,
 });
-export const getRestaurantDetail = (restaurantID) => (_dispatch) => (dispatch) => 
-  axois.get(`/atm/restaurant/detail/${id}`)
+export const getRestaurantDetail = (restaurantID) => (_dispatch) => (dispatch) => axois.get(`/atm/restaurant/detail/${restaurantID}`)
   .then((res) => dispatch(getRestaurantDetail_(res.data)));

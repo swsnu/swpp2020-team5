@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from '../actionTypes';
 
-//Handling CSRF-Token
+// Handling CSRF-Token
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 

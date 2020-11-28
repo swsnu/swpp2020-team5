@@ -99,7 +99,7 @@ describe('<LocationTab />', () => {
     //             Do not attempt to understand the fucntioalities of the LocationTab
     //             by this unittest.
     //
-    const spyChangeLocation = jest.spyOn(userActionCreators, 'changeLocation')
+    const spyChangeLocation = jest.spyOn(userActionCreators, 'editSearchLocation')
       .mockImplementation(() => () => {});
     const component = mount(locationTab);
     const inputWrapper = component.find('#location-input');

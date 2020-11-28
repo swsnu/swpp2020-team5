@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from '../actionTypes';
 
-//Handling CSRF-Token
+// Handling CSRF-Token
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
@@ -21,5 +21,4 @@ export const getRestaurantList = (name) => (dispatch) => axios.get(`/atm/restaur
 export const getRestaurantDetail_ = (selectedRestaurant) => ({
   type: actionTypes.GET_RESTAUARANTDETAIL, selectedRestaurant,
 });
-export const getRestaurantDetail = (restaurantID) => (_dispatch) => (dispatch) => 
-  axios.get(`/atm/restaurant/detail/${restaurantID}`)
+export const getRestaurantDetail = (restaurantID) => (_dispatch) => (dispatch) => axios.get(`/atm/restaurant/detail/${restaurantID}`);

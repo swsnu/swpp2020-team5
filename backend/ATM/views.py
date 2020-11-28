@@ -69,8 +69,8 @@ def sign_in(request):
             email = req_data['email']
             username = User.objects.get(email=email).username
             password = req_data['password']
-            loc_x = req_data['x']
-            loc_y = req_data['y']
+            loc_x = req_data['currLoc']['x']
+            loc_y = req_data['currLoc']['y']
         except (KeyError, JSONDecodeError) as e:
             return HttpResponse(status=400)
         user = authenticate(request, username=username, password=password)

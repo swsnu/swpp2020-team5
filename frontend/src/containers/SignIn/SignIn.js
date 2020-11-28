@@ -15,27 +15,28 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      currLoc: {
+        x: null,
+        y: null,
+      },
     };
   }
 
   onClickSignInHandler = () => {
-    const { onPostSignIn } = this.props;
-    const { history } = this.props;
-    const { password } = this.state;
-    const { email } = this.state;
-    let x,y;
+    const { onPostSignIn, history } = this.props;
+    const { email, password } = this.state;
+    const { currLoc } = this.state;
     navigator.geolocation.getCurrentPosition((loc) => {
-      x=loc.coords.longitude;
-      y=loc.coords.latitude;
+      currLoc.x = loc.coords.longitude;
+      currLoc.y = loc.coords.latitude;
+      this.setState({ currLoc });
+      onPostSignIn({ email, password, currLoc });
     });
-       
-    onPostSignIn({ email, password, x, y});
     history.push('/main');
   }
 
   render() {
-    const { password } = this.state;
-    const { email } = this.state;
+    const { email, password } = this.state;
     return (
       <div className="sign-in">
         <img className="background" alt="background" src={background} />
