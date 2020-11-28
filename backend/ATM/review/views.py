@@ -20,11 +20,14 @@ def get_other_reviews(request, restaurant_id):
             reviews_on_target = Review.objects.filter(restaurant=target)
 
             naver = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime(
-                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username} for review in reviews_on_target if review.site == 'naver']
+                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username}
+                for review in reviews_on_target if review.site == 'naver']
             kakao = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime(
-                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username} for review in reviews_on_target if review.site == 'kakao']
+                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username}
+                for review in reviews_on_target if review.site == 'kakao']
             atm = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime(
-                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username} for review in reviews_on_target if review.site == 'atm']
+                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username}
+                for review in reviews_on_target if review.site == 'atm']
 
             other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
             other_review_list = {}
@@ -120,7 +123,6 @@ def edit_my_review(request, review_id):
             return HttpResponse(
                 content=json.dumps(response_dict),
                 status=200)  # default status is 200
-
         elif request.method == 'DELETE':
             try:
                 target_review = Review.objects.get(id=review_id)
@@ -130,6 +132,7 @@ def edit_my_review(request, review_id):
                 return HttpResponseForbidden()
             response_dict = {'id': target_review.id}
             target_review.delete()
+
             return HttpResponse(
                 content=json.dumps(response_dict),
                 status=200)  # default status is 200
