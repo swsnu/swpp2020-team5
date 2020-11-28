@@ -15,6 +15,7 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+
       currLoc: {
         x: null,
         y: null,
@@ -33,6 +34,7 @@ class SignIn extends Component {
       onPostSignIn({ email, password, currLoc });
     });
     history.push('/main');
+
   }
 
   render() {
