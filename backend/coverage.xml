@@ -295,7 +295,7 @@
 		</package>
 		<package branch-rate="1" complexity="0" line-rate="1" name="ATM.migrations">
 			<classes>
-				<class branch-rate="1" complexity="0" filename="ATM/migrations/0001_initial.py" line-rate="1" name="0001_initial.py">
+				<class branch-rate="1" complexity="0" filename="ATM/migrations/initial.py" line-rate="1" name="initial.py">
 					<methods/>
 					<lines>
 						<line hits="1" number="3"/>
