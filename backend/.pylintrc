@@ -21,7 +21,7 @@ ignore-patterns=
 init-hook=
     sys.path.append(os.getcwd());
     from pylint_ignore import PylintIgnorePaths;
-    PylintIgnorePaths('migrations')
+    PylintIgnorePaths('ATM/migrations')
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use.
