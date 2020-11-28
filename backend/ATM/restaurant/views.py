@@ -6,7 +6,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 import json
 from json import JSONDecodeError
 from django.core.exceptions import ObjectDoesNotExist
-from ..models import Restaurant, openTime, menu, ThumbNail, keyword, Review, PreferenceVector, Profile, Location
+from ..models import *
 from haversine import haversine
 
 # preferencVector
@@ -106,17 +106,17 @@ def restaurant(request, id):
             response_dict['img_url'] = thumbnail_list[0]
             response_dict['img_url_list'] = thumbnail_list
             menu_list = []
-            for price in menu.objects.select_related(
+            for price in Menu.objects.select_related(
                     'restaurant').filter(restaurant=restaurant):
                 menu_list.append({price.name: price.price})
             response_dict['menu'] = menu_list
             openTime_list = []
-            for time in openTime.objects.select_related(
+            for time in OpenTime.objects.select_related(
                     'restaurant').filter(restaurant=restaurant):
                 openTime_list.append({time.condition: time.time})
             response_dict['time'] = openTime_list
             keyword_list = []
-            for key in keyword.objects.select_related(
+            for key in Keyword.objects.select_related(
                     'restaurant').filter(restaurant=restaurant):
                 keyword_list.append({key.word: key.weight})
             response_dict['keywords'] = keyword_list

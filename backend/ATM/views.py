@@ -1,16 +1,13 @@
-from django.shortcuts import render
+import json
 from json import JSONDecodeError
-from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import PreferenceVector, FoodCategory, Location, Profile
 from .utils import cos_sim_word
 from .user.utils import get_preference_attributes
-import json
-import requests
 # Create your views here.
-
 
 @ensure_csrf_cookie
 def sign_up(request):
@@ -21,7 +18,7 @@ def sign_up(request):
             email = req_data['email']
             password = req_data['password']
             selected_foods = req_data['selectedFoods']
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
         # This checks duplicated user
         if User.objects.filter(email=email).exists() or \
@@ -71,14 +68,17 @@ def sign_in(request):
             password = req_data['password']
            # loc_x = req_data['currLoc']['x']
            # loc_y = req_data['currLoc']['y']
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             return HttpResponse(status=401)
-        login(request, user)
-        return HttpResponse(status=204)
+        if user.check_password(password):
+            login(request, user)
+            return HttpResponse(status=204)
+        else:
+            return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['POST'])
 
