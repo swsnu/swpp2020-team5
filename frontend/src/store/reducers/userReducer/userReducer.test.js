@@ -153,13 +153,13 @@ describe('user reducer', () => {
       searchLocation: null,
     });
   });
-  
+
   it('should do nothing when action name incorrect', () => {
     const newState = reducer(stubInitialState, {
       type: 'WRONG',
     });
     expect(newState).toEqual(
-      stubInitialState
+      stubInitialState,
     );
-  })
+  });
 });

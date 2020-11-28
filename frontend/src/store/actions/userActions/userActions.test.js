@@ -70,12 +70,12 @@ describe('actionCreators', () => {
   it('getUser should process error', (done) => {
     const spy = jest.spyOn(axios, 'get')
       .mockImplementation((url) => new Promise((resolve, reject) => {
-        reject('error');
+        reject(new Error('error'));
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.getUser()).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
-      done()
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
     });
   });
   it('signup should do correctly', (done) => {
@@ -101,7 +101,7 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.postSignUp(null)).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
@@ -120,7 +120,6 @@ describe('actionCreators', () => {
     });
   });
 
-
   it('post signin should process error', (done) => {
     const spy = jest.spyOn(axios, 'post')
       .mockImplementation((url, user) => new Promise((resolve, reject) => {
@@ -131,9 +130,9 @@ describe('actionCreators', () => {
         reject(result);
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
-    store.dispatch(actionCreators.postSignIn('a', 'a')).then(err => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
-      done()
+    store.dispatch(actionCreators.postSignIn('a', 'a')).then((err) => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
     });
   });
   it('signout should do correctly', (done) => {
@@ -159,11 +158,10 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.getSignOut()).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
-
 
   /*
   it('edit user should edit user info properly', (done) => {
@@ -208,7 +206,7 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.editFoodCategory(stubFoodCategory)).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
@@ -241,7 +239,7 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.getSearchLocation()).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
@@ -273,7 +271,7 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.editSearchLocation(stubSearchLocation)).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
@@ -304,12 +302,10 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.getPreferenceVector(stubPreferenceVector)).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
-
-
 
   it('edit preferenceVector should edit user preferenceVector correctly', (done) => {
     const spy = jest.spyOn(axios, 'put')
@@ -338,7 +334,7 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.editPreferenceVector(stubPreferenceVector)).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
@@ -370,9 +366,8 @@ describe('actionCreators', () => {
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.getFoodCategory()).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1)
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
-
 });

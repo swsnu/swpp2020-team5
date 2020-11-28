@@ -34,7 +34,6 @@ class SignIn extends Component {
       onPostSignIn({ email, password, currLoc });
     });
     history.push('/main');
-
   }
 
   render() {

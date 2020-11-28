@@ -78,15 +78,15 @@ class MyInfoTab extends Component {
     // if current page is not Mainpage, myInfoTab should show onDetailPage.
     // Otherwise, should show onMainPage
     if (this.props.restaurantID !== -1) {
-      myReview = this.props.myReviewList.map((review) => {
-        return (<MyReview
+      myReview = this.props.myReviewList.map((review) => (
+        <MyReview
           className="Review"
           reviewID={review.id}
           content={review.content}
           rating={review.rating}
           date={review.date}
-        />);}
-      );
+        />
+      ));
 
       onDetailPage = (
         <div className="on-detail-page">
