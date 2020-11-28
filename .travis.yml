@@ -22,7 +22,6 @@ matrix:
         - pip install virtualenv
         - virtualenv venv --python=python3 
         - source venv/bin/activate
-        - pip install django
         - cd backend
         - pip install -r requirements.txt
         - python manage.py makemigrations ATM
