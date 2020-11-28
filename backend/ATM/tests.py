@@ -1,7 +1,5 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from django.contrib.auth import login
-import json
 
 # Create your tests here.
 
@@ -69,7 +67,7 @@ class HomeTestCase(TestCase):
                                content_type="application/json",
                                HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(400, response.status_code)
-        user = User.objects.create_user(username="sug",
+        User.objects.create_user(username="sug",
                                         email="sug@sug.com",
                                         password="sug")
         response = client.get('/atm/token/')
@@ -84,7 +82,7 @@ class HomeTestCase(TestCase):
         self.assertEqual(204, response.status_code)
 
     def test_sign_out(self):
-        user = User.objects.create_user(
+        User.objects.create_user(
             username='sug', password='sug', email='sug@sug.com')
         client = Client(enforce_csrf_checks=True)
         response = client.get('/atm/token/')

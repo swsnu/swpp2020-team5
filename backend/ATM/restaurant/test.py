@@ -78,18 +78,18 @@ class RestaurantTestCase(TestCase):
         mock_Profile_A = Profile(user=userA,
                                  search_location=mock_Location_A)
         mock_Profile_A.save()
-        # menu
-        mock_menu_A = menu(name='짜장면', price=300, restaurant=mock_restaurant_A)
+        # Menu
+        mock_menu_A = Menu(name='짜장면', price=300, restaurant=mock_restaurant_A)
         mock_menu_A.save()
-        mock_menu_B = menu(name='dd', price=30, restaurant=mock_restaurant_B)
+        mock_menu_B = Menu(name='dd', price=30, restaurant=mock_restaurant_B)
         mock_menu_B.save()
-        # openTime
-        mock_time_A = openTime(
+        # OpenTime
+        mock_time_A = OpenTime(
             restaurant=mock_restaurant_A,
             condition='휴무',
             time='9:00')
         mock_time_A.save()
-        mock_time_B = openTime(
+        mock_time_B = OpenTime(
             restaurant=mock_restaurant_B,
             condition='휴무',
             time='9:00')
@@ -104,11 +104,11 @@ class RestaurantTestCase(TestCase):
             restaurant=mock_restaurant_B,
             url='www.naver.com')
         mock_ThumbNail_B.save()
-        # keyword
-        mock_keyword_A = keyword(
+        # Keyword
+        mock_keyword_A = Keyword(
             restaurant=mock_restaurant_A, word='짠', weight=30)
         mock_keyword_A.save()
-        mock_keyword_B = keyword(
+        mock_keyword_B = Keyword(
             restaurant=mock_restaurant_B, word='짠', weight=30)
         mock_keyword_B.save()
 
