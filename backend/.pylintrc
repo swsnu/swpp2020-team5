@@ -68,6 +68,8 @@ disable=missing-module-docstring,
         relative-beyond-top-level,
         no-else-return,
         too-many-locals,
+        trailing-whitespace,
+        too-many-return-statements,
 
         print-statement,
         parameter-unpacking,

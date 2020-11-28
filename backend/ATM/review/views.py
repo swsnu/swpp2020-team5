@@ -1,14 +1,14 @@
 import json
 from datetime import datetime
 from json import JSONDecodeError
-from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
+from django.http import (
+        HttpResponse, HttpResponseNotAllowed, JsonResponse,
+        HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
+        )
 from django.views.decorators.csrf import ensure_csrf_cookie
-
 from ATM.models import Review, Restaurant, Profile
 
-# @ensure_csrf_cookie
-
-
+@ensure_csrf_cookie
 def get_other_reviews(request, restaurant_id):
     if request.user.is_authenticated:
         if request.method == 'GET':
@@ -19,14 +19,32 @@ def get_other_reviews(request, restaurant_id):
 
             reviews_on_target = Review.objects.filter(restaurant=target)
 
-            naver = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime(
-                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username}
+            naver = [
+                    {
+                        'id': review.id, 
+                        'content': review.content, 
+                        'rating': review.rating, 
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 
+                        'author_name': review.author.user.username
+                        }
                 for review in reviews_on_target if review.site == 'naver']
-            kakao = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime(
-                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username}
+            kakao = [
+                    {
+                        'id': review.id,
+                        'content': review.content,
+                        'rating': review.rating,
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
+                        'author_name': review.author.user.username
+                        }
                 for review in reviews_on_target if review.site == 'kakao']
-            atm = [{'id': review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime(
-                '%Y/%m/%d, %H:%M:%S'), 'author_name': review.author.user.username}
+            atm = [
+                    {
+                        'id': review.id,
+                        'content': review.content,
+                        'rating': review.rating,
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
+                        'author_name': review.author.user.username
+                        }
                 for review in reviews_on_target if review.site == 'atm']
 
             other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
@@ -49,15 +67,21 @@ def get_post_my_review(request, restaurant_id):
             except Restaurant.DoesNotExist:
                 return HttpResponse(status=404)
             response_list = [
-                    {'id':review.id, 'content': review.content, 'rating': review.rating, 'date': review.date.strftime('%Y/%m/%d, %H:%M:%S')
-                        } for review in Review.objects.all() if request.user.email == review.author.user.email]
+                    {
+                        'id':review.id,
+                        'content': review.content,
+                        'rating': review.rating,
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S')
+                        }
+                    for review in Review.objects.all()
+                    if request.user.email == review.author.user.email]
             return HttpResponse(response_list, status=200) 
         elif request.method == 'POST':
             try:
                 req_data = json.loads(request.body.decode())
                 content = req_data['content']
                 rating = req_data['rating']
-            except (KeyError, JSONDecodeError) as e:
+            except (KeyError, JSONDecodeError):
                 return HttpResponseBadRequest()
             try:
                 restaurant = Restaurant.objects.get(id=restaurant_id)
@@ -65,7 +89,13 @@ def get_post_my_review(request, restaurant_id):
                 return HttpResponse(status=404)
             date = datetime.now()
             author = Profile.objects.get(user=request.user)
-            new_review = Review(restaurant=restaurant, author=author, content=content, rating=rating, date=date, site='atm') 
+            new_review = Review(
+                    restaurant=restaurant, 
+                    author=author, 
+                    content=content, 
+                    rating=rating, 
+                    date=date, 
+                    site='atm') 
             new_review.save()
             response_dict = {
                 'id': new_review.id,
@@ -96,7 +126,7 @@ def edit_my_review(request, review_id):
                 req_data = json.loads(request.body.decode())
                 content = req_data['content']
                 rating = req_data['rating']
-            except (KeyError, JSONDecodeError) as e:
+            except (KeyError, JSONDecodeError):
                 return HttpResponseBadRequest()
             target_review.content = content
             target_review.rating = rating
@@ -106,7 +136,8 @@ def edit_my_review(request, review_id):
                 'id': target_review.id,
                 'content': target_review.content,
                 'rating': target_review.rating,
-                'date': target_review.date.strftime('%Y/%m/%d, %H:%M:%S')}
+                'date': target_review.date.strftime('%Y/%m/%d, %H:%M:%S')
+                }
             return HttpResponse(
                 content=json.dumps(response_dict),
                 status=200)  # default status is 200
@@ -119,7 +150,6 @@ def edit_my_review(request, review_id):
                 return HttpResponseForbidden()
             response_dict = {'id': target_review.id}
             target_review.delete()
-
             return HttpResponse(
                 content=json.dumps(response_dict),
                 status=200)  # default status is 200
