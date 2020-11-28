@@ -47,7 +47,7 @@ class CreatePreferenceVector extends Component {
     const selectedFoodsLength = this.state.selectedFoods.length;
     for (let i = 0; i < selectedFoodsLength; i += 1) {
       foodImages.push(
-        <div className="image-and-caption">
+        <div key={i} className="image-and-caption">
           <img
             alt="food-checked"
             className={this.state.selectedFoods[i]
