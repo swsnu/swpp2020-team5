@@ -1,9 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-from django.contrib.postgres.fields import ArrayField
-
 
 # Create your models here.
 class FoodCategory(models.Model):
@@ -118,7 +114,7 @@ class Restaurant(models.Model):
     map_link = models.URLField()
 
 
-class menu(models.Model):
+class Menu(models.Model):
     name = models.CharField(max_length=20)
     price = models.IntegerField()
     restaurant = models.ForeignKey(
@@ -128,7 +124,7 @@ class menu(models.Model):
     )
 
 
-class openTime(models.Model):
+class OpenTime(models.Model):
     condition = models.CharField(max_length=20)
     time = models.CharField(max_length=20)
     restaurant = models.ForeignKey(
@@ -147,7 +143,7 @@ class ThumbNail(models.Model):
     )
 
 
-class keyword(models.Model):
+class Keyword(models.Model):
     word = models.CharField(max_length=20)
     weight = models.IntegerField()
     restaurant = models.ForeignKey(

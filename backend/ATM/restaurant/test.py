@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-from ..models import Restaurant, openTime, menu, ThumbNail, keyword, Review, PreferenceVector, Profile, Location
+from ..models import *
 from haversine import haversine
 import json
 
