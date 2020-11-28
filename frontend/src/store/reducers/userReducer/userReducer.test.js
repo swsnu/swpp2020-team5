@@ -78,7 +78,7 @@ describe('user reducer', () => {
 
   it('should get searchLocation properly', () => {
     const newState = reducer(stubInitialState, {
-      type: actionTypes.GET_LOCATION,
+      type: actionTypes.GET_SEARCH_LOCATION,
       target: stubSearchLocation,
     });
     expect(newState).toEqual({
@@ -91,7 +91,7 @@ describe('user reducer', () => {
 
   it('should change searchLocation properly', () => {
     const newState = reducer(stubInitialState, {
-      type: actionTypes.CHANGE_LOCATION,
+      type: actionTypes.EDIT_SEARCH_LOCATION,
       target: stubSearchLocation,
     });
     expect(newState).toEqual({
@@ -117,7 +117,7 @@ describe('user reducer', () => {
 
   it('should change preferenceVector properly', () => {
     const newState = reducer(stubInitialState, {
-      type: actionTypes.PUT_PREFERENCE_VECTOR,
+      type: actionTypes.EDIT_PREFERENCE_VECTOR,
       target: stubPreferenceVector,
     });
     expect(newState).toEqual({
@@ -130,7 +130,7 @@ describe('user reducer', () => {
 
   it('should get foodCategory properly', () => {
     const newState = reducer(stubInitialState, {
-      type: actionTypes.GET_FOODCATEGORY,
+      type: actionTypes.GET_FOOD_CATEGORY,
       target: stubFoodCategory,
     });
     expect(newState).toEqual({
@@ -143,7 +143,7 @@ describe('user reducer', () => {
 
   it('should change foodCategory properly', () => {
     const newState = reducer(stubInitialState, {
-      type: actionTypes.PUT_FOODCATEGORY,
+      type: actionTypes.EDIT_FOOD_CATEGORY,
       target: stubFoodCategory,
     });
     expect(newState).toEqual({
@@ -153,4 +153,13 @@ describe('user reducer', () => {
       searchLocation: null,
     });
   });
+  
+  it('should do nothing when action name incorrect', () => {
+    const newState = reducer(stubInitialState, {
+      type: 'WRONG',
+    });
+    expect(newState).toEqual(
+      stubInitialState
+    );
+  })
 });
