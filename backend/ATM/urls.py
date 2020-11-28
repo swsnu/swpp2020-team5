@@ -9,5 +9,5 @@ urlpatterns = [
     path('user/', include('ATM.user.urls')),
     path('restaurant/', include('ATM.restaurant.urls')),
     path('token/', views.token, name='token'),
-    
+
 ]
