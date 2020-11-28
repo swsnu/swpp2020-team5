@@ -66,8 +66,8 @@ def sign_in(request):
             req_data = json.loads(request.body.decode())
             email = req_data['email']
             password = req_data['password']
-            loc_x = req_data['currLoc']['x']
-            loc_y = req_data['currLoc']['y']
+           # loc_x = req_data['currLoc']['x']
+           # loc_y = req_data['currLoc']['y']
         except (KeyError, JSONDecodeError) as e:
             return HttpResponse(status=400)
         try:
