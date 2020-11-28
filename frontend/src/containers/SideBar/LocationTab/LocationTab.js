@@ -149,7 +149,7 @@ class LocationTab extends Component {
 }
 
 LocationTab.propTypes = {
-  searchLocation: PropTypes.object,
+  searchLocation: PropTypes.arrayOf(PropTypes.any),
   onChangeLocation: PropTypes.func,
 };
 
