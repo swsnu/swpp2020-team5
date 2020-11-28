@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 from .utils import get_preference_attributes
 
+
 class UserTestCase(TestCase):
     def setUp(self):
         client = Client(enforce_csrf_checks=True)
@@ -17,15 +18,16 @@ class UserTestCase(TestCase):
             }
         }
         response = client.post('/atm/sign-up/', request_body,
-                    HTTP_X_CSRFTOKEN=csrftoken,
-                    content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(201, response.status_code)
+
     def test_me(self):
         client = Client(enforce_csrf_checks=True)
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/atm/user/me/',
-                    HTTP_X_CSRFTOKEN=csrftoken)
+                               HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(405, response.status_code)
         response = client.get('/atm/user/me/')
         self.assertEqual(401, response.status_code)
@@ -34,19 +36,18 @@ class UserTestCase(TestCase):
             'password': 'sug'
         }
         response = client.post('/atm/sign-in/', request_body,
-                    HTTP_X_CSRFTOKEN=csrftoken,
-                    content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/user/me/')
         self.assertEqual(200, response.status_code)
-
 
     def test_pref_vec(self):
         client = Client(enforce_csrf_checks=True)
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/atm/user/preference-vector/',
-                    HTTP_X_CSRFTOKEN=csrftoken)
+                               HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(405, response.status_code)
         response = client.get('/atm/user/preference-vector/')
         self.assertEqual(401, response.status_code)
@@ -58,8 +59,8 @@ class UserTestCase(TestCase):
             'password': 'sug'
         }
         response = client.post('/atm/sign-in/', request_body,
-                    HTTP_X_CSRFTOKEN=csrftoken,
-                    content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/user/preference-vector/')
         self.assertEqual(200, response.status_code)
@@ -88,7 +89,7 @@ class UserTestCase(TestCase):
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/atm/user/search-location/',
-                    HTTP_X_CSRFTOKEN=csrftoken)
+                               HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(405, response.status_code)
         response = client.get('/atm/user/search-location/')
         self.assertEqual(401, response.status_code)
@@ -100,8 +101,8 @@ class UserTestCase(TestCase):
             'password': 'sug'
         }
         response = client.post('/atm/sign-in/', request_body,
-                    HTTP_X_CSRFTOKEN=csrftoken,
-                    content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/user/search-location/')
         self.assertEqual(200, response.status_code)
@@ -130,7 +131,7 @@ class UserTestCase(TestCase):
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/atm/user/food-category/',
-                    HTTP_X_CSRFTOKEN=csrftoken)
+                               HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(405, response.status_code)
         response = client.get('/atm/user/food-category/')
         self.assertEqual(401, response.status_code)
@@ -142,8 +143,8 @@ class UserTestCase(TestCase):
             'password': 'sug'
         }
         response = client.post('/atm/sign-in/', request_body,
-                    HTTP_X_CSRFTOKEN=csrftoken,
-                    content_type='application/json')
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/user/food-category/')
         self.assertEqual(200, response.status_code)
