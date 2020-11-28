@@ -14,7 +14,7 @@ urlpatterns = [
         views.searched_restaurants,
         name='searched_restauratns'),
     path(
-        'detail/<int:id>',
+        'detail/<int:restaurant_id>',
         views.restaurant_detail,
         name='restaurant'),
 ]

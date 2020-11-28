@@ -3,7 +3,7 @@ restaurant backend
 '''
 from django.http import HttpResponse, HttpResponseNotAllowed,JsonResponse
 from haversine import haversine
-from ..models import Restaurant, openTime, menu, ThumbNail, keyword, Profile
+from ..models import Restaurant, OpenTime, Menu, ThumbNail, Keyword, Profile
 
 # preferencVector
 
@@ -97,16 +97,16 @@ def restaurant_detail(request,restaurant_id):
             response_dict['img_url'] = thumbnail_list[0]
             response_dict['img_url_list'] = thumbnail_list
             menu_list = []
-            for price in menu.objects.select_related(
+            for price in Menu.objects.select_related(
                     'restaurant').filter(restaurant=restaurant):
                 menu_list.append({price.name: price.price})
             response_dict['menu'] = menu_list
             open_list = []
-            for time in openTime.objects.select_related('restaurant').filter(restaurant=restaurant):
+            for time in OpenTime.objects.select_related('restaurant').filter(restaurant=restaurant):
                 open_list.append({time.condition : time.time})
             response_dict['time'] = open_list
             keyword_list = []
-            for key in keyword.objects.select_related(
+            for key in Keyword.objects.select_related(
                     'restaurant').filter(restaurant=restaurant):
                 keyword_list.append({key.word: key.weight})
             response_dict['keywords'] = keyword_list

@@ -3,7 +3,7 @@ restaurant backend testing
 '''
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from ..models import Restaurant, openTime, menu, ThumbNail, keyword, \
+from ..models import Restaurant, OpenTime, Menu, ThumbNail, Keyword, \
 PreferenceVector, Profile, Location
 
 
@@ -58,14 +58,14 @@ class RestaurantTestCase(TestCase):
                                 search_location=mock_location_a)
         mock_profile_a.save()
         #menu
-        mock_menu_a = menu(name = '짜장면', price=300, restaurant=mock_restaurant_a)
+        mock_menu_a = Menu(name = '짜장면', price=300, restaurant=mock_restaurant_a)
         mock_menu_a.save()
-        mock_menu_a = menu(name= 'dd', price=30, restaurant=mock_restaurant_b)
+        mock_menu_a = Menu(name= 'dd', price=30, restaurant=mock_restaurant_b)
         mock_menu_a.save()
         #openTime
-        mock_time_a = openTime(restaurant=mock_restaurant_a, condition='휴무', time='9:00')
+        mock_time_a = OpenTime(restaurant=mock_restaurant_a, condition='휴무', time='9:00')
         mock_time_a.save()
-        mock_time_a = openTime(restaurant=mock_restaurant_b, condition='휴무', time='9:00')
+        mock_time_a = OpenTime(restaurant=mock_restaurant_b, condition='휴무', time='9:00')
         mock_time_a.save()
         #ThumbNail
         mock_thumbnail_a = ThumbNail(restaurant=mock_restaurant_a, url='www.naver.com')
@@ -73,9 +73,9 @@ class RestaurantTestCase(TestCase):
         mock_thumbnail_a = ThumbNail(restaurant=mock_restaurant_b, url='www.naver.com')
         mock_thumbnail_a.save()
         #keyword
-        mock_keyword_a = keyword(restaurant=mock_restaurant_a, word='짠',weight=30)
+        mock_keyword_a = Keyword(restaurant=mock_restaurant_a, word='짠',weight=30)
         mock_keyword_a.save()
-        mock_keyword_a = keyword(restaurant=mock_restaurant_b, word='짠',weight=30)
+        mock_keyword_a = Keyword(restaurant=mock_restaurant_b, word='짠',weight=30)
         mock_keyword_a.save()
     def test_main_restaurant(self):
         '''
