@@ -87,7 +87,7 @@ class MyInfoTab extends Component {
           reviewID={review.id}
           content={review.content}
           rating={review.rating}
-          modifiedTime={review.modifiedTime.toLocaleDateString()}
+          date={review.date.toLocaleDateString()}
         />
       ));
 

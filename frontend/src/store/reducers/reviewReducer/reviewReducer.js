@@ -7,7 +7,7 @@ const initialState = {
       id: 10,
       content: '국물 맛이 좋다',
       rating: 5,
-      modifiedTime: new Date(),
+      date: new Date(),
     },
   ],
   otherReviews: {
