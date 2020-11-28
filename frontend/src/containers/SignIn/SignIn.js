@@ -28,11 +28,10 @@ class SignIn extends Component {
     navigator.geolocation.getCurrentPosition((loc) => {
       x=loc.coords.longitude;
       y=loc.coords.latitude;
-      onPostSignIn({ email, password, x, y});
-      history.push('/main');
-  
     });
-  
+    onPostSignIn({ email, password, x, y});
+    history.push('/main');
+
   }
 
   render() {
