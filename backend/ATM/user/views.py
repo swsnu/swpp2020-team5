@@ -7,6 +7,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from .utils import get_preference_attributes
 import json
 
+
 @ensure_csrf_cookie
 def me(request):
     if request.method == 'GET':
@@ -15,7 +16,7 @@ def me(request):
                 'id': request.user.id,
                 'name': request.user.username,
             }
-            return JsonResponse(response_dict,status=200)
+            return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)
     else:
@@ -54,7 +55,7 @@ def preference_vector(request):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET','PUT'])
+        return HttpResponseNotAllowed(['GET', 'PUT'])
 
 
 @ensure_csrf_cookie
@@ -89,7 +90,8 @@ def search_location(request):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET','PUT'])
+        return HttpResponseNotAllowed(['GET', 'PUT'])
+
 
 @ensure_csrf_cookie
 def food_category(request):
@@ -123,6 +125,4 @@ def food_category(request):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET','PUT'])
-
-
+        return HttpResponseNotAllowed(['GET', 'PUT'])

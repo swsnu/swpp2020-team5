@@ -19,35 +19,37 @@ url = 'https://www.mangoplate.com/restaurants/vXB5kLQUFC'
 driver.get(url)
 i = 0
 while True:
-  try:
-    i += 1
-    driver.find_element_by_class_name("RestaurantReviewList__MoreReviewButton").click()
-    if i > 50:
-      break
-    # driver.find_element_by_class_name("_3iTUo").click()
-    # time.sleep(2)
-  except NoSuchElementException:
-    break
-  except ElementNotInteractableException:
     try:
-      driver.find_element_by_class_name("close_icon").click()
-    except:
-      break
+        i += 1
+        driver.find_element_by_class_name(
+            "RestaurantReviewList__MoreReviewButton").click()
+        if i > 50:
+            break
+        # driver.find_element_by_class_name("_3iTUo").click()
+        # time.sleep(2)
+    except NoSuchElementException:
+        break
+    except ElementNotInteractableException:
+        try:
+            driver.find_element_by_class_name("close_icon").click()
+        except BaseException:
+            break
 # reviews = driver.find_elements_by_class_name("WoYOw")
-reviews = driver.find_elements_by_class_name("RestaurantReviewItem__ReviewText")
+reviews = driver.find_elements_by_class_name(
+    "RestaurantReviewItem__ReviewText")
 print(len(reviews))
 reviews_text = ""
 for review in reviews:
-  reviews_text += (review.text + " ")
+    reviews_text += (review.text + " ")
 han = Hannanum()
 tokens = han.morphs(reviews_text)
 keywords = {}
 for token in tokens:
-  if token in keywords:
-    keywords[token] += 1
-  else:
-    keywords[token] = 1
+    if token in keywords:
+        keywords[token] += 1
+    else:
+        keywords[token] = 1
 
 for keyword in keywords:
-  if keywords[keyword] >= 5 and len(keyword) >= 2:
-    print(keyword + ": " + str(keywords[keyword]))
+    if keywords[keyword] >= 5 and len(keyword) >= 2:
+        print(keyword + ": " + str(keywords[keyword]))
