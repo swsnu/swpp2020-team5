@@ -13,16 +13,14 @@ matrix:
         - yarn: true
         - pip: true
       before_install:
+
       install:
         - cd frontend
         - yarn install
         - yarn add coveralls
-        - cd ..
-        - pip install virtualenv
-        - virtualenv --python=3.7 venv
-        - source venv/bin/activate
-        - pip install django
-        - cd backend
+        - cd ../backend
+        - source ~/virtualenv/python3.7/bin/activate
+        - pip install -r requirements.txt
         - python manage.py makemigrations ATM
         - python manage.py migrate
         - cd ..
@@ -30,7 +28,12 @@ matrix:
         - cd frontend
         - ./node_modules/.bin/eslint src/
         - yarn test --coverage --watchAll=false
-        - cd .. && sonar-scanner
+        - cd .. 
+        - cd backend
+        - pylint ATM/**/*.py 
+        - coverage run --branch --source='./ATM' manage.py test
+        - coverage report -m && coverage xml
+        - cd ..
       after_success:
         - cat ./frontend/coverage/lcov.info | ./frontend/node_modules/coveralls/bin/coveralls.js
-
+        - sonar-scanner

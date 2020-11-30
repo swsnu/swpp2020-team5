@@ -29,7 +29,7 @@ class MyReview extends Component {
     this.props.onPutReview(this.props.reviewID, {
       content: this.state.content,
       rating: this.state.rating,
-      modifiedTime: new Date(),
+      date: new Date(),
     });
     this.setState({ isEdit: false });
   }
@@ -131,7 +131,7 @@ class MyReview extends Component {
           <div className="review-detail">
             <text id="rating-text">{this.state.rating}</text>
             <text> | </text>
-            <text id="modified-time-text">{this.props.modifiedTime}</text>
+            <text id="modified-time-text">{this.props.date}</text>
             <text> | </text>
             {EditOrDone}
             <text> | </text>
