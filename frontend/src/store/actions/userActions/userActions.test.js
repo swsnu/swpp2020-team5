@@ -51,7 +51,7 @@ describe('actionCreators', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  it('getUsers should get users info correctly', (done) => {
+  it('getUser should get users info correctly', (done) => {
     const spy = jest.spyOn(axios, 'get')
       .mockImplementation((url) => new Promise((resolve, reject) => {
         const result = {
@@ -64,6 +64,44 @@ describe('actionCreators', () => {
       const newState = store.getState();
       expect(newState.us.selectedUser).toBe(stubUser);
       expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('getUser should process error', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url) => new Promise((resolve, reject) => {
+        reject(new Error('error'));
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.getUser()).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('signup should do correctly', (done) => {
+    const spy = jest.spyOn(axios, 'post')
+      .mockImplementation((url, user) => new Promise((resolve, reject) => {
+        const result = {
+          status: 201,
+        };
+        resolve(result);
+      }));
+    store.dispatch(actionCreators.postSignUp(null)).then(() => {
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('signup should handle error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'post')
+      .mockImplementation((url, user) => new Promise((resolve, reject) => {
+        const result = {
+          status: 401,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.postSignUp(null)).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });
@@ -81,6 +119,51 @@ describe('actionCreators', () => {
       done();
     });
   });
+
+  it('post signin should process error', (done) => {
+    const spy = jest.spyOn(axios, 'post')
+      .mockImplementation((url, user) => new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: stubUser,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.postSignIn('a', 'a')).then((err) => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('signout should do correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url, user) => new Promise((resolve, reject) => {
+        const result = {
+          status: 204,
+        };
+        resolve(result);
+      }));
+    store.dispatch(actionCreators.getSignOut()).then(() => {
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('signout should handle error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url, user) => new Promise((resolve, reject) => {
+        const result = {
+          status: 401,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.getSignOut()).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
+  /*
   it('edit user should edit user info properly', (done) => {
     const spy = jest.spyOn(axios, 'put')
       .mockImplementation((url, user) => new Promise((resolve, reject) => {
@@ -95,6 +178,7 @@ describe('actionCreators', () => {
       done();
     });
   });
+  */
   it('edit foodcategory should edit user foodcategory correctly', (done) => {
     const spy = jest.spyOn(axios, 'put')
       .mockImplementation((url, foodcategory) => new Promise((resolve, reject) => {
@@ -104,13 +188,62 @@ describe('actionCreators', () => {
         };
         resolve(result);
       }));
-    store.dispatch(actionCreators.editUserFoodCategory(stubFoodCategory)).then(() => {
+    store.dispatch(actionCreators.editFoodCategory(stubFoodCategory)).then(() => {
       const newState = store.getState();
       expect(newState.us.foodCategory).toBe(stubFoodCategory);
       expect(spy).toHaveBeenCalledTimes(1);
       done();
     });
   });
+  it('editfoodcategory handle error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'put')
+      .mockImplementation((url, foodcategory) => new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: stubFoodCategory,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.editFoodCategory(stubFoodCategory)).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
+  it('should get user searchLocation correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url) => new Promise((resolve, reject) => {
+        const result = {
+          status: 200,
+          data: stubSearchLocation,
+        };
+        resolve(result);
+      }));
+    store.dispatch(actionCreators.getSearchLocation()).then(() => {
+      const newState = store.getState();
+      expect(newState.us.searchLocation).toBe(stubSearchLocation);
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
+  it('getSearchLocation should handle error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url) => new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: stubSearchLocation,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.getSearchLocation()).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
   it('should edit user searchLocation correctly', (done) => {
     const spy = jest.spyOn(axios, 'put')
       .mockImplementation((url, searchLocation) => new Promise((resolve, reject) => {
@@ -120,13 +253,60 @@ describe('actionCreators', () => {
         };
         resolve(result);
       }));
-    store.dispatch(actionCreators.changeLocation(stubSearchLocation)).then(() => {
+    store.dispatch(actionCreators.editSearchLocation(stubSearchLocation)).then(() => {
       const newState = store.getState();
       expect(newState.us.searchLocation).toBe(stubSearchLocation);
       expect(spy).toHaveBeenCalledTimes(1);
       done();
     });
   });
+  it('editSearchLocation should handle error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'put')
+      .mockImplementation((url, searchLocation) => new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: stubSearchLocation,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.editSearchLocation(stubSearchLocation)).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('get preferenceVector should get user preferenceVector correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url) => new Promise((resolve, reject) => {
+        const result = {
+          status: 200,
+          data: stubPreferenceVector,
+        };
+        resolve(result);
+      }));
+    store.dispatch(actionCreators.getPreferenceVector()).then(() => {
+      const newState = store.getState();
+      expect(newState.us.preferenceVector).toBe(stubPreferenceVector);
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('getPreferenceVector should handle error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url) => new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: stubPreferenceVector,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.getPreferenceVector(stubPreferenceVector)).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
   it('edit preferenceVector should edit user preferenceVector correctly', (done) => {
     const spy = jest.spyOn(axios, 'put')
       .mockImplementation((url, preferenceVector) => new Promise((resolve, reject) => {
@@ -136,13 +316,29 @@ describe('actionCreators', () => {
         };
         resolve(result);
       }));
-    store.dispatch(actionCreators.putPreferenceVector(stubPreferenceVector)).then(() => {
+    store.dispatch(actionCreators.editPreferenceVector(stubPreferenceVector)).then(() => {
       const newState = store.getState();
       expect(newState.us.preferenceVector).toBe(stubPreferenceVector);
       expect(spy).toHaveBeenCalledTimes(1);
       done();
     });
   });
+  it('editPreferenceVector should handler error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'put')
+      .mockImplementation((url, preferenceVector) => new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: stubPreferenceVector,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.editPreferenceVector(stubPreferenceVector)).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
   it('should get user foodCategory correctly', (done) => {
     const spy = jest.spyOn(axios, 'get')
       .mockImplementation((url) => new Promise((resolve, reject) => {
@@ -156,6 +352,21 @@ describe('actionCreators', () => {
       const newState = store.getState();
       expect(newState.us.foodCategory).toBe(stubFoodCategory);
       expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+  it('getFoodCategory should handle error correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((url) => new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: stubFoodCategory,
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.getFoodCategory()).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
       done();
     });
   });

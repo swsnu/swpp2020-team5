@@ -7,13 +7,13 @@ const stubMyReivew = {
   id: 2,
   content: '아주 맛이 좋다',
   rating: 5,
-  modifiedTime: 'test',
+  date: 'test',
 };
 
 const stubOtherReview = {
   content: '맛있으나 즐거우나 나라 사랑하세.',
   rating: 1,
-  createTime: new Date(),
+  date: new Date(),
   authorName: 'TESTER',
 };
 
@@ -26,7 +26,7 @@ let stubInitialState = {
 describe('Review reducer', () => {
   it('should get review', () => {
     const newState = reducer(stubInitialState, {
-      type: actionTypes.GET_REVIEWS,
+      type: actionTypes.GET_OTHER_REVIEWS,
       target: stubOtherReview,
     });
 
@@ -41,23 +41,23 @@ describe('Review reducer', () => {
     stubInitialState = {
       selectedReviews: {},
       myReviews: [{
-        id: 2, content: 'BAD', rating: 2, modifiedTime: 'bad',
+        id: 2, content: 'BAD', rating: 2, date: 'bad',
       }],
       otherReviews: {},
     };
 
     const newState = reducer(stubInitialState, {
-      type: actionTypes.PUT_REVIEW,
+      type: actionTypes.EDIT_MY_REVIEW,
       id: 2,
       content: '아주 맛이 좋다',
       rating: 5,
-      modifiedTime: 'test',
+      date: 'test',
     });
 
     expect(newState).toEqual({
       selectedReviews: {},
       myReviews: [{
-        id: 2, content: '아주 맛이 좋다', rating: 5, modifiedTime: 'test',
+        id: 2, content: '아주 맛이 좋다', rating: 5, date: 'test',
       }],
       otherReviews: {},
     });
@@ -71,17 +71,17 @@ describe('Review reducer', () => {
     };
 
     const newState = reducer(stubInitialState, {
-      type: actionTypes.POST_REVIEW,
+      type: actionTypes.POST_MY_REVIEW,
       id: 3,
       content: 'GOOD',
       rating: 5,
-      modifiedTime: 'test',
+      date: 'test',
     });
 
     expect(newState).toEqual({
       selectedReviews: {},
       myReviews: [{
-        id: 3, content: 'GOOD', rating: 5, modifiedTime: 'test',
+        id: 3, content: 'GOOD', rating: 5, date: 'test',
       }],
       otherReviews: {},
     });
@@ -91,13 +91,13 @@ describe('Review reducer', () => {
     stubInitialState = {
       selectedReviews: {},
       myReviews: [{
-        id: 2, content: 'BAD', rating: 2, modifiedTime: 'bad',
+        id: 2, content: 'BAD', rating: 2, date: 'bad',
       }],
       otherReviews: {},
     };
 
     const newState = reducer(stubInitialState, {
-      type: actionTypes.DELETE_REVIEW,
+      type: actionTypes.DELETE_MY_REVIEW,
       target: 2,
     });
 

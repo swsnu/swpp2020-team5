@@ -1,18 +1,13 @@
-from django.shortcuts import render
+import json
 from json import JSONDecodeError
-from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import PreferenceVector, FoodCategory, Location, Profile
 from .utils import cos_sim_word
 from .user.utils import get_preference_attributes
-import json
-
 # Create your views here.
-def index():
-    return
-
 
 @ensure_csrf_cookie
 def sign_up(request):
@@ -23,24 +18,24 @@ def sign_up(request):
             email = req_data['email']
             password = req_data['password']
             selected_foods = req_data['selectedFoods']
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
         # This checks duplicated user
         if User.objects.filter(email=email).exists() or \
            User.objects.filter(username=username).exists():
             return HttpResponse(status=409)
 
-        ## By user's selected foods, initialize pref_vec
+        # By user's selected foods, initialize pref_vec
         pref_vec = PreferenceVector()
-#        attr_list = get_preference_attributes(pref_vec)
-#        true_food_list = filter(lambda food_bool: food_bool[1], selected_foods.items())
-#        true_food_list = map(lambda food_bool: food_bool[0], true_food_list)
-#        for attr in attr_list:
-#            weight = 0.0
-#            for food in true_food_list:
-#                weight += cos_sim_word(attr, food)
-#            pref_vec[attr] = weight
-#        pref_vec.save()
+        attr_list = get_preference_attributes(pref_vec)
+        for attr in attr_list:
+            weight = 0.0
+            for food in selected_foods:
+                weight += cos_sim_word(attr, food)
+            if weight > 1.0:
+                weight = 1.0
+            pref_vec[attr] = weight
+        pref_vec.save()
 
         food_category = FoodCategory()
         food_category.save()
@@ -48,11 +43,12 @@ def sign_up(request):
         search_location = Location()
         search_location.save()
 
-        user = User.objects.create_user(username=username, email=email, password=password)
+        user = User.objects.create_user(
+            username=username, email=email, password=password)
         user.save()
 
         profile = Profile(user=user,
-                          #preference_vector=pref_vec,
+                          preference_vector=pref_vec,
                           food_category=food_category,
                           search_location=search_location)
         profile.save()
@@ -67,16 +63,20 @@ def sign_in(request):
         try:
             req_data = json.loads(request.body.decode())
             email = req_data['email']
-            username = User.objects.get(email=email).username
             password = req_data['password']
-        except (KeyError, JSONDecodeError) as e:
+           # loc_x = req_data['currLoc']['x']
+           # loc_y = req_data['currLoc']['y']
+        except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
-        user = authenticate(request, username=username, password=password)
-        if user is None:
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
             return HttpResponse(status=401)
-        else:
+        if user.check_password(password):
             login(request, user)
             return HttpResponse(status=204)
+        else:
+            return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['POST'])
 
@@ -91,6 +91,7 @@ def sign_out(request):
             return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['GET'])
+
 
 @ensure_csrf_cookie
 def token(request):

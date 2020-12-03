@@ -46,27 +46,7 @@ const stubInitialState = {
     username: '우렁쌈밥',
     preferenceVector: null,
     foodCategory: null,
-    searchLocation: {
-      address: {
-        address_name: '서울 관악구',
-        b_code: '1162000000',
-        h_code: '1162000000',
-        main_address_no: '',
-        mountain_yn: 'N',
-        region_1depth_name: '서울',
-        region_2depth_name: '관악구',
-        region_3depth_h_name: '',
-        region_3depth_name: '',
-        sub_address_no: '',
-        x: '126.951561853868',
-        y: '37.4783683761333',
-      },
-      address_name: '서울 관악구',
-      address_type: 'REGION',
-      road_address: null,
-      x: '126.951561853868',
-      y: '37.4783683761333',
-    },
+    searchLocation: [],
   },
   keyword: null,
   restaurant: null,
@@ -99,7 +79,7 @@ describe('<LocationTab />', () => {
     //             Do not attempt to understand the fucntioalities of the LocationTab
     //             by this unittest.
     //
-    const spyChangeLocation = jest.spyOn(userActionCreators, 'changeLocation')
+    const spyChangeLocation = jest.spyOn(userActionCreators, 'editSearchLocation')
       .mockImplementation(() => () => {});
     const component = mount(locationTab);
     const inputWrapper = component.find('#location-input');

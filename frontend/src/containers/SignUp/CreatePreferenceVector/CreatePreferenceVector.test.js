@@ -61,9 +61,9 @@ describe('<CreatePreferenceVector />', () => {
       username: 'TEST_NAME',
       email: 'TEST_EMAIL',
       password: 'TEST_PW',
-      foodList: [false, false, false, false, false, false],
+      selectedFoods: [false, false, false, false, false, false],
     });
-    expect(spyHistoryPush).toHaveBeenCalledWith('/sign-in/');
+    expect(spyHistoryPush).toHaveBeenCalledWith('/');
   });
 
   it('should toggle food', () => {
@@ -71,9 +71,9 @@ describe('<CreatePreferenceVector />', () => {
     let wrapper = component.find('CreatePreferenceVector');
 
     wrapper.find('.image-and-caption').at(0).find('img').simulate('click');
-    expect(wrapper.state().foodList[0]).toBe(true);
+    expect(wrapper.state().selectedFoods[0]).toBe(true);
     wrapper = component.find('CreatePreferenceVector');
     wrapper.find('.image-and-caption').find('.check-image').simulate('click');
-    expect(wrapper.state().foodList[0]).toBe(false);
+    expect(wrapper.state().selectedFoods[0]).toBe(false);
   });
 });

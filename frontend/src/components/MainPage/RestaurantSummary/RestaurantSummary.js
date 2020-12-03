@@ -32,7 +32,7 @@ class RestaurantSummary extends Component {
         </div>
         <img
           alt="restautantThumbnail"
-          src={this.props.img_src/* img_url */}
+          src={this.props.img_url/* img_url */}
           className="image"
           onClick={() => this.onClickRestaurantHandler(this.props.id)}
         />
