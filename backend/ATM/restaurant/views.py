@@ -34,7 +34,7 @@ def main_restaurants(request):
                 restaurant_pref_dict = {}
                 for attr in restaurant_attr_list:
                     restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
-                res = sorted(restaurant_pref_dict.items, key= lambda x: x[1], reverse=True)
+                res = sorted((restaurant_pref_dict.items), key= lambda x: x[1], reverse=True)
                 i = 0
                 sorted_dict = {}
                 for pref in res:
@@ -77,7 +77,7 @@ def searched_restaurants(request,word):
                 restaurant_pref_dict = {}
                 for attr in restaurant_attr_list:
                     restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
-                res = sorted(restaurant_pref_dict.items, key=f2, reverse=True)
+                res = sorted((restaurant_pref_dict.items), key = lambda x: x[1], reverse=True)
                 i = 0
                 sorted_dict = {}
                 for pref in res:
@@ -105,12 +105,12 @@ def restaurant_detail(request,restaurant_id):
             except Restaurant.DoesNotExist:
                 return HttpResponse(status = 404)
             author = Profile.objects.get(user=request.user)
-            author_pref_vec = user.preference_vector
+            author_pref_vec = author.preference_vector
             author_attr_list = get_preference_attributes(author_pref_vec)
             author_pref_dict = {}
             for attr in author_attr_list:
                 author_pref_dict[attr] = author_pref_vec[attr]
-            restaurant_pref_vec = restaurant.preferenceVector
+            restaurant_pref_vec = restaurant.preference_vector
             restaurnat_attr_list = get_preference_attributes(restaurant_pref_vec)
             restaurant_pref_dict = {}
             for attr in restaurant_attr_list:
@@ -120,7 +120,7 @@ def restaurant_detail(request,restaurant_id):
             response_dict['name'] = restaurant.name
             response_dict['category'] = restaurant.food_category
             response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict )
-            response_dict['difference'] = 3.5 - restaurant.avg_rating
+            response_dict['difference'] = response_dict['rate'] - restaurant.avg_rating
             response_dict['img_url'] = restaurant.thumbNail[0]
             response_dict['img_url_list'] = restaurant.thumbNail
             response_dict['menu'] = restaurant.menu
