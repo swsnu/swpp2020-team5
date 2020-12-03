@@ -10,12 +10,6 @@ class RestaurantSummary extends Component {
   }
 
   render() {
-    let categorylist = null;
-    Object.keys(this.props.category).forEach((key) => {
-      const category = this.props.category[key];
-      if (categorylist === null) categorylist = category;
-      else categorylist += `ㅣ${category}`;
-    });
     const factors = this.props.preferenceVector;
     const topFactors = [];
     Object.keys(this.props.preferenceVector).forEach((factor) => {
@@ -46,7 +40,7 @@ class RestaurantSummary extends Component {
             </div>
           </div>
           <div className="category">
-            {categorylist}
+            {this.props.category}
           </div>
           <hr className="border" />
           <div className="factors">

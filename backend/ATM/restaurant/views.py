@@ -3,8 +3,9 @@ restaurant backend
 '''
 from django.http import HttpResponse, HttpResponseNotAllowed,JsonResponse
 from haversine import haversine
-from ..models import Restaurant, Profile
-
+from ..models import Restaurant, Profile, Review
+from ..utils import cos_sim_word
+import math
 # preferencVector
 scale = 1
 pivot = 0.6
@@ -22,34 +23,41 @@ def main_restaurants(request):
                 author_pref_dict[attr] = author_pref_vec[attr]
             response_list = []
             for restaurant in Restaurant.objects.all():
-                cur = (author.search_location.y, author.search_location.x)
+                # cur = (author.search_location.y, author.search_location.x)
+                cur = (37.47835220754036, 126.95631398408709)
                 res_loc = (restaurant.location.y, restaurant.location.x)
                 if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
+                review_cnt = Review.objects.filter(restaurant = restaurant).count() + 2
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
                 response_dict['category'] = restaurant.food_category
-                response_dict['img_url'] = restaurant.thumbnail[0]
+                if len(restaurant.thumbnail) != 0:
+                    response_dict['img_url'] = restaurant.thumbnail[0]
+                else: 
+                    response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
                 restaurant_pref_vec = restaurant.preference_vector
                 restaurant_attr_list = get_preference_attributes(
                     restaurant_pref_vec)
                 restaurant_pref_dict = {}
                 for attr in restaurant_attr_list:
                     restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
-                res = sorted((restaurant_pref_dict.items), key= lambda x: x[1], reverse=True)
+                res = sorted(restaurant_pref_dict.items(), key= lambda x: x[1], reverse=True)
                 i = 0
                 sorted_dict = {}
-                for pref in res:
+                while True:
                     if i == 3:
                         break
-                    sorted_dict[pref] = res[pref]
+                    sorted_dict[res[i][0]] = res[i][1]
                     i += 1
+                print(response_dict['title'])
                 response_dict['preferenceVector'] = sorted_dict
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict,restaurant.avg_rating )
+                response_dict['rate-review'] = response_dict['rate'] * math.log2(review_cnt)
                 response_list.append(response_dict)
             #response list sorted by rate
-            result_list = sorted(response_list, key = lambda x: x['rate'], reverse= True)
+            result_list = sorted(response_list, key = lambda x: x['rate-review'], reverse= True)
             return JsonResponse(result_list, safe=False, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
@@ -67,31 +75,37 @@ def searched_restaurants(request,word):
             for attr in author_attr_list:
                 author_pref_dict[attr] = author_pref_vec[attr]
             response_list = []
+            print("hh")
             for restaurant in Restaurant.objects.filter(name__contains=word):
-                cur = (author.search_location.y, author.search_location.x)
+                # cur = (author.search_location.y, author.search_location.x)
+                cur = (37.47835220754036, 126.95631398408709)
                 res_loc = (restaurant.location.y, restaurant.location.x)
-                if haversine(cur, res_loc) >= 10:
+                if haversine(cur, res_loc,unit = "km" ) >= 10:
                     continue
                 response_dict = {}
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
                 response_dict['category'] = restaurant.food_category
-                response_dict['img_url'] = restaurant.thumbnail[0]
+                if len(restaurant.thumbnail) != 0:
+                    response_dict['img_url'] = restaurant.thumbnail[0]
+                else: 
+                    response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
                 restaurant_pref_vec = restaurant.preference_vector
                 restaurant_attr_list = get_preference_attributes(
                     restaurant_pref_vec)
                 restaurant_pref_dict = {}
                 for attr in restaurant_attr_list:
                     restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
-                res = sorted((restaurant_pref_dict.items), key = lambda x: x[1], reverse=True)
+                res = sorted(restaurant_pref_dict.items(), key = lambda x: x[1], reverse=True)
                 i = 0
                 sorted_dict = {}
-                for pref in res:
+                while True:
                     if i == 3:
                         break
-                    sorted_dict[pref] = res[pref]
+                    sorted_dict[res[i][0]] = res[i][1]
                     i += 1
                 response_dict['preferenceVector'] = sorted_dict
+                print(response_dict['title'])
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict, restaurant.avg_rating )
                 response_list.append(response_dict)
             #response list sorted by rate
@@ -127,8 +141,12 @@ def restaurant_detail(request,restaurant_id):
             response_dict['category'] = restaurant.food_category
             response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict, restaurant.avg_rating )
             response_dict['difference'] = response_dict['rate'] - restaurant.avg_rating
-            response_dict['img_url'] = restaurant.thumbnail[0]
-            response_dict['img_url_list'] = restaurant.thumbnail
+            if len(restaurant.thumbnail) != 0:
+                response_dict['img_url'] = restaurant.thumbnail[0]
+                response_dict['img_url_list'] = restaurant.thumbnail
+            else: 
+                response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
+                response_dict['img_url_list'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
             response_dict['menu'] = restaurant.menu
             response_dict['time'] = restaurant.openTime
             response_dict['keywords'] = restaurant.keyword
@@ -160,6 +178,8 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating):
     diff = 0
     for restaurant_factor in restaurant_pref:
         for user_factor in user_pref:
+            if restaurant_pref[restaurant_factor] == 0 :
+                continue
             similarity = cos_sim_word(user_factor, restaurant_factor)
             diff += similarity * (pivot - abs(restaurant_pref[restaurant_factor]- user_pref[user_factor]))
     return avg_rating + scale * diff

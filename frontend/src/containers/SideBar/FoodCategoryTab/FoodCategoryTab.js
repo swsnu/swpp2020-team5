@@ -12,15 +12,11 @@ class FoodCategoryTab extends Component {
     this.state = {
       foodCategory: {
         한식: false,
+        일식: false,
         양식: false,
         중식: false,
-        일식: false,
         카페: false,
-        패스트푸드: false,
-        베트남음식: false,
-        분식: false,
-        디저트: false,
-        주점: false,
+        기타: false,
       },
     };
   }
@@ -44,10 +40,7 @@ class FoodCategoryTab extends Component {
   // id 추가해야되나?
 
   postClickSaveHandler = () => {
-    const foodCategory = {
-      foodCategory: this.state.foodCategory,
-    };
-    this.props.onEditUserFoodCategory(foodCategory);
+    this.props.onEditUserFoodCategory({...this.state.foodCategory});
   }
 
   // we need to add hover and clicked img showing
