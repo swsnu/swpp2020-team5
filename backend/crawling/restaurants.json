@@ -14238,7 +14238,7 @@
   },
   {
     "name": "두만강샤브샤브 봉천점",
-    "foodCategory": "샤브샤브",
+    "foodCategory": "일식",
     "avgRating": 4.33,
     "numOfRating": 179.0,
     "menu": {
@@ -15136,7 +15136,7 @@
   },
   {
     "name": "아웃백스테이크하우스 서울대점",
-    "foodCategory": "패밀리레스토랑",
+    "foodCategory": "양식",
     "avgRating": 4.34,
     "numOfRating": 5020.0,
     "menu": {
@@ -15317,7 +15317,7 @@
   },
   {
     "name": "그날의브런치",
-    "foodCategory": "음식점",
+    "foodCategory": "양식",
     "avgRating": 4.22,
     "numOfRating": 338.0,
     "menu": {
@@ -20936,7 +20936,7 @@
   },
   {
     "name": "낙성기사식당",
-    "foodCategory": "기사식당",
+    "foodCategory": "한식",
     "avgRating": 4.25,
     "numOfRating": 134.0,
     "menu": {
@@ -22982,7 +22982,7 @@
   },
   {
     "name": "이금옥샤브샤브칼국수",
-    "foodCategory": "샤브샤브",
+    "foodCategory": "일식",
     "avgRating": 4.46,
     "numOfRating": 129.0,
     "menu": {
@@ -23911,7 +23911,7 @@
   },
   {
     "name": "채선당 서울대입구역점",
-    "foodCategory": "샤브샤브",
+    "foodCategory": "일식",
     "avgRating": 4.26,
     "numOfRating": 180.0,
     "menu": {
@@ -25490,95 +25490,6 @@
       "http://blogfiles.naver.net/MjAyMDEwMjVfMTA2/MDAxNjAzNTgyMTY0ODA1.dL5V_HDxkFQ5y_XJzZnf-7tywbVUNxdCoTajoSKLXH0g.uebGcRhY0wzK9uUO421poSYHvxUPEYDALK2zKnZIKMkg.JPEG.alwjd2925/output_1124371528.jpg"
     ],
     "mapLink": "https://map.kakao.com/?urlX=489404&urlY=1105483&urlLevel=3&itemId=1836394356&q=%EB%A7%A5%EC%A3%BC%EB%8A%94%EB%B3%84%EC%B1%85%EB%B6%80%EB%A1%9D&srcid=1836394356&map_type=TYPE_MAP"
-  },
-  {
-    "name": "통툰만화카페 서울대입구역점",
-    "foodCategory": "카페",
-    "avgRating": 4.03,
-    "numOfRating": 58.0,
-    "menu": {
-      "아메리카노": "2,800",
-      "라떼": "3,300",
-      "녹차라떼": "3,800",
-      "레몬에이드": "3,500",
-      "딸기스무디": "4,500"
-    },
-    "openTime": {
-      "영업 시간": {
-        "매일 ": "10:00 ~ 02:00"
-      },
-      "휴무일": []
-    },
-    "location": {
-      "address": {
-        "address_name": "서울 관악구 봉천동 853-2",
-        "b_code": "1162010100",
-        "h_code": "1162058500",
-        "main_address_no": "853",
-        "mountain_yn": "N",
-        "region_1depth_name": "서울",
-        "region_2depth_name": "관악구",
-        "region_3depth_h_name": "낙성대동",
-        "region_3depth_name": "봉천동",
-        "sub_address_no": "2",
-        "x": "126.953453156798",
-        "y": "37.4804180312521"
-      },
-      "address_name": "서울 관악구 관악로16길 13",
-      "address_type": "ROAD_ADDR",
-      "road_address": {
-        "address_name": "서울 관악구 관악로16길 13",
-        "building_name": "준빌딩",
-        "main_building_no": "13",
-        "region_1depth_name": "서울",
-        "region_2depth_name": "관악구",
-        "region_3depth_name": "봉천동",
-        "road_name": "관악로16길",
-        "sub_building_no": "",
-        "underground_yn": "N",
-        "x": "126.953453156798",
-        "y": "37.4804180312521",
-        "zone_no": "08788"
-      },
-      "x": "126.953453156798",
-      "y": "37.4804180312521"
-    },
-    "kakaoLink": "https://place.map.kakao.com/803639544",
-    "naverLink": "https://pcmap.place.naver.com/restaurant/1238715151",
-    "Id": 803639544,
-    "thumbNail": [
-      "http://blogfiles.naver.net/MjAyMDEwMDhfODQg/MDAxNjAyMTU5NjcwMTkx.xxQoMFKgDz05IYuHGzGGzth_we0d1CVWjZVyTPvCrQog.ra6GMwRnfPdUo9MI-0ldXf5Hh-srgrKSloBHUIBk6cgg.JPEG.sju03507/IMG_4673.jpg",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfMTg1/MDAxNjAyMTU5NjY4Njc5.YHVmyW6jwbuOFk5niPmqR_iODByeAnUvtXgTCrsygLIg.KaT1T6eTH_loZzGTWCnUCv8AVyf7HsPS7GkfPZc3HDEg.JPEG.sju03507/IMG_4672.jpg",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfMjEx/MDAxNjAyMTU5NjY3OTI1.shtn7UXFSu-FYod0xGE9ShC3Rj5b8G-qmmL1za4FfXEg.vGTvy6xMlWO20mo9cKtzCGesre17U3QXftEaKUmKsnIg.JPEG.sju03507/IMG_4671.jpg",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfMjQ0/MDAxNjAyMTU5ODcyODI1.DUeORnESYsDE2Tb6LrP0jYLapyjJA918pF_1PmLw-P4g.sKLNICSamC_oEOZPt58DjFcMUX2J15CKyP9Ui9vOmHwg.JPEG.sju03507/IMG_4676.jpg",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfMzEg/MDAxNjAyMTU5NjY1ODcx.-icI31C71oO_O4Lz9waKyYplkU3vU2MYrueOm1436Kwg.xien2oKx3OY5fHJZaKSSEr13JSckKxkUbS9XDMUbh5Eg.JPEG.sju03507/IMG_4670.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTdfMjgg/MDAxNTk0OTczNzMzMDUy.g941nxPno7rPlvUq2HebIooEMUIlv7zbqal2lLtduZEg.22c4EjEXglKCy4-y1HWCmeWii8yI1Xuj3e3WSRT81nMg.JPEG.0105351/IMG_0122.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTNfMTYz/MDAxNTk0NjA3NDY3Nzg2.2zxh79lhpQ806H9OAMcVmfvvq3aR3DTpEIUMf1a04XIg.7bxv8ckibE2_yGUMejvAAgx0aid0njAQ1QZ7EMdm2p4g.JPEG.euijin0605/KakaoTalk_20200713_104514193_06.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTdfNDUg/MDAxNTk0OTczNzMzMTg0.wh884HfQOXeTx669ZaHN-itMkDPIbIy0KiSKTMAfuUsg.s43Js55KYQ9jUc3VDreHtlVN0_FOEifK8lJ6IVvJRyMg.JPEG.0105351/IMG_0124.jpg",
-      "http://blogfiles.naver.net/MjAyMDA4MjRfMTEw/MDAxNTk4MjY0MDE4MzEz.qQZYUZlDuIj3lTKA3gilKeW6b7uWMeWlUEij4fY0U6Ig.2HofJfytPsLeGzTi-iBGUFe200rCoDKvYabTwFfXx1cg.JPEG.2001february/1598264017471.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTdfNzkg/MDAxNTk0OTczNzMzMDM4.H-DghW_1mXMp0VR7YeOPl-AuhfHdXPGSZMbjbiKm9Ykg.TEFWvEy436Avaev7xCb68RAp6YxrBBu0Y53hO6cnBqwg.JPEG.0105351/IMG_0123.jpg",
-      "http://blogfiles.naver.net/MjAyMDA4MjRfMTE2/MDAxNTk4MjY0MTA1ODk0.4uxV-mo_MCJaiN9ABf_PY5Alts8GhtC5MvI7sugVn-og.-HPFG7QAw-0bhd1sAP4qb0MVc_XI0kZXN1hGpRJWf1Ug.JPEG.2001february/1598264105005.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTdfMjk3/MDAxNTk0OTczNzMzODQx.MnkOZHnDG4_8oqKjEhlpXcoxveyacddD8tHr07GaHfUg.0yvmGjFjrsPJMf8lYMreAU3OYkNE5gYrz-BvVTfGOZ8g.JPEG.0105351/IMG_0120.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTNfMTIy/MDAxNTk0NjA2ODc1NDk5.nCQtZVhIyCtYUDME_LDPkLo-Z4xKUEjdlh0CCD_4QI0g.51O3SqtZH_6oh4W_lH6QF2GgF4wizNUkHJaLxHXR3X0g.JPEG.euijin0605/KakaoTalk_20200713_104514193_02.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTNfMTM3/MDAxNTk0NjA4MDI1MDM3.GAFNj9aF92T0GrQKHeXzlDbmIprSDZ4Okh6VYJINwNwg.Bl4x4IoQYFxVw1RGjv58IpFSwhHrOmNyWIYnBOYcYJsg.JPEG.euijin0605/KakaoTalk_20200713_104514193.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MTNfMjkz/MDAxNTk0NjA3MzA2MDAx.ZPbGzQmQXsB73sGop2b2gRPwAn2glcKtlMJOTUXcO1Qg.gMaLY2P6c5Browjh9QvvCypM8JrXD4xphMxKJpipnHUg.JPEG.euijin0605/KakaoTalk_20200713_104525738_01.jpg",
-      "http://blogfiles.naver.net/MjAyMDA2MTNfMjUx/MDAxNTkyMDI1NDI4MDc1.I0_WJB62CtylgLCLz8nCxfe76RISQPHlinKQLkGXLHAg.6FwS-zNCSp5IHLO_tuUZPozSLUynp6SqXS51zS9owZsg.JPEG.goodteen85/IMG_3209.JPG",
-      "http://blogfiles.naver.net/MjAyMDA2MTNfMzYg/MDAxNTkyMDI1NDI3NjQ2.TNtQm0kk1HcVhfPpOfonm4t_KGoB_vuZ7LZHHu9q7ekg.I7mjzVqZuCU5lGCrT-LpzbKM1WqA4EGM-VAauRSd2awg.JPEG.goodteen85/IMG_3207.JPG",
-      "http://blogfiles.naver.net/MjAyMDA3MTdfMzEg/MDAxNTk0OTc0Mjg0Mzgw.AhRGAUcmJNYuYEc09u8d7bqKyXIGCqNe8x3QD4zTiMkg.AbKINtbWFBXwCFvJSNmQhSwjEhQwn2DMBNThtWY6Bscg.JPEG.0105351/IMG_0129.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MDZfMjA1/MDAxNTk0MDAxOTM2MTA4.-fjlA0MpJK4SVcYVyxvGK24dzSak3MpcPRdzxznz1hAg.pbuEgjGljj1pSX1Dy7NcFS__Djef53Ix-fEQlz1qYUQg.PNG.zzghkszz/image.png",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfNzIg/MDAxNjAyMTU5NjY1NDk1.iGlzTNnfyHxmJgNkSByQOcLWFJrwT5v3_TU-16gdr60g.mokhGFmDnnse2yt4yHl8D6nE3WM9WKYwXj2Y5k9W1Ccg.JPEG.sju03507/IMG_4669.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MDZfMTY3/MDAxNTk0MDAxOTM0NTQ5.eLNdDC9vSfQVfisc1vdRCjPKlHmHQsx5ufbX6F_rs-kg.WgpXplus3wG8RTXgKqkyBgbO6Pwpnrl26Z5r4k9P6xgg.PNG.zzghkszz/image.png",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfNDAg/MDAxNjAyMTU5NjYzNTgz.QQfjIOPJGyPsjLcwAs23U30qYGCjQZRQ3V0WS2ti-Iwg.Shfx6vesrn5jOECFxTk34hH9cVQHsJzILSwDSfl28s0g.JPEG.sju03507/IMG_4667.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MDZfMTI0/MDAxNTk0MDAyMDAzMjky.6Oynmv7vuJ-aT7J8l_aCNT8roHa2ADtS7-g2EIBzHsMg.DtDiTEOOj08ZNLtqCvrwnOFbCie8VupgrbcZTmJeZD4g.PNG.zzghkszz/image.png",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfMjgw/MDAxNjAyMTU5NjYzMzgz.reN_nfWpDX_tCTQ1D7jg4mwelDsxBk4oe8aZnwWGIywg.Gm-5BoXZzst-Cd3rMXDO9Fcuek9Nzpq7JbmXGGD1PFYg.JPEG.sju03507/IMG_4666.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MDZfMTgz/MDAxNTk0MDAxOTMxMzMw.JjT4sg3CaJ5p_szLuuIYVPj9vexohBicNU4jFWO6S8gg.0hjDKdyxLpKPgi_6t63B3YM0XRPedyF3ub2nEvpddCEg.PNG.zzghkszz/image.png",
-      "http://blogfiles.naver.net/MjAxOTEyMTdfMjk4/MDAxNTc2NTcxMTU3NDcz.YSPZgJcAfZUAD5zbKBmMgOPVPldO_ghAjOY2JKM2PIAg.zq7kICsVp4-7uiSYCQnL3Mdv5AUmM1wZNZLJkTfJ7vsg.JPEG.wlgpek5959/IMG_4531.JPG",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfODUg/MDAxNjAyMTU5NjY3MDE5.OxhioXi-YbJlBdvxCntfe2YnQxoyABfsiRYyylAvjasg.vokBDUhHtc6SpA2i8uz5WJVvrhfDbxyXIssAw2S_hV4g.JPEG.sju03507/IMG_4664.jpg",
-      "http://blogfiles.naver.net/MjAxOTEyMTdfOTIg/MDAxNTc2NTcxMTU3NDM0.TSh-HKd654Nfox6DpDDvLrW0CEmspPCBVYcAIqBHvFgg.BNl_-iD-k436yqw9UAMm25mPOEr2ymnxbPc-jyKxVLEg.JPEG.wlgpek5959/IMG_4530.JPG",
-      "http://blogfiles.naver.net/MjAyMDEwMDhfMTcw/MDAxNjAyMTU5NjYzMjU1.VWkkdIajjDef5Bs6xkLJvBJng9LoUA6TJFqUgEm6y70g.Bt35zv024eCosh6PIvmaYoQEEdpZzg3IwEnwR1_XzyEg.JPEG.sju03507/IMG_4663.jpg",
-      "http://blogfiles.naver.net/MjAyMDA3MDZfMTE2/MDAxNTk0MDAxOTI5NTg2.AAQLx9gdZHlnSz8Ww8oRUjQb8Fx4SXFOLSRw1irsavcg.qq7HyiEY36uCND6W_2IrEaKgty3Xq7ZelFix2-9zeXEg.PNG.zzghkszz/image.png"
-    ],
-    "mapLink": "https://map.kakao.com/?urlX=489708&urlY=1105829&urlLevel=3&itemId=803639544&q=%ED%86%B5%ED%88%B0%EB%A7%8C%ED%99%94%EC%B9%B4%ED%8E%98%20%EC%84%9C%EC%9A%B8%EB%8C%80%EC%9E%85%EA%B5%AC%EC%97%AD%EC%A0%90&srcid=803639544&map_type=TYPE_MAP"
   },
   {
     "name": "치킨더샵",
@@ -27779,7 +27690,7 @@
   },
   {
     "name": "애슐리 퀸즈 서울대입구점",
-    "foodCategory": "패밀리레스토랑",
+    "foodCategory": "양식",
     "avgRating": 4.0,
     "numOfRating": 1115.0,
     "menu": {},
@@ -30134,7 +30045,7 @@
   },
   {
     "name": "무한통삼 서울대입구역점",
-    "foodCategory": "뷔페",
+    "foodCategory": "한식",
     "avgRating": 4.32,
     "numOfRating": 54.0,
     "menu": {
@@ -35368,7 +35279,7 @@
   },
   {
     "name": "한솥도시락 사랑의병원옆점",
-    "foodCategory": "도시락",
+    "foodCategory": "한식",
     "avgRating": 4.55,
     "numOfRating": 64.0,
     "menu": {
@@ -36643,7 +36554,7 @@
   },
   {
     "name": "본도시락 서울대입구역점",
-    "foodCategory": "도시락",
+    "foodCategory": "한식",
     "avgRating": 3.93,
     "numOfRating": 22.0,
     "menu": {},

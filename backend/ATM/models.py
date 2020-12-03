@@ -20,8 +20,14 @@ class FoodCategory(models.Model):
     일식 = models.BooleanField(default=False)
     중식 = models.BooleanField(default=False)
     양식 = models.BooleanField(default=False)
+    분식 = models.BooleanField(default=False)
+    술집 = models.BooleanField(default=False)
     카페 = models.BooleanField(default=False)
-    기타 = models.BooleanField(default=False)
+    치킨 = models.BooleanField(default=False)
+    간식 = models.BooleanField(default=False)
+    퓨전요리 = models.BooleanField(default=False)
+    아시아음식 = models.BooleanField(default=False)
+    패스트푸드 = models.BooleanField(default=False)
 
 
 class Location(models.Model):
