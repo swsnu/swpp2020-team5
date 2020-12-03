@@ -126,29 +126,6 @@ def restaurant_detail(request,restaurant_id):
             response_dict['menu'] = restaurant.menu
             response_dict['time'] = restaurant.openTime
             response_dict['keywords'] = restaurant.keyword
-            """
-            thumbnail_list = []
-            for thumbnail in ThumbNail.objects.select_related('restaurant') \
-            .filter(restaurant=restaurant):
-                thumbnail_list.append(thumbnail.url)
-            response_dict['img_url'] = thumbnail_list[0]
-            response_dict['img_url_list'] = thumbnail_list
-            response_dict['map_link'] = restaurant.map_link
-            menu_list = []
-            for price in Menu.objects.select_related(
-                    'restaurant').filter(restaurant=restaurant):
-                menu_list.append({price.name: price.price})
-            response_dict['menu'] = menu_list
-            open_list = []
-            for time in OpenTime.objects.select_related('restaurant').filter(restaurant=restaurant):
-                open_list.append({time.condition : time.time})
-            response_dict['time'] = open_list
-            keyword_list = []
-            for key in Keyword.objects.select_related(
-                    'restaurant').filter(restaurant=restaurant):
-                keyword_list.append({key.word: key.weight})
-            response_dict['keywords'] = keyword_list
-            """
             response_dict['urls'] = [
                 restaurant.kakao_link,
                 restaurant.naver_link]
