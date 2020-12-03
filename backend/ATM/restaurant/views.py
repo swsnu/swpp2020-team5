@@ -146,6 +146,7 @@ def restaurant_detail(request,restaurant_id):
                 restaurant.kakao_link,
                 restaurant.naver_link]
             response_dict['location'] = restaurant.location.address_name
+            response_dict['location_link'] = restaurant.map_link
             return JsonResponse(response_dict, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
