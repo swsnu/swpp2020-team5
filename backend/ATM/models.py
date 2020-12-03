@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 #from django.contrib.postgres.fields import ArrayField
+=======
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
 
 # Create your models here.
 class FoodCategory(models.Model):
@@ -64,6 +67,7 @@ class PreferenceVector(models.Model):
     불친절한 = models.FloatField(default=0.0)
 
 
+
 class Profile(models.Model):
     # user include email and password
     user = models.OneToOneField(
@@ -103,7 +107,10 @@ class Restaurant(models.Model):
     preference_vector = models.ForeignKey(
         PreferenceVector,
         on_delete=models.PROTECT,
+<<<<<<< HEAD
         null=True,
+=======
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
     )
     food_category = models.CharField(max_length=100)
     menu = models.JSONField()# dict{name(str): price(int)}
@@ -114,6 +121,49 @@ class Restaurant(models.Model):
     kakao_link = models.URLField()
     naver_link = models.URLField()
     map_link = models.URLField()
+<<<<<<< HEAD
+=======
+
+
+class Menu(models.Model):
+    name = models.CharField(max_length=20)
+    price = models.IntegerField()
+    restaurant = models.ForeignKey(
+        Restaurant,
+        on_delete=models.CASCADE,
+        related_name='menu',
+    )
+
+
+class OpenTime(models.Model):
+    condition = models.CharField(max_length=20)
+    time = models.CharField(max_length=20)
+    restaurant = models.ForeignKey(
+        Restaurant,
+        on_delete=models.CASCADE,
+        related_name='openTime',
+    )
+
+
+class ThumbNail(models.Model):
+    url = models.URLField(max_length=500)
+    restaurant = models.ForeignKey(
+        Restaurant,
+        on_delete=models.CASCADE,
+        related_name='thumbNail',
+    )
+
+
+class Keyword(models.Model):
+    word = models.CharField(max_length=20)
+    weight = models.IntegerField()
+    restaurant = models.ForeignKey(
+        Restaurant,
+        on_delete=models.CASCADE,
+        related_name='keyword',
+    )
+
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
 
 class Review(models.Model):
     restaurant = models.ForeignKey(
@@ -121,6 +171,7 @@ class Review(models.Model):
         on_delete=models.CASCADE,
         related_name='review'
     )
+<<<<<<< HEAD
     atm_author = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
@@ -129,6 +180,13 @@ class Review(models.Model):
     )
     other_site_author = models.CharField(max_length=100,\
                                          null=True)
+=======
+    author = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='review'
+    )
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
     content = models.CharField(max_length=1000)
     rating = models.FloatField()
     date = models.DateTimeField()

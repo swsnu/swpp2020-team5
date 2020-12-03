@@ -3,7 +3,6 @@ restaurant backend
 '''
 from django.http import HttpResponse, HttpResponseNotAllowed,JsonResponse
 from haversine import haversine
-#from ..models import Restaurant, OpenTime, Menu, ThumbNail, Keyword, Profile
 from ..models import Restaurant, Profile
 
 # preferencVector

@@ -16,4 +16,3 @@ def cos_sim_word(word_1, word_2):
 # argument needs to be np.array
 def cos_sim(emb_1, emb_2):
     return dot(emb_1, emb_2) / (norm(emb_1) * norm(emb_2))
-
