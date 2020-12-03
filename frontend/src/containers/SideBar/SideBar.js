@@ -126,7 +126,6 @@ class SideBar extends Component {
             나의 취향
           </div>
         </div>
-        <br />
         <div className="tab">
           {tab}
         </div>

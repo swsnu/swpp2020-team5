@@ -9,7 +9,6 @@
   margin-bottom: 20px;
   box-shadow: 0 4px 2px -2px gray;
   padding-bottom: 30px;
-  border-top: 3px black solid;
   background-color: white;
 }
 
@@ -48,7 +47,7 @@ input::placeholder {
   width: 30%;
   height: 70px;
   text-align: center;
-  background-color: #E44142;
+  background-color: #CC4230;
   color: white;
   border: none;
   cursor: pointer;
@@ -56,7 +55,7 @@ input::placeholder {
 
 
 #sign-out {  
-  background-color: #E44142;
+  background-color: #CC4230;
   border-radius: 10px;
   color: #FFFFFF;
   width: 90px;
