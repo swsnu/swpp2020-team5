@@ -15,6 +15,11 @@ def main_restaurants(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             author = Profile.objects.get(user=request.user)
+            author_pref_vec = author.preference_vector
+            author_attr_list = get_preference_attributes(author_pref_vec)
+            author_pref_dict = {}
+            for attr in author_attr_list:
+                author_pref_dict[attr] = author_pref_vec[attr]
             response_list = []
             for restaurant in Restaurant.objects.all():
                 cur = (author.search_location.y, author.search_location.x)
@@ -25,9 +30,7 @@ def main_restaurants(request):
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
                 response_dict['category'] = restaurant.food_category
-                thumbnail = ThumbNail.objects.select_related('restaurant') \
-                            .get(restaurant=restaurant)
-                response_dict['img_url'] = thumbnail.url
+                response_dict['img_url'] = restaurant.thumbnail[0]
                 restaurant_pref_vec = restaurant.preference_vector
                 restaurant_attr_list = get_preference_attributes(
                     restaurant_pref_vec)
@@ -43,7 +46,7 @@ def main_restaurants(request):
                     sorted_dict[pref] = res[pref]
                     i += 1
                 response_dict['preferenceVector'] = sorted_dict
-                response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict )
+                response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict,restaurant.avg_rating )
                 response_list.append(response_dict)
             #response list sorted by rate
             result_list = sorted(response_list, key = lambda x: x['rate'], reverse= True)
@@ -58,6 +61,11 @@ def searched_restaurants(request,word):
         if request.user.is_authenticated:
 
             author = Profile.objects.get(user=request.user)
+            author_pref_vec = author.preference_vector
+            author_attr_list = get_preference_attributes(author_pref_vec)
+            author_pref_dict = {}
+            for attr in author_attr_list:
+                author_pref_dict[attr] = author_pref_vec[attr]
             response_list = []
             for restaurant in Restaurant.objects.filter(name__contains=word):
                 cur = (author.search_location.y, author.search_location.x)
@@ -68,9 +76,7 @@ def searched_restaurants(request,word):
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
                 response_dict['category'] = restaurant.food_category
-                thumbnail = ThumbNail.objects.select_related('restaurant') \
-                            .get(restaurant=restaurant)
-                response_dict['img_url'] = thumbnail.url
+                response_dict['img_url'] = restaurant.thumbnail[0]
                 restaurant_pref_vec = restaurant.preference_vector
                 restaurant_attr_list = get_preference_attributes(
                     restaurant_pref_vec)
@@ -86,7 +92,7 @@ def searched_restaurants(request,word):
                     sorted_dict[pref] = res[pref]
                     i += 1
                 response_dict['preferenceVector'] = sorted_dict
-                response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict )
+                response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict, restaurant.avg_rating )
                 response_list.append(response_dict)
             #response list sorted by rate
             result_list = sorted(response_list, key = lambda x: x['rate'], reverse= True)
@@ -119,10 +125,10 @@ def restaurant_detail(request,restaurant_id):
             response_dict['id'] = restaurant.id
             response_dict['name'] = restaurant.name
             response_dict['category'] = restaurant.food_category
-            response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict )
+            response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict, restaurant.avg_rating )
             response_dict['difference'] = response_dict['rate'] - restaurant.avg_rating
-            response_dict['img_url'] = restaurant.thumbNail[0]
-            response_dict['img_url_list'] = restaurant.thumbNail
+            response_dict['img_url'] = restaurant.thumbnail[0]
+            response_dict['img_url_list'] = restaurant.thumbnail
             response_dict['menu'] = restaurant.menu
             response_dict['time'] = restaurant.openTime
             response_dict['keywords'] = restaurant.keyword
