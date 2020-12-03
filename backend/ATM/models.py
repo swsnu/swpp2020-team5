@@ -116,7 +116,7 @@ class Restaurant(models.Model):
     naver_link = models.URLField()
     map_link = models.URLField()
 
-
+"""
 class Menu(models.Model):
     name = models.CharField(max_length=20)
     price = models.IntegerField()
@@ -156,6 +156,7 @@ class Keyword(models.Model):
     )
 
 
+"""
 class Review(models.Model):
     restaurant = models.ForeignKey(
         Restaurant,
