@@ -1,0 +1,25 @@
+arr.append(['매운','매콤한', '얼얼한', '자극적인'])
+arr.append(['느끼하다'])
+arr.append(['짠','짭잘한'])
+arr.append(['단','달콤한'])   #arr.append(['달다','달콤한'])
+arr.append(['고소한'])
+arr.append(['싱거운','심심한','밍밍한'])
+arr.append(['담백한'])
+arr.append(['저렴한'])
+arr.append(['푸짐한'])
+arr.append(['웨이팅','기다리'])
+arr.append(['혼밥', '혼자'])
+arr.append(['바삭바삭'])
+arr.append(['부드럽'])
+arr.append(['불친절'])
+
+food_arr = ['짜장면',\
+            '쌀국수',\
+            '후라이드치킨',\
+            '김치찌개',\
+            '티라미수',\
+            '떡볶이',\
+            '웨이팅',\
+            '혼밥'
+           ]
+
