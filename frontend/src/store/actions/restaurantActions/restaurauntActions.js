@@ -9,8 +9,15 @@ export const getRestaurantList_ = (restaurantlist) => ({
   type: actionTypes.GET_RESTAURANTLIST, restaurantlist,
 });
 
-export const getRestaurantList = (name) => (dispatch) => axios.get(`/atm/restaurant/search/${name}`)
-  .then((res) => dispatch(getRestaurantList_(res.data)));
+export const getRestaurantList = (name) => (dispatch) => axios
+  .get(`/atm/restaurant/search/${name}`)
+  .then((res) => {
+    dispatch(getRestaurantList_(res.data));
+  })
+  .catch((err) => {
+    alert('Not Logined');
+  });
+
 
 // export const getRestaurantName_ = (searchedlist) => ({
 //   type: actionTypes.GET_RESTAURANTNAME, searchedlist
@@ -21,4 +28,12 @@ export const getRestaurantList = (name) => (dispatch) => axios.get(`/atm/restaur
 export const getRestaurantDetail_ = (selectedRestaurant) => ({
   type: actionTypes.GET_RESTAUARANTDETAIL, selectedRestaurant,
 });
-export const getRestaurantDetail = (restaurantID) => (_dispatch) => (dispatch) => axios.get(`/atm/restaurant/detail/${restaurantID}`);
+export const getRestaurantDetail = (restaurantID) => (_dispatch) => (dispatch) => axios
+  .get(`/atm/restaurant/detail/${restaurantID}`)
+  .then((res) => {
+    dispatch(getRestaurantDetail_(res.data));
+  })
+  .catch((err) => {
+    alert('Not Logined');
+  });
+

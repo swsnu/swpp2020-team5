@@ -34,7 +34,7 @@ def main_restaurants(request):
                 restaurant_pref_dict = {}
                 for attr in restaurant_attr_list:
                     restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
-                res = sorted(restaurant_pref_dict.items, key=f2, reverse=True)
+                res = sorted(restaurant_pref_dict.items, key= lambda x: x[1], reverse=True)
                 i = 0
                 sorted_dict = {}
                 for pref in res:
@@ -46,7 +46,8 @@ def main_restaurants(request):
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict )
                 response_list.append(response_dict)
             #response list sorted by rate
-            return JsonResponse(response_list, safe=False, status = 200)
+            result_list = sorted(response_list, key = lambda x: x['rate'], reverse= True)
+            return JsonResponse(result_list, safe=False, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
 def searched_restaurants(request,word):
@@ -88,7 +89,8 @@ def searched_restaurants(request,word):
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict )
                 response_list.append(response_dict)
             #response list sorted by rate
-            return JsonResponse(response_list, safe= False, status = 200)
+            result_list = sorted(response_list, key = lambda x: x['rate'], reverse= True)
+            return JsonResponse(result_list, safe=False, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
 
