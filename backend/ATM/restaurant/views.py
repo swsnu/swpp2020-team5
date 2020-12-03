@@ -7,7 +7,7 @@ from ..models import Restaurant, OpenTime, Menu, ThumbNail, Keyword, Profile
 
 # preferencVector
 scale = 1
-
+pivot = 0.5
 def main_restaurants(request):
     '''
     default main page
@@ -171,5 +171,5 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating):
     for restaurant_factor in restaurant_pref:
         for user_factor in user_pref:
             similarity = cos_sim_word(user_factor, restaurant_factor)
-            diff += similarity * (0.5 - abs(restaurant_pref[restaurant_factor]- user_pref[user_factor]))
+            diff += similarity * (pivot - abs(restaurant_pref[restaurant_factor]- user_pref[user_factor]))
     return avg_rating + scale * diff
