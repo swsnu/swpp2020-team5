@@ -7,7 +7,7 @@ from ..models import Restaurant, Profile
 
 # preferencVector
 scale = 1
-pivot = 0.5
+pivot = 0.6
 def main_restaurants(request):
     '''
     default main page
