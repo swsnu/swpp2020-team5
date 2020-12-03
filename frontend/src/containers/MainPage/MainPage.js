@@ -8,20 +8,22 @@ import './MainPage.css';
 
 class MainPage extends Component {
   componentDidMount() {
-    this.props.onGetRestaurantList(this.props.match.params.name);
+    if(this.props.match.params.name === undefined){
+      this.props.onGetRestaurantList("");
+      let vard ="";
+      console.log(`asf/${vard}`)
+    }
+    else{ 
+      this.props.onGetRestaurantList(this.props.match.params.name)
+    }
     this.props.onGetFoodCategory();
   }
 
   render() {
     let order = 0;
     const list = this.props.storedList.map((el) => {
-      let pos = false;
-      Object.keys(el.category).forEach((category) => {
-        const tmp = el.category[category];
-        if (this.props.foodCategory[tmp] === true) pos = true;
-      });
-
-      if (pos === true) {
+      
+      if (this.props.foodCategory[el.category] === true){
         order += 1;
 
         return (

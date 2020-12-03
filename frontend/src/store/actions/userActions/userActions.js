@@ -41,7 +41,7 @@ const editFoodCategory_ = (foodCategory) => ({
 });
 
 export const editFoodCategory = (foodCategory) => (dispatch) => axios
-  .put('/atm/user/foodCategory/', foodCategory)
+  .put('/atm/user/food-category/', foodCategory)
   .then((res) => { dispatch(editFoodCategory_(res.data)); })
   .catch((err) => {
     alert('Not logined');
