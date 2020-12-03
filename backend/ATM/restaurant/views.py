@@ -3,8 +3,9 @@ restaurant backend
 '''
 from django.http import HttpResponse, HttpResponseNotAllowed,JsonResponse
 from haversine import haversine
-from ..models import Restaurant, Profile
+from ..models import Restaurant, Profile, Review
 from ..utils import cos_sim_word
+import math
 # preferencVector
 scale = 1
 pivot = 0.6
@@ -28,6 +29,7 @@ def main_restaurants(request):
                 if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
+                review_cnt = Review.objects.filter(restaurant = restaurant).count() + 2
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
                 response_dict['category'] = restaurant.food_category
@@ -52,9 +54,10 @@ def main_restaurants(request):
                 print(response_dict['title'])
                 response_dict['preferenceVector'] = sorted_dict
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict,restaurant.avg_rating )
+                response_dict['rate-review'] = response_dict['rate'] * math.log2(review_cnt)
                 response_list.append(response_dict)
             #response list sorted by rate
-            result_list = sorted(response_list, key = lambda x: x['rate'], reverse= True)
+            result_list = sorted(response_list, key = lambda x: x['rate-review'], reverse= True)
             return JsonResponse(result_list, safe=False, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
@@ -175,6 +178,8 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating):
     diff = 0
     for restaurant_factor in restaurant_pref:
         for user_factor in user_pref:
+            if restaurant_pref[restaurant_factor] == 0 :
+                continue
             similarity = cos_sim_word(user_factor, restaurant_factor)
             diff += similarity * (pivot - abs(restaurant_pref[restaurant_factor]- user_pref[user_factor]))
     return avg_rating + scale * diff

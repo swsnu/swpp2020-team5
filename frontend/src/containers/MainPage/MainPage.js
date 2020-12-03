@@ -22,7 +22,6 @@ class MainPage extends Component {
   render() {
     let order = 0;
     const list = this.props.storedList.map((el) => {
-      
       if (this.props.foodCategory[el.category] === true){
         order += 1;
 
