@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+<<<<<<< HEAD
+#from django.contrib.postgres.fields import ArrayField
+=======
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
 
 # Create your models here.
 class FoodCategory(models.Model):
@@ -47,21 +51,21 @@ class PreferenceVector(models.Model):
     def __setitem__(self, key, value):
         return setattr(self, key, value)
 
-    매운 = models.FloatField()
-    느끼한 = models.FloatField()
-    짭짤한 = models.FloatField()
-    달달한 = models.FloatField()
-    기름진 = models.FloatField()
-    고소한 = models.FloatField()
-    싱거운 = models.FloatField()
-    신맛이나는 = models.FloatField()
-    담백한 = models.FloatField()
-    바삭바삭한 = models.FloatField()
-    부드러운 = models.FloatField()
-    저렴한 = models.FloatField()
-    푸짐한 = models.FloatField()
-    웨이팅이있는 = models.FloatField()
-    혼밥하기좋은 = models.FloatField()
+    # 0~1.0
+    매운 = models.FloatField(default=0.0)
+    느끼한 = models.FloatField(default=0.0)
+    짭짤한 = models.FloatField(default=0.0)
+    달달한 = models.FloatField(default=0.0)
+    고소한 = models.FloatField(default=0.0)
+    싱거운 = models.FloatField(default=0.0)
+    담백한 = models.FloatField(default=0.0)
+    바삭바삭한 = models.FloatField(default=0.0)
+    부드러운 = models.FloatField(default=0.0)
+    저렴한 = models.FloatField(default=0.0)
+    웨이팅이있는 = models.FloatField(default=0.0)
+    혼밥하기좋은 = models.FloatField(default=0.0)
+    불친절한 = models.FloatField(default=0.0)
+
 
 
 class Profile(models.Model):
@@ -103,15 +107,22 @@ class Restaurant(models.Model):
     preference_vector = models.ForeignKey(
         PreferenceVector,
         on_delete=models.PROTECT,
+<<<<<<< HEAD
+        null=True,
+=======
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
     )
     food_category = models.CharField(max_length=100)
-    # menu = models.JSONField() # dict{name(str): price(int)}
-    # openTime = models.JSONField() # dict{label(str): time(str)}
-    # thumbNail = ArrayField(URLField(max_length=200)) # list[thunbNail_link(str)]
-    # keyword = models.JSONField() # dict{keyword(str): weight(int)}
+    menu = models.JSONField()# dict{name(str): price(int)}
+    openTime = models.JSONField() # dict{label(str): time(str)}
+    #thumbNail = ArrayField(models.URLField(max_length=200)) # list[thunbNail_link(str)]
+    thumbnail = models.JSONField()
+    keyword = models.JSONField(null=True) # dict{keyword(str): weight(int)}
     kakao_link = models.URLField()
     naver_link = models.URLField()
     map_link = models.URLField()
+<<<<<<< HEAD
+=======
 
 
 class Menu(models.Model):
@@ -152,6 +163,7 @@ class Keyword(models.Model):
         related_name='keyword',
     )
 
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
 
 class Review(models.Model):
     restaurant = models.ForeignKey(
@@ -159,11 +171,22 @@ class Review(models.Model):
         on_delete=models.CASCADE,
         related_name='review'
     )
+<<<<<<< HEAD
+    atm_author = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE,
+        related_name='review',
+        null=True,
+    )
+    other_site_author = models.CharField(max_length=100,\
+                                         null=True)
+=======
     author = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
         related_name='review'
     )
+>>>>>>> 52d90d71e659911df20523665ed47e6c8dc1552f
     content = models.CharField(max_length=1000)
     rating = models.FloatField()
     date = models.DateTimeField()
