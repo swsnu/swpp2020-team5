@@ -79,15 +79,12 @@ class MyInfoTab extends Component {
     // Otherwise, should show onMainPage
     if (this.props.restaurantID !== -1) {
       myReview = this.props.myReviewList.map((review) => (
-        // let time = review.modifiedTime.toLocaleDateString();
-        // for parsing time object
-        // TODO: It should be changed into <Review> component when the component is implemented.
         <MyReview
           className="Review"
           reviewID={review.id}
           content={review.content}
           rating={review.rating}
-          modifiedTime={review.modifiedTime.toLocaleDateString()}
+          date={review.date}
         />
       ));
 
@@ -166,12 +163,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   // onGetUser: () => dispatch(actionCreators.getUser()),
   onGetSignOut: () => dispatch(actionCreators.getSignOut()),
-  onPostReview: (restaurantID, content, rating, modifiedTime) => dispatch(
+  onPostReview: (restaurantID, content, rating, date) => dispatch(
     actionCreators.postMyReview({
       restaurantID,
       content,
       rating,
-      modifiedTime,
+      date,
     }),
   ),
 });

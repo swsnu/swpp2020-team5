@@ -7,5 +7,7 @@ urlpatterns = [
     path('sign-in/', views.sign_in, name='sign_in'),
     path('sign-out/', views.sign_out, name='sign_out'),
     path('user/', include('ATM.user.urls')),
+    path('restaurant/', include('ATM.restaurant.urls')),
     path('token/', views.token, name='token'),
+
 ]

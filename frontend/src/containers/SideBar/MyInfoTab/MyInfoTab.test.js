@@ -75,9 +75,9 @@ describe('<MyInfoTab /', () => {
     // TODO SignOut should be implemented!!!
     // spyGetSignOut = jest.spyOn(userActionCreator, 'getSignOut')
     //    .mockImplementation(() => {return dispatch => {};});
-    spyGetReviews = jest.spyOn(reviewActionCreator, 'getReviews')
+    spyGetReviews = jest.spyOn(reviewActionCreator, 'getOtherReviews')
       .mockImplementation(() => (dispatch) => {});
-    spyPostReview = jest.spyOn(reviewActionCreator, 'postReview')
+    spyPostReview = jest.spyOn(reviewActionCreator, 'postMyReview')
       .mockImplementation(() => (dispatch) => {});
   });
 

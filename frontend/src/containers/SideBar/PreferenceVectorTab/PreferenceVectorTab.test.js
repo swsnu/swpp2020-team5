@@ -57,7 +57,7 @@ describe('<PreferenceVectorTab /', () => {
     spyGetUser = jest.spyOn(userActionCreator, 'getUser')
       .mockImplementation(() => (dispatch) => {});
 
-    spyPutPreferenceVector = jest.spyOn(userActionCreator, 'putPreferenceVector')
+    spyPutPreferenceVector = jest.spyOn(userActionCreator, 'editPreferenceVector')
       .mockImplementation(() => (dispatch) => {});
   });
 

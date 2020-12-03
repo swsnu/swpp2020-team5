@@ -26,7 +26,7 @@ describe('<MyReview />', () => {
             <Route
               path="/"
               exact
-              render={() => <MyReview reviewID={1} content="TEST_CONTENT" rating={3} modifiedTime="TEST_TIME" />}
+              render={() => <MyReview reviewID={1} content="TEST_CONTENT" rating={3} date="TEST_TIME" />}
             />
           </Switch>
         </ConnectedRouter>
@@ -65,7 +65,7 @@ describe('<MyReview />', () => {
     wrapper.find('StarRatingInput').find('Clear').find('a').simulate('click');
     expect(wrapper.state().rating).toBe(0);
 
-    const spyPutReview = jest.spyOn(actionCreators, 'putReview')
+    const spyPutReview = jest.spyOn(actionCreators, 'editMyReview')
       .mockImplementation((id, info) => (dispatch) => {});
 
     const DATE_TO_USE = new Date('2016');
@@ -83,7 +83,7 @@ describe('<MyReview />', () => {
       id: 1,
       content: 'EDITED_CONTENT',
       rating: 0,
-      modifiedTime: DATE_TO_USE,
+      date: DATE_TO_USE,
     });
     expect(wrapper.state().isEdit).toBe(false);
   });
@@ -91,7 +91,7 @@ describe('<MyReview />', () => {
   it('should delete comment', () => {
     const component = mount(myReview);
     const wrapper = component.find('MyReview');
-    const spyDeleteReview = jest.spyOn(actionCreators, 'deleteReview')
+    const spyDeleteReview = jest.spyOn(actionCreators, 'deleteMyReview')
       .mockImplementation((id) => (dispatch) => {});
     window.confirm = jest.fn(() => false);
     wrapper.find('#review-delete-button').simulate('click');

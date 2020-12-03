@@ -22,7 +22,19 @@ const stubInitialState = {
   review: null,
 };
 
+const mockGeolocation = {
+  getCurrentPosition: jest.fn()
+    .mockImplementationOnce((success) => Promise.resolve(success({
+      coords: {
+        latitude: 51.1,
+        longitude: 45.3,
+      },
+    }))),
+  watchPosition: jest.fn(),
+};
+
 const mockStore = getMockStore(stubInitialState);
+global.navigator.geolocation = mockGeolocation;
 
 describe('<SignIn />', () => {
   let signIn;
@@ -63,11 +75,11 @@ describe('<SignIn />', () => {
   });
 
   it('should call "onClickSigninHandler"', () => {
-    const spyPostSigIn = jest.spyOn(userActionCreators, 'postSignIn')
+    const spyPostSignIn = jest.spyOn(userActionCreators, 'postSignIn')
       .mockImplementation(() => () => {});
     const component = mount(signIn);
     const wrapper = component.find('#sign-in-button');
     wrapper.simulate('click');
-    expect(spyPostSigIn).toBeCalledTimes(1);
+    expect(navigator.geolocation.getCurrentPosition).toBeCalledTimes(1);
   });
 });
