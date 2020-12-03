@@ -28,14 +28,12 @@ def sign_up(request):
         # By user's selected foods, initialize pref_vec
         pref_vec = PreferenceVector()
         attr_list = get_preference_attributes(pref_vec)
-        true_food_list = filter(
-            lambda food_bool: food_bool[1],
-            selected_foods.items())
-        true_food_list = map(lambda food_bool: food_bool[0], true_food_list)
         for attr in attr_list:
             weight = 0.0
-            for food in true_food_list:
+            for food in selected_foods:
                 weight += cos_sim_word(attr, food)
+            if weight > 1.0:
+                weight = 1.0
             pref_vec[attr] = weight
         pref_vec.save()
 
