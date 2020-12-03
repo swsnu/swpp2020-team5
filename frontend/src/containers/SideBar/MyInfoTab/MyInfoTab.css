@@ -1,5 +1,6 @@
 .MyInfoTab {
   background-color: white;
+  height: 100%;
 }
 .MyInfoTab #name {
   position: relative;
@@ -8,15 +9,13 @@
 .upper-bar {
   margin-bottom: 20px;
   box-shadow: 0 4px 2px -2px gray;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  height: 40px;
   background-color: white;
-}
-
-.upper-bar-welcome {
-  margin-right: 20px;
-}
-.upper-bar-welcome #name {
-  margin-left: 10px;
+  text-align: center;
+  color: #808080;
+  font-size: 25px;
 }
 
 input::placeholder {
@@ -47,7 +46,7 @@ input::placeholder {
   width: 30%;
   height: 70px;
   text-align: center;
-  background-color: #CC4230;
+  background-color: #E44142;
   color: white;
   border: none;
   cursor: pointer;
@@ -55,17 +54,15 @@ input::placeholder {
 
 
 #sign-out {  
-  background-color: #CC4230;
-  border-radius: 10px;
+  background-color: #E44142;
+  border-radius: 20px;
   color: #FFFFFF;
   width: 90px;
-  height: 15px;
+  height: 40px;
   outline: none;
-  padding-bottom: 30px;
   border: none;
-  position: absolute;
-  margin-left: 110px;
-  margin-top: 5px;
+  float: right;
+  margin-right: 20px;
 }
 
 .on-main-page {
