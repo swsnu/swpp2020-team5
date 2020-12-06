@@ -42,7 +42,6 @@ class MyInfoTab extends Component {
     let onDetailPage = '';
     const onMainPage = (
       <div className="on-main-page">
-        <img id="welcome-img" src={welcomeImage} alt="" width="400" height="300" />
         <p id="welcome-text">
           #AllTastesMatter에 오신것을 환영합니다!
           <br />

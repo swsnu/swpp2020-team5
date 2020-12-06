@@ -2,16 +2,27 @@
   background-color: #FFFFFF;
   height: 100%;
 }
-.location-tab .location {
-  padding-left: 20px;
+.upper-bar {
+  margin-bottom: 20px;
+  box-shadow: 0 2px 2px gray;
+  padding-bottom: 10px;
   padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 40px;
+  background-color: white;
   color: #808080;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  overflow: hidden;
   font-size: 25px;
 }
 .location-tab .current-location {
   margin-left: 10px;
   color: #E44142;
   font-weight: lighter;
+  overflow: hidden;
 }
 .location-tab .map {
   width: calc(100% - 40px);

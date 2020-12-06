@@ -18,9 +18,14 @@
   filter: brightness(0) invert(1); 
 }
 
-.search-box {
-  width: 100%;
+.tab-icon {
+  height: 100%;
+  filter: invert(1);
+}
 
+.search-box {
+  width: 400px;
+  padding-left: 20px;
   vertical-align: middle;
   white-space: nowrap;
   position: relative;
@@ -29,36 +34,45 @@
 }
 
 .search-box #search-input {
-  width: calc(100% - 100px);
+  width: 200px;
   height: 50px;
   border: none;
+  outline: none;
   font-size: 12pt;
   float: left;
   padding: 0px;
-  padding-left: 45px;
+  padding-left: 60px;
+  padding-right: 100px;
   border-radius: 30px;
 }
-.search-box .search-icon{
+
+.search-box #search-icon{
   position: absolute;
-  top: 50%;
-  margin-left: 17px;
-  margin-top: 17px;
+  height: 30px;
+  margin-left: 15px;
+  margin-top: 10px;
   color: #4f5b66;
 }
 
 .search-box #search-button {
-  width: 115px;
+  width: 100px;
   height: 50px;
   border: none;
   font-size: 12pt;
   color: white;
   position: absolute;
   top: 50%;
-  margin-left: calc(100% - 150px);
+  margin-left: calc(100% - 155px);
   border-radius: 30px;
-  z-index: 1;
-  background-color: orange;
+  background-color: #ffb922;
   cursor: pointer;
+  outline: none;
+}
+.search-box #search-button:hover {
+  background-color: #eba000;
+}
+.search-box #search-button:active {
+  background-color: #DDDDDD;
 }
 
 .SideBar .background {
@@ -71,6 +85,7 @@
   text-align: center;
   width: 100%;
   height: 50px;
+  padding-bottom: 10px;
 }
 
 .SideBar .tab-button-image-line .tab-button {

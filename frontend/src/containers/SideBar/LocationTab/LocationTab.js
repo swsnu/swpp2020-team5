@@ -124,13 +124,12 @@ class LocationTab extends Component {
     const locationString = searchLocation.address_name;
     return (
       <div className="location-tab">
-        <div className="location">
+        <div className="upper-bar">
           현재 위치ㅣ
           <strong className="current-location">
             {locationString}
           </strong>
         </div>
-        <hr className="line" />
         <div id="search-box" className="box">
           <img src={searchIcon} alt="searchIcon" className="search-icon" />
           <input
