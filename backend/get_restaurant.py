@@ -37,6 +37,7 @@ with open('./crawling/restaurants.json') as json_file:
             naver_link=restaurant['naverLink'],
             thumbnail=restaurant['thumbNail'],
             map_link=restaurant['mapLink'],
+            search_string=restaurant['searchString']
         )
         new_restaurant.save()
 
