@@ -20,14 +20,8 @@ class FoodCategory(models.Model):
     일식 = models.BooleanField(default=False)
     중식 = models.BooleanField(default=False)
     양식 = models.BooleanField(default=False)
-    분식 = models.BooleanField(default=False)
-    술집 = models.BooleanField(default=False)
     카페 = models.BooleanField(default=False)
-    치킨 = models.BooleanField(default=False)
-    간식 = models.BooleanField(default=False)
-    퓨전요리 = models.BooleanField(default=False)
-    아시아음식 = models.BooleanField(default=False)
-    패스트푸드 = models.BooleanField(default=False)
+    기타 = models.BooleanField(default=False)
 
 
 class Location(models.Model):
@@ -131,8 +125,6 @@ class Menu(models.Model):
         on_delete=models.CASCADE,
         related_name='menu',
     )
-
-
 class OpenTime(models.Model):
     condition = models.CharField(max_length=20)
     time = models.CharField(max_length=20)
@@ -141,8 +133,6 @@ class OpenTime(models.Model):
         on_delete=models.CASCADE,
         related_name='openTime',
     )
-
-
 class ThumbNail(models.Model):
     url = models.URLField(max_length=500)
     restaurant = models.ForeignKey(
@@ -150,8 +140,6 @@ class ThumbNail(models.Model):
         on_delete=models.CASCADE,
         related_name='thumbNail',
     )
-
-
 class Keyword(models.Model):
     word = models.CharField(max_length=20)
     weight = models.IntegerField()
@@ -160,8 +148,6 @@ class Keyword(models.Model):
         on_delete=models.CASCADE,
         related_name='keyword',
     )
-
-
 """
 class Review(models.Model):
     restaurant = models.ForeignKey(

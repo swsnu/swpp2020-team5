@@ -10,8 +10,6 @@ class MainPage extends Component {
   componentDidMount() {
     if(this.props.match.params.name === undefined){
       this.props.onGetRestaurantList("");
-      let vard ="";
-      console.log(`asf/${vard}`)
     }
     else{ 
       this.props.onGetRestaurantList(this.props.match.params.name)
@@ -22,7 +20,9 @@ class MainPage extends Component {
   render() {
     let order = 0;
     const list = this.props.storedList.map((el) => {
-      if (this.props.foodCategory[el.category] === true){
+      let pos = true;
+      //this.props.foodCategory[el.category] === true
+      if (pos === true){
         order += 1;
 
         return (
