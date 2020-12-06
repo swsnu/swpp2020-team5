@@ -81,7 +81,7 @@ class DetailPage extends Component {
               <div className="imageright">
                 <div className="up" id="new">
                   <div className="title">
-                    {selectedRestaurant.title}
+                    {selectedRestaurant.name}
                   </div>
                   <div className="rate">
                     {selectedRestaurant.rate}

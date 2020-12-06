@@ -182,4 +182,4 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating):
                 continue
             similarity = cos_sim_word(user_factor, restaurant_factor)
             diff += similarity * (pivot - abs(restaurant_pref[restaurant_factor]- user_pref[user_factor]))
-    return avg_rating + scale * diff
+    return round(avg_rating + scale * diff,2)
