@@ -136,7 +136,7 @@ class MyInfoTab extends Component {
             {' '}
             님!
           </span>
-          <button id="sign-out" onClick={() => this.props.onGetSignOut()}>로그아웃</button>
+          <button className="upper-bar-button" id="sign-out" onClick={() => this.props.onGetSignOut()}>로그아웃</button>
         </div>
         {myInfo}
       </div>

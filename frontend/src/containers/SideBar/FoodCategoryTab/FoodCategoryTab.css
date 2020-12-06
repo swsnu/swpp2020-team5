@@ -1,7 +1,3 @@
-.foodCategory {
-  background-color: white;
-  overflow: scroll;
-}
 .foodCategory .images{
   text-align: center;
   display: flex;

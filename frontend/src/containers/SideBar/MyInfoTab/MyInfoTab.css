@@ -1,21 +1,6 @@
-.MyInfoTab {
-  background-color: white;
-  height: 100%;
-}
 .MyInfoTab #name {
   position: relative;
   color: #E44142;
-}
-.upper-bar {
-  margin-bottom: 20px;
-  box-shadow: 0 4px 2px -2px gray;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  height: 40px;
-  background-color: white;
-  text-align: center;
-  color: #808080;
-  font-size: 25px;
 }
 
 input::placeholder {
@@ -51,35 +36,3 @@ input::placeholder {
   border: none;
   cursor: pointer;
 }
-
-
-#sign-out {  
-  background-color: #E44142;
-  border-radius: 20px;
-  color: #FFFFFF;
-  width: 90px;
-  height: 40px;
-  outline: none;
-  border: none;
-  float: right;
-  margin-right: 20px;
-  cursor: pointer;
-}
-#sign-out:hover {
-  background-color: #c72d2d;
-}
-#sign-out:active {
-  background-color: #DDDDDD;
-}
-.on-main-page {
-  background-color: white;
-}
-#welcome-img {
-  position: absolute;
-  opacity: 0.3;
-}
-#welcome-text {
-  background-color: white;
-  margin-bottom: 260px;
-}
-

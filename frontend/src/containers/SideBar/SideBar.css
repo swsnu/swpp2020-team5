@@ -9,6 +9,41 @@
   height: 100%;
   margin: 0px;
   padding: 0px;
+  background-color: white;
+}
+
+.tab .upper-bar {
+  margin-bottom: 20px;
+  box-shadow: 0 2px 2px gray;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 40px;
+  background-color: white;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  overflow: hidden;
+  font-size: 25px;
+  color: #666666;
+}
+.tab .upper-bar-button {  
+  background-color: #E44142;
+  border-radius: 20px;
+  color: #FFFFFF;
+  width: 90px;
+  height: 40px;
+  outline: none;
+  border: none;
+  float: right;
+  cursor: pointer;
+}
+.tab .upper-bar-button:hover {
+  background-color: #c72d2d;
+}
+.tab .upper-bar-button:active {
+  background-color: #DDDDDD;
 }
 
 #logo-button {
