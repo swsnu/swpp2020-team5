@@ -3,7 +3,7 @@ from ATM.models import *
 import json
 from datetime import date
 
-with open('./reviews.json') as json_file:
+with open('./crawling/reviews.json') as json_file:
     reviews = json.load(json_file)
     
     no_rating_review_count = 0

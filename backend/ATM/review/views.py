@@ -7,6 +7,7 @@ from django.http import (
         )
 from django.views.decorators.csrf import ensure_csrf_cookie
 from ATM.models import Review, Restaurant, Profile
+from .utils import prefvec_update
 
 @ensure_csrf_cookie
 def get_other_reviews(request, restaurant_id):
@@ -80,7 +81,7 @@ def get_post_my_review(request, restaurant_id):
             try:
                 req_data = json.loads(request.body.decode())
                 content = req_data['content']
-                rating = req_data['rating']
+                rating = float(req_data['rating'])
             except (KeyError, JSONDecodeError):
                 return HttpResponseBadRequest()
             try:
@@ -102,6 +103,10 @@ def get_post_my_review(request, restaurant_id):
                 'content': new_review.content,
                 'rating': new_review.rating,
                 'date': new_review.date.strftime('%Y/%m/%d, %H:%M:%S')}
+            restaurant_prefvec = restaurant.preference_vector
+            user_prefvec = author.preference_vector
+            avg_diff = (rating - restaurant.avg_rating) / 5.0
+            prefvec_update(restaurant_prefvec, user_prefvec, avg_diff)
 
             return HttpResponse(
                 content=json.dumps(response_dict),

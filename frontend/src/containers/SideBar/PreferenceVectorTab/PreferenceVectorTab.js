@@ -1,6 +1,7 @@
-import Slider from '@material-ui/core/Slider';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
+import RangeSlider from 'react-bootstrap-range-slider';
 
 import * as actionCreators from '../../../store/actions/index';
 import './PreferenceVectorTab.css';
@@ -8,71 +9,69 @@ import './PreferenceVectorTab.css';
 class PreferenceVectorTab extends Component {
   constructor(props) {
     super(props);
+    //adjustedVector is the vector that will be submitted.
     this.state = {
+      factor_list: [
+        '매운', '느끼한', '짭짤한', '달달한', '고소한',
+        '싱거운', '담백한', '바삭바삭한', '부드러운', '저렴한',
+        '웨이팅이있는', '혼밥하기좋은', '불친절한'
+      ],
       currentPreferenceVector: {
-        factor_one: 1,
-        factor_two: 3,
-        factor_three: 5,
+        '매운': 0, '느끼한': 0, '짭짤한': 0, '달달한': 0, '고소한': 0,
+        '싱거운': 0, '담백한': 0, '바삭바삭한': 0, '부드러운': 0, '저렴한': 0,
+        '웨이팅이있는': 0, '혼밥하기좋은': 0, '불친절한': 0
+      },
+      adjustedPreferenceVector: {
+        '매운': 0, '느끼한': 0, '짭짤한': 0, '달달한': 0, '고소한': 0,
+        '싱거운': 0, '담백한': 0, '바삭바삭한': 0, '부드러운': 0, '저렴한': 0,
+        '웨이팅이있는': 0, '혼밥하기좋은': 0, '불친절한': 0
       },
     };
   }
 
   componentDidMount() {
-    // backend needed
-    // this.props.onGetPreferenceVector();
-
-    // get the current user from store and set the state with it.
-    // this.setState({ preferenceVector: this.props.currentPreferenceVector });
+    this.props.onGetPreferenceVector();
+    this.setState({ currentPreferenceVector: this.props.currentPreferenceVector,
+                    adjustedPreferenceVector: this.props.adjustedPreferenceVector });
   }
 
   onClickConfirmHandler = () => {
-    this.props.onPutPreferenceVector(this.state.currentPreferenceVector);
+    this.props.onPutPreferenceVector(this.state.adjustedPreferenceVector);
   }
 
-  onChangeFactor = (event, value) => {
-    const { currentPreferenceVector } = this.state;
-    currentPreferenceVector[event.target.id] = Math.round(value);
-    this.setState({ currentPreferenceVector });
+  onChangeFactor = (id, event) => {
+    let newPref = {...this.state.currentPreferenceVector};
+    let newAdjPref = {...this.state.adjustedPreferenceVector};
+    newPref[id] = parseInt(event.target.value);
+    newAdjPref[id] = newPref[id] / 10;
+    console.log(newPref[id]);
+    console.log(newPref);
+    console.log(newAdjPref);
+    this.setState({ currentPreferenceVector: newPref, adjustedPreferenceVector: newAdjPref });
   }
 
   render() {
+
+    let prefVecList = this.state.factor_list.map(factor => {
+      return (
+        <div className="Slider">
+          <p>{factor}</p>
+          <RangeSlider
+            value={this.state.currentPreferenceVector[factor]}
+            max={50}
+            onChange={this.onChangeFactor.bind(null, factor)}
+            tooltip='off'
+          />
+        </div>
+      )})
+
     return (
       <div className="PreferenceVectorTab">
         <div className="preference-upper-bar">
           <span>취향을 변경하신 후 적용 버튼을 누르세요!</span>
           <button id="preference-vector-button" onClick={() => this.onClickConfirmHandler()}>적용</button>
         </div>
-        <div className="Slider">
-          <p>매운맛</p>
-          <Slider
-            id="factor_one"
-            value={this.state.currentPreferenceVector.factor_one}
-            onChange={this.onChangeFactor}
-            onChangeCommitted={this.onChangeFactor}
-          />
-        </div>
-        <div className="Slider">
-          <p>느끼한맛</p>
-          <Slider
-            id="factor_two"
-            value={this.state.currentPreferenceVector.factor_two}
-            max={41}
-            onChange={this.onChangeFactor}
-            onChangeCommitted={this.onChangeFactor}
-          />
-        </div>
-
-        <div className="Slider">
-          <p>웨이팅</p>
-          <Slider
-            id="factor_three"
-            value={this.state.currentPreferenceVector.factor_three}
-            max={41}
-            step={0.1}
-            onChange={this.onChangeFactor}
-            onChangeCommitted={this.onChangeFactor}
-          />
-        </div>
+        {prefVecList}
       </div>
     );
   }
@@ -80,10 +79,13 @@ class PreferenceVectorTab extends Component {
 
 const mapStateToProps = (state) => ({
   currentUser: state.us.currentUser,
+  currentPreferenceVector: state.us.currentPreferenceVector,
+  adjustedPreferenceVector: state.us.adjustedPreferenceVector,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGetUser: () => dispatch(actionCreators.getUser()),
+  onGetPreferenceVector: () => dispatch(actionCreators.getPreferenceVector()),
   onPutPreferenceVector: (user) => dispatch(actionCreators.editPreferenceVector(user)),
 });
 

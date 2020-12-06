@@ -3,12 +3,17 @@ import * as actionTypes from '../../actions/actionTypes';
 const initialState = {
   selectedUser: {
     id: 0,
-    username: '우렁쌈밥',
+    name: '우렁쌈밥',
   },
-  preferenceVector: {
-    taste1: 1,
-    taste2: 2,
-    taste3: 3,
+  currentPreferenceVector: {
+    '매운': 10, '느끼한': 30, '짭짤한': 50, '달달한': 10, '고소한': 3,
+    '싱거운': 5, '담백한': 1, '바삭바삭한': 3, '부드러운': 5, '저렴한': 1,
+    '웨이팅이있는': 1, '혼밥하기좋은': 3, '불친절한': 5
+  },
+  adjustedPreferenceVector: {
+    '매운': 1, '느끼한': 3, '짭짤한': 5, '달달한': 1, '고소한': 3,
+    '싱거운': 5, '담백한': 1, '바삭바삭한': 3, '부드러운': 5, '저렴한': 1,
+    '웨이팅이있는': 1, '혼밥하기좋은': 3, '불친절한': 5
   },
   foodCategory: {
     한식: true,
@@ -58,8 +63,20 @@ const reducer = (state = initialState, action) => {
     case actionTypes.EDIT_SEARCH_LOCATION:
       return { ...state, searchLocation: action.target };
     case actionTypes.GET_PREFERENCE_VECTOR:
+      let adjustedVector = action.target;
+      let preferenceVector = {...action.target};
+      for (const key in preferenceVector) {
+        preferenceVector[key] = preferenceVector[key] * 10;
+      }
+      return {...state, currentPreferenceVector: preferenceVector,
+              adjustedPreferenceVector: adjustedVector};
     case actionTypes.EDIT_PREFERENCE_VECTOR:
-      return { ...state, preferenceVector: action.target };
+      let editedPreferenceVector = {...action.target};
+      for (const key in editedPreferenceVector) {
+        editedPreferenceVector[key] = editedPreferenceVector[key] * 10;
+      }
+      return { ...state, currentPreferenceVector: editedPreferenceVector,
+              adjustedPreferenceVector: action.target };
     default:
       break;
   }

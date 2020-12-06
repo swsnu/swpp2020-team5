@@ -17,7 +17,7 @@ class MyInfoTab extends Component {
   }
 
   componentDidMount() {
-    // this.props.onGetUser();
+    this.props.onGetUser();
   }
 
   onChangeReviewInputHandler = (event) => {
@@ -105,7 +105,7 @@ class MyInfoTab extends Component {
           </div>
           <div className="my-review-count-text">
             <span id="name">
-              {this.props.selectedUser.username}
+              {this.props.selectedUser.name}
 &nbsp;
             </span>
             님은 &nbsp;
@@ -133,7 +133,7 @@ class MyInfoTab extends Component {
           <span className="upper-bar-welcome">
             안녕하세요,
             {' '}
-            <span id="name">{this.props.selectedUser.username}</span>
+            <span id="name">{this.props.selectedUser.name}</span>
             {' '}
             님!
           </span>
@@ -161,7 +161,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // onGetUser: () => dispatch(actionCreators.getUser()),
+  onGetUser: () => dispatch(actionCreators.getUser()),
   onGetSignOut: () => dispatch(actionCreators.getSignOut()),
   onPostReview: (restaurantID, content, rating, date) => dispatch(
     actionCreators.postMyReview({
