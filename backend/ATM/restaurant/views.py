@@ -131,7 +131,7 @@ def restaurant_detail(request,restaurant_id):
             for attr in author_attr_list:
                 author_pref_dict[attr] = author_pref_vec[attr]
             restaurant_pref_vec = restaurant.preference_vector
-            restaurnat_attr_list = get_preference_attributes(restaurant_pref_vec)
+            restaurant_attr_list = get_preference_attributes(restaurant_pref_vec)
             restaurant_pref_dict = {}
             for attr in restaurant_attr_list:
                 restaurant_pref_dict[attr] = restaurant_pref_vec[attr]

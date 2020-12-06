@@ -18,8 +18,15 @@ class DetailPage extends Component {
 
   render() {
     const { selectedRestaurant } = this.props;
+    if(selectedRestaurant === null) {
+      return (
+        <div className="sideBar">
+          HI
+        </div>
+      )
+    }
     let text; let image;
-
+    const imgList = selectedRestaurant.img_url_list.map((el) => <img src={el} width="280" height="200" alt="thumbnail" />);
     if (selectedRestaurant.difference > 0) {
       text = `${selectedRestaurant.difference}점 상승!`;
       image = <img src={UpArrow} id="arrow" alt="upArrow" />;
@@ -27,19 +34,39 @@ class DetailPage extends Component {
       text = `${-selectedRestaurant.difference}점 하락!`;
       image = <img src={DownArrow} id="arrow" alt="downArrow" />;
     } else text = '변동없음!';
-
-    let category = null;
-    Object.keys(selectedRestaurant.category).forEach((cat) => {
-      if (category === null) category = selectedRestaurant.category[cat];
-      else category += `${selectedRestaurant.category[cat]}`;
+    let menu=[]
+    Object.keys(selectedRestaurant.menu).forEach((el) => {
+      menu.push
+      (
+        <p>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {el}
+          {selectedRestaurant.menu[el]}
+        </p>
+      );
     });
-    const menu = selectedRestaurant.menu.map((el) => (
-      <p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    let time =[]
+    Object.keys(selectedRestaurant.time["영업 시간"]).forEach((el) => {
+      time.push
+      (
+        <p>
+          {el}
+          {selectedRestaurant.time["영업 시간"][el]}
+        </p>
+      );
+    });
+    Object.keys(selectedRestaurant.time["휴무일"]).forEach((el) => {
+      time.push(
+        <p>
         {el}
-      </p>
-    ));
-    const imgList = selectedRestaurant.img_url_list.map((el) => <img src={el} width="280" height="200" alt="thumbnail" />);
+        {selectedRestaurant.time["휴무일"][el]}
+        </p>
+      );
+    });
+
+
+
     return (
       <div>
         <div className="sideBar">
@@ -67,19 +94,19 @@ class DetailPage extends Component {
                 <div className="detailinfo" id="new">
                   <p>
                     카테고리&nbsp;&nbsp;&nbsp;
-                    {category}
+                    {selectedRestaurant.category}
                   </p>
                   <p>
                     주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    서울 관악구 관악로14길 70 지하1층 (우)08789
+                    {selectedRestaurant.location}
                     &nbsp;&nbsp;
-                    <a href="https://map.kakao.com/?urlX=490331&urlY=1105229&urlLevel=3&itemId=41742921&q=%EC%95%88%EB%85%95%EB%B2%A0%ED%8A%B8%EB%82%A8&srcid=41742921&map_type=TYPE_MAP">
+                    <a href={selectedRestaurant.location_link}>
                       카카오맵
                     </a>
                   </p>
                   <p>
                     영업시간&nbsp;&nbsp;&nbsp;
-                    {selectedRestaurant.time}
+                    {time}
                   </p>
                   <p>
                     메뉴&nbsp;&nbsp;&nbsp;
@@ -97,9 +124,9 @@ class DetailPage extends Component {
               {imgList}
 
             </div>
-            <div className="reviewlist">
+            { <div className="reviewlist">
               <ReviewList restaurantID={selectedRestaurant.id} />
-            </div>
+            </div> }
           </div>
         </div>
       </div>

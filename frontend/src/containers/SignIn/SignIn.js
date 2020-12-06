@@ -32,13 +32,15 @@ class SignIn extends Component {
       currLoc.y = loc.coords.latitude;
       this.setState({ currLoc });
       onPostSignIn({ email, password, currLoc });
+      history.push('/main');
     },(err) => {
       currLoc.y = 37.47835220754036;
       currLoc.x = 126.95631398408709;
       this.setState({ currLoc });
       onPostSignIn({ email, password, currLoc });
+      history.push('/main');
     });
-    history.push('/main');
+    
   }
 
   render() {

@@ -29,7 +29,7 @@ export const getRestaurantList = (name) => (dispatch) => axios
 export const getRestaurantDetail_ = (selectedRestaurant) => ({
   type: actionTypes.GET_RESTAUARANTDETAIL, selectedRestaurant,
 });
-export const getRestaurantDetail = (restaurantID) => (_dispatch) => (dispatch) => axios
+export const getRestaurantDetail = (restaurantID) => (dispatch) => axios
   .get(`/atm/restaurant/detail/${restaurantID}`)
   .then((res) => {
     return dispatch(getRestaurantDetail_(res.data));
