@@ -30,7 +30,16 @@ class DetailPage extends Component {
     let text;
     let image;
     const ratingDiff = selectedRestaurant.difference.toFixed(2);
-    const imgList = selectedRestaurant.img_url_list.map((el) => <img src={el} width="280" height="200" alt="thumbnail" />);
+    const imgList = selectedRestaurant.img_url_list.map((el) => {
+      return (
+        <img
+          src={el}
+          className="restaurant-image"
+          alt="restaurant image"
+          onError={ev => ev.target.style.display='none'}
+        />
+      );
+    });
 
     if (ratingDiff > 0) {
       text = `${ratingDiff}점 상승!`;
@@ -45,14 +54,13 @@ class DetailPage extends Component {
     }
 
     const category = selectedRestaurant.category;
-
-    const location = <div>
-                      {selectedRestaurant.location}
-                      &nbsp;&nbsp;
-                      <a href={selectedRestaurant.location_link} style={{textDecoration: 'none'}}>
-                        카카오맵
-                      </a>
-                    </div>;
+    const location =  <div>
+                        {selectedRestaurant.location}
+                        &nbsp;&nbsp;
+                        <a href={selectedRestaurant.location_link} style={{textDecoration: 'none'}}>
+                          카카오맵
+                        </a>
+                      </div>;
 
     function buildMenu(key, dataDict) {
       return(
@@ -66,7 +74,7 @@ class DetailPage extends Component {
     function buildOpTime(key, dataDict) {
       return(
         <div>
-            {key} {dataDict[key]}
+          {key} {dataDict[key]}
         </div>
       )
     }
@@ -97,10 +105,8 @@ class DetailPage extends Component {
           <SideBar restaurantID={parseInt(this.props.match.params.id, 10)} />
         </div>
         <div className="detailPage">
-          <div className="restaurant" id="detail">
-            <div className="image">
-              <img src={selectedRestaurant.img_url} width="280" height="230" alt="thumbnail" />
-            </div>
+          <div className="restaurant-details">
+            <img src={selectedRestaurant.img_url} className="thumbnail" alt="thumbnail" />
             <div className="imageright">
               <div className="up">
                 <div className="title">
@@ -122,17 +128,19 @@ class DetailPage extends Component {
                 <RestaurantDetail detailType='메뉴' detailData={menu}/>
               </div>
             </div>
-
           </div>
+          <div className="info-type">주요 키워드 ㅣ</div>
           <div className="keywords">
             <Keywords keywords={selectedRestaurant.keywords} />
           </div>
+          <div className="info-type">리뷰 이미지 ㅣ</div>
           <div className="moreImage">
             {imgList}
           </div>
-          { <div className="reviewlist">
-              <ReviewList restaurantID={selectedRestaurant.id} />
-            </div> }
+          <div className="info-type">방문자 리뷰 ㅣ</div>
+          <div className="reviewlist">
+            <ReviewList restaurantID={selectedRestaurant.id} />
+          </div>
         </div>
       </div>
     );
