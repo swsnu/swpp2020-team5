@@ -1,0 +1,15 @@
+.restaurant-detail {
+  height: fit-content;
+  min-height: 30px;
+}
+
+.detail-type {
+  width: 30%;
+  float: left;
+  font-weight: bolder;
+}
+
+.detail-data {
+  width: 70%;
+  float: right;
+}

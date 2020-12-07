@@ -1,8 +1,10 @@
 .SideBar {
-  width: 100%;
+  width: 450px;
   height: 100%;
   background-color: #E44142;
-  box-shadow: 5px 0px 15px #888888;
+  box-shadow: 5px 0px 15px rgba(0,0,0,0.4);
+  float: left;
+  position: fixed;
 }
 .SideBar .tab {
   width: 100%;
