@@ -1,8 +1,14 @@
 .mainPage {
-    float: right;
+    /* float: right;
     display: flex;
     flex-direction: column;
     width: calc(100% - 450px);
     min-width: 1000px;
+    height: 100%; */
+    float: left;
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    width: 1200px;
+    margin-left: 530px;
 }

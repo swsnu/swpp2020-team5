@@ -7,7 +7,7 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 export const getRestaurantList_ = (restaurantlist) => ({
-  // type: actionTypes.GET_RESTAURANTLIST, restaurantlist,
+  type: actionTypes.GET_RESTAURANTLIST, restaurantlist,
 });
 
 export const getRestaurantList = (name) => (dispatch) => axios
