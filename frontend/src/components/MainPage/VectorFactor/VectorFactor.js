@@ -4,7 +4,7 @@ import './VectorFactor.css';
 // eslint-disable-next-line react/prefer-stateless-function
 class VectorFactor extends Component {
   render() {
-    const width = ((1 - this.props.weight) * 100).toString().concat('%');
+    const width = ((5 - this.props.weight) * 20).toString().concat('%');
     return (
       <div className="factor">
         {this.props.factor}
