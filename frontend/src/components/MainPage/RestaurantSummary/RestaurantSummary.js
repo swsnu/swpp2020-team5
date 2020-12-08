@@ -38,7 +38,10 @@ class RestaurantSummary extends Component {
             <div className="rate" onClick={() => this.onClickRestaurantHandler(this.props.id)}>
               {this.props.rate}
             </div>
+<<<<<<< HEAD
            
+=======
+>>>>>>> 788ef9e214f416a113466b4f578fdd58a6027574
           </div>
           <div className="category">
             {this.props.category}

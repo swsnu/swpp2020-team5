@@ -6,6 +6,8 @@ import * as actionCreators from '../../store/actions/index';
 import ReviewList from './ReviewList/ReviewList';
 import Keywords from '../../components/DetailPage/Keywords/Keywords';
 import SideBar from '../SideBar/SideBar';
+import RestaurantMenu from '../../components/DetailPage/RestaurantDetail/RestaurantMenu/RestaurantMenu'
+import RestaurantDetail from '../../components/DetailPage/RestaurantDetail/RestaurantDetail';
 
 import DownArrow from '../../images/arrow_down.png';
 import UpArrow from '../../images/arrow_up.png';
@@ -25,47 +27,77 @@ class DetailPage extends Component {
         </div>
       )
     }
-    let text; let image;
-    const imgList = selectedRestaurant.img_url_list.map((el) => <img src={el} width="280" height="200" alt="thumbnail" />);
-    if (selectedRestaurant.difference > 0) {
-      text = `${selectedRestaurant.difference}점 상승!`;
+    let text;
+    let image;
+    const ratingDiff = selectedRestaurant.difference.toFixed(2);
+    const imgList = selectedRestaurant.img_url_list.map((el) => {
+      return (
+        <img
+          src={el}
+          className="restaurant-image"
+          alt="restaurant image"
+          onError={ev => ev.target.style.display='none'}
+        />
+      );
+    });
+
+    if (ratingDiff > 0) {
+      text = `${ratingDiff}점 상승!`;
       image = <img src={UpArrow} id="arrow" alt="upArrow" />;
-    } else if (selectedRestaurant.difference < 0) {
-      text = `${-selectedRestaurant.difference}점 하락!`;
+    }
+    else if (ratingDiff < 0) {
+      text = `${ratingDiff}점 하락!`;
       image = <img src={DownArrow} id="arrow" alt="downArrow" />;
-    } else text = '변동없음!';
-    let menu=[]
-    Object.keys(selectedRestaurant.menu).forEach((el) => {
-      menu.push
-      (
-        <p>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {el}
-          {selectedRestaurant.menu[el]}
-        </p>
-      );
-    });
+    }
+    else {
+      text = '변동없음!';
+    }
+
+    const category = selectedRestaurant.category;
+    const location =  <div>
+                        {selectedRestaurant.location}
+                        &nbsp;&nbsp;
+                        <a href={selectedRestaurant.location_link} style={{textDecoration: 'none'}}>
+                          카카오맵
+                        </a>
+                      </div>;
+
+    function buildMenu(key, dataDict) {
+      return(
+        <RestaurantMenu
+          name = {key}
+          price = {dataDict[key]}
+        />
+      )
+    }
+      
+    function buildOpTime(key, dataDict) {
+      return(
+        <div>
+          {key} {dataDict[key]}
+        </div>
+      )
+    }
     
-    let time =[]
-    Object.keys(selectedRestaurant.time["영업 시간"]).forEach((el) => {
-      time.push
-      (
-        <p>
-          {el}
-          {selectedRestaurant.time["영업 시간"][el]}
-        </p>
-      );
-    });
-    Object.keys(selectedRestaurant.time["휴무일"]).forEach((el) => {
-      time.push(
-        <p>
-        {el}
-        {selectedRestaurant.time["휴무일"][el]}
-        </p>
-      );
-    });
+    function loadData(dataType, dataDict, buildFunc) {
+      if (dataDict.length === 0) {
+        dataType.push(<div>(정보없음)</div>)
+      }
+      else {
+        Object.keys(dataDict).forEach((key) => {
+          dataType.push(buildFunc(key, dataDict));
+        });
+      }
+    }
+    
+    const menu = [];
+    loadData(menu, selectedRestaurant.menu, buildMenu);
 
-
+    const onTime = [];
+    loadData(onTime, selectedRestaurant.time["영업 시간"], buildOpTime);
+    
+    const offTime = [];
+    loadData(offTime, selectedRestaurant.time["휴무일"], buildOpTime);
 
     return (
       <div>
@@ -73,60 +105,41 @@ class DetailPage extends Component {
           <SideBar restaurantID={parseInt(this.props.match.params.id, 10)} />
         </div>
         <div className="detailPage">
-          <div className="right">
-            <div className="restaurant" id="detail">
-              <div className="image">
-                <img src={selectedRestaurant.img_url} width="280" height="230" alt="thumbnail" />
-              </div>
-              <div className="imageright">
-                <div className="up" id="new">
-                  <div className="title">
-                    {selectedRestaurant.name}
-                  </div>
-                  <div className="rate">
-                    {selectedRestaurant.rate}
-                  </div>
-                  <div className="diff">
-                    {image}
-                    {text}
-                  </div>
+          <div className="restaurant-details">
+            <img src={selectedRestaurant.img_url} className="thumbnail" alt="thumbnail" />
+            <div className="imageright">
+              <div className="up">
+                <div className="title">
+                  {selectedRestaurant.name}
                 </div>
-                <div className="detailinfo" id="new">
-                  <p>
-                    카테고리&nbsp;&nbsp;&nbsp;
-                    {selectedRestaurant.category}
-                  </p>
-                  <p>
-                    주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    {selectedRestaurant.location}
-                    &nbsp;&nbsp;
-                    <a href={selectedRestaurant.location_link}>
-                      카카오맵
-                    </a>
-                  </p>
-                  <p>
-                    영업시간&nbsp;&nbsp;&nbsp;
-                    {time}
-                  </p>
-                  <p>
-                    메뉴&nbsp;&nbsp;&nbsp;
-                    {menu}
-                  </p>
-
+                <div className="rate">
+                  {selectedRestaurant.rate}
+                </div>
+                <div className="diff">
+                  {image}
+                  {text}
                 </div>
               </div>
-
+              <div className="detailinfo">
+                <RestaurantDetail detailType='카테고리' detailData={category}/>
+                <RestaurantDetail detailType='주소' detailData={location}/>
+                <RestaurantDetail detailType='영업시간' detailData={onTime}/>
+                <RestaurantDetail detailType='휴무일' detailData={offTime}/>
+                <RestaurantDetail detailType='메뉴' detailData={menu}/>
+              </div>
             </div>
-            <div className="keywords">
-              <Keywords keywords={selectedRestaurant.keywords} />
-            </div>
-            <div className="moreImage">
-              {imgList}
-
-            </div>
-            { <div className="reviewlist">
-              <ReviewList restaurantID={selectedRestaurant.id} />
-            </div> }
+          </div>
+          <div className="info-type">주요 키워드 ㅣ</div>
+          <div className="keywords">
+            <Keywords keywords={selectedRestaurant.keywords} />
+          </div>
+          <div className="info-type">리뷰 이미지 ㅣ</div>
+          <div className="moreImage">
+            {imgList}
+          </div>
+          <div className="info-type">방문자 리뷰 ㅣ</div>
+          <div className="reviewlist">
+            <ReviewList restaurantID={selectedRestaurant.id} />
           </div>
         </div>
       </div>
