@@ -20,9 +20,12 @@ with open('./crawling/reviews.json') as json_file:
                     r = Restaurant.objects.get(id=review['restaurant'])
                 except:
                     continue
+
+                author = Author(nickname=review['author'])
+                author.save()
                 new_review = Review(
                     restaurant=Restaurant.objects.get(id=review['restaurant']),
-                    other_site_author=review['author'],
+                    author=author,
                     date=date(int(date_values[0]),
                           int(date_values[1]),
                           int(date_values[2])),

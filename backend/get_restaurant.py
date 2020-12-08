@@ -5,6 +5,16 @@ import json
 pref_dict = {}
 total_count_dict = {}
 
+max_pref_value = 5.0
+
+debug_sum=0
+debug_max=0
+debug_min=0
+debug_count=0
+debug_10=[0,0,0,0,0,0]
+
+
+
 with open('./ATM/embedding/word_to_pref.json',"r", encoding="utf-8") as json_file:
     pref_dict = json.load(json_file)
     
@@ -73,14 +83,29 @@ with open('./crawling/reviews_tokenized.json',"r", encoding="utf-8") as json_fil
         for key in for_pref_vec.keys():
             pref_value = for_pref_vec[key] / our_key_total * total_count / \
                         total_count_dict[key]
-            if pref_value > 1:
-                pref_value = 1.0
+            debug_count += 1
+            if pref_value>debug_max:
+                debug_max = pref_value
+            if pref_value<debug_min:
+                debug_min = pref_value
+            debug_10[int(pref_value/10)] += 1
+            debug_sum += pref_value
+
+            # 0~10 is only used. This is 90% of total data
+            pref_value /= 2
+            if pref_value > max_pref_value:
+                pref_value = max_pref_value
             pref[key] = pref_value
         pref.save()
         new_res.preference_vector = pref
         new_res.save()
 
 print('keyword id not matched: ', no_res)
+print('mean: ',debug_sum/debug_count, 'max: ', debug_max, \
+    'min: ',debug_min)
+for i in range(len(debug_10)):
+    print(i, debug_10[i])
+
         
 """
 with open("./ATM/embedding/word_to_frequency.json","w") as json_file:

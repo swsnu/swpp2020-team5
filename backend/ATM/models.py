@@ -122,20 +122,28 @@ class Restaurant(models.Model):
     map_link = models.URLField()
     search_string = models.CharField(max_length=200)
 
+# This can be ATM or other-sites' user so user can be null.
+class Author(models.Model):
+    user = models.ForeignKey(
+            User,
+            on_delete=models.CASCADE,
+            related_name='author',
+            null=True,
+            )
+    nickname = models.CharField(max_length=100)
+
 class Review(models.Model):
     restaurant = models.ForeignKey(
         Restaurant,
         on_delete=models.CASCADE,
         related_name='review'
     )
-    atm_author = models.ForeignKey(
-        Profile,
+    author = models.ForeignKey(
+        Author,
         on_delete=models.CASCADE,
         related_name='review',
         null=True,
     )
-    other_site_author = models.CharField(max_length=100,\
-                                         null=True)
     content = models.CharField(max_length=1000)
     rating = models.FloatField()
     date = models.DateField()

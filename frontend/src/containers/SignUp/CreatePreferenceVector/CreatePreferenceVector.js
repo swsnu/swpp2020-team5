@@ -17,6 +17,7 @@ class CreatePreferenceVector extends Component {
     super(props);
     this.state = {
       selectedFoods: [false, false, false, false, false, false],
+      foodCaptionList: ['짜장면', '쌀국수', '떡볶이', '후라이드치킨', '김치찌개', '티라미수'],
     };
   }
 
@@ -28,12 +29,18 @@ class CreatePreferenceVector extends Component {
 
   onClickConfirmHandler = () => {
     const { username, email, password } = this.props;
-    const { selectedFoods } = this.state;
+    const { selectedFoods, foodCaptionList } = this.state;
+    const selectedFoodNames = [];
+    for (let i = 0; i < selectedFoods.length; i++) {
+      if (selectedFoods[i]) {
+        selectedFoodNames.push(foodCaptionList[i]);
+      } 
+    }
     this.props.onPostSignUp({
       username,
       email,
       password,
-      selectedFoods: ['김치찌개']
+      selectedFoods: selectedFoodNames, 
       //selectedFoods,
     });
     this.props.history.push('/');
@@ -43,7 +50,7 @@ class CreatePreferenceVector extends Component {
   render() {
     const { alert } = this.props;
     const foodImageList = [food1, food2, food3, food4, food5, food6];
-    const foodCaptionList = ['해산물', '피자', '떡볶이', '스테이크', '샐러드', '오꼬노미야끼'];
+    const { foodCaptionList } = this.state;
     const foodImages = [];
     const selectedFoodsLength = this.state.selectedFoods.length;
     for (let i = 0; i < selectedFoodsLength; i += 1) {

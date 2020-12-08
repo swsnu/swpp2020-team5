@@ -52,6 +52,12 @@ def sign_up(request):
                           food_category=food_category,
                           search_location=search_location)
         profile.save()
+
+        author = Author(user=user,
+                        nickname=username)
+
+        author.save()
+
         return HttpResponse(status=201)
     else:
         return HttpResponseNotAllowed(['POST'])
