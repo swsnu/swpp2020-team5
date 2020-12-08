@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { push } from 'connected-react-router';
+import { push, replace } from 'connected-react-router';
 import * as actionTypes from '../actionTypes';
 
 // Handling CSRF-Token
@@ -37,18 +37,19 @@ export const resetCheckUser = () => (dispatch) => {
 export const getUser = () => (dispatch) => axios
   .get('/atm/user/me/')
   .then((res) => dispatch(getUser_(res.data)))
-  .catch((err) => {}); 
+  .catch((err) => dispatch(getUser_(null))); 
 
 
 export const postSignIn = (userInfo) => (dispatch) => axios
   .post('/atm/sign-in/', userInfo)
   .then((res) => {
     dispatch({type: actionTypes.POST_SIGN_IN});
+    return dispatch(replace('/'));
   })
   .catch((err) => alert('Login failed'));
 
 export const postSignUp = (userInfo) => (dispatch) => axios
-  .post('atm/sign-up/', userInfo)
+  .post('/atm/sign-up/', userInfo)
   .then((res) => {})
   .catch((err) => {
     if (err.response.status == 409){
@@ -61,10 +62,10 @@ export const postSignUp = (userInfo) => (dispatch) => axios
 
 
 export const getSignOut = () => (dispatch) => axios
-  .get('atm/sign-out/')
+  .get('/atm/sign-out/')
   .then((res) => {
-    dispatch(push('/'));
-    dispatch({type: actionTypes.GET_SIGN_OUT})
+    dispatch({type: actionTypes.GET_SIGN_OUT});
+    return dispatch(replace('/'));
   })
   .catch((err) => {
     alert('sign-out failed!');

@@ -88,9 +88,9 @@ const reducer = (state = initialState, action) => {
       return { ...state, currentPreferenceVector: editedPreferenceVector,
               adjustedPreferenceVector: action.target };
     case actionTypes.GET_SIGN_OUT:
-      return {...state, };
+      return {...state, isGetUserCalled: false};
     case actionTypes.POST_SIGN_IN:
-      return {...state, };
+      return {...state, isGetUserCalled: false};
     default:
       break;
   }

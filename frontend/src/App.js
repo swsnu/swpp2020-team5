@@ -16,11 +16,9 @@ class App extends Component {
       isMount: false,
     }
   }
-  componentDidMount() {
-    this.props.onGetUser();
-  }
   render(){
     if (!this.props.isGetUserCalled) {
+      this.props.onGetUser();
       return (<div></div>);
     } 
     return (
