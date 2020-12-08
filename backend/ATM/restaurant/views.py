@@ -24,7 +24,7 @@ def searched_restaurants(request, word=''):
                 author_pref_dict[attr] = author_pref_vec[attr]
             response_list = []
             if word != '':
-                for restaurant in Restaurant.objects.filter(name__contains=word):
+                for restaurant in Restaurant.objects.filter(search_string__contains=word):
                     #cur = (37.47835220754036, 126.95631398408709)
                     print(author.search_location.x)
                     cur = (author.search_location.y, author.search_location.x)
