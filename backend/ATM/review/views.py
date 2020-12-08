@@ -49,7 +49,6 @@ def get_other_reviews(request, restaurant_id):
                 for review in reviews_on_target if review.site == 'atm']
 
             other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
-            other_review_list = {}
             return JsonResponse(
                 other_review_list,
                 safe=False)  # default status is 200
