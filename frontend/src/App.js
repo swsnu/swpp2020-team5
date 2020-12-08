@@ -10,13 +10,22 @@ import SignUp from './containers/SignUp/SignUp';
 import './App.css';
 import * as actionCreators from './store/actions/index';
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMount: false,
+    }
+  }
   componentDidMount() {
     this.props.onGetUser();
   }
   render(){
+    if (!this.props.isGetUserCalled) {
+      return (<div></div>);
+    } 
     return (
       <ConnectedRouter history={this.props.history}>
-        {this.props.isSignIn ?
+        {this.props.selectedUser ?
           (<div className="App">
             <Switch>
               <Redirect exact from="/" to="/main" />
@@ -43,7 +52,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isSignIn: state.us.isSignIn,
+  selectedUser: state.us.selectedUser,
+  isGetUserCalled: state.us.isGetUserCalled,
 });
 
 const mapDispatchToProps = (dispatch) => ({
