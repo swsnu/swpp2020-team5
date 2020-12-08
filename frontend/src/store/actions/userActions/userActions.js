@@ -16,9 +16,15 @@ export const getUser = () => (dispatch) => axios
   .then((res) => dispatch(getUser_(res.data)))
   .catch((err) => alert('You need to login first!'));
 
+const postSignIn_ = () => ({
+  type: actionTypes.POST_SIGN_IN,
+});
+
 export const postSignIn = (userInfo) => (dispatch) => axios
   .post('/atm/sign-in/', userInfo)
-  .then((res) => {})
+  .then((res) => {
+    dispatch(postSignIn_());
+  })
   .catch((err) => alert('Login failed'));
 
 export const postSignUp = (userInfo) => (dispatch) => axios
@@ -26,10 +32,15 @@ export const postSignUp = (userInfo) => (dispatch) => axios
   .then((res) => {})
   .catch((err) => alert('SignUp Failed'));
 
+const getSignOut_ = () => ({
+  type: actionTypes.GET_SIGN_OUT,
+})
+
 export const getSignOut = () => (dispatch) => axios
   .get('atm/sign-out/')
   .then((res) => {
     dispatch(push('/'));
+    dispatch(getSignOut_())
   })
   .catch((err) => {
     alert('sign-out failed!');

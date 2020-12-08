@@ -1,6 +1,7 @@
 import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
+  isSignIn: false,
   selectedUser: {
     id: 0,
     username: '우렁쌈밥',
@@ -49,7 +50,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USER:
-      return { ...state, selectedUser: action.target };
+      return { ...state, selectedUser: action.target, isSignIn: true };
     case actionTypes.GET_FOOD_CATEGORY:
     case actionTypes.EDIT_FOOD_CATEGORY:
       return { ...state, foodCategory: action.target };
@@ -60,6 +61,10 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GET_PREFERENCE_VECTOR:
     case actionTypes.EDIT_PREFERENCE_VECTOR:
       return { ...state, preferenceVector: action.target };
+    case actionTypes.GET_SIGN_OUT:
+      return {...state, isSignIn: false};
+    case actionTypes.POST_SIGN_IN:
+      return {...state, isSignIn: true};
     default:
       break;
   }

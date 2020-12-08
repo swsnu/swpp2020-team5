@@ -7,7 +7,7 @@ from ATM.restaurant import views
 urlpatterns = [
     path(
         'search/',
-        views.main_restaurants,
+        views.searched_restaurants,
         name='searched_restaurants'),
     path(
         'search/<str:word>',
