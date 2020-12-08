@@ -64,7 +64,7 @@ export const getSignOut = () => (dispatch) => axios
   .get('atm/sign-out/')
   .then((res) => {
     dispatch(push('/'));
-    dispatch({type: GET_SIGN_OUT})
+    dispatch({type: actionTypes.GET_SIGN_OUT})
   })
   .catch((err) => {
     alert('sign-out failed!');
