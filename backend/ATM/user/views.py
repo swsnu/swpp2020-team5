@@ -3,6 +3,8 @@ from json import JSONDecodeError
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.views.decorators.csrf import ensure_csrf_cookie
 from .utils import get_preference_attributes
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 
 @ensure_csrf_cookie
@@ -19,6 +21,16 @@ def me_info(request):
     else:
         return HttpResponseNotAllowed(['GET'])
 
+@ensure_csrf_cookie
+def check(request):
+    if request.method == 'GET':
+        username = request.GET.get('username','')
+        email = request.GET.get('email','')
+        try:
+            User.objects.get(Q(username=username) | Q(email__contains=email))
+        except User.DoesNotExist:
+            return HttpResponse(status=204)
+        return HttpResponse(status=401)
 
 @ensure_csrf_cookie
 def preference_vector(request):

@@ -1,6 +1,8 @@
 import { withRouter } from 'react-router';
+import { withAlert } from 'react-alert';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as actionCreators from '../../../store/actions/index'
 import CreatePreferenceVector from '../CreatePreferenceVector/CreatePreferenceVector';
 import './CreateID.css';
 
@@ -23,12 +25,42 @@ class CreateID extends Component {
         foodList: [],
       },
       verifyPassword: null,
-      mode: 'ID',
+      shouldCheck: false,
     };
   }
 
+  componentDidMount() {
+    this.props.onResetCheckUser();
+      // 'NotYet' is not checked yet
+      // 'NotExist' is checked but not exist
+      // 'Exist' is checked and exist
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.shouldCheck) {
+      if (nextProps.checkUserStatus === 'NotExist') {
+        return { 
+          mode: 'Preference',
+          shouldCheck: false,
+        }
+      } else if (nextProps.checkUserStatus === 'Exist') {
+        const { alert } = nextProps; 
+        alert.show('이미 가입된 회원입니다!');
+        nextProps.onResetCheckUser();
+        return {
+          shouldCheck: false,
+        }
+      }
+      
+    }
+  }
+
   onClickConfirmHandler() {
-    this.setState({ mode: 'Preference' });
+    const { username, email } = this.state.userInfo;
+    this.props.onCheckUser(username, email);
+    this.setState({
+      shouldCheck: true,
+    })
   }
 
   onChangeButtonHandler() {
@@ -41,7 +73,9 @@ class CreateID extends Component {
 
   render() {
     const { userInfo } = this.state;
-    if (this.state.mode === 'Preference') this.props.onChangeStageHandler(userInfo);
+    if (this.state.mode === 'Preference') {
+      this.props.onChangeStageHandler(userInfo);
+    }
     // return(
     // <CreatePreferenceVector  userInfo={userInfo}/>
     // );
@@ -113,12 +147,13 @@ class CreateID extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => ({
+  checkUserStatus: state.us.checkUserStatus,
+});
 
-};
+const mapDispatchToProps = (dispatch) => ({
+  onCheckUser: (username, email) => dispatch(actionCreators.checkUser(username, email)),
+  onResetCheckUser: () => dispatch(actionCreators.resetCheckUser())
+});
 
-const mapDispatchToProps = (dispatch) => {
-
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CreateID));
+export default connect(mapStateToProps, mapDispatchToProps)(withAlert()(withRouter(CreateID)));
