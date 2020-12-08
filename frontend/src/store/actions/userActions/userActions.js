@@ -37,7 +37,7 @@ export const resetCheckUser = () => (dispatch) => {
 export const getUser = () => (dispatch) => axios
   .get('/atm/user/me/')
   .then((res) => dispatch(getUser_(res.data)))
-  .catch((err) => alert('You need to login first!'));
+  .catch((err) => {}); 
 
 
 export const postSignIn = (userInfo) => (dispatch) => axios

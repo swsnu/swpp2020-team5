@@ -10,6 +10,12 @@ import SignUp from './containers/SignUp/SignUp';
 import './App.css';
 import * as actionCreators from './store/actions/index';
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMount: false,
+    }
+  }
   componentDidMount() {
     this.props.onGetUser();
   }
@@ -50,7 +56,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  isSignIn: state.us.isSignIn,
+  selectedUser: state.us.selectedUser,
+  isGetUserCalled: state.us.isGetUserCalled,
 });
 
 const mapDispatchToProps = (dispatch) => ({

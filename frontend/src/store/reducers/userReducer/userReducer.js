@@ -88,7 +88,7 @@ const reducer = (state = initialState, action) => {
       return {...state, isSignIn: false};
     case actionTypes.POST_SIGN_IN:
       sessionStorage.isSignIn = true;
-      return {...state, isSignIn: true};
+      return {...state, isSignIn: true};  
     default:
       break;
   }
