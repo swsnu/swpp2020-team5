@@ -72,14 +72,13 @@ class FoodCategoryTab extends Component {
     });
     return (
       <div className="foodCategory">
-        <text>원하는 음식 종류를 고르세요!</text>
-        <br />
+        <div className="upper-bar">
+          <span>음식 카테고리</span>
+        <button className="upper-bar-button" id="foodcategory-confirm" onClick={() => this.postClickSaveHandler()}>적용</button>
+        </div>
         <div className="images">
           {categorylist}
         </div>
-        <button id="savebutton" onClick={() => this.postClickSaveHandler()}>
-          저장
-        </button>
       </div>
     );
   }

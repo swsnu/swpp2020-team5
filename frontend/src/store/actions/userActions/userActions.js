@@ -11,6 +11,29 @@ const getUser_ = (user) => ({
   target: user,
 });
 
+// isExist is boolean
+const checkUser_ = isExist => ({
+  type: actionTypes.CHECK_USER,
+  target: isExist
+})
+
+export const checkUser = (username, email) => (dispatch) => axios
+  .get(`/atm/user/check/?username=${username}&email=${email}/`)
+  .then(res => dispatch(checkUser_('NotExist')))
+  .catch(err => {
+    if (err.response.status === 401) {
+      return dispatch(checkUser_('Exist'))
+    } else {
+      return alert('checkUser error')
+    }
+  })
+
+export const resetCheckUser = () => (dispatch) => {
+  return dispatch({
+    type: resetCheckUser,
+  });
+}
+
 export const getUser = () => (dispatch) => axios
   .get('/atm/user/me/')
   .then((res) => dispatch(getUser_(res.data)))
@@ -24,7 +47,14 @@ export const postSignIn = (userInfo) => (dispatch) => axios
 export const postSignUp = (userInfo) => (dispatch) => axios
   .post('atm/sign-up/', userInfo)
   .then((res) => {})
-  .catch((err) => alert('SignUp Failed'));
+  .catch((err) => {
+    if (err.response.status == 409){
+      alert('이미 등록된 회원입니다!')
+    }
+    else {
+      alert('SignUp Failed')
+      }
+    });
 
 export const getSignOut = () => (dispatch) => axios
   .get('atm/sign-out/')

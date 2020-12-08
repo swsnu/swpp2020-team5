@@ -67,9 +67,9 @@ class PreferenceVectorTab extends Component {
 
     return (
       <div className="PreferenceVectorTab">
-        <div className="preference-upper-bar">
-          <span>취향을 변경하신 후 적용 버튼을 누르세요!</span>
-          <button id="preference-vector-button" onClick={() => this.onClickConfirmHandler()}>적용</button>
+        <div className="upper-bar">
+          <span>나의 취향 조정하기</span>
+          <button className="upper-bar-button" id="preference-confirm" onClick={() => this.onClickConfirmHandler()}>적용</button>
         </div>
         {prefVecList}
       </div>

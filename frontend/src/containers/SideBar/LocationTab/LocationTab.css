@@ -1,17 +1,8 @@
-.location-tab {
-  background-color: #FFFFFF;
-  height: 100%;
-}
-.location-tab .location {
-  padding-left: 20px;
-  padding-top: 10px;
-  color: #808080;
-  font-size: 25px;
-}
 .location-tab .current-location {
   margin-left: 10px;
   color: #E44142;
   font-weight: lighter;
+  overflow: hidden;
 }
 .location-tab .map {
   width: calc(100% - 40px);
