@@ -4,16 +4,12 @@
     float: left;
     position: fixed;
 }
-.mainPage{
-    float: left;
-}
-.mainPage .restaurantList{
-    float: left;
+
+.mainPage {
+    float: right;
     display: flex;
     flex-direction: column;
-    width: calc(100% - 400px);
+    width: calc(100% - 450px);
     min-width: 1000px;
     height: 100%;
-    overflow-y:scroll;
-    padding-left: 410px;
 }

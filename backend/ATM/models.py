@@ -16,6 +16,7 @@ class FoodCategory(models.Model):
     def __setitem__(self, key, value):
         return setattr(self, key, value)
 
+
     한식 = models.BooleanField(default=True)
     일식 = models.BooleanField(default=True)
     중식 = models.BooleanField(default=True)
@@ -132,6 +133,7 @@ class Author(models.Model):
             )
     nickname = models.CharField(max_length=100)
 
+
 class Review(models.Model):
     restaurant = models.ForeignKey(
         Restaurant,
@@ -146,5 +148,6 @@ class Review(models.Model):
     )
     content = models.CharField(max_length=1000)
     rating = models.FloatField()
+
     date = models.DateField()
     site = models.CharField(max_length=10)  # one of naver, kakao or atm.

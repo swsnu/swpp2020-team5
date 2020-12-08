@@ -10,8 +10,6 @@ class MainPage extends Component {
   componentDidMount() {
     if(this.props.match.params.name === undefined){
       this.props.onGetRestaurantList("");
-      let vard ="";
-      console.log(`asf/${vard}`)
     }
     else{ 
       this.props.onGetRestaurantList(this.props.match.params.name)

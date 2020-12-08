@@ -70,8 +70,8 @@ def sign_in(request):
             req_data = json.loads(request.body.decode())
             email = req_data['email']
             password = req_data['password']
-           # loc_x = req_data['currLoc']['x']
-           # loc_y = req_data['currLoc']['y']
+            loc_x = req_data['currLoc']['x']
+            loc_y = req_data['currLoc']['y']
         except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
         try:
@@ -80,6 +80,11 @@ def sign_in(request):
             return HttpResponse(status=401)
         if user.check_password(password):
             login(request, user)
+            cur_user = Profile.objects.get(user=user)
+            cur_loc = Location(x=loc_x, y=loc_y)
+            cur_loc.save()
+            cur_user.search_location = cur_loc
+            cur_user.save()
             return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)
