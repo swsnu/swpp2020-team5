@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withAlert } from 'react-alert';
 import * as actionCreators from '../../../store/actions/index';
-import food1 from '../../../images/1_CreatePreferenceVector.jpg';
-import food2 from '../../../images/2_CreatePreferenceVector.jpg';
-import food3 from '../../../images/3_CreatePreferenceVector.jpg';
-import food4 from '../../../images/4_CreatePreferenceVector.jpg';
-import food5 from '../../../images/5_CreatePreferenceVector.jpg';
-import food6 from '../../../images/6_CreatePreferenceVector.jpg';
+import food1 from '../../../images/sign_up_food_짜장면.png';
+import food2 from '../../../images/sign_up_food_쌀국수.jpeg';
+import food3 from '../../../images/sign_up_food_떡볶이.jpg';
+import food4 from '../../../images/sign_up_food_후라이드치킨.png';
+import food5 from '../../../images/sign_up_food_김치찌개.jpeg';
+import food6 from '../../../images/sign_up_food_티라미수.jpg';
 import checkImage from '../../../images/check.png';
 import './CreatePreferenceVector.css';
 

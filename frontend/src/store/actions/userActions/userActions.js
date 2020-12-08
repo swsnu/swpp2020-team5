@@ -24,7 +24,14 @@ export const postSignIn = (userInfo) => (dispatch) => axios
 export const postSignUp = (userInfo) => (dispatch) => axios
   .post('atm/sign-up/', userInfo)
   .then((res) => {})
-  .catch((err) => alert('SignUp Failed'));
+  .catch((err) => {
+    if (err.response.status == 409){
+      alert('이미 등록된 회원입니다!')
+    }
+    else {
+      alert('SignUp Failed')
+      }
+    });
 
 export const getSignOut = () => (dispatch) => axios
   .get('atm/sign-out/')

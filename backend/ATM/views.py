@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .models import PreferenceVector, FoodCategory, Location, Profile
+from .models import PreferenceVector, FoodCategory, Location, Profile, Author
 from .utils import cos_sim_word
 from .user.utils import get_preference_attributes
 # Create your views here.
