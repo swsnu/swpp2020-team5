@@ -33,7 +33,7 @@ class CreatePreferenceVector extends Component {
       username,
       email,
       password,
-      selectedFoods: ['짜장면']
+      selectedFoods: ['김치찌개']
       //selectedFoods,
     });
     this.props.history.push('/');
