@@ -1,7 +1,6 @@
 import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
-  isSignIn: false,
   selectedUser: {
     id: 0,
     name: '우렁쌈밥',
@@ -30,13 +29,14 @@ const initialState = {
     y: '37.4783683761333',
   },
   checkUserStatus: 'NotYet',
+  isGetUserCalled: false, 
 };
 
 // preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USER:
-      return { ...state, selectedUser: action.target, isSignIn: true };
+      return { ...state, selectedUser: action.target, isGetUserCalled: true };
     case actionTypes.CHECK_USER:
       return { ...state, checkUserStatus: action.target };
     case actionTypes.RESET_CHECK_USER:
@@ -53,7 +53,6 @@ const reducer = (state = initialState, action) => {
     case actionTypes.EDIT_PREFERENCE_VECTOR:
       return {...state, preferenceVector: action.target };
     case actionTypes.GET_SIGN_OUT:
-<<<<<<< HEAD
       return {...state, isGetUserCalled: false};
     case actionTypes.POST_SIGN_IN:
       return {...state, isGetUserCalled: false};

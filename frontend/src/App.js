@@ -23,7 +23,7 @@ class App extends Component {
     } 
     return (
       <ConnectedRouter history={this.props.history}>
-        {signIn ?
+        {this.props.selectedUser ?
           (<div className="App">
             <Switch>
               <Redirect exact from="/" to="/main" />

@@ -97,7 +97,7 @@ def sign_in(request):
             cur_user = Profile.objects.get(user=user)
             cur_user.search_location.x = loc_x
             cur_user.search_location.y = loc_y
-            cur_user.save()
+            cur_user.search_location.save()
             return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)
