@@ -78,20 +78,16 @@ const reducer = (state = initialState, action) => {
       return {...state, currentPreferenceVector: preferenceVector,
               adjustedPreferenceVector: adjustedVector};
     case actionTypes.EDIT_PREFERENCE_VECTOR:
-<<<<<<< HEAD
-      return { ...state, preferenceVector: action.target };
-    case actionTypes.GET_SIGN_OUT:
-      return {...state, isSignIn: false};
-    case actionTypes.POST_SIGN_IN:
-      return {...state, isSignIn: true};
-=======
       let editedPreferenceVector = {...action.target};
       for (const key in editedPreferenceVector) {
         editedPreferenceVector[key] = editedPreferenceVector[key] * 10;
       }
       return { ...state, currentPreferenceVector: editedPreferenceVector,
               adjustedPreferenceVector: action.target };
->>>>>>> 7ae13b20f7c2e59278c1f049349cab30d5d5f020
+    case actionTypes.GET_SIGN_OUT:
+      return {...state, isSignIn: false};
+    case actionTypes.POST_SIGN_IN:
+      return {...state, isSignIn: true};
     default:
       break;
   }
