@@ -5,84 +5,11 @@ import './Keywords.css';
 // eslint-disable-next-line react/prefer-stateless-function
 class Keywords extends Component {
   render() {
-    const words = [ // would be given as props in actual implementation
-      {
-        text: '샤로수길',
-        value: 3,
-      },
-      {
-        text: '반세오',
-        value: 3,
-      },
-      {
-        text: '새우',
-        value: 3,
-      },
-      {
-        text: '정리',
-        value: 3,
-      },
-      {
-        text: '추천',
-        value: 3,
-      },
-      {
-        text: '볶음밥',
-        value: 4,
-      },
-      {
-        text: '비싸',
-        value: 4,
-      },
-      {
-        text: '괜찮',
-        value: 4,
-      },
-      {
-        text: '라이스페이퍼',
-        value: 4,
-      },
-      {
-        text: '보통',
-        value: 4,
-      },
-      {
-        text: '분위기',
-        value: 4,
-      },
-      {
-        text: '자리',
-        value: 4,
-      },
-      {
-        text: '웨이팅',
-        value: 6,
-      },
-      {
-        text: '느끼',
-        value: 6,
-      },
-      {
-        text: '베트남',
-        value: 8,
-      },
-      {
-        text: '쌀국수',
-        value: 12,
-      },
-      {
-        text: '반쎄오',
-        value: 13,
-      },
-      {
-        text: '분짜',
-        value: 16,
-      },
-      {
-        text: '맛있',
-        value: 23,
-      },
-    ];
+    const words = []
+    Object.keys(this.props.keywords).forEach((el) => {
+      words.push({text: el, value: this.props.keywords[el]})
+    })
+    
     const options = {
       rotations: 0,
       rotationAngles: [0, 0],

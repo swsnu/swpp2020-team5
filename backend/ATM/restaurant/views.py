@@ -30,10 +30,10 @@ def searched_restaurants(request, word=''):
                 res_query = Restaurant.objects.all()
             for restaurant in res_query:
                     #cur = (37.47835220754036, 126.95631398408709)
-                print(author.search_location.x)
+                # print(author.search_location.x)
                 cur = (author.search_location.y, author.search_location.x)
                 res_loc = (restaurant.location.y, restaurant.location.x)
-                print(haversine(cur, res_loc))
+                # print(haversine(cur, res_loc))
                 if haversine(cur, res_loc) >= 10:
                     continue
                 response_dict = {}
@@ -59,12 +59,12 @@ def searched_restaurants(request, word=''):
                         break
                     sorted_dict[res[i][0]] = res[i][1]
                     i += 1
-                print(response_dict['title'])
                 response_dict['preferenceVector'] = sorted_dict
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict,restaurant.avg_rating )
-                print('rate', response_dict['rate'])
                 response_dict['rate-review'] = response_dict['rate'] * math.log2(review_cnt)
-                print('ranking',response_dict['rate-review'])
+                # print(response_dict['title'])
+                # print('rate', response_dict['rate'])
+                # print('ranking',response_dict['rate-review'])
                 response_list.append(response_dict)
             '''
             for restaurant in Restaurant.objects.filter(name__contains=word):

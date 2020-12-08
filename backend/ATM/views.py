@@ -8,6 +8,9 @@ from .models import PreferenceVector, FoodCategory, Location, Profile, Author
 from .utils import cos_sim_word
 from .user.utils import get_preference_attributes
 # Create your views here.
+max_weight = 5.0
+min_weight = 0
+
 
 @ensure_csrf_cookie
 def sign_up(request):
@@ -28,14 +31,25 @@ def sign_up(request):
         # By user's selected foods, initialize pref_vec
         pref_vec = PreferenceVector()
         attr_list = get_preference_attributes(pref_vec)
+        max_cos = 0
+        min_cos = 5.0
         for attr in attr_list:
             weight = 0.0
             for food in selected_foods:
-                weight += cos_sim_word(attr, food)
-            if weight > 1.0:
-                weight = 1.0
+                weight += (cos_sim_word(attr, food))
+                if cos_sim_word(attr, food) > max_cos:
+                    max_cos = cos_sim_word(attr, food)
+                if cos_sim_word(attr, food) < min_cos:
+                    min_cos = cos_sim_word(attr, food)
+            weight = 2.5+10*weight
+            if weight > max_weight:
+                weight = max_weight
+            if weight < min_weight:
+                weight = min_weight
             pref_vec[attr] = weight
         pref_vec.save()
+        print('max', max_cos)
+        print('min', min_cos)
 
         food_category = FoodCategory()
         food_category.save()
@@ -81,9 +95,8 @@ def sign_in(request):
         if user.check_password(password):
             login(request, user)
             cur_user = Profile.objects.get(user=user)
-            cur_loc = Location(x=loc_x, y=loc_y)
-            cur_loc.save()
-            cur_user.search_location = cur_loc
+            cur_user.search_location.x = loc_x
+            cur_user.search_location.y = loc_y
             cur_user.save()
             return HttpResponse(status=204)
         else:
