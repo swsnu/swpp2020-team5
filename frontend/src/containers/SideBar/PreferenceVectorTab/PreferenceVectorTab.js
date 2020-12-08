@@ -16,52 +16,45 @@ class PreferenceVectorTab extends Component {
         '싱거운', '담백한', '바삭바삭한', '부드러운', '저렴한',
         '웨이팅이있는', '혼밥하기좋은', '불친절한'
       ],
-      currentPreferenceVector: {
-        '매운': 0, '느끼한': 0, '짭짤한': 0, '달달한': 0, '고소한': 0,
-        '싱거운': 0, '담백한': 0, '바삭바삭한': 0, '부드러운': 0, '저렴한': 0,
-        '웨이팅이있는': 0, '혼밥하기좋은': 0, '불친절한': 0
-      },
-      adjustedPreferenceVector: {
-        '매운': 0, '느끼한': 0, '짭짤한': 0, '달달한': 0, '고소한': 0,
-        '싱거운': 0, '담백한': 0, '바삭바삭한': 0, '부드러운': 0, '저렴한': 0,
-        '웨이팅이있는': 0, '혼밥하기좋은': 0, '불친절한': 0
-      },
+      preferenceVector: null,
     };
   }
 
   componentDidMount() {
+    const { preferenceVector } = this.props;
     this.props.onGetPreferenceVector();
-    this.setState({ currentPreferenceVector: this.props.currentPreferenceVector,
-                    adjustedPreferenceVector: this.props.adjustedPreferenceVector });
+    this.setState({ preferenceVector });
   }
 
   onClickConfirmHandler = () => {
-    this.props.onPutPreferenceVector(this.state.adjustedPreferenceVector);
+    this.props.onPutPreferenceVector(this.state.preferenceVector);
   }
 
   onChangeFactor = (id, event) => {
-    let newPref = {...this.state.currentPreferenceVector};
-    let newAdjPref = {...this.state.adjustedPreferenceVector};
-    newPref[id] = parseInt(event.target.value);
-    newAdjPref[id] = newPref[id] / 10;
-    console.log(newPref[id]);
-    console.log(newPref);
-    console.log(newAdjPref);
-    this.setState({ currentPreferenceVector: newPref, adjustedPreferenceVector: newAdjPref });
+    const { preferenceVector } = this.state;
+    preferenceVector[id] = event.target.value;
+    console.log(preferenceVector[id]);
+    this.setState({ preferenceVector });
   }
 
   render() {
-
-    let prefVecList = this.state.factor_list.map(factor => {
+    const { factor_list, preferenceVector } = this.state;
+    if(preferenceVector === null) return (<div/>);
+    let prefVecList = factor_list.map(factor => {
+      const width = "calc((100% - 60px)*" + (preferenceVector[factor]/5).toString() + ")";
       return (
         <div className="Slider">
           <p>{factor}</p>
-          <RangeSlider
-            value={this.state.currentPreferenceVector[factor]}
-            max={50}
-            onChange={this.onChangeFactor.bind(null, factor)}
-            tooltip='off'
-          />
+          <div className="slider">
+            <input type="range"
+                    min="0"
+                    max="5"
+                    value={preferenceVector[factor]}
+                    onChange={this.onChangeFactor.bind(null, factor)}
+                    step="0.01"
+            />
+            <div className="fill-lower" style={{ width }}></div>
+          </div>
         </div>
       )})
 
@@ -81,8 +74,7 @@ class PreferenceVectorTab extends Component {
 
 const mapStateToProps = (state) => ({
   currentUser: state.us.currentUser,
-  currentPreferenceVector: state.us.currentPreferenceVector,
-  adjustedPreferenceVector: state.us.adjustedPreferenceVector,
+  preferenceVector: state.us.preferenceVector,
 });
 
 const mapDispatchToProps = (dispatch) => ({

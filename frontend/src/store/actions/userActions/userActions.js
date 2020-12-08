@@ -149,5 +149,5 @@ export const getPreferenceVector = () => (dispatch) => axios
     dispatch(getPreferenceVector_(res.data));
   })
   .catch((err) => {
-    alert('Not Logined');
+    alert(err + 'Not Logined');
   });
