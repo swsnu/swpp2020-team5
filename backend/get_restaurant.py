@@ -28,8 +28,6 @@ for word in total_count_dict.keys():
 with open('./crawling/restaurants.json') as json_file:
     restaurants = json.load(json_file)
     for i, restaurant in enumerate(restaurants):
-        if i < 5:
-            continue
         location = Location(
             address_name=restaurant['location']['address_name'],
             x=restaurant['location']['x'],
