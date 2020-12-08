@@ -72,6 +72,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GET_PREFERENCE_VECTOR:
       let adjustedVector = action.target;
       let preferenceVector = {...action.target};
+      console.log(action.target)
       for (const key in preferenceVector) {
         preferenceVector[key] = preferenceVector[key] * 10;
       }
