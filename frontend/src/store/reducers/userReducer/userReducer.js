@@ -57,7 +57,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USER:
       return { ...state, selectedUser: action.target, isSignIn: true };
-      return { ...state, selectedUser: action.target };
     case actionTypes.CHECK_USER:
       return { ...state, checkUserStatus: action.target };
     case actionTypes.RESET_CHECK_USER:

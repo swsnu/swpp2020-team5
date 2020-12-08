@@ -1,4 +1,4 @@
-.foodCategory .images{
+#filter .images{
   text-align: center;
   display: flex;
   
@@ -6,17 +6,17 @@
   flex-wrap: wrap;
   margin-top: 10px;
 }
-.foodCategory .category{
+#filter .category{
   height:80px
 }
-.foodCategory .unchecked {
+#filter .unchecked {
   width: 80px;
   height: 80px;
   opacity: 1;
   cursor: pointer;
 }
 
-.foodCategory .checked {
+#filter .checked {
   width: 80px;
   height: 80px;
   opacity: 0.5;

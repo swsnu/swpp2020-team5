@@ -123,26 +123,28 @@ class LocationTab extends Component {
     // set the displayed name on the button to searchLocation
     const locationString = searchLocation.address_name;
     return (
-      <div className="location-tab">
-        <div className="upper-bar">
+      <div className="tab" id="location">
+        <div className="tab-header">
           현재 위치ㅣ
           <strong className="current-location">
             {locationString}
           </strong>
         </div>
-        <div id="search-box" className="box">
-          <img src={searchIcon} alt="searchIcon" className="search-icon" />
-          <input
-            className="input"
-            id="location-input"
-            onChange={(event) => this.onChangeLocationInputHandler(event.target.value)}
-            placeholder="장소 검색..."
-          />
-          <div id="location-list" className="list">
-            {locationButtonList}
+        <div className="tab-content">
+          <div id="search-box" className="box">
+            <img src={searchIcon} alt="searchIcon" className="search-icon" />
+            <input
+              className="input"
+              id="location-input"
+              onChange={(event) => this.onChangeLocationInputHandler(event.target.value)}
+              placeholder="장소 검색..."
+            />
+            <div id="location-list" className="list">
+              {locationButtonList}
+            </div>
           </div>
+          <div id="current-location-map" className="map" />
         </div>
-        <div id="current-location-map" className="map" />
       </div>
     );
   }

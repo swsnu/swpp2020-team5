@@ -93,7 +93,7 @@ describe('<MyInfoTab /', () => {
   it('should render only welcome component when page is  main page', () => {
     const component = mount(myInfoTabOnMainPage);
     const wrapper = component.find('.on-main-page');
-    const upperBar = component.find('.upper-bar');
+    const upperBar = component.find('.tab-header');
     const wrapperToBeFalse = component.find('on-detail-page');
 
     expect(wrapper.length).toBe(1);
@@ -104,7 +104,7 @@ describe('<MyInfoTab /', () => {
   it('should render my review and review input and rating component when page is detail page', () => {
     const component = mount(myInfoTabOnDetailPage);
     const wrapper = component.find('.on-detail-page');
-    const upperBar = component.find('.upper-bar');
+    const upperBar = component.find('.tab-header');
     const wrapperToBeFalse = component.find('.on-main-page');
     const myReview = component.find('.Review');
     const reviewInput = component.find('#review-input');

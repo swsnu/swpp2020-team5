@@ -71,13 +71,15 @@ class FoodCategoryTab extends Component {
       id += 1;
     });
     return (
-      <div className="foodCategory">
-        <div className="upper-bar">
+      <div className="tab" id="filter">
+        <div className="tab-header">
           <span>음식 카테고리</span>
-        <button className="upper-bar-button" id="foodcategory-confirm" onClick={() => this.postClickSaveHandler()}>적용</button>
+        <button className="tab-header-button" id="foodcategory-confirm" onClick={() => this.postClickSaveHandler()}>적용</button>
         </div>
-        <div className="images">
-          {categorylist}
+        <div className="tab-content">
+          <div className="images">
+            {categorylist}
+          </div>
         </div>
       </div>
     );

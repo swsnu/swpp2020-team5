@@ -40,9 +40,7 @@ class MainPage extends Component {
 
     return (
       <div>
-        <div className="sideBar">
-          <SideBar restaurantID={-1} />
-        </div>
+        <SideBar restaurantID={-1} />
         <div className="mainPage">
           <div className="restaurantList">
             {list}
