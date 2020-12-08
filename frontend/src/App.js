@@ -14,14 +14,21 @@ class App extends Component {
     this.props.onGetUser();
   }
   render(){
+    let signIn = this.props.isSignIn;
+    if(signIn === false) {
+      signIn = sessionStorage.getItem('isSignIn');
+    }
+    if(signIn === true) {
+      signIn= sessionStorage.getItem('isSignIn');
+    }
     return (
       <ConnectedRouter history={this.props.history}>
-        {this.props.isSignIn ?
+        {signIn ?
           (<div className="App">
             <Switch>
               <Redirect exact from="/" to="/main" />
-              <Route path="/sign-in" exact render={() => <SignIn />} />
-              <Route path="/sign-up" exact render={() => <SignUp />} />
+              <Redirect exact from="/sign-in" to="/main" />
+              <Redirect exact from="/sign-up" to="/main" />
               <Route path="/main" exact render={() => <MainPage />} />
               <Route path="/main/:name" exact render={() => <MainPage />} />
               <Route path="/detail/:id" exact render={() => <DetailPage />} />

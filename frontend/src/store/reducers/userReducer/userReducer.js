@@ -84,8 +84,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, currentPreferenceVector: editedPreferenceVector,
               adjustedPreferenceVector: action.target };
     case actionTypes.GET_SIGN_OUT:
+      sessionStorage.removeItem("isSignIn");
       return {...state, isSignIn: false};
     case actionTypes.POST_SIGN_IN:
+      sessionStorage.isSignIn = true;
       return {...state, isSignIn: true};
     default:
       break;

@@ -81,9 +81,8 @@ def sign_in(request):
         if user.check_password(password):
             login(request, user)
             cur_user = Profile.objects.get(user=user)
-            cur_loc = Location(x=loc_x, y=loc_y)
-            cur_loc.save()
-            cur_user.search_location = cur_loc
+            cur_user.search_location.x = loc_x
+            cur_user.search_location.y = loc_y
             cur_user.save()
             return HttpResponse(status=204)
         else:

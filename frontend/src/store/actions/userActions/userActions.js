@@ -44,11 +44,12 @@ export const postSignIn = (userInfo) => (dispatch) => axios
   .post('/atm/sign-in/', userInfo)
   .then((res) => {
     dispatch({type: actionTypes.POST_SIGN_IN});
+    dispatch(push('/main'))
   })
   .catch((err) => alert('Login failed'));
 
 export const postSignUp = (userInfo) => (dispatch) => axios
-  .post('atm/sign-up/', userInfo)
+  .post('/atm/sign-up/', userInfo)
   .then((res) => {})
   .catch((err) => {
     if (err.response.status == 409){
@@ -61,7 +62,7 @@ export const postSignUp = (userInfo) => (dispatch) => axios
 
 
 export const getSignOut = () => (dispatch) => axios
-  .get('atm/sign-out/')
+  .get('/atm/sign-out/')
   .then((res) => {
     dispatch(push('/'));
     dispatch({type: actionTypes.GET_SIGN_OUT})
