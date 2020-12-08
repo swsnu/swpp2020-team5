@@ -12,7 +12,7 @@ urlpatterns = [
     path(
         'search/<str:word>',
         views.searched_restaurants,
-        name='searched_restauratns'),
+        name='searched_restaurants'),
     path(
         'detail/<int:restaurant_id>',
         views.restaurant_detail,

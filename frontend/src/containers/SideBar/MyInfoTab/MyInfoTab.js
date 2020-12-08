@@ -42,7 +42,6 @@ class MyInfoTab extends Component {
     let onDetailPage = '';
     const onMainPage = (
       <div className="on-main-page">
-        <img id="welcome-img" src={welcomeImage} alt="" width="400" height="300" />
         <p id="welcome-text">
           #AllTastesMatter에 오신것을 환영합니다!
           <br />
@@ -137,7 +136,7 @@ class MyInfoTab extends Component {
             {' '}
             님!
           </span>
-          <button id="sign-out" onClick={() => this.props.onGetSignOut()}>로그아웃</button>
+          <button className="upper-bar-button" id="sign-out" onClick={() => this.props.onGetSignOut()}>로그아웃</button>
         </div>
         {myInfo}
       </div>

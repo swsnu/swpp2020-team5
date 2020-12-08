@@ -44,6 +44,7 @@ const initialState = {
     x: '126.951561853868',
     y: '37.4783683761333',
   },
+  checkUserStatus: 'NotYet',
 };
 
 // preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
@@ -51,6 +52,11 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_USER:
       return { ...state, selectedUser: action.target, isSignIn: true };
+      return { ...state, selectedUser: action.target };
+    case actionTypes.CHECK_USER:
+      return { ...state, checkUserStatus: action.target };
+    case actionTypes.RESET_CHECK_USER:
+      return { ...state, checkUserStatus: 'NotYet'};
     case actionTypes.GET_FOOD_CATEGORY:
     case actionTypes.EDIT_FOOD_CATEGORY:
       return { ...state, foodCategory: action.target };

@@ -19,4 +19,8 @@ urlpatterns = [
         'food-category/',
         views.food_category,
         name='food_category'),
+    path(
+        'check/',
+        views.check,
+        name='check'),
 ]

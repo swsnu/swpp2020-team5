@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import {
-  faSearch, faUser, faMapMarkerAlt, faFilter, faSlidersH,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { connect } from 'react-redux';
+
+import logoImage from '../../images/logo.png';
+import searchIcon from '../../images/searchIcon_yellow.png';
+import filterIcon from '../../images/filter.png';
+import locationIcon from '../../images/location.png';
+import userIcon from '../../images/user.png';
+import sliderIcon from '../../images/slider.png';
+
+import * as actionCreators from '../../store/actions/index';
 import MyInfoTab from './MyInfoTab/MyInfoTab';
 import LocationTab from './LocationTab/LocationTab';
 import FoodCategoryTab from './FoodCategoryTab/FoodCategoryTab';
 import PreferenceVectorTab from './PreferenceVectorTab/PreferenceVectorTab';
-import logoImage from '../../images/logo.png';
 
 import './SideBar.css';
 
@@ -33,13 +38,14 @@ class SideBar extends Component {
   onClickLogoButtonHandler = () => {
     this.setState({ searchWord: '' });
     this.props.history.push('/main/');
-    // this.setState({ tabMode: 'MyInfo' })
   }
 
   // SubComponent
   render() {
     let tab;
     const { tabMode, searchWord } = this.state;
+    const { searchLocation } = this.props;
+
     switch (tabMode) {
       case 'MyInfo':
         tab = <MyInfoTab id="my-info-tab" restaurantID={this.props.restaurantID} />;
@@ -61,7 +67,7 @@ class SideBar extends Component {
         <img id="logo-button" src={logoImage} onClick={() => this.onClickLogoButtonHandler()} alt="logo" />
         <br />
         <div className="search-box">
-          <FontAwesomeIcon className="search-icon" icon={faSearch} />
+          <img id="search-icon" src={searchIcon} alt="search"/>
           <button id="search-button" onClick={() => this.onClickSearchButtonHandler()}>
             검&emsp;색
           </button>
@@ -76,16 +82,16 @@ class SideBar extends Component {
         <br />
         <div className="tab-button-image-line">
           <div id="my-info-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('MyInfo')}>
-            <FontAwesomeIcon icon={faUser} size="3x" />
+            <img id="user-icon" class="tab-icon" src={userIcon} alt="user"/>
           </div>
           <div id="location-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('Location')}>
-            <FontAwesomeIcon icon={faMapMarkerAlt} size="3x" />
+            <img id="location-icon" class="tab-icon" src={locationIcon} alt="location"/>
           </div>
           <div id="food-category-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('FoodCategory')}>
-            <FontAwesomeIcon icon={faFilter} size="3x" />
+            <img id="filter-icon" class="tab-icon" src={filterIcon} alt="filter"/>
           </div>
           <div id="preference-vector-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('PreferenceVector')}>
-            <FontAwesomeIcon icon={faSlidersH} size="3x" />
+            <img id="slider-icon" class="tab-icon" src={sliderIcon} alt="slider"/>
           </div>
         </div>
         <div className="tab-button-name-line">
@@ -96,7 +102,7 @@ class SideBar extends Component {
               : 'tab-button'}
             onClick={() => this.onClickTabButtonHandler('MyInfo')}
           >
-            나의 정보
+            마이페이지
           </div>
           <div
             id="location-tab-name-button"
@@ -105,7 +111,9 @@ class SideBar extends Component {
               : 'tab-button'}
             onClick={() => this.onClickTabButtonHandler('Location')}
           >
-            위치
+            {tabMode === 'Location'
+              ? '위치'
+              : searchLocation.address.region_2depth_name}
           </div>
           <div
             id="food-category-tab-name-button"
@@ -133,4 +141,9 @@ class SideBar extends Component {
     );
   }
 }
-export default withRouter(SideBar);
+
+const mapStateToProps = (state) => ({
+  searchLocation: state.us.searchLocation,
+});
+
+export default connect(mapStateToProps, null)(withRouter(SideBar));

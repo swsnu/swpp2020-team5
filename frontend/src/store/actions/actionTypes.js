@@ -1,4 +1,6 @@
 export const GET_USER = 'GET_USER';
+export const CHECK_USER = 'CHECK_USER';
+export const RESET_CHECK_USER = 'RESET_CHECK_USER';
 export const GET_FOOD_CATEGORY = 'GET_FOOD_CATEGORY';
 export const GET_SIGN_OUT = 'GET_SIGN_OUT';
 export const POST_SIGN_IN = 'POST_SIGN_IN';

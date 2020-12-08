@@ -3,7 +3,7 @@ from ATM.models import *
 import json
 from datetime import date
 
-with open('./reviews.json') as json_file:
+with open('./crawling/reviews.json') as json_file:
     reviews = json.load(json_file)
     
     no_rating_review_count = 0
@@ -16,9 +16,16 @@ with open('./reviews.json') as json_file:
                     no_rating_review_count += 1
                     review['rating'] = 0
                 date_values = review['date'].split('.')
+                try:
+                    r = Restaurant.objects.get(id=review['restaurant'])
+                except:
+                    continue
+
+                author = Author(nickname=review['author'])
+                author.save()
                 new_review = Review(
                     restaurant=Restaurant.objects.get(id=review['restaurant']),
-                    other_site_author=review['author'],
+                    author=author,
                     date=date(int(date_values[0]),
                           int(date_values[1]),
                           int(date_values[2])),

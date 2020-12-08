@@ -1,5 +1,7 @@
 export {
   getUser,
+  checkUser,
+  resetCheckUser,
   postSignIn,
   postSignUp,
   getSignOut,
