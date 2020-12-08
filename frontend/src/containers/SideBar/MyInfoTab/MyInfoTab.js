@@ -127,18 +127,20 @@ class MyInfoTab extends Component {
     }
 
     return (
-      <div className="MyInfoTab">
-        <div className="upper-bar">
-          <span className="upper-bar-welcome">
+      <div className="tab" id="my-info">
+        <div className="tab-header">
+          <span className="tab-header-welcome">
             안녕하세요,
             {' '}
             <span id="name">{this.props.selectedUser.name}</span>
             {' '}
             님!
           </span>
-          <button className="upper-bar-button" id="sign-out" onClick={() => this.props.onGetSignOut()}>로그아웃</button>
+          <button className="tab-header-button" id="sign-out" onClick={() => this.props.onGetSignOut()}>로그아웃</button>
         </div>
-        {myInfo}
+        <div className="tab-content">
+          {myInfo}
+        </div>
       </div>
     );
   }

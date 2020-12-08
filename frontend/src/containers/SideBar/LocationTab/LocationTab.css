@@ -1,15 +1,15 @@
-.location-tab .current-location {
+#location .current-location {
   margin-left: 10px;
   color: #E44142;
   font-weight: lighter;
   overflow: hidden;
 }
-.location-tab .map {
+#location .map {
   width: calc(100% - 40px);
   height: 350px;
   margin: 20px;
 }
-.location-tab .box {
+#location .box {
   margin: 10px 20px 10px 20px;
   width: calc(100% - 40px);
   border-color: #E44142;
@@ -17,7 +17,7 @@
   border-style: solid;
   height: 50px;
 }
-.location-tab .box .input {
+#location .box .input {
   background-color: transparent;
   width: calc(100% - 120px);
   position: absolute;
@@ -26,12 +26,12 @@
   outline: none;
   border: none;
 }
-.location-tab .search-icon {
+#location .search-icon {
   width: 30px;
   height: 30px;
   margin: 10px;
 }
-.location-tab .list {
+#location .list {
   background-color: #FFFFFF;
   box-shadow: 0px 5px 10px #808080;
   border-radius: 10px;
