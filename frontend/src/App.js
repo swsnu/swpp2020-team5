@@ -23,12 +23,12 @@ class App extends Component {
     } 
     return (
       <ConnectedRouter history={this.props.history}>
-        {this.props.selectedUser ?
+        {signIn ?
           (<div className="App">
             <Switch>
               <Redirect exact from="/" to="/main" />
-              <Route path="/sign-in" exact render={() => <SignIn />} />
-              <Route path="/sign-up" exact render={() => <SignUp />} />
+              <Redirect exact from="/sign-in" to="/main" />
+              <Redirect exact from="/sign-up" to="/main" />
               <Route path="/main" exact render={() => <MainPage />} />
               <Route path="/main/:name" exact render={() => <MainPage />} />
               <Route path="/detail/:id" exact render={() => <DetailPage />} />

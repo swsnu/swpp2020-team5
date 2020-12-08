@@ -6,9 +6,11 @@
   flex-wrap: wrap;
   margin-top: 10px;
 }
+
 #filter .category{
   height:80px
 }
+
 #filter .unchecked {
   width: 80px;
   height: 80px;
@@ -22,6 +24,7 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
 #savebutton{
   width:100px;
   background-color: #E44142;

@@ -11,12 +11,18 @@ class FoodCategoryTab extends Component {
     super(props);
     this.state = {
       foodCategory: {
-        한식: false,
-        일식: false,
-        양식: false,
-        중식: false,
-        카페: false,
-        기타: false,
+        한식 : false,
+        일식 : false,
+        중식 : false,
+        양식 : false,
+        분식 : false,
+        술집 : false,
+        카페 : false,
+        치킨 : false,
+        간식 : false,
+        퓨전요리 : false,
+        아시아음식 : false,
+        패스트푸드 : false,
       },
     };
   }
@@ -57,15 +63,17 @@ class FoodCategoryTab extends Component {
     Object.keys(this.state.foodCategory).forEach((category) => {
       categorylist.push(
         <div className="category">
-          <img
-            src={foodimg[id]}
+          <p
+            
             className={this.state.foodCategory[category]
               ? 'checked' : 'unchecked'}
             alt="foodImage"
             width="50"
             height="50"
             onClick={() => this.postClickFoodCategoryHandler(category)}
-          />
+          >
+          {category}
+          </p>
         </div>,
       );
       id += 1;
