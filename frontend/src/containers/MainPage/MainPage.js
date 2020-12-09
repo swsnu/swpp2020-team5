@@ -7,6 +7,13 @@ import * as actionCreators from '../../store/actions/index';
 import './MainPage.css';
 
 class MainPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      curPage: 1,
+    };
+  }
+  
   componentDidMount() {
     if(this.props.match.params.name === undefined){
       this.props.onGetRestaurantList("");
@@ -16,15 +23,31 @@ class MainPage extends Component {
     }
     this.props.onGetFoodCategory();
   }
-
+  onClickHandler() {
+    const {curPage} = this.state
+    this.setState({curPage: curPage+1});
+  }
   render() {
+    const{curPage} = this.state;
     let order = 0;
-    const list = this.props.storedList.map((el) => {
-      if (this.props.foodCategory[el.category] === true){
-        order += 1;
-
-        return (
-          <RestaurantSummary
+    let list =[];
+    let idx=0;
+    if(this.props.storedList.length === 0) 
+      return(
+        <div>
+          loading
+        </div>
+      );
+    while(order<curPage*10 && idx < this.props.storedList.length) {
+      let el = this.props.storedList[idx];
+      if(this.props.foodCategory[el.category]=== false) {
+        idx++;
+        continue;
+      }
+      order++;
+      idx++;
+      list.push(
+        <RestaurantSummary
             title={el.title}
             id={el.id}
             img_url={el.img_url}
@@ -33,10 +56,33 @@ class MainPage extends Component {
             order={order}
             preferenceVector={el.preferenceVector}
           />
-        );
-      }
-      return null;
-    });
+      )
+    }
+    let moreButton;
+    if(idx >= this.props.storedList.length) {
+      moreButton=null;
+    }
+    else {
+      moreButton= <button id="more-button" onClick={() => this.onClickHandler()}>더보기</button>
+    }
+    // const list = this.props.storedList.map((el) => {
+    //   if (this.props.foodCategory[el.category] === true){
+        
+    //     order += 1;
+    //     return (
+    //       <RestaurantSummary
+    //         title={el.title}
+    //         id={el.id}
+    //         img_url={el.img_url}
+    //         rate={el.rate}
+    //         category={el.category}
+    //         order={order}
+    //         preferenceVector={el.preferenceVector}
+    //       />
+    //     );
+    //   }
+    //   return null;
+    // });
 
     return (
       <div>
@@ -44,6 +90,7 @@ class MainPage extends Component {
         <div className="mainPage">
           <div className="restaurantList">
             {list}
+            {moreButton}
           </div>
         </div>
       </div>
@@ -59,7 +106,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)),
   onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
-
+  
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPage));
