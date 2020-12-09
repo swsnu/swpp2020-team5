@@ -72,10 +72,17 @@ class DetailPage extends Component {
       )
     }
       
-    function buildOpTime(key, dataDict) {
+    function buildOnTime(key, dataDict) {
       return(
         <div>
           {key} {dataDict[key]}
+        </div>
+      )
+    }
+    function buildOffTime(key, dataDict) {
+      return(
+        <div>
+          {dataDict[key]}
         </div>
       )
     }
@@ -95,10 +102,10 @@ class DetailPage extends Component {
     loadData(menu, selectedRestaurant.menu, buildMenu);
 
     const onTime = [];
-    loadData(onTime, selectedRestaurant.time["영업 시간"], buildOpTime);
+    loadData(onTime, selectedRestaurant.time["영업 시간"], buildOnTime);
     
     const offTime = [];
-    loadData(offTime, selectedRestaurant.time["휴무일"], buildOpTime);
+    loadData(offTime, selectedRestaurant.time["휴무일"], buildOffTime);
 
     return (
       <div>

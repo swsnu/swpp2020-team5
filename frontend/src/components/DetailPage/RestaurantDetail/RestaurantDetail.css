@@ -1,6 +1,7 @@
 .restaurant-detail {
-  height: fit-content;
+  display: flex;
   min-height: 30px;
+  margin-top: 5px;
 }
 
 .detail-type {
