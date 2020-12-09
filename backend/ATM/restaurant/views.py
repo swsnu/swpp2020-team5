@@ -164,9 +164,8 @@ def other_reviews(request, restaurant_id):
                         'author_name': review.author.nickname,
                         }
                 for review in reviews_on_target \
-                        if review.site == 'atm' \
-                            and review.author.id != request.user.id]
-
+                        if review.site == 'atm'] 
+                            
             other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
             return JsonResponse(
                 other_review_list,
