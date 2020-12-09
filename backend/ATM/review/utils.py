@@ -1,6 +1,6 @@
 from ATM.models import (PreferenceVector)
 from ..user.utils import get_preference_attributes
-from ..utils import cos_sim
+from ..utils import cos_sim_word
 
 
 ## R(constant) * (res_i - user_j) * cos_sim(i,j)      * (user_rating - res_avg)

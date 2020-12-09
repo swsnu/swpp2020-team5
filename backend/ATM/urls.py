@@ -8,6 +8,7 @@ urlpatterns = [
     path('sign-out/', views.sign_out, name='sign_out'),
     path('user/', include('ATM.user.urls')),
     path('restaurant/', include('ATM.restaurant.urls')),
+    path('review/', include('ATM.review.urls')),
     path('token/', views.token, name='token'),
 
 ]

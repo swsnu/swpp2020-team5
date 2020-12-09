@@ -1,10 +1,19 @@
 '''
 restaurant backend
 '''
-from django.http import HttpResponse, HttpResponseNotAllowed,JsonResponse
+from django.http import (
+        HttpResponse, HttpResponseNotAllowed, JsonResponse,
+        HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
+        )
+from json import JSONDecodeError
+import json
+from datetime import datetime
 from haversine import haversine
-from ..models import Restaurant, Profile, Review
+from ..models import Restaurant, Profile, Review, Author
 from ..utils import cos_sim_word
+from ..review.utils import prefvec_update
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 import math
 # preferencVector
 scale = 1
@@ -151,7 +160,8 @@ def restaurant_detail(request,restaurant_id):
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
 
-def my_reviews(request, restaurant_id):
+@ensure_csrf_cookie
+def other_reviews(request, restaurant_id):
     if request.user.is_authenticated:
         if request.method == 'GET':
             try:
@@ -159,11 +169,9 @@ def my_reviews(request, restaurant_id):
             except Restaurant.DoesNotExist:
                 return HttpResponse(status=404)
 
-            reviews_on_target = \
-            Review.objects.filter(restaurant_id=restaurant_id, \
-            author__user=request.user)
+            reviews_on_target = Review.objects.filter(restaurant_id=restaurant_id)
 
-            reviews = [
+            naver = [
                     {
                         'id': review.id, 
                         'content': review.content, 
@@ -171,15 +179,94 @@ def my_reviews(request, restaurant_id):
                         'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 
                         'author_name': review.author.nickname,
                         }
-                for review in reviews_on_target ]
+                for review in reviews_on_target if review.site == 'naver']
+            kakao = [
+                    {
+                        'id': review.id,
+                        'content': review.content,
+                        'rating': review.rating,
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
+                        'author_name': review.author.nickname,
+                        }
+                for review in reviews_on_target if review.site == 'kakao']
+            atm = [
+                    {
+                        'id': review.id,
+                        'content': review.content,
+                        'rating': review.rating,
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
+                        'author_name': review.author.nickname,
+                        }
+                for review in reviews_on_target if review.site == 'atm']
 
+            other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
             return JsonResponse(
-                reviews,
+                other_review_list,
                 safe=False)  # default status is 200
         else:
             return HttpResponseNotAllowed(['GET'])
     else:
         return HttpResponse(status=401)
+
+
+
+@ensure_csrf_cookie
+def my_reviews(request, restaurant_id):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            try:
+                restaurant = Restaurant.objects.get(id=restaurant_id)
+            except Restaurant.DoesNotExist:
+                return HttpResponse(status=404)
+            response_list = [
+                    {
+                        'id':review.id,
+                        'content': review.content,
+                        'rating': review.rating,
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S')
+                        }
+                    for review in Review.objects.all()
+                    if request.user.email == review.author.user.email]
+            return HttpResponse(response_list, status=200) 
+        elif request.method == 'POST':
+            try:
+                req_data = json.loads(request.body.decode())
+                content = req_data['content']
+                rating = float(req_data['rating'])
+            except (KeyError, JSONDecodeError):
+                return HttpResponseBadRequest()
+            try:
+                restaurant = Restaurant.objects.get(id=restaurant_id)
+            except Restaurant.DoesNotExist:
+                return HttpResponse(status=404)
+            date = datetime.now()
+            author = Author.objects.get(user_id=request.user.id)
+            new_review = Review(
+                    restaurant=restaurant, 
+                    author=author, 
+                    content=content, 
+                    rating=rating, 
+                    date=date, 
+                    site='atm') 
+            new_review.save()
+            response_dict = {
+                'id': new_review.id,
+                'content': new_review.content,
+                'rating': new_review.rating,
+                'date': new_review.date.strftime('%Y/%m/%d, %H:%M:%S')}
+            restaurant_prefvec = restaurant.preference_vector
+            user_prefvec = author.user.profile.preference_vector
+            avg_diff = (rating - restaurant.avg_rating) / 5.0
+            prefvec_update(restaurant_prefvec, user_prefvec, avg_diff)
+
+            return HttpResponse(
+                content=json.dumps(response_dict),
+                status=201)  # default status is 200
+        else:
+            return HttpResponseNotAllowed(['GET', 'POST'])
+    else:
+        return HttpResponse(status=401)
+
 
 def get_preference_attributes(pref_vec):
     '''

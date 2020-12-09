@@ -11,7 +11,7 @@ const getMyReviews_ = (reviews) => ({
 });
 
 export const getMyReviews = (restaurantID) => (dispatch) => axios
-  .get(`/atm/restaurant/${restaurantID}/my-review/`)
+  .get(`/atm/restaurant/detail/${restaurantID}/my-review/`)
   .then(res => 
     dispatch(getMyReviews_(res.data))
   )
@@ -24,7 +24,7 @@ const getOtherReviews_ = (reviews) => ({
 });
 
 export const getOtherReviews = (id) => (dispatch) => axios
-  .get(`/atm/restaurant/${id}/other-review/`)
+  .get(`/atm/restaurant/detail/${id}/other-review/`)
   .then(res => 
     dispatch(getOtherReviews_(res.data))
   )
@@ -37,7 +37,7 @@ const postMyReview_ = (reviewInfo) => ({
   ...reviewInfo,
 });
 
-export const postMyReview = (reviewInfo) => (dispatch) => axios.post(`/atm/restaurant/${reviewInfo.restaurantID}/review`, reviewInfo)
+export const postMyReview = (reviewInfo) => (dispatch) => axios.post(`/atm/restaurant/detail/${reviewInfo.restaurantID}/my-review/`, reviewInfo)
   .then((res) => {
     dispatch(postMyReview_(res.data));
   });
@@ -47,7 +47,7 @@ const editMyReview_ = (reviewInfo) => ({
   ...reviewInfo,
 });
 
-export const editMyReview = (reviewInfo) => (dispatch) => axios.put(`/atm/my-review/${reviewInfo.id}`, reviewInfo)
+export const editMyReview = (reviewInfo) => (dispatch) => axios.put(`/atm/my-review/${reviewInfo.id}/`, reviewInfo)
   .then((res) => {
     dispatch(editMyReview_(res.data));
   });
@@ -57,7 +57,7 @@ const deleteMyReview_ = (reviewID) => ({
   target: reviewID,
 });
 
-export const deleteMyReview = (reviewID) => (dispatch) => axios.put(`/atm/my-review/${reviewID}`)
+export const deleteMyReview = (reviewID) => (dispatch) => axios.put(`/atm/my-review/${reviewID}/`)
   .then((res) => {
     dispatch(deleteMyReview_(reviewID));
   })
