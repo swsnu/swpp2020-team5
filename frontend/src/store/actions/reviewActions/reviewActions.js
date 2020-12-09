@@ -15,8 +15,12 @@ export const getMyReviews = (restaurantID) => (dispatch) => axios
   .then(res => 
     dispatch(getMyReviews_(res.data))
   )
-  .catch(err => 
-    alert('getMyReviews Error'+err.response.status)
+  .catch(err => {
+    if (err.response == null) {
+      return alert('getMyReviews Error')
+    }
+    return alert('getMyReviews Error'+err.response.status)
+  }
   )
 const getOtherReviews_ = (reviews) => ({
   type: actionTypes.GET_OTHER_REVIEWS,
@@ -57,7 +61,7 @@ const deleteMyReview_ = (reviewID) => ({
   target: reviewID,
 });
 
-export const deleteMyReview = (reviewID) => (dispatch) => axios.put(`/atm/my-review/${reviewID}/`)
+export const deleteMyReview = (reviewID) => (dispatch) => axios.delete(`/atm/my-review/${reviewID}/`)
   .then((res) => {
     dispatch(deleteMyReview_(reviewID));
   })

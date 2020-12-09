@@ -197,7 +197,9 @@ def other_reviews(request, restaurant_id):
                         'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
                         'author_name': review.author.nickname,
                         }
-                for review in reviews_on_target if review.site == 'atm']
+                for review in reviews_on_target \
+                        if review.site == 'atm' \
+                            and review.author.id != request.user.id]
 
             other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
             return JsonResponse(
@@ -225,9 +227,10 @@ def my_reviews(request, restaurant_id):
                         'rating': review.rating,
                         'date': review.date.strftime('%Y/%m/%d, %H:%M:%S')
                         }
-                    for review in Review.objects.all()
-                    if request.user.email == review.author.user.email]
-            return HttpResponse(response_list, status=200) 
+                    for review in \
+                        Review.objects.filter(author__user_id=request.user.id, restaurant_id=restaurant_id)]
+                    
+            return JsonResponse(response_list, status=200, safe=False) 
         elif request.method == 'POST':
             try:
                 req_data = json.loads(request.body.decode())

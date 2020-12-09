@@ -18,6 +18,7 @@ class MyInfoTab extends Component {
 
   componentDidMount() {
     this.props.onGetUser();
+    this.props.onGetMyReviews(this.props.restaurantID);
   }
 
   onChangeReviewInputHandler = (event) => {
