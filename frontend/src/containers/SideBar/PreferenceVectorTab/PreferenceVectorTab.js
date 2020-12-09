@@ -39,12 +39,21 @@ class PreferenceVectorTab extends Component {
 
   render() {
     const { factor_list, preferenceVector } = this.state;
-    if(preferenceVector === null) return (<div/>);
-    let prefVecList = factor_list.map(factor => {
+    if (preferenceVector === null) return (<div/>);
+    const num = [0,1,2,3,4,5];
+    const factorIndicator = num.map(num => {
+      const marginLeft = "calc( " + (num * 20).toString() + "% - " + (num * 17).toString() + "px )";
+      return (
+      <div className="factor-indicator" style={{ marginLeft }}>{num}</div>
+      )
+    })
+    const prefVecList = factor_list.map(factor => {
       const width = "calc((100% - 60px)*" + (preferenceVector[factor]/5).toString() + ")";
       return (
-        <div className="Slider">
-          <p>{factor}</p>
+        <div className="slider-wrapper">
+          <div className="user-factor">
+            {factor}
+          </div>
           <div className="slider">
             <input type="range"
                     min="0"
@@ -55,8 +64,12 @@ class PreferenceVectorTab extends Component {
             />
             <div className="fill-lower" style={{ width }}></div>
           </div>
+          <div className="factor-indicator-wrapper">
+            {factorIndicator}
+          </div>
         </div>
-      )})
+      )
+    })
 
     return (
       <div className="tab" id="preference">
