@@ -11,29 +11,30 @@ class FoodCategoryTab extends Component {
     super(props);
     this.state = {
       foodCategory: {
-        한식 : false,
-        일식 : false,
-        중식 : false,
-        양식 : false,
-        분식 : false,
-        술집 : false,
-        카페 : false,
-        치킨 : false,
-        간식 : false,
-        퓨전요리 : false,
-        아시아음식 : false,
-        패스트푸드 : false,
+        한식 : true,
+        일식 : true,
+        중식 : true,
+        양식 : true,
+        분식 : true,
+        술집 : true,
+        카페 : true,
+        치킨 : true,
+        간식 : true,
+        퓨전요리 : true,
+        아시아음식 : true,
+        패스트푸드 : true,
       },
     };
   }
 
   componentDidMount() {
     this.props.onGetFoodCategory();
-    let changed = false;
-    Object.keys(this.props.foodCategory).forEach((category) => {
-      if (this.props.foodCategory[category] === false) { changed = true; }
-    });
-    if (changed === true) this.setState({ foodCategory: this.props.foodCategory });
+    // let changed = false;
+    // Object.keys(this.props.foodCategory).forEach((category) => {
+    //   if (this.props.foodCategory[category] === false) { changed = true; }
+    // });
+    // if (changed === true) 
+    this.setState({ foodCategory: this.props.foodCategory });
   }
 
   postClickFoodCategoryHandler = (category) => {
@@ -52,12 +53,7 @@ class FoodCategoryTab extends Component {
   // we need to add hover and clicked img showing
   // DB needed for image
   render() {
-    const foodimg = ['https://image.ytn.co.kr/general/jpg/2016/0424/201604241752313492_t.jpg', 'https://media.istockphoto.com/photos/japanese-deep-fried-pork-cutlet-with-white-cabbage-salad-picture-id1164831977',
-      'https://lh3.googleusercontent.com/proxy/ztMRN1Wey-nVftrIsSjFRCuBo9Ws5MesfbPOf0UJO1jx4HoosKWQhBvhzKmgnJLYZgDJMqytot0dUlMT6Y1LOWxkotiYeLPysPsMdHAAx2_1g7xGT0y-6jFyjMaYr1AEDeDSEiNcQmT5hEIzTnPF6LrfMQ',
-      'https://t1.daumcdn.net/cfile/blog/995FA8485BFFA07012', 'https://cdn.koreahealthlog.com/news/photo/202004/23745_12548_945.jpg',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSUNyFIhrZjJwD5tBRbgQl6SpJCA5vtZtgi1A&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRPojAjUzHpJGgt8w9AsUtzJSS_EHyPh_8RWw&usqp=CAU',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSbAVL6Ary5UJt88nTJxBu8UDcQfYkntPH4MA&usqp=CAU', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQaqsOYZ1PmXe87ArhNIwhd5_YRBA5f1_du1w&usqp=CAU',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTM8slOqomlXtNTIcceB4rW5ovYw2qwTTNVTQ&usqp=CAU'];
+    
     const categorylist = [];
     let id = 0;
     Object.keys(this.state.foodCategory).forEach((category) => {
@@ -66,7 +62,7 @@ class FoodCategoryTab extends Component {
           <p
             
             className={this.state.foodCategory[category]
-              ? 'checked' : 'unchecked'}
+              ? 'unchecked' : 'checked'}
             alt="foodImage"
             width="50"
             height="50"
