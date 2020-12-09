@@ -145,9 +145,10 @@ const getPreferenceVector_ = (preferenceVector) => ({
 });
 
 export const getPreferenceVector = () => (dispatch) => axios
-  .get('/atm/user/preference-vector')
+  .get('/atm/user/preference-vector/')
   .then((res) => {
-    dispatch(getPreferenceVector_(res.data));
+    console.log(res.data)
+    return dispatch(getPreferenceVector_(res.data));
   })
   .catch((err) => {
     alert(err + 'Not Logined');

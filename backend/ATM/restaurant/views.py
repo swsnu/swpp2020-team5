@@ -71,9 +71,9 @@ def searched_restaurants(request, word=''):
                 response_dict['preferenceVector'] = sorted_dict
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict,restaurant.avg_rating )
                 response_dict['rate-review'] = response_dict['rate'] * math.log2(review_cnt)
-                print(response_dict['title'])
-                print('rate', response_dict['rate'])
-                print('ranking',response_dict['rate-review'])
+                #print(response_dict['title'])
+                #print('rate', response_dict['rate'])
+                #print('ranking',response_dict['rate-review'])
                 response_list.append(response_dict)
             '''
             for restaurant in Restaurant.objects.filter(name__contains=word):
