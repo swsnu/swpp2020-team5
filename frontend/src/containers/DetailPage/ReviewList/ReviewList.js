@@ -50,7 +50,7 @@ class ReviewList extends Component {
             <OtherReview
               content={review.content}
               author={review.authorName}
-              date={review.date}
+              date={review.date.split(',')[0]}
               rating={review.rating}
             />)
         }
@@ -64,7 +64,7 @@ class ReviewList extends Component {
             <OtherReview
               content={review.content}
               author={review.authorName}
-              date={review.date}
+              date={review.date.split(',')[0]}
               rating={review.rating}
             />)
         }
@@ -79,7 +79,7 @@ class ReviewList extends Component {
             <OtherReview
               content={review.content}
               author={review.authorName}
-              date={review.date}
+              date={review.date.split(',')[0]}
               rating={review.rating}
             />)
         }
