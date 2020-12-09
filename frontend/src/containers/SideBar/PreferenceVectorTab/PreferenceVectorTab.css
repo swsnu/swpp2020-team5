@@ -46,9 +46,14 @@ input[type='range']::-webkit-slider-thumb {
 .factor-indicator-wrapper {
   padding-top: 5px;
   margin-left: 40px;
+  margin-top: 15px;
 }
 .factor-indicator {
-  position: absolute;
+  position: relative;
   width: 10px;
+  height: 15px;
+  margin-top: -15px;
   color: #AAAAAA;
+  display: flex;
+
 }

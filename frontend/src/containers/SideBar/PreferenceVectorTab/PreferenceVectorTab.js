@@ -56,7 +56,7 @@ class PreferenceVectorTab extends Component {
     if (preferenceVector === null) return (<div/>);
     const num = [0,1,2,3,4,5];
     const factorIndicator = num.map(num => {
-      const marginLeft = "calc( " + (num * 20).toString() + "% - " + (num * 17).toString() + "px )";
+      const marginLeft = "calc( " + (num * 20).toString() + "% - " + (num * 10).toString() + "px )";
       return (
       <div className="factor-indicator" style={{ marginLeft }}>{num}</div>
       )
