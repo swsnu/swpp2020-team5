@@ -57,6 +57,12 @@
 .tab .tab-header-button:hover {
   background-color: #c72d2d;
 }
+.tab .tab-header-button:focus {
+  background-color: #c72d2d;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #AAAAAA;
+}
 .tab .tab-header-button:active {
   background-color: #DDDDDD;
 }
@@ -111,12 +117,11 @@
   font-size: 12pt;
   color: white;
   position: absolute;
-  top: 50%;
-  margin-left: calc(100% - 155px);
   border-radius: 30px;
   background-color: #ffb922;
   cursor: pointer;
   outline: none;
+  margin-left: -95px;
 }
 .search-box #search-button:hover {
   background-color: #eba000;
@@ -124,7 +129,12 @@
 .search-box #search-button:active {
   background-color: #DDDDDD;
 }
-
+.search-box #search-button:focus {
+  background-color: #eba000;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #AAAAAA;
+}
 .SideBar .background {
   width: 100px;
   height: 100px;
