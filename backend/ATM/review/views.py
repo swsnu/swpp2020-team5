@@ -33,7 +33,7 @@ def edit_my_review(request, review_id):
                 'id': target_review.id,
                 'content': target_review.content,
                 'rating': target_review.rating,
-                'date': target_review.date.strftime('%Y/%m/%d, %H:%M:%S')
+                'date': target_review.date.strftime('%Y/%m/%d')
                 }
             return HttpResponse(
                 content=json.dumps(response_dict),

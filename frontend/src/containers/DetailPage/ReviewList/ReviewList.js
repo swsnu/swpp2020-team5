@@ -32,6 +32,7 @@ class ReviewList extends Component {
   onClickTabHandler = (index) => {
     this.setState({ tab_index: index });
     this.setState({curr_review_cnt: 10});
+    this.props.onGetReviews(this.props.restaurantID);
   }
 
   onClickShowMoreHandler = () => {
@@ -49,8 +50,8 @@ class ReviewList extends Component {
           return (
             <OtherReview
               content={review.content}
-              author={review.authorName}
-              date={review.date.split(',')[0]}
+              author={review.author_name}
+              date={review.date}
               rating={review.rating}
             />)
         }
@@ -63,8 +64,8 @@ class ReviewList extends Component {
           return (
             <OtherReview
               content={review.content}
-              author={review.authorName}
-              date={review.date.split(',')[0]}
+              author={review.author_name}
+              date={review.date}
               rating={review.rating}
             />)
         }
@@ -78,8 +79,8 @@ class ReviewList extends Component {
           return (
             <OtherReview
               content={review.content}
-              author={review.authorName}
-              date={review.date.split(',')[0]}
+              author={review.author_name}
+              date={review.date}
               rating={review.rating}
             />)
         }
@@ -103,7 +104,7 @@ class ReviewList extends Component {
 
           <TabPanel className="tabcontent" id="naver-content">
             <p>
-              다른 사용자들이 총
+              사용자들이 총
               {naverCnt}
               개의 리뷰를 남겼습니다.
             </p>

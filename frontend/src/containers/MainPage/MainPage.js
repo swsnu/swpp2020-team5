@@ -61,6 +61,16 @@ class MainPage extends Component {
           />
       )
     }
+    if(list.length === 0) {
+      return(
+        <div>
+          <SideBar restaurantID={-1} />
+            <div className='no-restaurant'>
+              <p className='word'>결과가 없어요ㅠㅠ</p>
+          </div>
+        </div>
+      )
+    }
     let moreButton;
     if(idx >= this.props.storedList.length) {
       moreButton=null;

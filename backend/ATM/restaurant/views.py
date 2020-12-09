@@ -75,40 +75,6 @@ def searched_restaurants(request, word=''):
                 #print('rate', response_dict['rate'])
                 #print('ranking',response_dict['rate-review'])
                 response_list.append(response_dict)
-            '''
-            for restaurant in Restaurant.objects.filter(name__contains=word):
-                # cur = (author.search_location.y, author.search_location.x)
-                cur = (37.47835220754036, 126.95631398408709)
-                res_loc = (restaurant.location.y, restaurant.location.x)
-                if haversine(cur, res_loc,unit = "km" ) >= 10:
-                    continue
-                response_dict = {}
-                response_dict['id'] = restaurant.id
-                response_dict['title'] = restaurant.name
-                response_dict['category'] = restaurant.food_category
-                if len(restaurant.thumbnail) != 0:
-                    response_dict['img_url'] = restaurant.thumbnail[0]
-                else: 
-                    response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
-                restaurant_pref_vec = restaurant.preference_vector
-                restaurant_attr_list = get_preference_attributes(
-                    restaurant_pref_vec)
-                restaurant_pref_dict = {}
-                for attr in restaurant_attr_list:
-                    restaurant_pref_dict[attr] = restaurant_pref_vec[attr]
-                res = sorted(restaurant_pref_dict.items(), key = lambda x: x[1], reverse=True)
-                i = 0
-                sorted_dict = {}
-                while True:
-                    if i == 3:
-                        break
-                    sorted_dict[res[i][0]] = res[i][1]
-                    i += 1
-                response_dict['preferenceVector'] = sorted_dict
-                print(response_dict['title'])
-                response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict, restaurant.avg_rating )
-                response_list.append(response_dict)
-            '''
             #response list sorted by rate
             result_list = sorted(response_list, key = lambda x: x['rate-review'], reverse= True)
             return JsonResponse(result_list, safe=False, status = 200)
@@ -176,7 +142,7 @@ def other_reviews(request, restaurant_id):
                         'id': review.id, 
                         'content': review.content, 
                         'rating': review.rating, 
-                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 
+                        'date': review.date.strftime('%Y/%m/%d'), 
                         'author_name': review.author.nickname,
                         }
                 for review in reviews_on_target if review.site == 'naver']
@@ -185,7 +151,7 @@ def other_reviews(request, restaurant_id):
                         'id': review.id,
                         'content': review.content,
                         'rating': review.rating,
-                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
+                        'date': review.date.strftime('%Y/%m/%d'),
                         'author_name': review.author.nickname,
                         }
                 for review in reviews_on_target if review.site == 'kakao']
@@ -194,13 +160,12 @@ def other_reviews(request, restaurant_id):
                         'id': review.id,
                         'content': review.content,
                         'rating': review.rating,
-                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
+                        'date': review.date.strftime('%Y/%m/%d'),
                         'author_name': review.author.nickname,
                         }
                 for review in reviews_on_target \
-                        if review.site == 'atm' \
-                            and review.author.id != request.user.id]
-
+                        if review.site == 'atm'] 
+                            
             other_review_list = {'naver': naver, 'kakao': kakao, 'atm': atm}
             return JsonResponse(
                 other_review_list,
@@ -225,7 +190,7 @@ def my_reviews(request, restaurant_id):
                         'id':review.id,
                         'content': review.content,
                         'rating': review.rating,
-                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S')
+                        'date': review.date.strftime('%Y/%m/%d')
                         }
                     for review in \
                         Review.objects.filter(author__user_id=request.user.id, restaurant_id=restaurant_id)]
@@ -256,7 +221,7 @@ def my_reviews(request, restaurant_id):
                 'id': new_review.id,
                 'content': new_review.content,
                 'rating': new_review.rating,
-                'date': new_review.date.strftime('%Y/%m/%d, %H:%M:%S')}
+                'date': new_review.date.strftime('%Y/%m/%d')}
             restaurant_prefvec = restaurant.preference_vector
             user_prefvec = author.user.profile.preference_vector
             avg_diff = (rating - restaurant.avg_rating) / 5.0
@@ -293,5 +258,6 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating):
             if restaurant_pref[restaurant_factor] == 0 :
                 continue
             similarity = cos_sim_word(user_factor, restaurant_factor)
-            diff += similarity * (pivot - abs(restaurant_pref[restaurant_factor]- user_pref[user_factor]))
+            diff += similarity * (pivot -
+                    abs(restaurant_pref[restaurant_factor] - user_pref[user_factor]))
     return round(avg_rating + scale * diff,2)

@@ -26,7 +26,7 @@ class SideBar extends Component {
     };
   }
 
-  onClickSearchButtonHandler = () => {
+  onSearchHandler = () => {
     const { searchWord } = this.state;
     this.props.history.push(`/main/${searchWord}`);
   }
@@ -67,11 +67,8 @@ class SideBar extends Component {
         <div className="sidebar-header">
           <img id="logo-button" src={logoImage} onClick={() => this.onClickLogoButtonHandler()} alt="logo" />
           <br />
-          <div className="search-box">
+          <form className="search-box" onSubmit={() => this.onSearchHandler()}>
             <img id="search-icon" src={searchIcon} alt="search"/>
-            <button id="search-button" onClick={() => this.onClickSearchButtonHandler()}>
-              검&emsp;색
-            </button>
             <input
               id="search-input"
               type="text"
@@ -79,7 +76,10 @@ class SideBar extends Component {
               value={searchWord}
               onChange={(event) => this.setState({ searchWord: event.target.value })}
             />
-          </div>
+            <button type="submit" id="search-button">
+              검&emsp;색
+            </button>
+          </form>
           <br />
           <div className="tab-button-image-line">
             <div id="my-info-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('MyInfo')}>

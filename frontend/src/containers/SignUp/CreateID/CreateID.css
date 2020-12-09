@@ -1,6 +1,6 @@
 .createID .box {
   width: 400px;
-  height: 450px;
+  height: 500px;
   box-shadow: 0 0 15px 5px gray;
    
   margin: auto;
@@ -18,10 +18,10 @@
   margin: 10px 10px 0 30px;
 }
 .createID input {
-  margin: 5px 10px 20px 30px;
+  margin: 5px 20px 20px 30px;
 }
-.createID button {
-  margin: 10px 10px 10px 30px;
+.createID #confirm-button {
+  margin: 10px 0px 10px 140px;
 }
 .createID .box .signup {
   font-size: 30pt;
