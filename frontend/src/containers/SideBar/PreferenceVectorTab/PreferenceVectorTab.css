@@ -1,9 +1,7 @@
 input[type='range'] {
   width: calc(100% - 60px);
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 0px;
-  height: 30px;
+  margin: 0px 30px 0px 30px;
+  height: 20px;
   cursor: pointer;
   display: block;
   outline: none;
@@ -15,7 +13,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 input[type='range']::-webkit-slider-runnable-track {
   height: 10px;
-  background: #AAA;
+  background: #CCCCCC;
   border-radius: 10px;
 }
 input[type='range']::-webkit-slider-thumb {
@@ -25,13 +23,32 @@ input[type='range']::-webkit-slider-thumb {
   margin-top: -10px;
   background: transparent;
 }
+.slider-wrapper {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
 .fill-lower {
   height: 12px;
   border-radius: 6px;
   margin-left: 30px;
-  margin-top: -21px;
+  margin-top: -16px;
   position: relative;
   z-index: 10;
   pointer-events: none;
   background-color: #E44142;
+}
+.user-factor {
+  margin-left: 40px;
+  font-size: 20px;
+  color:  #666666;
+}
+.factor-indicator-wrapper {
+  padding-top: 5px;
+  margin-left: 40px;
+}
+.factor-indicator {
+  position: absolute;
+  width: 10px;
+  color: #AAAAAA;
 }

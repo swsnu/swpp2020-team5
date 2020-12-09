@@ -4,6 +4,7 @@
     height: 180px;
     cursor: pointer;
     float: left;
+    object-fit: cover;
 }
 .summary {
     height: 230px;

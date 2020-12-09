@@ -6,6 +6,10 @@ import RangeSlider from 'react-bootstrap-range-slider';
 import * as actionCreators from '../../../store/actions/index';
 import './PreferenceVectorTab.css';
 
+function isEmptyObject(param) {
+    return Object.keys(param).length === 0 && param.constructor === Object;
+}
+
 class PreferenceVectorTab extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +21,7 @@ class PreferenceVectorTab extends Component {
         '웨이팅이있는', '혼밥하기좋은', '불친절한'
       ],
       preferenceVector: null,
+      isInit: false,
     };
   }
 
@@ -33,18 +38,36 @@ class PreferenceVectorTab extends Component {
   onChangeFactor = (id, event) => {
     const { preferenceVector } = this.state;
     preferenceVector[id] = event.target.value;
-    console.log(preferenceVector[id]);
     this.setState({ preferenceVector });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.isInit) {
+      return 
+    }
+    const { preferenceVector } = nextProps;
+    if (!isEmptyObject(preferenceVector)){
+      return { isInit: true, preferenceVector };
+    }
   }
 
   render() {
     const { factor_list, preferenceVector } = this.state;
-    if(preferenceVector === null) return (<div/>);
-    let prefVecList = factor_list.map(factor => {
+    if (preferenceVector === null) return (<div/>);
+    const num = [0,1,2,3,4,5];
+    const factorIndicator = num.map(num => {
+      const marginLeft = "calc( " + (num * 20).toString() + "% - " + (num * 17).toString() + "px )";
+      return (
+      <div className="factor-indicator" style={{ marginLeft }}>{num}</div>
+      )
+    })
+    const prefVecList = factor_list.map(factor => {
       const width = "calc((100% - 60px)*" + (preferenceVector[factor]/5).toString() + ")";
       return (
-        <div className="Slider">
-          <p>{factor}</p>
+        <div className="slider-wrapper">
+          <div className="user-factor">
+            {factor}
+          </div>
           <div className="slider">
             <input type="range"
                     min="0"
@@ -55,8 +78,12 @@ class PreferenceVectorTab extends Component {
             />
             <div className="fill-lower" style={{ width }}></div>
           </div>
+          <div className="factor-indicator-wrapper">
+            {factorIndicator}
+          </div>
         </div>
-      )})
+      )
+    })
 
     return (
       <div className="tab" id="preference">

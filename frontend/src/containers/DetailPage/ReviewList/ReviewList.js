@@ -84,7 +84,6 @@ class ReviewList extends Component {
             />)
         }
       });
-
     const naverCnt = naverReview.length;
     const kakaoCnt = kakaoReview.length;
     const atmCnt = atmReview.length;
