@@ -164,6 +164,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onGetUser: () => dispatch(actionCreators.getUser()),
   onGetSignOut: () => dispatch(actionCreators.getSignOut()),
+  onGetMyReviews: (restaurantID) => dispatch(actionCreators.getMyReviews(restaurantID)),
   onPostReview: (restaurantID, content, rating, date) => dispatch(
     actionCreators.postMyReview({
       restaurantID,

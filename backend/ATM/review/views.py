@@ -16,9 +16,9 @@ def get_other_reviews(request, restaurant_id):
             try:
                 target = Restaurant.objects.get(id=restaurant_id)
             except Restaurant.DoesNotExist:
-                return JsonResponse({}, status=404)
+                return HttpResponse(status=404)
 
-            reviews_on_target = Review.objects.filter(restaurant=target)
+            reviews_on_target = Review.objects.filter(restaurant_id=restaurant_id)
 
             naver = [
                     {
@@ -26,7 +26,7 @@ def get_other_reviews(request, restaurant_id):
                         'content': review.content, 
                         'rating': review.rating, 
                         'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 
-                        'author_name': review.author.user.username
+                        'author_name': review.author.nickname,
                         }
                 for review in reviews_on_target if review.site == 'naver']
             kakao = [
@@ -35,7 +35,7 @@ def get_other_reviews(request, restaurant_id):
                         'content': review.content,
                         'rating': review.rating,
                         'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
-                        'author_name': review.author.user.username
+                        'author_name': review.author.nickname,
                         }
                 for review in reviews_on_target if review.site == 'kakao']
             atm = [
@@ -44,7 +44,7 @@ def get_other_reviews(request, restaurant_id):
                         'content': review.content,
                         'rating': review.rating,
                         'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'),
-                        'author_name': review.author.user.username
+                        'author_name': review.author.nickname,
                         }
                 for review in reviews_on_target if review.site == 'atm']
 

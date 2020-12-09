@@ -151,6 +151,36 @@ def restaurant_detail(request,restaurant_id):
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
 
+def my_reviews(request, restaurant_id):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            try:
+                target = Restaurant.objects.get(id=restaurant_id)
+            except Restaurant.DoesNotExist:
+                return HttpResponse(status=404)
+
+            reviews_on_target = \
+            Review.objects.filter(restaurant_id=restaurant_id, \
+            author__user=request.user)
+
+            reviews = [
+                    {
+                        'id': review.id, 
+                        'content': review.content, 
+                        'rating': review.rating, 
+                        'date': review.date.strftime('%Y/%m/%d, %H:%M:%S'), 
+                        'author_name': review.author.nickname,
+                        }
+                for review in reviews_on_target ]
+
+            return JsonResponse(
+                reviews,
+                safe=False)  # default status is 200
+        else:
+            return HttpResponseNotAllowed(['GET'])
+    else:
+        return HttpResponse(status=401)
+
 def get_preference_attributes(pref_vec):
     '''
     get preference vector's key

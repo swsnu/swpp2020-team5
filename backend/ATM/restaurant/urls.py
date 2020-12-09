@@ -17,4 +17,8 @@ urlpatterns = [
         'detail/<int:restaurant_id>',
         views.restaurant_detail,
         name='restaurant'),
+    path(
+        'detail/<int:restaurant_id>/my-review/',
+        views.my_reviews,
+        name='my-reviews'),
 ]

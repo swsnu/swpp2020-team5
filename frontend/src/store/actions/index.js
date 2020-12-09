@@ -14,6 +14,7 @@ export {
 } from './userActions/userActions';
 
 export {
+  getMyReviews,
   getOtherReviews,
   editMyReview,
   deleteMyReview,

@@ -58,7 +58,9 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_OTHER_REVIEWS:
-      return { ...state, selectedReviews: action.target };
+      return { ...state, otherReviews: action.target };
+    case actionTypes.GET_MY_REVIEWS:
+      return { ...state, myReviews: action.target };
     case actionTypes.EDIT_MY_REVIEW: {
       const deleted = state.myReviews.filter((review) => review.id !== action.id);
       const newReview = {

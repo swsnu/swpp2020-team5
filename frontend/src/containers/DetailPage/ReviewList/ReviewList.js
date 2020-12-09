@@ -25,7 +25,7 @@ class ReviewList extends Component {
   }
 
   componentDidMount() {
-    this.props.onGetReviews(this.props.RestaurantID);
+    this.props.onGetReviews(this.props.restaurantID);
   }
 
   onClickTabHandler = (index) => {

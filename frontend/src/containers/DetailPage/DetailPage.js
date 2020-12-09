@@ -23,10 +23,11 @@ class DetailPage extends Component {
     if(selectedRestaurant === null) {
       return (
         <div className="sideBar">
-          HI
+          Loading...
         </div>
       )
     }
+    console.log(selectedRestaurant.id)
     let text;
     let image;
     const ratingDiff = selectedRestaurant.difference.toFixed(2);
