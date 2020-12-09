@@ -6,6 +6,10 @@ import RangeSlider from 'react-bootstrap-range-slider';
 import * as actionCreators from '../../../store/actions/index';
 import './PreferenceVectorTab.css';
 
+function isEmptyObject(param) {
+    return Object.keys(param).length === 0 && param.constructor === Object;
+}
+
 class PreferenceVectorTab extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +21,7 @@ class PreferenceVectorTab extends Component {
         '웨이팅이있는', '혼밥하기좋은', '불친절한'
       ],
       preferenceVector: null,
+      isInit: false,
     };
   }
 
@@ -33,8 +38,17 @@ class PreferenceVectorTab extends Component {
   onChangeFactor = (id, event) => {
     const { preferenceVector } = this.state;
     preferenceVector[id] = event.target.value;
-    console.log(preferenceVector[id]);
     this.setState({ preferenceVector });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.isInit) {
+      return 
+    }
+    const { preferenceVector } = nextProps;
+    if (!isEmptyObject(preferenceVector)){
+      return { isInit: true, preferenceVector };
+    }
   }
 
   render() {
