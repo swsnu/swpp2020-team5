@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import ReactStars from 'react-rating-stars-component';
 import { StarRatingInput, StarRating, css } from 'react-star-rating-input';
 import insertCss from 'insert-css';
 import * as actionCreators from '../../../store/actions/index';
@@ -53,24 +54,15 @@ class MyReview extends Component {
   };
 
   render() {
-    const starList = [];
-    starList.push(<StarRating value={1} />);
-    starList.push(<StarRating value={2} />);
-    starList.push(<StarRating value={3} />);
-    starList.push(<StarRating value={4} />);
-    starList.push(<StarRating value={5} />);
+    const ratingStar = <ReactStars
+              id="rate-star"
+              value={this.props.rating}
+              count={5}
+              size={20}
+              isHalf
+              edit={false}
+            />
 
-    const StarInputOrShow = (
-      this.state.isEdit
-        ? (
-          <StarRatingInput
-            size={5}
-            value={this.state.rating}
-            onChange={this.onChangeRatingHandler}
-          />
-        )
-        : starList[this.state.rating - 1]
-    );
     const EditOrDone = (
       this.state.isEdit
         ? (
@@ -121,12 +113,11 @@ class MyReview extends Component {
         )
         : <text id="content-text">{this.state.content}</text>
     );
-    // we need to fix star
     return (
       <div className="MyReview">
         <div className="review-info">
           <div className="review-rating-stars">
-            {StarInputOrShow}
+            {ratingStar}
           </div>
           <div className="review-detail">
             <text id="rating-text">{this.state.rating}</text>
