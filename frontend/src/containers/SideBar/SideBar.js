@@ -26,7 +26,7 @@ class SideBar extends Component {
     };
   }
 
-  onClickSearchButtonHandler = () => {
+  onSearchHandler = () => {
     const { searchWord } = this.state;
     this.props.history.push(`/main/${searchWord}`);
   }
@@ -67,7 +67,7 @@ class SideBar extends Component {
         <div className="sidebar-header">
           <img id="logo-button" src={logoImage} onClick={() => this.onClickLogoButtonHandler()} alt="logo" />
           <br />
-          <form className="search-box" onSubmit={() => this.onClickSearchButtonHandler()}>
+          <form className="search-box" onSubmit={() => this.onSearchHandler()}>
             <img id="search-icon" src={searchIcon} alt="search"/>
             <input
               id="search-input"
