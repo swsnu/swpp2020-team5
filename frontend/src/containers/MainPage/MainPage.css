@@ -6,7 +6,17 @@
     width: 1100px;
     margin-left: 530px;
 }
-
+.no-restaurant {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 1100px;
+    margin-left: 530px;
+}
+.no-restaurant .word {
+    font-size: 5ch;
+}
 #more-button {
   width:130px;
   

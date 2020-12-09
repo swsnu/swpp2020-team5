@@ -35,7 +35,10 @@ class MainPage extends Component {
     if(this.props.storedList.length === 0) 
       return(
         <div>
-          loading
+          <SideBar restaurantID={-1} />
+            <div className='no-restaurant'>
+              <p className='word'>결과가 없어요ㅠㅠ</p>
+          </div>
         </div>
       );
     while(order<curPage*10 && idx < this.props.storedList.length) {
