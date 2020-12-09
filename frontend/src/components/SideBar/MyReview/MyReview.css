@@ -34,3 +34,15 @@
   height: 30px;
   font-size: 13pt;
 }
+.MyReview #review-edit-done-button {
+  cursor: pointer;
+}
+.MyReview #review-edit-button {
+  cursor: pointer;
+}
+.MyReview #review-delete-button {
+  cursor: pointer;
+}
+.MyReview #review-cancel-button {
+  cursor: pointer;
+}
