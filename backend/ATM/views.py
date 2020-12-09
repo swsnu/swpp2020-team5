@@ -4,9 +4,11 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
+import requests
 from .models import PreferenceVector, FoodCategory, Location, Profile, Author
 from .utils import cos_sim_word
 from .user.utils import get_preference_attributes
+
 # Create your views here.
 max_weight = 5.0
 min_weight = 0
@@ -97,6 +99,14 @@ def sign_in(request):
             cur_user = Profile.objects.get(user=user)
             cur_user.search_location.x = loc_x
             cur_user.search_location.y = loc_y
+            print("d")
+            url = f'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x={loc_x}&y={loc_y}'
+            headers = {"Authorization": "KakaoAK aac06354b765df501b09c92813259058"}
+            api_test = requests.get(url,headers=headers)
+            url_text = json.loads(api_test.text)
+            address_name = url_text['documents'][0]['address_name']
+            print(address_name)
+            cur_user.search_location.address_name = address_name
             cur_user.search_location.save()
             return HttpResponse(status=204)
         else:
