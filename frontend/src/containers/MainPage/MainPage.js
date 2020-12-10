@@ -2,7 +2,7 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
-import LoadingPage from '../../components/LoadingPage/LoadingPage'
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen'
 import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
 import * as actionCreators from '../../store/actions/index';
 import './MainPage.css';
@@ -35,7 +35,7 @@ class MainPage extends Component {
         <div>
           <SideBar restaurantID={-1} />
           <div className='mainPage'>
-            <LoadingPage loadingQuote="음식점 목록을 불러오는 중입니다..."/>
+            <LoadingScreen loadingQuote="음식점 목록을 불러오는 중입니다..."/>
           </div>
         </div>
       );

@@ -8,7 +8,7 @@ import Keywords from '../../components/DetailPage/Keywords/Keywords';
 import SideBar from '../SideBar/SideBar';
 import RestaurantMenu from '../../components/DetailPage/RestaurantDetail/RestaurantMenu/RestaurantMenu'
 import RestaurantDetail from '../../components/DetailPage/RestaurantDetail/RestaurantDetail';
-
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen'
 import DownArrow from '../../images/arrow_down.png';
 import UpArrow from '../../images/arrow_up.png';
 import './DetailPage.css';
@@ -21,11 +21,15 @@ class DetailPage extends Component {
   }
 
   render() {
+
     const { selectedRestaurant } = this.props;
     if(selectedRestaurant === null) {
       return (
-        <div className="sideBar">
-          Loading...
+        <div>
+          <SideBar restaurantID={-1} />
+          <div className="detailPage">
+            <LoadingScreen loadingQuote="음식점 정보를 불러오는 중입니다..."/>
+          </div>
         </div>
       )
     }
