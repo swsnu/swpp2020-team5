@@ -8,8 +8,8 @@ class VectorFactor extends Component {
     return (
       <div className="restaurant-factor">
         {this.props.factor}
-        <div className="bar">
-          <p className="rating">
+        <div className="factor-bar">
+          <p className="factor-weight">
             {this.props.weight.toFixed(2)}
           </p>
           <div className="gauge" style={{width}}/>
