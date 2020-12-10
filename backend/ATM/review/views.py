@@ -45,7 +45,7 @@ def edit_my_review(request, review_id):
                 return HttpResponseNotFound('<h1>Page not Found</h1>')
             if request.user.email != target_review.author.user.email:
                 return HttpResponseForbidden()
-            response_dict = {'id': target_review.id}
+            response_dict = {'id': review_id}
             target_review.delete()
             return HttpResponse(
                 content=json.dumps(response_dict),
