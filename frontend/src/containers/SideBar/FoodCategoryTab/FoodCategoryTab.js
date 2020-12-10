@@ -118,17 +118,17 @@ class FoodCategoryTab extends Component {
         <button className="tab-header-button" id="foodcategory-confirm" onClick={() => this.postClickSaveHandler()}>적용</button>
         </div>
         <div className="tab-content">
+          <div className="category-list">
+            {categorylist}
+          </div>
           <div className="category">
             <button
               className={this.state.selectAll
                 ? 'unchecked' : 'checked'}
-              onClick={() => this.postClickFoodCategoryHandler('total')}
-            >
+                onClick={() => this.postClickFoodCategoryHandler('total')}
+                >
               {'모두'}
             </button>
-          </div>
-          <div className="category-list">
-            {categorylist}
           </div>
         </div>
       </div>
