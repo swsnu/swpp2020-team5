@@ -90,7 +90,7 @@ class DetailPage extends Component {
     }
     
     function loadData(dataType, dataDict, buildFunc) {
-      if (dataDict.length === 0) {
+      if (Object.keys(dataDict).length === 0) {
         dataType.push(<div>(정보없음)</div>)
       }
       else {
