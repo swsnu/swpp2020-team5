@@ -39,7 +39,7 @@ class Location(models.Model):
         return setattr(self, key, value)
     x = models.FloatField(default=0.0)
     y = models.FloatField(default=0.0)
-    address_name = models.CharField(max_length=100)
+    address_name = models.TextField()
 
 
 class PreferenceVector(models.Model):
@@ -102,7 +102,7 @@ class Profile(models.Model):
 
 
 class Restaurant(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.TextField()
     location = models.ForeignKey(
         Location,
         on_delete=models.PROTECT,
@@ -113,15 +113,15 @@ class Restaurant(models.Model):
         on_delete=models.PROTECT,
         null=True,
     )
-    food_category = models.CharField(max_length=100)
+    food_category = models.TextField()
     menu = models.JSONField()# dict{name(str): price(int)}
     openTime = models.JSONField() # dict{label(str): time(str)}
     thumbnail = models.JSONField() # list[thumbnail_link(str)]
     keyword = models.JSONField(null=True) # dict{keyword(str): weight(int)}
-    kakao_link = models.URLField()
-    naver_link = models.URLField()
-    map_link = models.URLField()
-    search_string = models.CharField(max_length=200)
+    kakao_link = models.TextField()
+    naver_link = models.TextField()
+    map_link = models.TextField()
+    search_string = models.TextField()
 
 # This can be ATM or other-sites' user so user can be null.
 class Author(models.Model):
@@ -131,7 +131,7 @@ class Author(models.Model):
             related_name='author',
             null=True,
             )
-    nickname = models.CharField(max_length=100)
+    nickname = models.TextField()
 
 
 class Review(models.Model):
@@ -146,8 +146,8 @@ class Review(models.Model):
         related_name='review',
         null=True,
     )
-    content = models.CharField(max_length=1000)
+    content = models.TextField()
     rating = models.FloatField()
 
     date = models.DateField()
-    site = models.CharField(max_length=10)  # one of naver, kakao or atm.
+    site = models.TextField()  # one of naver, kakao or atm.

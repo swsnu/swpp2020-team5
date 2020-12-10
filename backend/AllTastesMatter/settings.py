@@ -25,7 +25,10 @@ SECRET_KEY = 'dar#yilu+rznpm2ez$)m(^jssl=^*-jv8z)@@653!nclu5bauc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ec2-54-234-120-162.compute-1.amazonaws.com',
+    'localhost',
+]
 
 
 # Application definition
@@ -74,17 +77,18 @@ WSGI_APPLICATION = 'AllTastesMatter.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-"""
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'swpp',
         'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT': '8000',
+        'PORT': '',
     }
 }
+
 """
 DATABASES = {
     'default': {
@@ -92,6 +96,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
 #"""
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

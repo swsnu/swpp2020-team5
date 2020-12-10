@@ -2,10 +2,11 @@ from numpy import dot
 from numpy.linalg import norm
 import json
 import numpy as np
+import os
 # import numpy as np
 
 embedding = {}
-with open("./ATM/embedding/embedding_first_1.json", "r", encoding="utf-8") as fp:
+with open("/home/ubuntu/swpp2020-team5/backend/ATM/embedding/embedding_first_1.json", "r", encoding="utf-8") as fp:
     embedding = json.load(fp)
 
 def cos_sim_word(word_1, word_2):
