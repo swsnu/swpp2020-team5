@@ -17,6 +17,7 @@ class DetailPage extends Component {
   componentDidMount() {
     this.props.onGetRestaurantDetail(parseInt(this.props.match.params.id, 10));
     this.props.onGetReviews(parseInt(this.props.match.params.id, 10));
+    window.scrollTo(0,0);
   }
 
   render() {
