@@ -1,6 +1,5 @@
 .MyReview {
   width: 100%;
-  height: 80px;
   margin-left: 30px;
 }
 
@@ -20,16 +19,22 @@
 }
 
 .MyReview .review-content {
-  width: 70%;
+  width: 400px;
   font-size: 13pt;
-  height: 30px;
+  margin-top: 20px;
+}
+.MyReview #content-text {
+  width: 400px;
+  font-size: 13pt;
+  margin-top: 20px;
+  word-break:break-all;
 }
 .MyReview .review-input {
   background-color: transparent;
-  border: none;
-  width: 70%;
-  height: 30px;
+  width: 100%;
   font-size: 13pt;
+  margin-top: 20px;
+  word-break:break-all;
 }
 .MyReview #review-edit-done-button {
   cursor: pointer;
@@ -43,26 +48,3 @@
 .MyReview #review-cancel-button {
   cursor: pointer;
 }
-.rating[data-rating="0"] .rating__item:nth-child(-n + 0):after, .rating[data-rating="0.5"] .rating__item:nth-child(-n + 0):after, .rating[data-rating="1"] .rating__item:nth-child(-n + 1):after, .rating[data-rating="1.5"] .rating__item:nth-child(-n + 1):after, .rating[data-rating="2"] .rating__item:nth-child(-n + 2):after, .rating[data-rating="2.5"] .rating__item:nth-child(-n + 2):after, .rating[data-rating="3"] .rating__item:nth-child(-n + 3):after, .rating[data-rating="3.5"] .rating__item:nth-child(-n + 3):after, .rating[data-rating="4"] .rating__item:nth-child(-n + 4):after, .rating[data-rating="4.5"] .rating__item:nth-child(-n + 4):after, .rating[data-rating="5"] .rating__item:nth-child(-n + 5):after, .rating[data-rating="5.5"] .rating__item:nth-child(-n + 5):after {
-  content: "\f005";
-}
-.rating[data-rating="0.5"] .rating__item:nth-child(1):after, .rating[data-rating="1.5"] .rating__item:nth-child(2):after, .rating[data-rating="2.5"] .rating__item:nth-child(3):after, .rating[data-rating="3.5"] .rating__item:nth-child(4):after, .rating[data-rating="4.5"] .rating__item:nth-child(5):after, .rating[data-rating="5.5"] .rating__item:nth-child(6):after {
-  content: "\f123";
-}
-.rating {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: #900;
-}
-.rating__item {
-  font-size: 24px;
-  display: block;
-  font-family: FontAwesome;
-}
-.rating__item::after {
-  content: '\f006 ';
-}
-
