@@ -64,8 +64,8 @@ class MainPage extends Component {
       return(
         <div>
           <SideBar restaurantID={-1} />
-            <div className='no-restaurant'>
-              <p className='word'>결과가 없어요ㅠㅠ</p>
+          <div className='mainPage'>
+            <div className='no-result'>현재 조건에 맞는 결과가 없습니다.</div>
           </div>
         </div>
       )

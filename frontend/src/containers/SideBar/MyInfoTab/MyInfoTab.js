@@ -45,11 +45,11 @@ class MyInfoTab extends Component {
     let onDetailPage = '';
     const onMainPage = (
       <div className="on-main-page">
-        <p id="welcome-text">
+        <div className="welcome-text">
           #AllTastesMatter에 오신것을 환영합니다!
           <br />
           천천히 둘러보세요
-        </p>
+        </div>
       </div>
     );
 

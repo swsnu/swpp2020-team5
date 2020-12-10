@@ -7,7 +7,12 @@ input::placeholder {
   vertical-align: text-top;
   text-align: left;
 }
-
+.welcome-text {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #666666;
+  text-align: center;
+}
 .second-line {
   margin-bottom: 0px;
 }
