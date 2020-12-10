@@ -63,8 +63,8 @@ const deleteMyReview_ = (reviewID) => ({
 
 export const deleteMyReview = (reviewID) => (dispatch) => axios.delete(`/atm/my-review/${reviewID}/`)
   .then((res) => {
-    dispatch(deleteMyReview_(reviewID));
+    dispatch(deleteMyReview_(res.data.id));
   })
   .catch((res) => {
-    dispatch(deleteMyReview_(reviewID));
+    console.log('error in deleteMyReview')
   });

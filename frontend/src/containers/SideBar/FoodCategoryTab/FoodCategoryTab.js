@@ -24,6 +24,8 @@ class FoodCategoryTab extends Component {
         아시아음식 : true,
         패스트푸드 : true,
       },
+      selectAll: false,
+      isFirst: true,
     };
   }
 
@@ -34,12 +36,51 @@ class FoodCategoryTab extends Component {
     //   if (this.props.foodCategory[category] === false) { changed = true; }
     // });
     // if (changed === true) 
-    this.setState({ foodCategory: this.props.foodCategory });
+    //this.setState({ foodCategory: this.props.foodCategory });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.foodCategory) {
+      if (!prevState.isFirst) {
+        return {}
+      }
+      let isAllTrue = true
+      Object.keys(prevState.foodCategory).forEach((category) => {
+        isAllTrue = isAllTrue && nextProps.foodCategory[category]
+      });
+      return {
+        foodCategory: { ...nextProps.foodCategory },
+        isFirst: false,
+        selectAll: isAllTrue,
+      }
+      
+    }
+
   }
 
   postClickFoodCategoryHandler = (category) => {
     const newState = { ...this.state };
-    newState.foodCategory[category] = !this.state.foodCategory[category];
+    if (category === 'total') {
+      if (newState.selectAll === false) {
+        Object.keys(this.state.foodCategory).forEach((category) => {
+          newState.foodCategory[category] = true
+        });
+        newState['selectAll'] = true
+      } else {
+        Object.keys(this.state.foodCategory).forEach((category) => {
+          newState.foodCategory[category] = false
+        });
+        newState['selectAll'] = false
+      }
+    } else {
+      if (newState.selectAll) {
+        Object.keys(this.state.foodCategory).forEach((category) => {
+          newState.foodCategory[category] = false
+        });
+        newState['selectAll'] = false
+      }
+      newState.foodCategory[category] = !this.state.foodCategory[category];
+    }
     this.setState(newState);
   }
 
@@ -60,7 +101,7 @@ class FoodCategoryTab extends Component {
       categorylist.push(
         <div className="category">
           <button
-            className={this.state.foodCategory[category]
+            className={this.state.foodCategory[category] && !this.state.selectAll
               ? 'unchecked' : 'checked'}
             alt="foodImage"
             width="50"
@@ -80,6 +121,18 @@ class FoodCategoryTab extends Component {
         <button className="tab-header-button" id="foodcategory-confirm" onClick={() => this.postClickSaveHandler()}>적용</button>
         </div>
         <div className="tab-content">
+          <div className="category">
+            <button
+              className={this.state.selectAll
+                ? 'unchecked' : 'checked'}
+              alt="foodImage"
+              width="50"
+              height="50"
+              onClick={() => this.postClickFoodCategoryHandler('total')}
+            >
+              {'모두'}
+            </button>
+          </div>
           <div className="images">
             {categorylist}
           </div>
@@ -89,7 +142,9 @@ class FoodCategoryTab extends Component {
   }
 }
 // 만약에 유저에서 가져올거면 그거있어야함
-const mapStateToProps = (state) => ({ foodCategory: state.us.foodCategory });
+const mapStateToProps = (state) => ({ 
+  foodCategory: state.us.foodCategory,
+});
 
 // we can assume this popup occurs when the user is logging in
 const mapDispatchToProps = (dispatch) => ({
@@ -97,7 +152,6 @@ const mapDispatchToProps = (dispatch) => ({
     actionCreators.editFoodCategory(foodCategory),
   ),
   onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(FoodCategoryTab));

@@ -89,7 +89,6 @@ class MyInfoTab extends Component {
           date={review.date}
         />
       ));
-      console.log(myReview);
 
       onDetailPage = (
         <div className="on-detail-page">
@@ -130,6 +129,7 @@ class MyInfoTab extends Component {
       myInfo = onMainPage;
     }
 
+
     return (
       <div className="tab" id="my-info">
         <div className="tab-header">
@@ -152,16 +152,7 @@ class MyInfoTab extends Component {
 
 const mapStateToProps = (state) => ({
   selectedUser: state.us.selectedUser,
-  // myReviewList: state.rv.myReviews,
   myReviewList: state.rv.myReviews,
-  /*
-    [{
-      id: 1,
-      content: '내스타일의 매운맛',
-      rating: 5,
-      modifiedTime: '2020.11.01'
-    },],
-    */
   selectedRestaurant: state.rs.selectedRestaurant,
 });
 
