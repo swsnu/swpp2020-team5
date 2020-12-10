@@ -51,10 +51,21 @@ class MyReview extends Component {
 
   onChangeRatingHandler = (newRating) => {
     this.setState({ rating: newRating });
-  };
+  }
 
   render() {
-    const ratingStar = <ReactStars
+    const ratingStar = (
+      this.state.isEdit
+        ? <ReactStars
+              id="rate-star"
+              value={this.state.rating}
+              count={5}
+              size={20}
+              isHalf
+              edit={true}
+              onChange={this.onChangeRatingHandler}
+            />
+        : <ReactStars
               id="rate-star"
               value={this.props.rating}
               count={5}
@@ -62,6 +73,8 @@ class MyReview extends Component {
               isHalf
               edit={false}
             />
+    )
+    console.log(ratingStar)
 
     const EditOrDone = (
       this.state.isEdit
@@ -111,7 +124,7 @@ class MyReview extends Component {
             onChange={(event) => this.setState({ content: event.target.value })}
           />
         )
-        : <text id="content-text">{this.state.content}</text>
+        : <div id="content-text">{this.state.content}</div>
     );
     return (
       <div className="MyReview">
