@@ -113,7 +113,7 @@ class ReviewList extends Component {
           </TabPanel>
           <TabPanel className="tabcontent" id="kakao-content">
             <p>
-              다른 사용자들이 총
+              사용자들이 총
               {kakaoCnt}
               개의 리뷰를 남겼습니다.
             </p>
@@ -122,7 +122,7 @@ class ReviewList extends Component {
           </TabPanel>
           <TabPanel className="tabcontent" id="atm-content">
             <p>
-              다른 사용자들이 총
+              사용자들이 총
               {atmCnt}
               개의 리뷰를 남겼습니다.
             </p>
