@@ -2,6 +2,7 @@ import { withRouter } from 'react-router';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SideBar from '../SideBar/SideBar';
+import LoadingPage from '../../components/LoadingPage/LoadingPage'
 import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary';
 import * as actionCreators from '../../store/actions/index';
 import './MainPage.css';
@@ -11,16 +12,13 @@ class MainPage extends Component {
     super(props);
     this.state = {
       curPage: 1,
+      isLoading: true,
     };
   }
   
   componentDidMount() {
-    if(this.props.match.params.name === undefined){
-      this.props.onGetRestaurantList("");
-    }
-    else{ 
-      this.props.onGetRestaurantList(this.props.match.params.name)
-    }
+    const searchKeyword = this.props.match.params.name === undefined ? "" : this.props.match.params.name;
+    this.props.onGetRestaurantList(searchKeyword).then(()=>{this.setState({isLoading: false})});
     this.props.onGetFoodCategory();
   }
   onClickHandler() {
@@ -28,19 +26,20 @@ class MainPage extends Component {
     this.setState({curPage: curPage+1});
   }
   render() {
-    const{curPage} = this.state;
+    const{ curPage, isLoading } = this.state;
     let order = 0;
     let list =[];
     let idx=0;
-    if(this.props.storedList.length === 0) 
+    if (isLoading) {
       return(
         <div>
           <SideBar restaurantID={-1} />
-            <div className='no-restaurant'>
-              <p className='word'>결과가 없어요ㅠㅠ</p>
+          <div className='mainPage'>
+            <LoadingPage loadingQuote="음식점 목록을 불러오는 중입니다..."/>
           </div>
         </div>
       );
+    }
     while(order<curPage*10 && idx < this.props.storedList.length) {
       let el = this.props.storedList[idx];
       if(this.props.foodCategory[el.category]=== false) {
@@ -117,7 +116,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)),
+  onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)).then(),
   onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
   
 });
