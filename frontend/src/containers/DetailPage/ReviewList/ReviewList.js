@@ -26,13 +26,12 @@ class ReviewList extends Component {
   }
 
   componentDidMount() {
-    this.props.onGetReviews(this.props.restaurantID);
+    //this.props.onGetReviews(this.props.restaurantID);
   }
 
   onClickTabHandler = (index) => {
     this.setState({ tab_index: index });
     this.setState({curr_review_cnt: 10});
-    this.props.onGetReviews(this.props.restaurantID);
   }
 
   onClickShowMoreHandler = () => {
@@ -136,11 +135,11 @@ class ReviewList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  otherReviews: state.rv.otherReviews,
+  //otherReviews: state.rv.otherReviews,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetReviews: (restaurantID) => dispatch(actionCraetors.getOtherReviews(restaurantID)),
+  //onGetReviews: (restaurantID) => dispatch(actionCraetors.getOtherReviews(restaurantID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);

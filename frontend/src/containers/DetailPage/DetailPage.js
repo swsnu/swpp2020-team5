@@ -16,6 +16,7 @@ import './DetailPage.css';
 class DetailPage extends Component {
   componentDidMount() {
     this.props.onGetRestaurantDetail(parseInt(this.props.match.params.id, 10));
+    this.props.onGetReviews(parseInt(this.props.match.params.id, 10));
   }
 
   render() {
@@ -147,7 +148,7 @@ class DetailPage extends Component {
           </div>
           <div className="info-type">방문자 리뷰 ㅣ</div>
           <div className="reviewlist">
-            <ReviewList restaurantID={selectedRestaurant.id} />
+            <ReviewList restaurantID={selectedRestaurant.id} otherReviews={this.props.otherReviews} />
           </div>
         </div>
       </div>
@@ -158,9 +159,11 @@ const mapDispatchToProps = (dispatch) => ({
   onGetRestaurantDetail: (restaurantID) => {
     dispatch(actionCreators.getRestaurantDetail(restaurantID));
   },
+  onGetReviews: (restaurantID) => dispatch(actionCreators.getOtherReviews(restaurantID)),
 });
 const mapStateToProps = (state) => ({
   selectedRestaurant: state.rs.selectedRestaurant,
+  otherReviews: state.rv.otherReviews,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DetailPage));
