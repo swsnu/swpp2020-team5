@@ -108,7 +108,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {naverReview}
-            {naverCnt > 10 ? showMoreButton : ''}
+            {(naverCnt > 10 && naverCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
           </TabPanel>
           <TabPanel className="tabcontent" id="kakao-content">
             <p>
@@ -117,7 +117,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {kakaoReview}
-            {kakaoCnt > 10 ? showMoreButton : ''}
+            {(kakaoCnt > 10 && kakaoCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
           </TabPanel>
           <TabPanel className="tabcontent" id="atm-content">
             <p>
@@ -126,7 +126,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {atmReview}
-            {atmCnt > 10 ? showMoreButton : ''}
+            {(atmCnt > 10 && atmCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
           </TabPanel>
         </Tabs>
       </div>
