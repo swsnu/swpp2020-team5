@@ -124,7 +124,7 @@ class FoodCategoryTab extends Component {
           <div className="category">
             <button
               className={this.state.selectAll
-                ? 'unchecked' : 'checked'}
+                ? 'checked' : 'unchecked'}
                 onClick={() => this.postClickFoodCategoryHandler('total')}
                 >
               {'모두'}
