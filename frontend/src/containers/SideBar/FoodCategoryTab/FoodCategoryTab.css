@@ -12,18 +12,23 @@
 }
 
 #filter .unchecked {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   opacity: 1;
   cursor: pointer;
+  background-color: white;
+  border-radius: 20px;
+  outline: none;
 }
 
 #filter .checked {
-  width: 80px;
-  height: 80px;
-  opacity: 0.5;
+  width: 70px;
+  height: 70px;
+  opacity: 0.2;
   cursor: pointer;
-  
+  border-radius: 20px;
+  background-color: white;
+  outline: none;
 }
 
 #savebutton{

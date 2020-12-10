@@ -59,8 +59,7 @@ class FoodCategoryTab extends Component {
     Object.keys(this.state.foodCategory).forEach((category) => {
       categorylist.push(
         <div className="category">
-          <p
-            
+          <button
             className={this.state.foodCategory[category]
               ? 'unchecked' : 'checked'}
             alt="foodImage"
@@ -69,7 +68,7 @@ class FoodCategoryTab extends Component {
             onClick={() => this.postClickFoodCategoryHandler(category)}
           >
           {category}
-          </p>
+          </button>
         </div>,
       );
       id += 1;
