@@ -80,7 +80,7 @@ class MyInfoTab extends Component {
     // if current page is not Mainpage, myInfoTab should show onDetailPage.
     // Otherwise, should show onMainPage
     if (this.props.restaurantID !== -1) {
-      myReview = this.props.myReviewList.map((review) => (
+      myReview = this.props.myReviewList.map((review) => ( 
         <MyReview
           className="Review"
           reviewID={review.id}
@@ -89,12 +89,13 @@ class MyInfoTab extends Component {
           date={review.date}
         />
       ));
+      console.log(myReview);
 
       onDetailPage = (
         <div className="on-detail-page">
           <p className="second-line">
             <span id="restaurantName">
-              {this.props.selectedRestaurant.title}
+              {this.props.selectedRestaurant.name}
 &nbsp;&nbsp;
             </span>
             {' '}
@@ -111,7 +112,7 @@ class MyInfoTab extends Component {
 &nbsp;
             </span>
             님은 &nbsp;
-            <span id="restaurantName">{this.props.selectedRestaurant.title}</span>
+            <span id="restaurantName">{this.props.selectedRestaurant.name}</span>
             {' '}
             에
             <br />
