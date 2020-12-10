@@ -117,7 +117,7 @@ class MyReview extends Component {
     const TextOrInput = (
       this.state.isEdit
         ? (
-          <input
+          <textarea
             id="content-input"
             className="review-input"
             value={this.state.content}
