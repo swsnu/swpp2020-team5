@@ -15,7 +15,6 @@
 .SideBar .tab {
   width: 100%;
   height: calc(100% - 322.75px);
-  margin: 0px;
   padding: 0px;
   background-color: white;
   -ms-overflow-style: none;  /* IE and Edge */
@@ -26,6 +25,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   height: calc(100% - 60px);
+  margin-top: 10px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

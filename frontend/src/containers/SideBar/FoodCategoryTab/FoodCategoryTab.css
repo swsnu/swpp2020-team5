@@ -1,50 +1,34 @@
-#filter .images{
+#filter .category-list{
   text-align: center;
   display: flex;
-  
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 10px;
 }
 
-#filter .category{
-  height:80px
+#filter .category {
+  margin: 5px;
 }
 
-#filter .unchecked {
-  width: 70px;
-  height: 70px;
-  opacity: 1;
-  cursor: pointer;
-  background-color: white;
-  border-radius: 20px;
-  outline: none;
-}
-
-#filter .checked {
-  width: 70px;
-  height: 70px;
-  opacity: 0.2;
-  cursor: pointer;
-  border-radius: 20px;
-  background-color: white;
-  outline: none;
-}
-
-#savebutton{
-  width:100px;
-  background-color: #E44142;
-  border: none;
+#filter .category button{
   font-weight: bold;
-  color: white;
-  padding: 15px 0;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
+  width: 100px;
   height: 40px;
-  border-radius: 20px;
-  cursor: pointer;  
-  margin-top: 50px;
-  margin-left: 280px;
+  outline: none;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 25px;
+  border-width: 2px;
+  border-style: solid;
+  background-color: #FFFFFF;
+}
+
+#filter .category button.unchecked {
+  border-color: #AAAAAA;
+  color: #AAAAAA;
+}
+
+#filter .category button.checked {
+  border-color: #E44142;
+  color: #E44142;
 }

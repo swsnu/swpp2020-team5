@@ -103,14 +103,11 @@ class FoodCategoryTab extends Component {
           <button
             className={this.state.foodCategory[category] && !this.state.selectAll
               ? 'unchecked' : 'checked'}
-            alt="foodImage"
-            width="50"
-            height="50"
             onClick={() => this.postClickFoodCategoryHandler(category)}
           >
           {category}
           </button>
-        </div>,
+        </div>
       );
       id += 1;
     });
@@ -125,15 +122,12 @@ class FoodCategoryTab extends Component {
             <button
               className={this.state.selectAll
                 ? 'unchecked' : 'checked'}
-              alt="foodImage"
-              width="50"
-              height="50"
               onClick={() => this.postClickFoodCategoryHandler('total')}
             >
               {'모두'}
             </button>
           </div>
-          <div className="images">
+          <div className="category-list">
             {categorylist}
           </div>
         </div>
