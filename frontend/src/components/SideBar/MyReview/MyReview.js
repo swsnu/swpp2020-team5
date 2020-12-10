@@ -51,10 +51,21 @@ class MyReview extends Component {
 
   onChangeRatingHandler = (newRating) => {
     this.setState({ rating: newRating });
-  };
+  }
 
   render() {
-    const ratingStar = <ReactStars
+    const ratingStar = (
+      this.state.isEdit
+        ? <ReactStars
+              id="rate-star"
+              value={this.state.rating}
+              count={5}
+              size={20}
+              isHalf
+              edit={true}
+              onChange={this.onChangeRatingHandler}
+            />
+        : <ReactStars
               id="rate-star"
               value={this.props.rating}
               count={5}
@@ -62,6 +73,8 @@ class MyReview extends Component {
               isHalf
               edit={false}
             />
+    )
+    console.log(ratingStar)
 
     const EditOrDone = (
       this.state.isEdit
@@ -104,22 +117,22 @@ class MyReview extends Component {
     const TextOrInput = (
       this.state.isEdit
         ? (
-          <input
+          <textarea
             id="content-input"
             className="review-input"
             value={this.state.content}
             onChange={(event) => this.setState({ content: event.target.value })}
           />
         )
-        : <text id="content-text">{this.state.content}</text>
+        : <div id="content-text">{this.state.content}</div>
     );
     return (
       <div className="MyReview">
         <div className="review-info">
-          <span className="review-rating-stars">
+          <div className="review-rating-stars">
             {ratingStar}
-          </span>
-          <span className="review-detail">
+          </div>
+          <div className="review-detail">
             <text id="rating-text">{this.state.rating}</text>
             <text> | </text>
             <text id="modified-time-text">{this.props.date}</text>
@@ -127,7 +140,7 @@ class MyReview extends Component {
             {EditOrDone}
             <text> | </text>
             {DeleteOrCancel}
-          </span>
+          </div>
         </div>
         <div className="review-content">
           {TextOrInput}
