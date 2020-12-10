@@ -116,10 +116,10 @@ class MyReview extends Component {
     return (
       <div className="MyReview">
         <div className="review-info">
-          <span className="review-rating-stars">
+          <div className="review-rating-stars">
             {ratingStar}
-          </span>
-          <span className="review-detail">
+          </div>
+          <div className="review-detail">
             <text id="rating-text">{this.state.rating}</text>
             <text> | </text>
             <text id="modified-time-text">{this.props.date}</text>
@@ -127,7 +127,7 @@ class MyReview extends Component {
             {EditOrDone}
             <text> | </text>
             {DeleteOrCancel}
-          </span>
+          </div>
         </div>
         <div className="review-content">
           {TextOrInput}
