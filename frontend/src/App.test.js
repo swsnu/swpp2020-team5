@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { history } from './store/store';
 import App from './App';
 import getMockStore from './test-utils/mocks';
+import * as actionCreators from './store/actions/userActions/userActions';
 
 jest.mock('./containers/SignIn/SignIn', () => jest.fn((props) => (
   <div className="spySignIn" />
@@ -25,17 +26,41 @@ jest.mock('./containers/DetailPage/DetailPage', () => jest.fn((props) => (
 
 describe('App', () => {
   afterEach(() => { jest.clearAllMocks(); });
+  it('should call onGetUser when isGetUserCalled is false', () => {
+    const mockStore = getMockStore({
+      keyword: {},
+      restaurant: {},
+      user: {
+        selectedUser: null,
+        isGetUserCalled: false,
+      },
+      review: {},
+    });
+    history.location.pathname='/';
+    let spyGetUser = jest.spyOn(actionCreators, 'getUser')
+      .mockImplementation(() => dispatch => {})
+    const app = (
+      <Provider store={mockStore}>
+        <App history={history}  />
+      </Provider>
+    );
+    const component = mount(app);
+    expect(spyGetUser).toHaveBeenCalledTimes(1);
+  });
   it('should create SignIn at /', () => {
     const mockStore = getMockStore({
       keyword: {},
       restaurant: {},
-      user: {},
+      user: {
+        selectedUser: null,
+        isGetUserCalled: true,
+      },
       review: {},
     });
-    history.push('/');
+    history.location.pathname='/';
     const app = (
       <Provider store={mockStore}>
-        <App history={history} />
+        <App history={history}  />
       </Provider>
     );
     const component = mount(app);
@@ -46,10 +71,13 @@ describe('App', () => {
     const mockStore = getMockStore({
       keyword: {},
       restaurant: {},
-      user: {},
+      user: {
+        selectedUser: null,
+        isGetUserCalled: true,
+      },
       review: {},
     });
-    history.push('/sign-in/');
+    history.location.pathname='/sign-in/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
@@ -63,67 +91,79 @@ describe('App', () => {
     const mockStore = getMockStore({
       keyword: {},
       restaurant: {},
-      user: {},
+      user: {
+        selectedUser: null,
+        isGetUserCalled: true,
+      },
       review: {},
     });
-    history.push('/sign-up/');
+    history.location.pathname='/sign-up/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
       </Provider>
     );
     const component = mount(app);
-    // expect(component.find('.spySignUp').length).toBe(1);
+    expect(component.find('.spySignUp').length).toBe(1);
   });
 
   it('should create MainPage at /main/:name', () => {
     const mockStore = getMockStore({
       keyword: {},
       restaurant: {},
-      user: {},
+      user: {
+        selectedUser: {},
+        isGetUserCalled: true,
+      },
       review: {},
     });
-    history.push('/main/hi_vietnam/');
+    history.location.pathname='/main/hi_vietnam/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
       </Provider>
     );
     const component = mount(app);
-    // expect(component.find('.spyMainPage').length).toBe(1);
+    expect(component.find('.spyMainPage').length).toBe(1);
   });
 
   it('should create DetailPage at /detail/:id', () => {
     const mockStore = getMockStore({
       keyword: {},
       restaurant: {},
-      user: {},
+      user: {
+        selectedUser: {},
+        isGetUserCalled: true,
+      },
       review: {},
     });
-    history.push('/detail/1/');
+    history.location.pathname='/detail/1/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
       </Provider>
     );
     const component = mount(app);
-    // expect(component.find('.spyDetailPage').length).toBe(1);
+    expect(component.find('.spyDetailPage').length).toBe(1);
   });
 
   it('should create h1 at /not-found', () => {
     const mockStore = getMockStore({
       keyword: {},
       restaurant: {},
-      user: {},
+      user: {
+        selectedUser: {},
+        isGetUserCalled: true,
+      },
       review: {},
     });
-    history.push('/not-found/');
+    history.location.pathname = '/not-found/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
       </Provider>
     );
     const component = mount(app);
-    // expect(component.find('h1').length).toBe(1);
+    expect(component.find('h1').length).toBe(1);
   });
 });
