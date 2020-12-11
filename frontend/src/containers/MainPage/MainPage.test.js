@@ -7,7 +7,8 @@ import MainPage from './MainPage';
 import * as actionCreators from '../../store/actions/index';
 import getMockStore from '../../test-utils/mocks';
 import { history } from '../../store/store';
-
+import RestaurantSummary from '../../components/MainPage/RestaurantSummary/RestaurantSummary'
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 jest.mock('../SideBar/SideBar', () => jest.fn((props) => (
   <div className="spySideBar">
     SideBar
@@ -27,21 +28,23 @@ jest.mock('../SideBar/SideBar', () => jest.fn((props) => (
     </div>
   </div>
 )));
-
+jest.mock('../../components/LoadingScreen/LoadingScreen', () => jest.fn(() => (
+  <div className='spyLoading'>
+    HI
+  </div>
+)));
 jest.mock('../../components/MainPage/RestaurantSummary/RestaurantSummary', () => jest.fn((props) => (
   <div className="spySummary">
     {props.title}
     {props.id}
     {props.rate}
-    <img src={props.img_url_list} alt="img" />
-
+    {props.img_url_list}
   </div>
 )));
 
 const stubInitialState = {
   restaurant: {
     restaurantlist: [
-
       {
         id: 1,
         title: '안녕베트남',
@@ -49,13 +52,13 @@ const stubInitialState = {
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
         menu: ['짜장면 6000원', '탕수육 2000원'],
         time: '9;00-12:00',
-        keywords: ['맵다', '짜다', '분위기가 좋다'],
+        keywords: {'맵다':10, '짜다':11, '분위기가 좋다':10},
         preferenceVector: {
           느끼하다: 4.8,
           분위기: 4.5,
           웨이팅: 4.4,
         },
-        category: ['베트남음식'],
+        category: '베트남음식',
         difference: 0.43,
       },
       {
@@ -66,7 +69,7 @@ const stubInitialState = {
         menu: ['짜장면 6000원', '탕수육 2000원'],
         time: '9;00-12:00',
         keywords: ['맵다', '짜다', '분위기가 좋다'],
-        category: ['카페'],
+        category: '카페',
         difference: 0.43,
         preferenceVector: {
           아늑한: 5.0,
@@ -98,8 +101,8 @@ const stubInitialState = {
 const mockStore = getMockStore(stubInitialState);
 
 describe('<MainPage />', () => {
-  let spyGetRestaurantList; let spyGetFoodCategory; let
-    mainpage;
+  let spyGetRestaurantList; 
+  let mainpage;
   beforeEach(() => {
     mainpage = (
       <Provider store={mockStore}>
@@ -108,22 +111,30 @@ describe('<MainPage />', () => {
             <Route
               path="/"
               exact
-              render={() => <MainPage />}
+              render={() => <MainPage match={{ params: { name: null }, isExact: true }} />}
             />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
-    // spyGetRestaurantList =  jest.spyOn(actionCreators, 'getRestaurantList')
-    //   .mockImplementation(() => {return dispatch => {}; });
+    spyGetRestaurantList =  jest.spyOn(actionCreators, 'getRestaurantList')
+      .mockImplementation((name) => {return dispatch => {}; });
     // spyGetFoodCategory = jest.spyOn(actionCreators, 'getFoodCategory')
     //   .mockImplemetation(() => {return dispatch => {}; });
   });
-  it('should render properly', () => {
+  it('should render loading page properly', () => {
     const component = mount(mainpage);
     const wrapper = component.find('.spySummary');
-    expect(wrapper.length).toBe(1);
-    // expect(spyGetFoodCategory).toBeCalledTimes(1);
-    // expect(spyGetRestaurantList).toBeCalledTimes(1);
+    expect(component.find('.spyLoading').length).toBe(1);
+    expect(wrapper.length).toBe(0);
+    expect(spyGetRestaurantList).toBeCalledTimes(1);
   });
+  it('should render main page properly', () => {
+    const component = mount(mainpage);
+    // const wrapper = component.find('.spySummary');
+    // expect(wrapper.length).toBe(1);
+    const mainPageInstance = component.find(MainPage.WrappedComponent).instance();
+    mainPageInstance.componentDidMount();
+    expect(component.find('.spyLoading').length).toBe(1);
+  })
 });
