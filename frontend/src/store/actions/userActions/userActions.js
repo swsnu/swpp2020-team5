@@ -30,7 +30,7 @@ export const checkUser = (username, email) => (dispatch) => axios
 
 export const resetCheckUser = () => (dispatch) => {
   return dispatch({
-    type: resetCheckUser,
+    type: actionTypes.RESET_CHECK_USER,
   });
 }
 
@@ -147,7 +147,6 @@ const getPreferenceVector_ = (preferenceVector) => ({
 export const getPreferenceVector = () => (dispatch) => axios
   .get('/atm/user/preference-vector/')
   .then((res) => {
-    console.log(res.data)
     return dispatch(getPreferenceVector_(res.data));
   })
   .catch((err) => {
