@@ -16,7 +16,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 import math
 # preferencVector
-scale = 1
+scale = 3
 pivot = 1.5
 
 MIN_RAW_RATING = -10
@@ -33,7 +33,7 @@ def searched_restaurants(request, word=''):
     '''
     when user searchs restaurant
     '''
-    debug_min = 500
+    debug_min = -500
     if request.method == 'GET':
         if request.user.is_authenticated:
             author = Profile.objects.get(user=request.user)
@@ -85,7 +85,7 @@ def searched_restaurants(request, word=''):
                 response_dict['preferenceVector'] = sorted_dict
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict,\
                                     author_pref_dict, restaurant.avg_rating, review_cnt)
-                if debug_min > response_dict['rate']:
+                if debug_min < response_dict['rate']:
                    debug_min = response_dict['rate'];
             
                 response_list.append(response_dict)
@@ -290,4 +290,4 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating, review_cnt):
                             if review_cnt > MAX_REVIEW_COUNT \
                             else review_cnt
     return scale_rating(avg_rating + scale * diff \
-                    * math.log10(review_cnt_truncated/MAX_REVIEW_COUNT))
+                    * math.log10(review_cnt_truncated)/math.log10(MAX_REVIEW_COUNT))
