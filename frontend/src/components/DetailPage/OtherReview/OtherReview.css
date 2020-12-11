@@ -1,7 +1,6 @@
 .OtherReview {
   display: flex;
   flex-direction: row;
-  align-items: center;
   border-bottom: 1px gray solid;
   margin-bottom: 10px;
 }
@@ -16,6 +15,7 @@
   align-items: center;
 }
 .OtherReview #author-name {
+  text-align: center;
   margin-left: 0px;
   margin-top: 5px;
 }
