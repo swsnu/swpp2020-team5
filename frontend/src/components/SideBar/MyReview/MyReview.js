@@ -54,17 +54,21 @@ class MyReview extends Component {
   }
 
   render() {
-    const ratingStar = (
+    const changeRatingStar = (
       this.state.isEdit
         ? <ReactStars
               id="rate-star"
-              value={this.state.rating}
+              value={this.props.rating}
               count={5}
               size={20}
               isHalf
-              edit={true}
               onChange={this.onChangeRatingHandler}
             />
+        : <></>
+    )
+    const ratingStar = (
+      this.state.isEdit
+        ? <></>
         : <ReactStars
               id="rate-star"
               value={this.props.rating}
@@ -130,10 +134,11 @@ class MyReview extends Component {
       <div className="MyReview">
         <div className="review-info">
           <div className="review-rating-stars">
+            {changeRatingStar}
             {ratingStar}
           </div>
           <div className="review-detail">
-            <text id="rating-text">{this.state.rating}</text>
+            <text id="rating-text">{this.props.rating}</text>
             <text> | </text>
             <text id="modified-time-text">{this.props.date}</text>
             <text> | </text>
@@ -150,11 +155,13 @@ class MyReview extends Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
+  /*
   onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.editMyReview({
     id: reviewID,
     ...reviewInfo,
   })),
   onDeleteReview: (reviewID) => dispatch(actionCreators.deleteMyReview(reviewID)),
+  */
 });
 
 insertCss(css);

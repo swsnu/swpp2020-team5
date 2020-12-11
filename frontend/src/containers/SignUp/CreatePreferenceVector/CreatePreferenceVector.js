@@ -45,6 +45,10 @@ class CreatePreferenceVector extends Component {
     });
     this.props.history.push('/');
   }
+  onChangeValue(event) {
+        console.log(event.target.value);
+      
+  }
 
   // image selection is not complete
   render() {
@@ -90,6 +94,9 @@ class CreatePreferenceVector extends Component {
           <div className="images">
             {foodImages}
           </div>
+      
+          <div className="survey"/>
+            
           <div
             id="confirm-button"
             onClick={() => {

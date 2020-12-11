@@ -13,19 +13,19 @@ jest.mock('./MyInfoTab/MyInfoTab', () => jest.fn((props) => (
   </div>
 )));
 
-jest.mock('./LocationTab/LocationTab', () => jest.fn((props) => (
+jest.mock('../../components/SideBar/LocationTab/LocationTab', () => jest.fn((props) => (
   <div className="spyLocationTab">
     <p>{props.restaurantID}</p>
   </div>
 )));
 
-jest.mock('./FoodCategoryTab/FoodCategoryTab', () => jest.fn((props) => (
+jest.mock('../../components/SideBar/FoodCategoryTab/FoodCategoryTab', () => jest.fn((props) => (
   <div className="spyFoodCategoryTab">
     <p>{props.restaurantID}</p>
   </div>
 )));
 
-jest.mock('./PreferenceVectorTab/PreferenceVectorTab', () => jest.fn((props) => (
+jest.mock('../../components/SideBar/PreferenceVectorTab/PreferenceVectorTab', () => jest.fn((props) => (
   <div className="spyPreferenceVectorTab">
     <p>{props.restaurantID}</p>
   </div>

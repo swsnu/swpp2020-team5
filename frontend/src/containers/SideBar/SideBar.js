@@ -11,11 +11,15 @@ import sliderIcon from '../../images/slider.png';
 
 import * as actionCreators from '../../store/actions/index';
 import MyInfoTab from './MyInfoTab/MyInfoTab';
-import LocationTab from './LocationTab/LocationTab';
-import FoodCategoryTab from './FoodCategoryTab/FoodCategoryTab';
-import PreferenceVectorTab from './PreferenceVectorTab/PreferenceVectorTab';
+import LocationTab from '../../components/SideBar/LocationTab/LocationTab';
+import FoodCategoryTab from '../../components/SideBar/FoodCategoryTab/FoodCategoryTab';
+import PreferenceVectorTab from '../../components/SideBar/PreferenceVectorTab/PreferenceVectorTab';
 
 import './SideBar.css';
+
+function isEmptyObject(param) {
+    return Object.keys(param).length === 0 && param.constructor === Object;
+}
 
 class SideBar extends Component {
   constructor(props) {
@@ -23,11 +27,90 @@ class SideBar extends Component {
     this.state = {
       searchWord: '',
       tabMode: 'MyInfo',
+      searchLocation: {},
+      initSearchLocation: false,
+      foodCategory: {},
+      initFoodCategory: false,
+      selectAllCategory: false,
+      preferenceVector: {},
+      initPreferenceVector: false,
     };
+  }
+  componentDidMount() {
+    this.props.onGetSearchLocation();
+    this.props.onGetFoodCategory();
+    this.props.onGetPreferenceVector();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.initSearchLocation === false) {
+      if (!isEmptyObject(nextProps.searchLocation)) {
+        return {
+          searchLocation: { ...nextProps.searchLocation },
+          initSearchLocation: true,
+        }
+      }
+    }
+    if (prevState.initFoodCategory === false) {
+      if (!isEmptyObject(nextProps.foodCategory)) {
+        let isAllTrue = true;
+        Object.keys(prevState.foodCategory).forEach((category) => {
+          isAllTrue = isAllTrue && nextProps.foodCategory[category];
+        })
+        return {
+          foodCategory: { ...nextProps.foodCategory },
+          initFoodCategory: true,
+          selectAllCategory: isAllTrue,
+        }
+      }
+    }
+    if (prevState.initPreferenceVector === false) {
+      if (!isEmptyObject(nextProps.preferenceVector)) {
+        return {
+          preferenceVector: { ...nextProps.preferenceVector },
+          initPreferenceVector: true,
+        }
+      }
+    }
+  }
+
+  postClickFoodCategoryHandler = (category) => {
+    const newState = { ...this.state };
+    if (category === 'total') {
+      if (newState.selectAllCategory === false) {
+        Object.keys(this.state.foodCategory).forEach((category) => {
+          newState.foodCategory[category] = true
+        });
+        newState['selectAllCategory'] = true
+      } else {
+        Object.keys(this.state.foodCategory).forEach((category) => {
+          newState.foodCategory[category] = false
+        });
+        newState['selectAllCategory'] = false
+      }
+    } else {
+      if (newState.selectAllCategory) {
+        Object.keys(this.state.foodCategory).forEach((category) => {
+          newState.foodCategory[category] = false
+        });
+        newState['selectAllCategory'] = false
+      }
+      newState.foodCategory[category] = !this.state.foodCategory[category];
+    }
+    this.setState(newState);
+  }
+
+  onChangeVectorHandler = (id, event) => {
+    const { preferenceVector} = this.state;
+    preferenceVector[id] = event.target.value;
+    this.setState({ preferenceVector });
   }
 
   onSearchHandler = () => {
-    const { searchWord } = this.state;
+    const { searchWord, searchLocation, foodCategory, preferenceVector } = this.state;
+    this.props.onEditSearchLocation(searchLocation);
+    this.props.onEditFoodCategory(foodCategory);
+    this.props.onEditPreferenceVector(preferenceVector);
     this.props.history.push(`/main/${searchWord}`);
   }
 
@@ -48,16 +131,34 @@ class SideBar extends Component {
 
     switch (tabMode) {
       case 'MyInfo':
-        tab = <MyInfoTab id="my-info-tab" restaurantID={this.props.restaurantID} />;
+        tab = <MyInfoTab 
+                id="my-info-tab" 
+                restaurantID={this.props.restaurantID} 
+              />;
         break;
       case 'Location':
-        tab = <LocationTab id="location-tab" restaurantID={this.props.restaurantID} />;
+        tab = <LocationTab 
+                id="location-tab" 
+                searchLocation={this.state.searchLocation}
+                onChangeLocation={(searchLocation) => this.setState({searchLocation})}
+              />;
         break;
       case 'FoodCategory':
-        tab = <FoodCategoryTab id="food-category-tab" restaurantID={this.props.restaurantID} />;
+        tab = <FoodCategoryTab 
+                id="food-category-tab"  
+                foodCategory={this.state.foodCategory}
+                postClickFoodCategoryHandler={
+                  (category) => this.postClickFoodCategoryHandler(category)
+                }
+                selectAll={this.state.selectAllCategory}
+              />;
         break;
       case 'PreferenceVector':
-        tab = <PreferenceVectorTab id="preference-vector-tab" restaurantID={this.props.restaurantID} />;
+        tab = <PreferenceVectorTab 
+                id="preference-vector-tab"
+                preferenceVector={this.state.preferenceVector}
+                onChangeFactor={this.onChangeVectorHandler}
+              />;
         break;
       default:
         throw new Error('Invalid tabMode');
@@ -142,8 +243,25 @@ class SideBar extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  onEditSearchLocation: (location) => 
+    dispatch(actionCreators.editSearchLocation(location)),
+  onGetSearchLocation: () => 
+    dispatch(actionCreators.getSearchLocation()),
+  onEditFoodCategory: (foodCategory) => 
+    dispatch(actionCreators.editFoodCategory(foodCategory)),
+  onGetFoodCategory: () =>
+    dispatch(actionCreators.getFoodCategory()),
+  onEditPreferenceVector: (preferenceVector) => 
+    dispatch(actionCreators.editPreferenceVector(preferenceVector)),
+  onGetPreferenceVector: () =>
+    dispatch(actionCreators.getPreferenceVector()),
+})
+
 const mapStateToProps = (state) => ({
   searchLocation: state.us.searchLocation,
+  foodCategory: state.us.foodCategory,
+  preferenceVector: state.us.preferenceVector,
 });
 
-export default connect(mapStateToProps, null)(withRouter(SideBar));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SideBar));

@@ -19,7 +19,6 @@ class MainPage extends Component {
   componentDidMount() {
     const searchKeyword = this.props.match.params.name === undefined ? "" : this.props.match.params.name;
     this.props.onGetRestaurantList(searchKeyword).then(()=>{this.setState({isLoading: false})});
-    this.props.onGetFoodCategory();
   }
   onClickHandler() {
     const {curPage} = this.state
@@ -46,10 +45,6 @@ class MainPage extends Component {
     }
     while(order<curPage*10 && idx < this.props.storedList.length) {
       let el = this.props.storedList[idx];
-      if(this.props.foodCategory[el.category]=== false) {
-        idx++;
-        continue;
-      }
       order++;
       idx++;
       list.push(
@@ -124,12 +119,10 @@ class MainPage extends Component {
 
 const mapStateToProps = (state) => ({
   storedList: state.rs.restaurantlist,
-  foodCategory: state.us.foodCategory,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)).then(),
-  onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
   
 });
 

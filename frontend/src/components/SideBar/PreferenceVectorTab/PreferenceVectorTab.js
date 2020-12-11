@@ -18,39 +18,12 @@ class PreferenceVectorTab extends Component {
         '싱거운', '담백한', '바삭바삭한', '부드러운', '저렴한',
         '웨이팅이있는', '혼밥하기좋은', '불친절한'
       ],
-      preferenceVector: null,
-      isInit: false,
     };
   }
 
-  componentDidMount() {
-    const { preferenceVector } = this.props;
-    this.props.onGetPreferenceVector();
-    this.setState({ preferenceVector });
-  }
-
-  onClickConfirmHandler = () => {
-    this.props.onPutPreferenceVector(this.state.preferenceVector);
-  }
-
-  onChangeFactor = (id, event) => {
-    const { preferenceVector } = this.state;
-    preferenceVector[id] = event.target.value;
-    this.setState({ preferenceVector });
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.isInit) {
-      return 
-    }
-    const { preferenceVector } = nextProps;
-    if (!isEmptyObject(preferenceVector)){
-      return { isInit: true, preferenceVector };
-    }
-  }
-
   render() {
-    const { factor_list, preferenceVector } = this.state;
+    const { factor_list } = this.state;
+    const { preferenceVector } = this.props;
     if (preferenceVector === null) return (<div/>);
     const num = [0,1,2,3,4,5];
     const factorIndicator = num.map(num => {
@@ -71,7 +44,7 @@ class PreferenceVectorTab extends Component {
                     min="0"
                     max="5"
                     value={preferenceVector[factor]}
-                    onChange={this.onChangeFactor.bind(null, factor)}
+                    onChange={this.props.onChangeFactor.bind(null, factor)}
                     step="0.01"
             />
             <div className="fill-lower" style={{ width }}></div>
@@ -87,7 +60,6 @@ class PreferenceVectorTab extends Component {
       <div className="tab" id="preference">
         <div className="tab-header">
           <span>나의 취향 조정하기</span>
-          <button className="tab-header-button" id="preference-confirm" onClick={() => this.onClickConfirmHandler()}>적용</button>
         </div>
         <div className="tab-content">
           {prefVecList}
@@ -97,15 +69,4 @@ class PreferenceVectorTab extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.us.currentUser,
-  preferenceVector: state.us.preferenceVector,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onGetUser: () => dispatch(actionCreators.getUser()),
-  onGetPreferenceVector: () => dispatch(actionCreators.getPreferenceVector()),
-  onPutPreferenceVector: (user) => dispatch(actionCreators.editPreferenceVector(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PreferenceVectorTab);
+export default PreferenceVectorTab;
