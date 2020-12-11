@@ -23,12 +23,12 @@
   background-color: #FFFFFF;
 }
 
-#filter .category button.unchecked {
+#filter .category button.checked {
   border-color: #AAAAAA;
   color: #AAAAAA;
 }
 
-#filter .category button.checked {
+#filter .category button.unchecked {
   border-color: #E44142;
   color: #E44142;
 }

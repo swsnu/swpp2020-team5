@@ -30,7 +30,7 @@
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .tab .tab-content::-webkit-scrollbar {
-  display: none;
+  display: 10px;
 }
 
 .tab .tab-header {
@@ -113,6 +113,7 @@
   margin-left: 15px;
   margin-top: 10px;
   color: #4f5b66;
+  display: block;
 }
 
 .search-box #search-button {

@@ -26,6 +26,9 @@ class Keywords extends Component {
     });
     const callbacks = {
       getWordColor: (word) => (word.value > Math.log(maxKeywordValue / 2) ? '#000000' : '#AAAAAA'),
+      onWordClick: word => {},
+      onWordMouseOver: word => {},
+      getWordTooltip: word => {},
     };
     // const expandRatio = 50;
     const expandedWords = [];
