@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import ReactStars from 'react-rating-stars-component';
-import { StarRatingInput, StarRating, css } from 'react-star-rating-input';
-import insertCss from 'insert-css';
 import * as actionCreators from '../../../store/actions/index';
 import './MyReview.css';
 
@@ -78,7 +76,6 @@ class MyReview extends Component {
               edit={false}
             />
     )
-    console.log(ratingStar)
 
     const EditOrDone = (
       this.state.isEdit
@@ -155,15 +152,13 @@ class MyReview extends Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  /*
+  
   onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.editMyReview({
     id: reviewID,
     ...reviewInfo,
   })),
   onDeleteReview: (reviewID) => dispatch(actionCreators.deleteMyReview(reviewID)),
-  */
+  
 });
-
-insertCss(css);
 
 export default connect(null, mapDispatchToProps)(withRouter(MyReview));

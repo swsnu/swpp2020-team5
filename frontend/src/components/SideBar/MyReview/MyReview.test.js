@@ -61,9 +61,9 @@ describe('<MyReview />', () => {
     wrapper = component.find('MyReview');
     wrapper.find('#content-input').simulate('change', { target: { value: 'EDITED_CONTENT' } });
     expect(wrapper.state().content).toBe('EDITED_CONTENT');
-    expect(wrapper.find('StarRatingInput').length).toBe(1);
-    wrapper.find('StarRatingInput').find('Clear').find('a').simulate('click');
-    expect(wrapper.state().rating).toBe(0);
+    expect(wrapper.find('ReactStars').length).toBe(1);
+    wrapper.find('ReactStars').find('Star').at(0).simulate('click');
+    expect(wrapper.state().rating).toBe(0.5);
 
     const spyPutReview = jest.spyOn(actionCreators, 'editMyReview')
       .mockImplementation((id, info) => (dispatch) => {});
@@ -82,7 +82,7 @@ describe('<MyReview />', () => {
     expect(spyPutReview).toHaveBeenCalledWith({
       id: 1,
       content: 'EDITED_CONTENT',
-      rating: 0,
+      rating: 0.5,
       date: DATE_TO_USE,
     });
     expect(wrapper.state().isEdit).toBe(false);
