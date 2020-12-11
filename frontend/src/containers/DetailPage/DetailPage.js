@@ -143,10 +143,12 @@ class DetailPage extends Component {
                 <div className="title">
                   {selectedRestaurant.name}
                 </div>
-                <div className="rate">
-                  {selectedRestaurant.rate}
+                <div className="rate-wrapper">
+                  <div className="rate">
+                    {selectedRestaurant.rate}
+                  </div>
+                  {ratingDiffWrapper()}
                 </div>
-                {ratingDiffWrapper()}
               </div>
               <div className="detailinfo">
                 <RestaurantDetail detailType='카테고리' detailData={category}/>
