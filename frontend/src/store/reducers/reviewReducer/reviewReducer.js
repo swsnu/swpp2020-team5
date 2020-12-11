@@ -1,7 +1,6 @@
 import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
-  selectedReviews: [],
   myReviews: [
   ],
   otherReviews: {
@@ -45,9 +44,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, myReviews: [...deleted] };
     }
     default:
+      console.log('HI')
       break;
   }
-  return state;
+  return { ...state };
 };
 
 export default reducer;
