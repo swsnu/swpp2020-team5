@@ -21,7 +21,7 @@ input::placeholder {
 }
 .review-input-set {
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   margin-top: 20px;
   border-bottom: 1px gray solid;
   padding-bottom: 20px;
@@ -40,4 +40,10 @@ input::placeholder {
   color: white;
   border: none;
   cursor: pointer;
+}
+
+#review-padding{
+  width: 50%;
+  min-height: 30px;
+  display: inline-block;
 }

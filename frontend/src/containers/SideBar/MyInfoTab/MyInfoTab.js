@@ -120,7 +120,13 @@ class MyInfoTab extends Component {
             {' '}
             개의 리뷰를 남겼습니다.
           </div>
-          {myReview}
+          <div className="my-review-list">
+            {myReview}
+            <div className="review-padding">
+              <br />
+              {' '}
+            </div>
+          </div>
         </div>
       );
 
