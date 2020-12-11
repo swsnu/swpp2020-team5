@@ -1,19 +1,13 @@
 .CreatePreferenceVector .box {
   width: 1000px;
   height: 700px;
-  box-shadow: 0 0 15px 5px gray;
-   
+  box-shadow: 0 0 15px 5px rgba(0,0,0,0.4);
+  background-color: white;
   margin: auto;
   position: absolute;
-  top: 10%;
-  left: 10%;
-  background-color: white;
+  top: 20%;
+  left: calc(50% - 500px);
   border-radius: 2em;
-  border-top-left-radius: 2em;
-  border-top-right-radius: 2em;
-  border-bottom-left-radius: 2em;
-  border-bottom-right-radius: 2em;
-  z-index: 0;
 }
 .CreatePreferenceVector .box .signup {
   font-size: 30pt;
@@ -42,52 +36,49 @@
   text-align: center;
 }
 
-.CreatePreferenceVector .images .image-and-caption {
-  width: 300px;
-  height: 250px;
-  font-size: 15pt;
+.CreatePreferenceVector .images .food-candidate {
+  display: block;
+  width: 280px;
+  height: 190px;
+  margin: 20px;
+  margin-bottom: 30px;
   float: left;
-  margin: 10px;
-  position: relative;
-  
+}
+.CreatePreferenceVector .images .food-image-wrapper {
+  width: 280px;
+  height: 190px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .CreatePreferenceVector .images .food-image {
-  width: 280px;
   height: 190px;
-  margin: 10px;
-  cursor: pointer;
+  width: 280px;
 }
 
 .CreatePreferenceVector .images .food-image-checked {
+  outline: 5px solid red;
+  position: relative;
   width: 280px;
   height: 190px;
   opacity: 0.3;
-  border: 5px solid red;
-  cursor: pointer;
-  margin: 5px;
+  z-index: 2;
 }
 
 .CreatePreferenceVector .images .check-image {
-  width: 250px;
-  height: 150px;
-  margin: 20px 0 0 -270px;
-  cursor: pointer;
-  position: absolute;
-  z-index: -1;
-
+  width: 220px;
+  position: sticky;
+  position: relative;
+  bottom: 180px;
 }
-
 #confirm-button {
-  width:130px;
+  width: 130px;
   background-color: #E44142;
   border: none;
   font-weight: bold;
   color: white;
   padding: 15px 0;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 20px;
   margin-top: 20px;
   margin-left: 435px;
