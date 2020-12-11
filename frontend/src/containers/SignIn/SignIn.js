@@ -69,16 +69,14 @@ class SignIn extends Component {
             value={password}
             onChange={(event) => this.setState({ password: event.target.value })}
           />
-          <div>
-            <button
-              type="button"
-              id="sign-in-button"
-              onClick={() => this.onClickSignInHandler()}
-            >
-              로그인
-            </button>
-          </div>
-          <div className="sign-up">
+          <button
+            type="button"
+            id="sign-in-button"
+            onClick={() => this.onClickSignInHandler()}
+          >
+            로그인
+          </button>
+          <div className="ask-sign-up">
             아직 회원이 아니신가요?
             {' '}
             <a id="sign-up-link" className="link" href="/sign-up">회원 가입</a>

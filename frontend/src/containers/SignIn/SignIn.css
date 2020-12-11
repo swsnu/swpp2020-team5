@@ -20,7 +20,7 @@
   margin-bottom: 70px;
 }
 
-.sign-in .phrase {
+.phrase {
   color: #888888;
   font-size: 22px;
   letter-spacing: 8px;
@@ -43,7 +43,7 @@
 }
 
 .box-head {
-  font-weight: lighter;
+  font-weight: normal;
   letter-spacing: 2px;
   color: #888888;
   text-align: left;
@@ -57,7 +57,7 @@
 }
 
 .box .input {
-  width: calc(100% - 10px);
+  width: calc(100% - 15px);
   border: 2px solid #AAAAAA;
   border-radius: 15px;
   height: 30px;
@@ -94,18 +94,18 @@
 #sign-in-button:active {
   background-color: #AAAAAA;
 }
-.sign-up {
+.ask-sign-up {
   letter-spacing: 1px;
   color: #AAAAAA;
   font-size: 15px;
 }
 
-.sign-up .link {
+.ask-sign-up .link {
   text-decoration: none;
   color: #00AAFF
 }
 
-.sign-up .link:active {
+.ask-sign-up .link:active {
   text-decoration: none;
   color: #8c65e9
 }

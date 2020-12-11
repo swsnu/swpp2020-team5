@@ -88,11 +88,15 @@ class CreateID extends Component {
 
     // <div className='createID' style={ backgroundStyle} >
       <div className="createID">
+        <div className="phrase">나만의 입맛, 나만의 평점.</div>
         <div className="box">
-          <text className="signup">회원가입</text>
-          <text className="step1">STEP1</text>
-
-          <p>이름</p>
+          <h1 className="signup">
+            회원가입
+            <div className="step1">
+              Step 1
+            </div>
+          </h1>
+          <div className="box-text">이름</div>
           <input
             id="username-input"
             type="text"
@@ -102,7 +106,7 @@ class CreateID extends Component {
             }}
           />
 
-          <p>이메일</p>
+          <div className="box-text">이메일</div>
           <input
             id="email-input"
             type="text"
@@ -112,7 +116,7 @@ class CreateID extends Component {
             }}
           />
 
-          <p>비밀번호</p>
+          <div className="box-text">비밀번호</div>
           <input
             id="password-input"
             type="password"
@@ -121,7 +125,7 @@ class CreateID extends Component {
               this.setState({ userInfo: { ...userInfo, password: ev.target.value } });
             }}
           />
-          <p>비밀번호확인</p>
+          <div className="box-text">비밀번호확인</div>
           <input
             id="verify-password-input"
             type="password"
@@ -133,13 +137,17 @@ class CreateID extends Component {
           <p id="verified">{isverified}</p>
 
           <button
-            id="confirm-button"
+            id="sign-up-button"
             disabled={this.onChangeButtonHandler()}
             onClick={() => this.onClickConfirmHandler()}
           >
             확인
           </button>
-
+          <div className="ask-sign-in">
+            이미 계정이 있으신가요?
+            {' '}
+            <a id="sign-in-link" className="link" href="/sign-in">로그인</a>
+          </div>
         </div>
 
       </div>
