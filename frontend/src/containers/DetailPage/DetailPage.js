@@ -39,7 +39,7 @@ class DetailPage extends Component {
     const imgList = selectedRestaurant.img_url_list.map((el) => {
       return (
         <img
-        src={el}
+        src={"https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src="+el}
         className="restaurant-image"
         alt="restaurant image"
         onError={ev => ev.target.style.display='none'}
