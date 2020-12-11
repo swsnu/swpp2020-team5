@@ -3,12 +3,16 @@
   color: #AAAAAA;
   margin: 5px;
   font-size: 16px;
+  display: flex;
+}
+.factor-name {
+  width: 100px;
 }
 .factor-bar {
   text-indent: 8px;
   height: 80%;
-  width: 75%;
-  margin-right: 50px;
+  width: calc(100% - 140px);
+  margin-right: 40px;
   margin-top: 5px;
   color: white;
   float: right;

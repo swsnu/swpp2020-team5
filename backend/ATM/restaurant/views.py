@@ -50,10 +50,7 @@ def searched_restaurants(request, word=''):
                 response_dict['id'] = restaurant.id
                 response_dict['title'] = restaurant.name
                 response_dict['category'] = restaurant.food_category
-                if len(restaurant.thumbnail) != 0:
-                    response_dict['img_url'] = restaurant.thumbnail[0]
-                else: 
-                    response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
+                response_dict['img_url_list'] = restaurant.thumbnail
                 restaurant_pref_vec = restaurant.preference_vector
                 restaurant_attr_list = get_preference_attributes(
                     restaurant_pref_vec)
@@ -108,12 +105,7 @@ def restaurant_detail(request,restaurant_id):
             response_dict['category'] = restaurant.food_category
             response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict, restaurant.avg_rating )
             response_dict['difference'] = response_dict['rate'] - restaurant.avg_rating
-            if len(restaurant.thumbnail) != 0:
-                response_dict['img_url'] = restaurant.thumbnail[0]
-                response_dict['img_url_list'] = restaurant.thumbnail
-            else: 
-                response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
-                response_dict['img_url_list'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
+            response_dict['img_url_list'] = restaurant.thumbnail
             response_dict['menu'] = restaurant.menu
             response_dict['time'] = restaurant.openTime
             response_dict['keywords'] = restaurant.keyword

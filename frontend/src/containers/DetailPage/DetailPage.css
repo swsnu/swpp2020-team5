@@ -44,15 +44,24 @@
     font-size: xx-large;
     color: orange;
     float: left;
-    width: 70px;
     margin-left: 20px;
     margin-top: 20px;
    
 }
-.restaurant-details .imageright .up .diff{
-   margin-top: 27px;
-   color: orange;
+.restaurant-details .rating-diff-wrapper{
+   margin-top: 30px;
+   margin-left: 10px;
    float: left;
+   display: flex;
+}
+.rating-diff-wrapper .rating-decreased {
+    color: #657CFF
+}
+.rating-diff-wrapper .rating-increased {
+    color: #F1814D;
+}
+.rating-diff-wrapper .rating-unchanged {
+    color: orange;
 }
 .restaurant-details .imageright .detailinfo{
     height: 200px;

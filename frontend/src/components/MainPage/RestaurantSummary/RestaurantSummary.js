@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import './RestaurantSummary.css';
+import NoImage from '../../../images/no_img.png';
 import VectorFactor from '../VectorFactor/VectorFactor';
 
 class RestaurantSummary extends Component {
@@ -19,6 +20,8 @@ class RestaurantSummary extends Component {
         weight={factors[factor]}
       />);
     });
+    let i = 0;
+    const urlListLength = this.props.img_url_list.length;
     return (
       <div className="summary">
         <div className="order">
@@ -26,7 +29,14 @@ class RestaurantSummary extends Component {
         </div>
         <img
           alt="restautantThumbnail"
-          src={this.props.img_url/* img_url */}
+          onError={ev => {
+            i += 1;
+            if (i > urlListLength) ev.target.src = NoImage;
+            else ev.target.src = this.props.img_url_list[i];
+          }}
+          src={
+            urlListLength === 0 ? NoImage : this.props.img_url_list[0]
+          }
           className="image"
           onClick={() => this.onClickRestaurantHandler(this.props.id)}
         />

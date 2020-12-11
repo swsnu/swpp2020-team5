@@ -33,7 +33,7 @@ jest.mock('../../components/MainPage/RestaurantSummary/RestaurantSummary', () =>
     {props.title}
     {props.id}
     {props.rate}
-    <img src={props.img_url} alt="img" />
+    <img src={props.img_url_list} alt="img" />
 
   </div>
 )));
@@ -46,8 +46,7 @@ const stubInitialState = {
         id: 1,
         title: '안녕베트남',
         rate: 4.78,
-        // img_url:'https://upload.wikimedia.org/wikipedia/commons/4/4d/Tangsuyuk_%28Korean_Chinese_sweet_and_sour_pork%29.jpg?download',
-        img_url: 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0',
+        img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
         menu: ['짜장면 6000원', '탕수육 2000원'],
         time: '9;00-12:00',
         keywords: ['맵다', '짜다', '분위기가 좋다'],
@@ -63,8 +62,7 @@ const stubInitialState = {
         id: 3,
         title: '유동커피',
         rate: 4.65,
-        // img_url:'https://upload.wikimedia.org/wikipedia/commons/4/4d/Tangsuyuk_%28Korean_Chinese_sweet_and_sour_pork%29.jpg?download',
-        img_url: 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0',
+        img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
         menu: ['짜장면 6000원', '탕수육 2000원'],
         time: '9;00-12:00',
         keywords: ['맵다', '짜다', '분위기가 좋다'],

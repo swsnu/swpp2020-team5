@@ -30,6 +30,7 @@
 .text .head {
     height: 50px;
     padding-bottom: 10px;
+    display: flex;
 }
 .text .rate {
     font-size: 25px;
@@ -46,6 +47,7 @@
     float: left;
     max-width: calc(100% - 50px);
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 .text .category {
