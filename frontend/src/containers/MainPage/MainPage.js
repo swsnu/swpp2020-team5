@@ -76,12 +76,18 @@ class MainPage extends Component {
     else {
       moreButton= <button id="more-button" onClick={() => this.onClickHandler()}>더보기</button>
     }
+    let headerContent = "";
+    if (!this.props.match.params.name) {
+      headerContent = "모든 식당"
+    } else {
+      headerContent = "\"" + this.props.match.params.name + "\""
+    }
     return (
       <div>
         <SideBar restaurantID={-1} />
         <div className="main-page-header">
           <div className="header-text">
-            "{this.props.match.params.name}" 에 대한 검색 결과입니다.
+            {headerContent}에 대한 검색 결과입니다.
           </div>
           <div className="header-help" onClick={() => this.onClickHelpHandler()}>
             <span className="questionmark">?</span>
