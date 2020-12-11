@@ -47,7 +47,7 @@ class MainPage extends Component {
         <RestaurantSummary
             title={el.title}
             id={el.id}
-            img_url={el.img_url}
+            img_url_list={el.img_url_list}
             rate={el.rate}
             category={el.category}
             order={order}
@@ -72,25 +72,6 @@ class MainPage extends Component {
     else {
       moreButton= <button id="more-button" onClick={() => this.onClickHandler()}>더보기</button>
     }
-    // const list = this.props.storedList.map((el) => {
-    //   if (this.props.foodCategory[el.category] === true){
-        
-    //     order += 1;
-    //     return (
-    //       <RestaurantSummary
-    //         title={el.title}
-    //         id={el.id}
-    //         img_url={el.img_url}
-    //         rate={el.rate}
-    //         category={el.category}
-    //         order={order}
-    //         preferenceVector={el.preferenceVector}
-    //       />
-    //     );
-    //   }
-    //   return null;
-    // });
-
     return (
       <div>
         <SideBar restaurantID={-1} />

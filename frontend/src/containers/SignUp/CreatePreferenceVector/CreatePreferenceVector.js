@@ -59,19 +59,19 @@ class CreatePreferenceVector extends Component {
     const selectedFoodsLength = this.state.selectedFoods.length;
     for (let i = 0; i < selectedFoodsLength; i += 1) {
       foodImages.push(
-        <div key={i} className="image-and-caption">
-          <img
-            alt="food-checked"
-            className={this.state.selectedFoods[i]
-              ? 'food-image-checked'
-              : 'food-image'}
-            onClick={() => this.onClickFoodHandler(i)}
-            src={foodImageList[i]}
-          />
-
-          {this.state.selectedFoods[i] ? <img alt="check" className="check-image" onClick={() => this.onClickFoodHandler(i)} src={checkImage} /> : <></> }
-          <text>{foodCaptionList[i]}</text>
-        </div>,
+        <div className="food-candidate">
+          <div key={i} className="food-image-wrapper" onClick={() => this.onClickFoodHandler(i)}>
+            <img
+              alt="food-checked"
+              className={this.state.selectedFoods[i]
+                ? 'food-image-checked'
+                : 'food-image'}
+              src={foodImageList[i]}
+            />
+            {this.state.selectedFoods[i] ? <img alt="check" className="check-image" src={checkImage} /> : <></> }
+          </div>
+          <div>{foodCaptionList[i]}</div>
+        </div>
       );
       if (i % 3 === 2) {
         foodImages.push(<br />);

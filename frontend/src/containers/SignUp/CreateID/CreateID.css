@@ -1,37 +1,80 @@
+.createID {
+  min-width: 1000px;
+}
 .createID .box {
-  width: 400px;
-  height: 500px;
-  box-shadow: 0 0 15px 5px gray;
-   
-  margin: auto;
-  position: absolute;
-  top: 30%;
-  left: 40%;
-  background-color: white;
-  border-radius: 2em;
-  border-top-left-radius: 2em;
-  border-top-right-radius: 2em;
-  border-bottom-left-radius: 2em;
-  border-bottom-right-radius: 2em;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px #666666;
+  width: 300px;
+  display: block;
+  text-align: center;
+  margin: 10px auto 0px auto;
+  padding: 1px 50px 30px 50px;
 }
-.createID p {
-  margin: 10px 10px 0 30px;
+.box input {
+  width: calc(100% - 15px);
+  border: 2px solid #AAAAAA;
+  border-radius: 15px;
+  height: 30px;
+  padding-left: 10px;
+  margin: 10px 0px 10px 0px;
+  outline: none;
 }
-.createID input {
-  margin: 5px 20px 20px 30px;
+
+.box input:focus {
+  border-color: #E44142;
 }
-.createID #confirm-button {
-  margin: 10px 0px 10px 140px;
+#sign-up-button {
+  background-color: #E44142;
+  border-radius: 10px;
+  color: #FFFFFF;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 17px;
+  width: 100px;
+  height: 40px;
+  outline: none;
+  border: none;
+}
+#sign-up-button:hover {
+  background-color: #F46162;
+}
+#sign-up-button:focus {
+  background-color: #F46162;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #AAAAAA;
+}
+#sign-up-button:active {
+  background-color: #AAAAAA;
 }
 .createID .box .signup {
-  font-size: 30pt;
-  color: grey;
-  margin: 30px 0 10px 30px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  color: #888888;
+  text-align: left;
+  font-size: 30px;
+  display: flex;
 }
 .createID .box .step1 {
-  font-size: 20pt;
-  color: grey;
-  margin: 0 0 0 10px;
+  margin-top: 18px;
+  font-size: 15pt;
+}
+
+.ask-sign-in {
+  letter-spacing: 1px;
+  color: #AAAAAA;
+  font-size: 15px;
+}
+
+.ask-sign-in .link {
+  text-decoration: none;
+  color: #00AAFF
+}
+
+.ask-sign-in .link:active {
+  text-decoration: none;
+  color: #8c65e9
 }
 .createID #back-to-login {
   margin: 10px 0px 10px 140px;

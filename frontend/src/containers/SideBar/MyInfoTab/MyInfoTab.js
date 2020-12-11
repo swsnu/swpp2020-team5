@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions/actionTypes';
 import * as actionCreators from '../../../store/actions/index';
-import welcomeImage from '../../../images/that_bonobono.jpg';
 import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
 

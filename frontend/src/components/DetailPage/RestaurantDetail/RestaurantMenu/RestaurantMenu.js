@@ -10,7 +10,7 @@ class RestaurantMenu extends Component {
           {name}
         </div>
         <div className="menu-price">
-          {price}
+          {price === null ? "(정보없음)" : price}
         </div>
         <div className="menu-line"/>
       </div>

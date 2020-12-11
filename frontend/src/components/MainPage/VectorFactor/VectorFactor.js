@@ -7,7 +7,9 @@ class VectorFactor extends Component {
     const width = ((5 - this.props.weight) * 20).toString().concat('%');
     return (
       <div className="restaurant-factor">
-        {this.props.factor}
+        <div className="factor-name">
+          {this.props.factor}
+        </div>
         <div className="factor-bar">
           <p className="factor-weight">
             {this.props.weight.toFixed(2)}
