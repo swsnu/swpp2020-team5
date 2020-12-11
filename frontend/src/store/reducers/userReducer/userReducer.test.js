@@ -50,6 +50,8 @@ const stubInitialState = {
   preferenceVector: null,
   foodCategory: null,
   searchLocation: null,
+  isGetUserCalled: false,
+  checkUserStatus: 'NotYet',
 };
 
 describe('user reducer', () => {
@@ -60,6 +62,8 @@ describe('user reducer', () => {
       preferenceVector: null,
       foodCategory: null,
       searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
     });
   });
 
@@ -73,6 +77,8 @@ describe('user reducer', () => {
       preferenceVector: null,
       foodCategory: null,
       searchLocation: null,
+      isGetUserCalled: true,
+      checkUserStatus: 'NotYet',
     });
   });
 
@@ -86,6 +92,8 @@ describe('user reducer', () => {
       preferenceVector: null,
       foodCategory: null,
       searchLocation: stubSearchLocation,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
     });
   });
 
@@ -99,6 +107,8 @@ describe('user reducer', () => {
       preferenceVector: null,
       foodCategory: null,
       searchLocation: stubSearchLocation,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
     });
   });
 
@@ -112,6 +122,8 @@ describe('user reducer', () => {
       preferenceVector: stubPreferenceVector,
       foodCategory: null,
       searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
     });
   });
 
@@ -125,6 +137,8 @@ describe('user reducer', () => {
       preferenceVector: stubPreferenceVector,
       foodCategory: null,
       searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
     });
   });
 
@@ -138,6 +152,8 @@ describe('user reducer', () => {
       preferenceVector: null,
       foodCategory: stubFoodCategory,
       searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
     });
   });
 
@@ -151,6 +167,65 @@ describe('user reducer', () => {
       preferenceVector: null,
       foodCategory: stubFoodCategory,
       searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
+    });
+  });
+
+  it('should change checkUserStatus properly', () => {
+    const newState = reducer(stubInitialState, {
+      type: actionTypes.CHECK_USER,
+      target: 'Exist',
+    });
+    expect(newState).toEqual({
+      selectedUser: null,
+      preferenceVector: null,
+      foodCategory: null,
+      searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'Exist',
+    });
+  });
+
+  it('should reset checkUserStatus properly', () => {
+    const newState = reducer(stubInitialState, {
+      type: actionTypes.RESET_CHECK_USER,
+    });
+    expect(newState).toEqual({
+      selectedUser: null,
+      preferenceVector: null,
+      foodCategory: null,
+      searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
+    });
+  });
+
+  it('should call sign_out properly', () => {
+    const newState = reducer(stubInitialState, {
+      type: actionTypes.GET_SIGN_OUT,
+    });
+    expect(newState).toEqual({
+      selectedUser: null,
+      preferenceVector: null,
+      foodCategory: null,
+      searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
+    });
+  });
+
+  it('should call sign_out properly', () => {
+    const newState = reducer(stubInitialState, {
+      type: actionTypes.POST_SIGN_IN,
+    });
+    expect(newState).toEqual({
+      selectedUser: null,
+      preferenceVector: null,
+      foodCategory: null,
+      searchLocation: null,
+      isGetUserCalled: false,
+      checkUserStatus: 'NotYet',
     });
   });
 
