@@ -289,5 +289,5 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating, review_cnt):
     review_cnt_truncated = MAX_REVIEW_COUNT \
                             if review_cnt > MAX_REVIEW_COUNT \
                             else review_cnt
-    return scale_rating(avg_rating 
-                    + scale * diff * math.log10(review_cnt_truncated))
+    return scale_rating(avg_rating + scale * diff \
+                    * math.log10(review_cnt_truncated/MAX_REVIEW_COUNT))
