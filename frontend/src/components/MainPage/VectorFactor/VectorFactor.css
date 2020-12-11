@@ -10,6 +10,7 @@
 }
 .factor-bar {
   text-indent: 8px;
+  font-size: 100%;
   height: 80%;
   width: calc(100% - 140px);
   margin-right: 40px;

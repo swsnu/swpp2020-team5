@@ -16,17 +16,29 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 import math
 # preferencVector
-scale = 1
+scale = 3
 pivot = 1.5
+
+MIN_RAW_RATING = -10
+MAX_RAW_RATING = 20
+
+MAX_CUSTOMIZED_RATING = 5
+#MIN_CUSTOMIZED_RATING = 0
+
+MAX_REVIEW_COUNT = 1000
+
+
 
 def searched_restaurants(request, word=''):
     '''
     when user searchs restaurant
     '''
+    debug_min = -500
     if request.method == 'GET':
         if request.user.is_authenticated:
             author = Profile.objects.get(user=request.user)
             author_pref_vec = author.preference_vector
+            author_food_category = author.food_category
             author_attr_list = get_preference_attributes(author_pref_vec)
             author_pref_dict = {}
             for attr in author_attr_list:
@@ -44,6 +56,8 @@ def searched_restaurants(request, word=''):
                 res_loc = (restaurant.location.y, restaurant.location.x)
                 # print(haversine(cur, res_loc))
                 if haversine(cur, res_loc) >= 10:
+                    continue
+                if not author_food_category[restaurant.food_category]:
                     continue
                 response_dict = {}
                 review_cnt = Review.objects.filter(restaurant = restaurant).count() + 2
@@ -66,14 +80,15 @@ def searched_restaurants(request, word=''):
                     sorted_dict[res[i][0]] = res[i][1]
                     i += 1
                 response_dict['preferenceVector'] = sorted_dict
-                response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict,restaurant.avg_rating )
-                response_dict['rate-review'] = response_dict['rate'] * math.log2(review_cnt)
-                #print(response_dict['title'])
-                #print('rate', response_dict['rate'])
-                #print('ranking',response_dict['rate-review'])
+                response_dict['rate'] = get_customized_rating(restaurant_pref_dict,\
+                                    author_pref_dict, restaurant.avg_rating, review_cnt)
+                if debug_min < response_dict['rate']:
+                   debug_min = response_dict['rate'];
+            
                 response_list.append(response_dict)
             #response list sorted by rate
-            result_list = sorted(response_list, key = lambda x: x['rate-review'], reverse= True)
+            result_list = sorted(response_list, key = lambda x: x['rate'], reverse= True)
+            print('min ', debug_min)
             return JsonResponse(result_list, safe=False, status = 200)
         return HttpResponse(status = 401)
     return HttpResponseNotAllowed(['GET'])
@@ -95,6 +110,7 @@ def restaurant_detail(request,restaurant_id):
             for attr in author_attr_list:
                 author_pref_dict[attr] = author_pref_vec[attr]
             restaurant_pref_vec = restaurant.preference_vector
+            review_cnt = Review.objects.filter(restaurant = restaurant).count() + 2
             restaurant_attr_list = get_preference_attributes(restaurant_pref_vec)
             restaurant_pref_dict = {}
             for attr in restaurant_attr_list:
@@ -103,9 +119,16 @@ def restaurant_detail(request,restaurant_id):
             response_dict['id'] = restaurant.id
             response_dict['name'] = restaurant.name
             response_dict['category'] = restaurant.food_category
-            response_dict['rate'] = get_customized_rating(restaurant_pref_dict, author_pref_dict, restaurant.avg_rating )
-            response_dict['difference'] = response_dict['rate'] - restaurant.avg_rating
-            response_dict['img_url_list'] = restaurant.thumbnail
+            response_dict['rate'] = get_customized_rating(restaurant_pref_dict,
+                    author_pref_dict, restaurant.avg_rating, review_cnt)
+            response_dict['difference'] = response_dict['rate'] \
+                                            - scale_rating(restaurant.avg_rating)
+            if len(restaurant.thumbnail) != 0:
+                response_dict['img_url'] = restaurant.thumbnail[0]
+                response_dict['img_url_list'] = restaurant.thumbnail
+            else: 
+                response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
+                response_dict['img_url_list'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
             response_dict['menu'] = restaurant.menu
             response_dict['time'] = restaurant.openTime
             response_dict['keywords'] = restaurant.keyword
@@ -240,16 +263,28 @@ def get_preference_attributes(pref_vec):
             new_attr_list.append(attr)
     return new_attr_list
 
-def get_customized_rating(restaurant_pref, user_pref, avg_rating):
+def scale_rating(raw_rating):
+    if raw_rating < MIN_RAW_RATING:
+        return 0
+    if raw_rating > MAX_RAW_RATING:
+        return MAX_CUSTOMIZED_RATING
+    return round((raw_rating - MIN_RAW_RATING) * MAX_CUSTOMIZED_RATING  \
+                                        / (MAX_RAW_RATING-MIN_RAW_RATING), 2)
+
+def get_customized_rating(restaurant_pref, user_pref, avg_rating, review_cnt):
     '''
     get customized rating
     '''
     diff = 0
     for restaurant_factor in restaurant_pref:
+        if restaurant_pref[restaurant_factor] == 0 :
+            continue
         for user_factor in user_pref:
-            if restaurant_pref[restaurant_factor] == 0 :
-                continue
             similarity = cos_sim_word(user_factor, restaurant_factor)
             diff += similarity * (pivot -
                     abs(restaurant_pref[restaurant_factor] - user_pref[user_factor]))
-    return round(avg_rating + scale * diff,2)
+    review_cnt_truncated = MAX_REVIEW_COUNT \
+                            if review_cnt > MAX_REVIEW_COUNT \
+                            else review_cnt
+    return scale_rating(avg_rating + scale * diff \
+                    * math.log10(review_cnt_truncated)/math.log10(MAX_REVIEW_COUNT))
