@@ -15,12 +15,8 @@ export const getMyReviews = (restaurantID) => (dispatch) => axios
   .then(res => 
     dispatch(getMyReviews_(res.data))
   )
-  .catch(err => {
-    if (err.response == null) {
-      return alert('getMyReviews Error')
-    }
-    return alert('getMyReviews Error'+err.response.status)
-  }
+  .catch(err => 
+    alert('getMyReviews Error'+err.response.status)
   )
 const getOtherReviews_ = (reviews) => ({
   type: actionTypes.GET_OTHER_REVIEWS,
