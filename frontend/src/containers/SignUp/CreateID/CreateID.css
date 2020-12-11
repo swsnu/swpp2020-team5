@@ -76,3 +76,6 @@
   text-decoration: none;
   color: #8c65e9
 }
+.createID #back-to-login {
+  margin: 10px 0px 10px 140px;
+}

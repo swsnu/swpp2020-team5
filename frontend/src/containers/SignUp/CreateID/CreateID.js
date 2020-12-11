@@ -14,6 +14,8 @@ const backgroundStyle = {
   backgroundImage: `url(${Background})`,
 };
 
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 class CreateID extends Component {
   constructor(props) {
     super(props);
@@ -65,9 +67,11 @@ class CreateID extends Component {
 
   onChangeButtonHandler() {
     const { userInfo } = this.state;
-    if (userInfo.username === null || userInfo.password === null
-            || userInfo.email === null) return true;
-    if (userInfo.password === this.state.verifyPassword) return false;
+    if (userInfo.username && userInfo.password 
+        && emailRegex.test(userInfo.email)
+        && userInfo.password 
+        && (userInfo.password === this.state.verifyPassword)) return false;
+
     return true;
   }
 
@@ -81,9 +85,14 @@ class CreateID extends Component {
     // );
     let isverified;
     if (userInfo.password === null
+        || userInfo.password === ""
         || userInfo.password !== this.state.verifyPassword) {
       isverified = 'Password not verified';
     } else isverified = 'Ok';
+
+    let validEmail = emailRegex.test(this.state.userInfo.email) ? 
+                      '' : 'Invalid form!';
+
     return (
 
     // <div className='createID' style={ backgroundStyle} >
@@ -115,6 +124,7 @@ class CreateID extends Component {
               this.setState({ userInfo: { ...userInfo, email: ev.target.value } });
             }}
           />
+          {this.state.userInfo.email === null ? '' : validEmail}
 
           <div className="box-text">비밀번호</div>
           <input
@@ -134,7 +144,7 @@ class CreateID extends Component {
               this.setState({ verifyPassword: ev.target.value });
             }}
           />
-          <p id="verified">{isverified}</p>
+          {this.state.userInfo.password === null ? '' : isverified}
 
           <button
             id="sign-up-button"
