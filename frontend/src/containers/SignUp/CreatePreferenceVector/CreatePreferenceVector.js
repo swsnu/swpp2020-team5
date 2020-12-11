@@ -45,10 +45,6 @@ class CreatePreferenceVector extends Component {
     });
     this.props.history.push('/');
   }
-  onChangeValue(event) {
-        console.log(event.target.value);
-      
-  }
 
   // image selection is not complete
   render() {
