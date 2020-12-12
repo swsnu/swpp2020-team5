@@ -22,7 +22,7 @@ class OtherReview extends Component {
   render() {
     let contentDisplay = this.props.content;
 
-    if (contentDisplay.length > 10 && this.state.isSummary) {
+    if (contentDisplay.length > 50 && this.state.isSummary) {
       contentDisplay = contentDisplay.substring(0, 50).concat('...');
     }
 

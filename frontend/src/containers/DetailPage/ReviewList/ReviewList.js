@@ -97,7 +97,7 @@ class ReviewList extends Component {
 
     return (
       <div className="ReviewList">
-        <Tabs selectedIndex={this.state.tab_index} onSelect={this.onClickTabHandler}>
+        <Tabs id="review-tab" selectedIndex={this.state.tab_index} onSelect={this.onClickTabHandler}>
           <TabList>
             <Tab>네이버 리뷰</Tab>
             <Tab>카카오 리뷰</Tab>

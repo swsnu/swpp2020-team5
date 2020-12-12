@@ -10,20 +10,29 @@ describe('</OtherReview />', () => {
   });
 
   it('should open/close the content when clicked', () => {
-    const component = shallow(<OtherReview content="This must be summarized" />);
+    
+    const longContent = `This must be summarized. 
+    Because the length of this content is too~~~~~ too~~~~~ 
+    too~~~~~too~~~~~too~~~~~too~~~~~too~~~~~too~~~~~too~~~~~
+    too~~~~~too~~~~~too~~~~long to ibe fit`;
+
+    const component = shallow(<OtherReview 
+      content={longContent}/>);
     const wrapper = component.find('.other-review-content');
 
     // initially rendered as summary
-    expect(wrapper.text()).toBe('This must ...');
+    expect(wrapper.text()).toBe(`This must be summarized. 
+    Because the length o...`);
 
     // should open the content.
     wrapper.simulate('click');
     const wrapper1 = component.find('.other-review-content');
-    expect(wrapper1.text()).toBe('This must be summarized');
+    expect(wrapper1.text()).toBe(longContent);
 
     // should close the content
     wrapper.simulate('click');
     const wrapper2 = component.find('.other-review-content');
-    expect(wrapper2.text()).toBe('This must ...');
+    expect(wrapper2.text()).toBe(`This must be summarized. 
+    Because the length o...`);
   });
 });

@@ -8,6 +8,9 @@ import * as reviewActionCreator from '../../../store/actions/reviewActions/revie
 import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
 import OtherReview from '../../../components/DetailPage/OtherReview/OtherReview';
+import {
+  Tab, Tabs, TabList, TabPanel,
+} from 'react-tabs';
 
 const stubInitialState = {
   user: {
@@ -41,6 +44,16 @@ const stubInitialState = {
           date: '',
           authorName: '사용자4',
         },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
       ],
       kakao: [
         {
@@ -49,6 +62,21 @@ const stubInitialState = {
           date: '',
           authorName: '사용자2',
         },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
       ],
       atm: [
         {
@@ -63,6 +91,16 @@ const stubInitialState = {
           date: '',
           authorName: '사용자3',
         },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
       ],
     },
   },
@@ -78,13 +116,11 @@ describe('<ReviewList /', () => {
     reviewList = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
-          <ReviewList />
+          <ReviewList otherReviews={stubInitialState.review.otherReviews} />
         </ConnectedRouter>
       </Provider>
     );
 
-    spyGetReviews = jest.spyOn(reviewActionCreator, 'getOtherReviews')
-      .mockImplementation(() => (dispatch) => {});
   });
 
   afterEach(() => { jest.clearAllMocks(); });
@@ -96,14 +132,29 @@ describe('<ReviewList /', () => {
     expect(wrapper.length).toBe(1);
   });
 
-  it('should call getReviews', () => {
-    const component = mount(reviewList);
-    expect(spyGetReviews).toBeCalledTimes(1);
-  });
 
   it('should handle Other Reviews', () => {
     const component = mount(reviewList);
     const wrapper = component.find(OtherReview);
-    expect(wrapper.length).toBe(3);
+    expect(wrapper.length).toBe(10);
   });
+
+  it('should handle show more', () => {
+    const component = mount(reviewList);
+    const wrapper = component.find('#show-more');
+    wrapper.simulate('click');
+    const tempInstance = component.find(ReviewList.WrappedComponent).instance();
+    expect(tempInstance.state.curr_review_cnt).toBe(20);
+  });
+
+  it('should handle tab change', () => {
+    const component = mount(reviewList);
+    const wrapper = component.find(Tab).at(1).simulate('click');
+    const tempInstance = component.find(ReviewList.WrappedComponent).instance();
+    expect(tempInstance.state.curr_review_cnt).toBe(10);
+    const showMoreButton = component.find('#show-more');
+    expect(showMoreButton.length).toBe(1);
+
+  });
+
 });
