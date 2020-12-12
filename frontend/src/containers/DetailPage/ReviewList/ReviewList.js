@@ -44,54 +44,27 @@ class ReviewList extends Component {
     // TODO other review 분류작업? + <OtherReview> 로 렌더링
     const { currReviewCnt } = this.state;
     const { otherReviews } = this.props;
-    let showCnt = 0;
-    const naverReview = otherReviews.naver.map((review) => {
-      if (showCnt < currReviewCnt) {
-        showCnt += 1;
-        return (
+    function loadReview(reviewList) {
+      const loadedList = [];
+      for (let i = 0; i < Math.min(currReviewCnt, reviewList.length); i += 1) {
+        const review = reviewList[i];
+        loadedList.push(
           <OtherReview
             content={review.content}
             author={review.author_name}
             date={review.date}
             rating={review.rating}
-          />
+          />,
         );
       }
-    });
-    showCnt = 0;
-
-    const kakaoReview = otherReviews.kakao.map((review) => {
-      if (showCnt < currReviewCnt) {
-        showCnt += 1;
-        return (
-          <OtherReview
-            content={review.content}
-            author={review.author_name}
-            date={review.date}
-            rating={review.rating}
-          />
-        );
-      }
-    });
-
-    showCnt = 0;
-
-    const atmReview = otherReviews.atm.map((review) => {
-      if (showCnt < currReviewCnt) {
-        showCnt += 1;
-        return (
-          <OtherReview
-            content={review.content}
-            author={review.author_name}
-            date={review.date}
-            rating={review.rating}
-          />
-        );
-      }
-    });
-    const naverCnt = naverReview.length;
-    const kakaoCnt = kakaoReview.length;
-    const atmCnt = atmReview.length;
+      return (loadedList);
+    }
+    const naverReview = loadReview(otherReviews.naver);
+    const kakaoReview = loadReview(otherReviews.kakao);
+    const atmReview = loadReview(otherReviews.atm);
+    const naverCnt = otherReviews.naver.length;
+    const kakaoCnt = otherReviews.kakao.length;
+    const atmCnt = otherReviews.atm.length;
 
     const showMoreButton = (
       <button id="show-more" onClick={this.onClickShowMoreHandler}>Show more</button>
