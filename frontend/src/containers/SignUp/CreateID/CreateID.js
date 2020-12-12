@@ -173,5 +173,5 @@ const mapDispatchToProps = (dispatch) => ({
   onCheckUser: (username, email) => dispatch(actionCreators.checkUser(username, email)),
   onResetCheckUser: () => dispatch(actionCreators.resetCheckUser()),
 });
-
+//alertWith()
 export default connect(mapStateToProps, mapDispatchToProps)((withRouter(CreateID)));
