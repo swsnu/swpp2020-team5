@@ -23,7 +23,7 @@ class ReviewTestCase(TestCase):
         authorB = Author(user=userB, nickname='userB')
         authorB.save()
 
-        mock_location = Location(x=0, y=0, address_name='')
+        mock_location = Location(x=127, y=36, address_name='mock_address')
         mock_location.save()
         mock_prevec = PreferenceVector(
             매운=0,
@@ -124,7 +124,7 @@ class ReviewTestCase(TestCase):
         response = client.get('/atm/restaurant/detail/1/other-review/')
         self.assertEqual(response.status_code, 401)
 
-        location_info = {'x': 25, 'y': 37}
+        location_info = {'x': 127, 'y': 36}
         ### Login successfully ###
         request_body = {
             "email": 'testerA@tester.com',
@@ -167,7 +167,7 @@ class ReviewTestCase(TestCase):
         response = client.post('/atm/sign-in/',
                                json.dumps({'email': 'testerA@tester.com',
                                            'password': '123123',
-                                           'currLoc':{'x': 30, 'y': 30}
+                                           'currLoc':{'x': 127, 'y': 36}
                                            }),
                                content_type='application/json')
         self.assertEqual(response.status_code, 204)
@@ -223,7 +223,7 @@ class ReviewTestCase(TestCase):
         response = client.post('/atm/sign-in/',
                                json.dumps({'email': 'testerA@tester.com',
                                            'password': '123123',
-                                           'currLoc': {'x': 30, 'y': 30}
+                                           'currLoc': {'x': 127, 'y': 36}
                                            }),
                                content_type='application/json')
         self.assertEqual(response.status_code, 204)
