@@ -40,27 +40,34 @@ class ReviewTestCase(TestCase):
             혼밥하기좋은=0,
             불친절한=0)
         mock_prevec.save()
-        food_category= FoodCategory(
+        food_category = FoodCategory(
             한식=True,
-            일식= True,
-            중식= False,
-            양식= True,
-            분식= True,
-            술집= True,
-            카페= True,
-            치킨= True,
-            간식= True,
-            퓨전요리= True,
-            아시아음식= True,
-            패스트푸드= True
+            일식=True,
+            중식=False,
+            양식=True,
+            분식=True,
+            술집=True,
+            카페=True,
+            치킨=True,
+            간식=True,
+            퓨전요리=True,
+            아시아음식=True,
+            패스트푸드=True
         )
         food_category.save()
- 
-        profileA = Profile(user=userA, search_location=mock_location, food_category=food_category, preference_vector=mock_prevec);
-        profileA.save()
-        profileB = Profile(user=userB, search_location=mock_location, food_category=food_category, preference_vector=mock_prevec)
-        profileB.save()
 
+        profileA = Profile(
+            user=userA,
+            search_location=mock_location,
+            food_category=food_category,
+            preference_vector=mock_prevec)
+        profileA.save()
+        profileB = Profile(
+            user=userB,
+            search_location=mock_location,
+            food_category=food_category,
+            preference_vector=mock_prevec)
+        profileB.save()
 
         restaurantA = Restaurant(
             name='restaurantA',
@@ -167,7 +174,7 @@ class ReviewTestCase(TestCase):
         response = client.post('/atm/sign-in/',
                                json.dumps({'email': 'testerA@tester.com',
                                            'password': '123123',
-                                           'currLoc':{'x': 127, 'y': 36}
+                                           'currLoc': {'x': 127, 'y': 36}
                                            }),
                                content_type='application/json')
         self.assertEqual(response.status_code, 204)

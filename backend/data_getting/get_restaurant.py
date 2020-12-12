@@ -7,18 +7,17 @@ total_count_dict = {}
 
 max_pref_value = 5.0
 
-debug_sum=0
-debug_max=0
-debug_min=0
-debug_count=0
-debug_10=[0,0,0,0,0,0]
+debug_sum = 0
+debug_max = 0
+debug_min = 0
+debug_count = 0
+debug_10 = [0, 0, 0, 0, 0, 0]
 
 
-
-with open('./ATM/embedding/word_to_pref.json',"r", encoding="utf-8") as json_file:
+with open('./ATM/embedding/word_to_pref.json', "r", encoding="utf-8") as json_file:
     pref_dict = json.load(json_file)
-    
-with open('./ATM/embedding/word_to_frequency.json',"r", encoding="utf-8") as json_file:
+
+with open('./ATM/embedding/word_to_frequency.json', "r", encoding="utf-8") as json_file:
     total_count_dict = json.load(json_file)
 
 total_count = 0
@@ -52,12 +51,12 @@ with open('./crawling/restaurants.json') as json_file:
 
 
 no_res = 0
-with open('./crawling/reviews_tokenized.json',"r", encoding="utf-8") as json_file:
+with open('./crawling/reviews_tokenized.json', "r", encoding="utf-8") as json_file:
     keywords = json.load(json_file)
     for res in keywords:
         try:
             new_res = Restaurant.objects.get(id=res['Id'])
-        except:
+        except BaseException:
             no_res += 1
             continue
 
@@ -72,22 +71,22 @@ with open('./crawling/reviews_tokenized.json',"r", encoding="utf-8") as json_fil
                 for_pref_vec[pref_dict[key]] = freq
             else:
                 for_pref_vec[pref_dict[key]] += freq
-        
+
         key_weight_sorted = sorted(key_weight_dict.items(), reverse=True,
-            key=lambda item: item[1])
+                                   key=lambda item: item[1])
         if len(key_weight_sorted) > 30:
             key_weight_sorted = key_weight_sorted[:30]
-        new_res.keyword = { item[0]:item[1] for item in key_weight_sorted }
+        new_res.keyword = {item[0]: item[1] for item in key_weight_sorted}
         pref = PreferenceVector()
         for key in for_pref_vec.keys():
             pref_value = for_pref_vec[key] / our_key_total * total_count / \
-                        total_count_dict[key]
+                total_count_dict[key]
             debug_count += 1
-            if pref_value>debug_max:
+            if pref_value > debug_max:
                 debug_max = pref_value
-            if pref_value<debug_min:
+            if pref_value < debug_min:
                 debug_min = pref_value
-            debug_10[int(pref_value/10)] += 1
+            debug_10[int(pref_value / 10)] += 1
             debug_sum += pref_value
 
             # 0~10 is only used. This is 90% of total data
@@ -100,12 +99,12 @@ with open('./crawling/reviews_tokenized.json',"r", encoding="utf-8") as json_fil
         new_res.save()
 
 print('keyword id not matched: ', no_res)
-print('mean: ',debug_sum/debug_count, 'max: ', debug_max, \
-    'min: ',debug_min)
+print('mean: ', debug_sum / debug_count, 'max: ', debug_max,
+      'min: ', debug_min)
 for i in range(len(debug_10)):
     print(i, debug_10[i])
 
-        
+
 """
 with open("./ATM/embedding/word_to_frequency.json","w") as json_file:
     json.dump(total_count_dict, json_file, ensure_ascii=False, indent="\t")

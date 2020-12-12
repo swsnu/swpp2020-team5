@@ -21,11 +21,12 @@ def me_info(request):
     else:
         return HttpResponseNotAllowed(['GET'])
 
+
 @ensure_csrf_cookie
 def check(request):
     if request.method == 'GET':
-        username = request.GET.get('username','')
-        email = request.GET.get('email','')
+        username = request.GET.get('username', '')
+        email = request.GET.get('email', '')
         try:
             User.objects.get(Q(username=username) | Q(email__contains=email))
         except User.DoesNotExist:
@@ -33,6 +34,7 @@ def check(request):
         return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['GET'])
+
 
 @ensure_csrf_cookie
 def preference_vector(request):

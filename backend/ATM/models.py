@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 #from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
+
+
 class FoodCategory(models.Model):
     """
     Below function is for using model like this.
@@ -15,7 +17,6 @@ class FoodCategory(models.Model):
 
     def __setitem__(self, key, value):
         return setattr(self, key, value)
-
 
     한식 = models.BooleanField(default=True)
     일식 = models.BooleanField(default=True)
@@ -71,7 +72,6 @@ class PreferenceVector(models.Model):
     불친절한 = models.FloatField(default=0.0)
 
 
-
 class Profile(models.Model):
     # user include email and password
     user = models.OneToOneField(
@@ -114,23 +114,25 @@ class Restaurant(models.Model):
         null=True,
     )
     food_category = models.CharField(max_length=100)
-    menu = models.JSONField()# dict{name(str): price(int)}
-    openTime = models.JSONField() # dict{label(str): time(str)}
-    thumbnail = models.JSONField() # list[thumbnail_link(str)]
-    keyword = models.JSONField(null=True) # dict{keyword(str): weight(int)}
+    menu = models.JSONField()  # dict{name(str): price(int)}
+    openTime = models.JSONField()  # dict{label(str): time(str)}
+    thumbnail = models.JSONField()  # list[thumbnail_link(str)]
+    keyword = models.JSONField(null=True)  # dict{keyword(str): weight(int)}
     kakao_link = models.URLField()
     naver_link = models.URLField()
     map_link = models.URLField()
     search_string = models.CharField(max_length=200)
 
 # This can be ATM or other-sites' user so user can be null.
+
+
 class Author(models.Model):
     user = models.ForeignKey(
-            User,
-            on_delete=models.CASCADE,
-            related_name='author',
-            null=True,
-            )
+        User,
+        on_delete=models.CASCADE,
+        related_name='author',
+        null=True,
+    )
     nickname = models.CharField(max_length=100)
 
 

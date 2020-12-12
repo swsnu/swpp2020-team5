@@ -2,12 +2,13 @@ import json
 from datetime import datetime
 from json import JSONDecodeError
 from django.http import (
-        HttpResponse, HttpResponseNotAllowed, JsonResponse,
-        HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
-        )
+    HttpResponse, HttpResponseNotAllowed, JsonResponse,
+    HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
+)
 from django.views.decorators.csrf import ensure_csrf_cookie
 from ATM.models import Review, Restaurant, Profile
 from .utils import prefvec_update
+
 
 @ensure_csrf_cookie
 def edit_my_review(request, review_id):
@@ -34,7 +35,7 @@ def edit_my_review(request, review_id):
                 'content': target_review.content,
                 'rating': target_review.rating,
                 'date': target_review.date.strftime('%Y/%m/%d')
-                }
+            }
             return HttpResponse(
                 content=json.dumps(response_dict),
                 status=200)  # default status is 200

@@ -14,7 +14,7 @@ ignore=
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
-ignore-patterns=
+ignore-patterns=get*.py
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
@@ -22,6 +22,7 @@ init-hook=
     sys.path.append(os.getcwd());
     from pylint_ignore import PylintIgnorePaths;
     PylintIgnorePaths('ATM/migrations')
+    PylintIgnorePaths('data_getting')
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use.

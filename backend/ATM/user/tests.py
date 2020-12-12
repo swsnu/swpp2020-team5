@@ -202,18 +202,21 @@ class UserTestCase(TestCase):
                                HTTP_X_CSRFTOKEN=csrftoken,
                                content_type='application/json')
         self.assertEqual(204, response.status_code)
-        response = client.get('/atm/user/check/?username=sug&email=sug@sug.com')
+        response = client.get(
+            '/atm/user/check/?username=sug&email=sug@sug.com')
         self.assertEqual(401, response.status_code)
         response = client.get('/atm/user/check/?username=sug&email=wrong')
         self.assertEqual(401, response.status_code)
-        response = client.get('/atm/user/check/?username=wrong&email=sug@sug.com')
+        response = client.get(
+            '/atm/user/check/?username=wrong&email=sug@sug.com')
         self.assertEqual(401, response.status_code)
         response = client.get('/atm/user/check/?username=wrong&email=wrong')
         self.assertEqual(204, response.status_code)
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/atm/user/check/?username=wrong&email=wrong', {},
-                               HTTP_X_CSRFTOKEN=csrftoken,
-                               content_type='application/json')
+        response = client.post(
+            '/atm/user/check/?username=wrong&email=wrong',
+            {},
+            HTTP_X_CSRFTOKEN=csrftoken,
+            content_type='application/json')
         self.assertEqual(405, response.status_code)
-
