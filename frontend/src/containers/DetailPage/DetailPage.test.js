@@ -44,25 +44,10 @@ jest.mock('./ReviewList/ReviewList', () => jest.fn(() => (
 
 describe('<DetailPage />', () => {
   const LOAD_FAILURE_SRC = 'LOAD_FAILURE_SRC';
-  const LOAD_SUCCESS_SRC = 'LOAD_SUCCESS_SRC';
-  let detailpage;
   let stubInitialState;
   let mockStore;
 
   beforeEach(() => {
-    detailpage = (
-      <Provider store={mockStore}>
-        <ConnectedRouter history={history}>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={() => <DetailPage match={{ params: { id: '1' }, isExact: true }} />}
-            />
-          </Switch>
-        </ConnectedRouter>
-      </Provider>
-    );
     stubInitialState = {
       restaurant: {
         selectedRestaurant: {
@@ -77,7 +62,7 @@ describe('<DetailPage />', () => {
             '영업 시간': {
               일요일: '9:00-21:00',
             },
-            휴무일: ['우리우리설날'],
+            휴무일: [],
           },
           keywords: ['맵다', '짜다', '분위기가 좋다'],
           category: ['베트남음식'],
@@ -121,6 +106,21 @@ describe('<DetailPage />', () => {
     const component = mount(otherdetailpage);
   });
   it('should render properly', () => {
+    const testState = { ...stubInitialState };
+    const testMockStore = getMockStore(testState);
+    const detailpage = (
+      <Provider store={testMockStore}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() => <DetailPage match={{ params: { id: '1' }, isExact: true }} />}
+            />
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
+    );
     const component = mount(detailpage);
     const wrapper = component.find('.spySideBar');
     expect(wrapper.length).toBe(1);
@@ -131,8 +131,10 @@ describe('<DetailPage />', () => {
     //   expect(spygetRestaurantDetail).toBeCalledTimes(1);
   });
   it('should render properly when difference is positive', () => {
+    const testState = { ...stubInitialState };
+    const testMockStore = getMockStore(testState);
     const otherdetailpage = (
-      <Provider store={mockStore}>
+      <Provider store={testMockStore}>
         <ConnectedRouter history={history}>
           <Switch>
             <Route
@@ -149,7 +151,8 @@ describe('<DetailPage />', () => {
     expect(wrapper.length).toBe(1);
   });
   it('should render properly when difference is negative', () => {
-    stubInitialState.restaurant.selectedRestaurant.difference = -0.5;
+    const testState = { ...stubInitialState };
+    testState.restaurant.selectedRestaurant.difference = -0.5;
     const testMockStore = getMockStore(stubInitialState);
     const otherdetailpage = (
       <Provider store={testMockStore}>
@@ -171,6 +174,7 @@ describe('<DetailPage />', () => {
   it('should render properly when difference is 0', () => {
     const testState = { ...stubInitialState };
     testState.restaurant.selectedRestaurant.difference = 0;
+    testState.restaurant.selectedRestaurant.time['휴무일'] = ['우리우리설날'];
     const testMockStore = getMockStore(testState);
     const otherdetailpage = (
       <Provider store={testMockStore}>
@@ -223,8 +227,9 @@ describe('<DetailPage />', () => {
     image.prop('onError').call(null, event);
   });
   it('should show NoImage', () => {
-    stubInitialState.restaurant.selectedRestaurant.img_url_list = [];
-    const testMockStore = getMockStore(stubInitialState);
+    const testState = { ...stubInitialState };
+    testState.restaurant.selectedRestaurant.img_url_list = [];
+    const testMockStore = getMockStore(testState);
     const otherdetailpage = (
       <Provider store={testMockStore}>
         <ConnectedRouter history={history}>
