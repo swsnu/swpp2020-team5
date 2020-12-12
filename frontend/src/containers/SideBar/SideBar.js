@@ -18,7 +18,7 @@ import PreferenceVectorTab from '../../components/SideBar/PreferenceVectorTab/Pr
 import './SideBar.css';
 
 function isEmptyObject(param) {
-    return Object.keys(param).length === 0 && param.constructor === Object;
+  return Object.keys(param).length === 0 && param.constructor === Object;
 }
 
 class SideBar extends Component {
@@ -36,6 +36,7 @@ class SideBar extends Component {
       initPreferenceVector: false,
     };
   }
+
   componentDidMount() {
     this.props.onGetSearchLocation();
     this.props.onGetFoodCategory();
@@ -48,7 +49,7 @@ class SideBar extends Component {
         return {
           searchLocation: { ...nextProps.searchLocation },
           initSearchLocation: true,
-        }
+        };
       }
     }
     if (prevState.initFoodCategory === false) {
@@ -56,12 +57,12 @@ class SideBar extends Component {
         let isAllTrue = true;
         Object.keys(prevState.foodCategory).forEach((category) => {
           isAllTrue = isAllTrue && nextProps.foodCategory[category];
-        })
+        });
         return {
           foodCategory: { ...nextProps.foodCategory },
           initFoodCategory: true,
           selectAllCategory: isAllTrue,
-        }
+        };
       }
     }
     if (prevState.initPreferenceVector === false) {
@@ -69,7 +70,7 @@ class SideBar extends Component {
         return {
           preferenceVector: { ...nextProps.preferenceVector },
           initPreferenceVector: true,
-        }
+        };
       }
     }
   }
@@ -79,21 +80,21 @@ class SideBar extends Component {
     if (category === 'total') {
       if (newState.selectAllCategory === false) {
         Object.keys(this.state.foodCategory).forEach((category) => {
-          newState.foodCategory[category] = true
+          newState.foodCategory[category] = true;
         });
-        newState['selectAllCategory'] = true
+        newState.selectAllCategory = true;
       } else {
         Object.keys(this.state.foodCategory).forEach((category) => {
-          newState.foodCategory[category] = false
+          newState.foodCategory[category] = false;
         });
-        newState['selectAllCategory'] = false
+        newState.selectAllCategory = false;
       }
     } else {
       if (newState.selectAllCategory) {
         Object.keys(this.state.foodCategory).forEach((category) => {
-          newState.foodCategory[category] = false
+          newState.foodCategory[category] = false;
         });
-        newState['selectAllCategory'] = false
+        newState.selectAllCategory = false;
       }
       newState.foodCategory[category] = !this.state.foodCategory[category];
     }
@@ -101,13 +102,15 @@ class SideBar extends Component {
   }
 
   onChangeVectorHandler = (id, event) => {
-    const { preferenceVector} = this.state;
+    const { preferenceVector } = this.state;
     preferenceVector[id] = event.target.value;
     this.setState({ preferenceVector });
   }
 
   onSearchHandler = () => {
-    const { searchWord, searchLocation, foodCategory, preferenceVector } = this.state;
+    const {
+      searchWord, searchLocation, foodCategory, preferenceVector,
+    } = this.state;
     this.props.onEditSearchLocation(searchLocation);
     this.props.onEditFoodCategory(foodCategory);
     this.props.onEditPreferenceVector(preferenceVector);
@@ -131,34 +134,42 @@ class SideBar extends Component {
 
     switch (tabMode) {
       case 'MyInfo':
-        tab = <MyInfoTab 
-                id="my-info-tab" 
-                restaurantID={this.props.restaurantID} 
-              />;
+        tab = (
+          <MyInfoTab
+            id="my-info-tab"
+            restaurantID={this.props.restaurantID}
+          />
+        );
         break;
       case 'Location':
-        tab = <LocationTab 
-                id="location-tab" 
-                searchLocation={this.state.searchLocation}
-                onChangeLocation={(searchLocation) => this.setState({searchLocation})}
-              />;
+        tab = (
+          <LocationTab
+            id="location-tab"
+            searchLocation={this.state.searchLocation}
+            onChangeLocation={(searchLocation) => this.setState({ searchLocation })}
+          />
+        );
         break;
       case 'FoodCategory':
-        tab = <FoodCategoryTab 
-                id="food-category-tab"  
-                foodCategory={this.state.foodCategory}
-                postClickFoodCategoryHandler={
+        tab = (
+          <FoodCategoryTab
+            id="food-category-tab"
+            foodCategory={this.state.foodCategory}
+            postClickFoodCategoryHandler={
                   (category) => this.postClickFoodCategoryHandler(category)
                 }
-                selectAll={this.state.selectAllCategory}
-              />;
+            selectAll={this.state.selectAllCategory}
+          />
+        );
         break;
       case 'PreferenceVector':
-        tab = <PreferenceVectorTab 
-                id="preference-vector-tab"
-                preferenceVector={this.state.preferenceVector}
-                onChangeFactor={this.onChangeVectorHandler}
-              />;
+        tab = (
+          <PreferenceVectorTab
+            id="preference-vector-tab"
+            preferenceVector={this.state.preferenceVector}
+            onChangeFactor={this.onChangeVectorHandler}
+          />
+        );
         break;
       default:
         throw new Error('Invalid tabMode');
@@ -169,7 +180,7 @@ class SideBar extends Component {
           <img id="logo-button" src={logoImage} onClick={() => this.onClickLogoButtonHandler()} alt="logo" />
           <br />
           <form className="search-box" onSubmit={() => this.onSearchHandler()}>
-            <img id="search-icon" src={searchIcon} alt="search"/>
+            <img id="search-icon" src={searchIcon} alt="search" />
             <input
               id="search-input"
               type="text"
@@ -184,16 +195,16 @@ class SideBar extends Component {
           <br />
           <div className="tab-button-image-line">
             <div id="my-info-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('MyInfo')}>
-              <img id="user-icon" class="tab-icon" src={userIcon} alt="user"/>
+              <img id="user-icon" className="tab-icon" src={userIcon} alt="user" />
             </div>
             <div id="location-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('Location')}>
-              <img id="location-icon" class="tab-icon" src={locationIcon} alt="location"/>
+              <img id="location-icon" className="tab-icon" src={locationIcon} alt="location" />
             </div>
             <div id="food-category-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('FoodCategory')}>
-              <img id="filter-icon" class="tab-icon" src={filterIcon} alt="filter"/>
+              <img id="filter-icon" className="tab-icon" src={filterIcon} alt="filter" />
             </div>
             <div id="preference-vector-tab-image-button" className="tab-button" onClick={() => this.onClickTabButtonHandler('PreferenceVector')}>
-              <img id="slider-icon" class="tab-icon" src={sliderIcon} alt="slider"/>
+              <img id="slider-icon" className="tab-icon" src={sliderIcon} alt="slider" />
             </div>
           </div>
           <div className="tab-button-name-line">
@@ -215,7 +226,7 @@ class SideBar extends Component {
             >
               {tabMode === 'Location'
                 ? '위치'
-                : searchLocation.address_name.split(" ")[1]}
+                : searchLocation.address_name.split(' ')[1]}
             </div>
             <div
               id="food-category-tab-name-button"
@@ -244,19 +255,13 @@ class SideBar extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onEditSearchLocation: (location) => 
-    dispatch(actionCreators.editSearchLocation(location)),
-  onGetSearchLocation: () => 
-    dispatch(actionCreators.getSearchLocation()),
-  onEditFoodCategory: (foodCategory) => 
-    dispatch(actionCreators.editFoodCategory(foodCategory)),
-  onGetFoodCategory: () =>
-    dispatch(actionCreators.getFoodCategory()),
-  onEditPreferenceVector: (preferenceVector) => 
-    dispatch(actionCreators.editPreferenceVector(preferenceVector)),
-  onGetPreferenceVector: () =>
-    dispatch(actionCreators.getPreferenceVector()),
-})
+  onEditSearchLocation: (location) => dispatch(actionCreators.editSearchLocation(location)),
+  onGetSearchLocation: () => dispatch(actionCreators.getSearchLocation()),
+  onEditFoodCategory: (foodCategory) => dispatch(actionCreators.editFoodCategory(foodCategory)),
+  onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
+  onEditPreferenceVector: (preferenceVector) => dispatch(actionCreators.editPreferenceVector(preferenceVector)),
+  onGetPreferenceVector: () => dispatch(actionCreators.getPreferenceVector()),
+});
 
 const mapStateToProps = (state) => ({
   searchLocation: state.us.searchLocation,

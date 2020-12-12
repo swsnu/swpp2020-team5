@@ -26,23 +26,7 @@ const stubFoodCategory = {
   주점: false,
 };
 const stubSearchLocation = {
-  address: {
-    address_name: '서울 관악구',
-    b_code: '1162000000',
-    h_code: '1162000000',
-    main_address_no: '',
-    mountain_yn: 'N',
-    region_1depth_name: '서울',
-    region_2depth_name: '관악구',
-    region_3depth_h_name: '',
-    region_3depth_name: '',
-    sub_address_no: '',
-    x: '126.951561853868',
-    y: '37.4783683761333',
-  },
   address_name: '서울 관악구',
-  address_type: 'REGION',
-  road_address: null,
   x: '126.951561853868',
   y: '37.4783683761333',
 };
@@ -72,11 +56,66 @@ describe('actionCreators', () => {
       .mockImplementation((url) => new Promise((resolve, reject) => {
         reject(new Error('error'));
       }));
-    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.getUser()).then(() => {
-      expect(spyAlert).toHaveBeenCalledTimes(1);
+      const newState = store.getState();
+      expect(newState.us.selectedUser).toBe(null);
       done();
     });
+  });
+  it('checkUser should do correctly', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((username, email) => new Promise((resolve, reject) => {
+        const result = {
+          status: 201,
+        };
+        resolve(result);
+      }));
+    store.dispatch(actionCreators.checkUser('sug', 'sug_email')).then(() => {
+      expect(spy).toHaveBeenCalledTimes(1);
+      const newState = store.getState();
+      expect(newState.us.checkUserStatus).toBe('NotExist');
+      done();
+    });
+  });
+  it('checkUser should handler error 401', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((username, email) => new Promise((resolve, reject) => {
+        const result = {
+          response: {
+            status: 401,
+          },
+        };
+        reject(result);
+      }));
+    store.dispatch(actionCreators.checkUser('sug', 'sug_email')).then(() => {
+      expect(spy).toHaveBeenCalledTimes(1);
+      const newState = store.getState();
+      expect(newState.us.checkUserStatus).toBe('Exist');
+      done();
+    });
+  });
+  it('checkUser should handler error not 401', (done) => {
+    const spy = jest.spyOn(axios, 'get')
+      .mockImplementation((username, email) => new Promise((resolve, reject) => {
+        const result = {
+          response: {
+            status: 404,
+          },
+        };
+        reject(result);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.checkUser('sug', 'sug_email')).then(() => {
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      expect(spyAlert).toHaveBeenCalledWith('checkUser error');
+      done();
+    });
+  });
+  it('resetCheckUser should do correctly', () => {
+    store.dispatch(actionCreators.resetCheckUser());
+    const newState = store.getState();
+    expect(newState.us.checkUserStatus).toBe('NotYet');
   });
   it('signup should do correctly', (done) => {
     const spy = jest.spyOn(axios, 'post')
@@ -91,13 +130,32 @@ describe('actionCreators', () => {
       done();
     });
   });
-  it('signup should handle error correctly', (done) => {
+  it('signup should handle error correctly at 409', (done) => {
     const spy = jest.spyOn(axios, 'post')
       .mockImplementation((url, user) => new Promise((resolve, reject) => {
-        const result = {
-          status: 401,
+        const response = {
+          response: {
+            status: 409,
+          },
         };
-        reject(result);
+        reject(response);
+      }));
+    const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
+    store.dispatch(actionCreators.postSignUp(null)).then(() => {
+      expect(spyAlert).toHaveBeenCalledTimes(1);
+      expect(spyAlert).toHaveBeenCalledWith('이미 등록된 회원입니다!');
+      done();
+    });
+  });
+  it('signup should handle error correctly not at 409', (done) => {
+    const spy = jest.spyOn(axios, 'post')
+      .mockImplementation((url, user) => new Promise((resolve, reject) => {
+        const response = {
+          response: {
+            status: 401,
+          },
+        };
+        reject(response);
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
     store.dispatch(actionCreators.postSignUp(null)).then(() => {

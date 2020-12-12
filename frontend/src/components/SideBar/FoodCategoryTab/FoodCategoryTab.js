@@ -18,9 +18,9 @@ class FoodCategoryTab extends Component {
               ? 'checked' : 'unchecked'}
             onClick={() => this.props.postClickFoodCategoryHandler(category)}
           >
-          {category}
+            {category}
           </button>
-        </div>
+        </div>,
       );
       id += 1;
     });
@@ -34,12 +34,13 @@ class FoodCategoryTab extends Component {
             {categorylist}
           </div>
           <div className="category">
-            <button id="total-button"
+            <button
+              id="total-button"
               className={this.props.selectAll
                 ? 'checked' : 'unchecked'}
-                onClick={() => this.props.postClickFoodCategoryHandler('total')}
-                >
-              {'모두'}
+              onClick={() => this.props.postClickFoodCategoryHandler('total')}
+            >
+              모두
             </button>
           </div>
         </div>

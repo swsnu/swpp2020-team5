@@ -14,7 +14,7 @@ class VectorFactor extends Component {
           <p className="factor-weight">
             {this.props.weight.toFixed(2)}
           </p>
-          <div className="gauge" style={{width}}/>
+          <div className="gauge" style={{ width }} />
         </div>
       </div>
     );

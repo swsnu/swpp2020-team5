@@ -2,7 +2,7 @@ import { withRouter } from 'react-router';
 import { withAlert } from 'react-alert';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../../../store/actions/index'
+import * as actionCreators from '../../../store/actions/index';
 import CreatePreferenceVector from '../CreatePreferenceVector/CreatePreferenceVector';
 import './CreateID.css';
 
@@ -33,27 +33,26 @@ class CreateID extends Component {
 
   componentDidMount() {
     this.props.onResetCheckUser();
-      // 'NotYet' is not checked yet
-      // 'NotExist' is checked but not exist
-      // 'Exist' is checked and exist
+    // 'NotYet' is not checked yet
+    // 'NotExist' is checked but not exist
+    // 'Exist' is checked and exist
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.shouldCheck) {
       if (nextProps.checkUserStatus === 'NotExist') {
-        return { 
+        return {
           mode: 'Preference',
           shouldCheck: false,
-        }
-      } else if (nextProps.checkUserStatus === 'Exist') {
-        const { alert } = nextProps; 
+        };
+      } if (nextProps.checkUserStatus === 'Exist') {
+        const { alert } = nextProps;
         alert.show('이미 가입된 회원입니다!');
         nextProps.onResetCheckUser();
         return {
           shouldCheck: false,
-        }
+        };
       }
-      
     }
   }
 
@@ -62,14 +61,14 @@ class CreateID extends Component {
     this.props.onCheckUser(username, email);
     this.setState({
       shouldCheck: true,
-    })
+    });
   }
 
   onChangeButtonHandler() {
     const { userInfo } = this.state;
-    if (userInfo.username && userInfo.password 
+    if (userInfo.username && userInfo.password
         && emailRegex.test(userInfo.email)
-        && userInfo.password 
+        && userInfo.password
         && (userInfo.password === this.state.verifyPassword)) return false;
 
     return true;
@@ -85,13 +84,13 @@ class CreateID extends Component {
     // );
     let isverified;
     if (userInfo.password === null
-        || userInfo.password === ""
+        || userInfo.password === ''
         || userInfo.password !== this.state.verifyPassword) {
       isverified = 'Password not verified';
     } else isverified = 'Ok';
 
-    let validEmail = emailRegex.test(this.state.userInfo.email) ? 
-                      '' : 'Invalid form!';
+    const validEmail = emailRegex.test(this.state.userInfo.email)
+      ? '' : 'Invalid form!';
 
     return (
 
@@ -171,7 +170,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onCheckUser: (username, email) => dispatch(actionCreators.checkUser(username, email)),
-  onResetCheckUser: () => dispatch(actionCreators.resetCheckUser())
+  onResetCheckUser: () => dispatch(actionCreators.resetCheckUser()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAlert()(withRouter(CreateID)));

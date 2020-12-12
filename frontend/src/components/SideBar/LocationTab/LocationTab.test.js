@@ -65,7 +65,7 @@ describe('<LocationTab />', () => {
             <Route
               path="/"
               exact
-              render={() => <LocationTab searchLocation={{address_name:"아리랑" }} onChangeLocation={(location)=>{}}/>}
+              render={() => <LocationTab searchLocation={{ address_name: '아리랑' }} onChangeLocation={(location) => {}} />}
             />
           </Switch>
         </ConnectedRouter>

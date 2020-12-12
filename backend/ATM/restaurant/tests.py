@@ -176,7 +176,7 @@ class RestaurantTestCase(TestCase):
         request_body = {
             "email": 'testerA@tester.com',
             'password': '123123',
-            'currLoc': {'x':0,'y':0}
+            'currLoc': {'x':127,'y':39}
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -242,7 +242,7 @@ class RestaurantTestCase(TestCase):
         request_body = {
             "email": 'testerA@tester.com',
             'password': '123123',
-            'currLoc':{'x':0,'y':0}
+            'currLoc':{'x':127,'y':39}
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -274,7 +274,7 @@ class RestaurantTestCase(TestCase):
         request_body = {
             "email": 'testerA@tester.com',
             'password': '123123',
-            'currLoc': {'x':0,'y':0}
+            'currLoc': {'x':127,'y':39}
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -310,7 +310,7 @@ class RestaurantTestCase(TestCase):
         request_body = {
             "email": 'testerA@tester.com',
             'password': '123123',
-            'currLoc': {'x':0,'y':0}
+            'currLoc': {'x':127,'y':39}
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,

@@ -1,7 +1,6 @@
 import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
-  selectedReviews: [],
   myReviews: [
   ],
   otherReviews: {
@@ -39,15 +38,15 @@ const reducer = (state = initialState, action) => {
       return { ...state, myReviews: [...state.myReviews, newReview] };
     }
     case actionTypes.DELETE_MY_REVIEW: {
-      console.log(action.target)
+      console.log(action.target);
       const deleted = state.myReviews.filter((review) => review.id !== action.target);
-      console.log(deleted)
+      console.log(deleted);
       return { ...state, myReviews: [...deleted] };
     }
     default:
       break;
   }
-  return state;
+  return { ...state };
 };
 
 export default reducer;

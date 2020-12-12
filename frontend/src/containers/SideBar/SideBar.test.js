@@ -15,19 +15,20 @@ jest.mock('./MyInfoTab/MyInfoTab', () => jest.fn((props) => (
 
 jest.mock('../../components/SideBar/LocationTab/LocationTab', () => jest.fn((props) => (
   <div className="spyLocationTab">
-    <p>{props.restaurantID}</p>
+    <button id="spy-button" onClick={() => { props.onChangeLocation('TEST'); }} />
   </div>
 )));
 
 jest.mock('../../components/SideBar/FoodCategoryTab/FoodCategoryTab', () => jest.fn((props) => (
   <div className="spyFoodCategoryTab">
-    <p>{props.restaurantID}</p>
+    <button id="spy-button" onClick={() => props.postClickFoodCategoryHandler('한식')} />
+    <button id="spy-button-for-all" onClick={() => props.postClickFoodCategoryHandler('total')} />
   </div>
 )));
 
 jest.mock('../../components/SideBar/PreferenceVectorTab/PreferenceVectorTab', () => jest.fn((props) => (
   <div className="spyPreferenceVectorTab">
-    <p>{props.restaurantID}</p>
+    <button id="spy-button" onClick={() => props.onChangeFactor('매운', { target: { value: 1 } })} />
   </div>
 )));
 
@@ -37,7 +38,18 @@ describe('<SideBar />', () => {
     const mockStore = getMockStore({
       keyword: {},
       restaurant: {},
-      user: {},
+      user: {
+        searchLocation: {
+          address_name: '서울 관악구',
+        },
+        foodCategory: {
+          한식: false,
+        },
+        preferenceVector: {
+          매운: 3,
+        },
+
+      },
       review: {},
     });
     sideBar = (
@@ -65,6 +77,7 @@ describe('<SideBar />', () => {
 
   it('should render tabs when clicking tab-image-button', () => {
     const component = mount(sideBar);
+
     let wrapper = component.find('SideBar');
     expect(wrapper.find('.spyMyInfoTab').length).toBe(1);
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
@@ -110,7 +123,7 @@ describe('<SideBar />', () => {
     const spyHistoryPush = jest.spyOn(history, 'push')
       .mockImplementation((path) => path);
     wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
-    wrapper.find('#search-button').simulate('click');
+    wrapper.find('.search-box').simulate('submit');
     expect(spyHistoryPush).toHaveBeenCalledWith('/main/food');
   });
 
@@ -118,9 +131,7 @@ describe('<SideBar />', () => {
     const component = mount(sideBar);
     const wrapper = component.find('SideBar');
 
-    const spyHistoryPush = jest.spyOn(history, 'push')
-      .mockImplementation((path) => path);
-    wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((path) => path); wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
     wrapper.find('#logo-button').simulate('click');
     expect(spyHistoryPush).toHaveBeenCalledWith('/main/');
     expect(wrapper.state().searchWord).toBe('');
@@ -162,5 +173,105 @@ describe('<SideBar />', () => {
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
+  });
+
+  it('should change location at tab', () => {
+    const component = mount(sideBar);
+    let wrapper = component.find('SideBar');
+    wrapper.find('#location-tab-name-button').simulate('click');
+    wrapper = component.find('SideBar');
+    expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
+    expect(wrapper.find('.spyLocationTab').length).toBe(1);
+    expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
+    expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
+    const tabWrapper = component.find('.spyLocationTab');
+
+    tabWrapper.find('#spy-button').simulate('click');
+    expect(wrapper.state().searchLocation).toBe('TEST');
+  });
+
+  it('should change category at tab', () => {
+    const component = mount(sideBar);
+    let wrapper = component.find('SideBar');
+    wrapper.find('#food-category-tab-name-button').simulate('click');
+    wrapper = component.find('SideBar');
+    expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
+    expect(wrapper.find('.spyLocationTab').length).toBe(0);
+    expect(wrapper.find('.spyFoodCategoryTab').length).toBe(1);
+    expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
+    const tabWrapper = component.find('.spyFoodCategoryTab');
+
+    tabWrapper.find('#spy-button').simulate('click');
+    expect(wrapper.state().foodCategory).toEqual({
+      한식: true,
+    });
+
+    tabWrapper.find('#spy-button-for-all').simulate('click');
+    expect(wrapper.state().foodCategory).toEqual({
+      한식: true,
+    });
+
+    tabWrapper.find('#spy-button-for-all').simulate('click');
+    expect(wrapper.state().foodCategory).toEqual({
+      한식: false,
+    });
+    const mockStoreForAll = getMockStore({
+      keyword: {},
+      restaurant: {},
+      user: {
+        searchLocation: {
+          address_name: '서울 관악구',
+        },
+        foodCategory: {
+          한식: false,
+        },
+        preferenceVector: {
+          매운: 3,
+        },
+
+      },
+      review: {},
+    });
+    const givenProps = {
+      foodCategory: {
+        한식: true,
+      },
+    };
+    const givenState = {
+      foodCategory: {},
+      selectAllCategory: false,
+    };
+
+    const result = wrapper.instance().constructor.getDerivedStateFromProps(givenProps, givenState);
+
+    /*
+    expect(result).toEqual({
+      foodCategory: {
+        '한식': true,
+      },
+      selectAllCategory: true,
+    })
+    */
+  });
+
+  it('should change factor at tab', () => {
+    const component = mount(sideBar);
+    let wrapper = component.find('SideBar');
+    wrapper.find('#preference-vector-tab-name-button').simulate('click');
+    wrapper = component.find('SideBar');
+    expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
+    expect(wrapper.find('.spyLocationTab').length).toBe(0);
+    expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
+    expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(1);
+    const tabWrapper = component.find('.spyPreferenceVectorTab');
+
+    tabWrapper.find('#spy-button').simulate('click');
+    wrapper = component.find('SideBar');
+    // console.log(wrapper.state())
+    /*
+    expect(wrapper.state().preferenceVector).toEqual({
+      '매운': 1,
+    });
+    */
   });
 });

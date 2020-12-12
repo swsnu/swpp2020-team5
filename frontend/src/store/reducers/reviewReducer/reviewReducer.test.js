@@ -11,35 +11,52 @@ const stubMyReivew = {
 };
 
 const stubOtherReview = {
-  content: '맛있으나 즐거우나 나라 사랑하세.',
-  rating: 1,
-  date: new Date(),
-  authorName: 'TESTER',
+  naver: [
+    {
+      content: '맛있으나 즐거우나 나라 사랑하세.',
+      rating: 1,
+      date: new Date(),
+      authorName: 'TESTER',
+    },
+  ],
+  kakao: [
+  ],
+  atm: [
+  ],
 };
 
 let stubInitialState = {
-  selectedReviews: {},
   myReviews: [],
-  otherReview: {},
+  otherReviews: {},
 };
 
 describe('Review reducer', () => {
-  it('should get review', () => {
+  it('should get other reviews', () => {
     const newState = reducer(stubInitialState, {
       type: actionTypes.GET_OTHER_REVIEWS,
       target: stubOtherReview,
     });
 
     expect(newState).toEqual({
-      selectedReviews: stubOtherReview,
       myReviews: [],
-      otherReview: {},
+      otherReviews: stubOtherReview,
+    });
+  });
+
+  it('should get my reviews', () => {
+    const newState = reducer(stubInitialState, {
+      type: actionTypes.GET_MY_REVIEWS,
+      target: [stubMyReivew],
+    });
+
+    expect(newState).toEqual({
+      myReviews: [stubMyReivew],
+      otherReviews: {},
     });
   });
 
   it('should put review', () => {
     stubInitialState = {
-      selectedReviews: {},
       myReviews: [{
         id: 2, content: 'BAD', rating: 2, date: 'bad',
       }],
@@ -55,7 +72,6 @@ describe('Review reducer', () => {
     });
 
     expect(newState).toEqual({
-      selectedReviews: {},
       myReviews: [{
         id: 2, content: '아주 맛이 좋다', rating: 5, date: 'test',
       }],
@@ -65,7 +81,6 @@ describe('Review reducer', () => {
 
   it('should post review', () => {
     stubInitialState = {
-      selectedReviews: {},
       myReviews: [],
       otherReviews: {},
     };
@@ -79,7 +94,6 @@ describe('Review reducer', () => {
     });
 
     expect(newState).toEqual({
-      selectedReviews: {},
       myReviews: [{
         id: 3, content: 'GOOD', rating: 5, date: 'test',
       }],
@@ -89,7 +103,6 @@ describe('Review reducer', () => {
 
   it('should delete review', () => {
     stubInitialState = {
-      selectedReviews: {},
       myReviews: [{
         id: 2, content: 'BAD', rating: 2, date: 'bad',
       }],
@@ -102,7 +115,21 @@ describe('Review reducer', () => {
     });
 
     expect(newState).toEqual({
-      selectedReviews: {},
+      myReviews: [],
+      otherReviews: {},
+    });
+  });
+
+  it('should do nothing when type is wrong', () => {
+    stubInitialState = {
+      myReviews: [],
+      otherReviews: {},
+    };
+    const newState = reducer(stubInitialState, {
+      type: 'wrong',
+    });
+
+    expect(newState).toEqual({
       myReviews: [],
       otherReviews: {},
     });

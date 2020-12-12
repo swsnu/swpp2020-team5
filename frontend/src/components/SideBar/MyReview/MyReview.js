@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import ReactStars from 'react-rating-stars-component';
-import { StarRatingInput, StarRating, css } from 'react-star-rating-input';
-import insertCss from 'insert-css';
 import * as actionCreators from '../../../store/actions/index';
 import './MyReview.css';
 
@@ -56,29 +54,32 @@ class MyReview extends Component {
   render() {
     const changeRatingStar = (
       this.state.isEdit
-        ? <ReactStars
-              id="rate-star"
-              value={this.props.rating}
-              count={5}
-              size={20}
-              isHalf
-              onChange={this.onChangeRatingHandler}
-            />
+        ? (
+          <ReactStars
+            id="rate-star"
+            value={this.props.rating}
+            count={5}
+            size={20}
+            isHalf
+            onChange={this.onChangeRatingHandler}
+          />
+        )
         : <></>
-    )
+    );
     const ratingStar = (
       this.state.isEdit
         ? <></>
-        : <ReactStars
-              id="rate-star"
-              value={this.props.rating}
-              count={5}
-              size={20}
-              isHalf
-              edit={false}
-            />
-    )
-    console.log(ratingStar)
+        : (
+          <ReactStars
+            id="rate-star"
+            value={this.props.rating}
+            count={5}
+            size={20}
+            isHalf
+            edit={false}
+          />
+        )
+    );
 
     const EditOrDone = (
       this.state.isEdit
@@ -155,15 +156,13 @@ class MyReview extends Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  /*
+
   onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.editMyReview({
     id: reviewID,
     ...reviewInfo,
   })),
   onDeleteReview: (reviewID) => dispatch(actionCreators.deleteMyReview(reviewID)),
-  */
-});
 
-insertCss(css);
+});
 
 export default connect(null, mapDispatchToProps)(withRouter(MyReview));

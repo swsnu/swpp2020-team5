@@ -44,15 +44,18 @@ def sign_up(request):
                 if cos_sim_word(attr, food) < min_cos:
                     min_cos = cos_sim_word(attr, food)
             weight = 2.5+10*weight
+            """
             if weight > max_weight:
                 weight = max_weight
             if weight < min_weight:
                 weight = min_weight
+            """
             pref_vec[attr] = weight
         pref_vec.save()
+        """
         print('max', max_cos)
         print('min', min_cos)
-
+        """
         food_category = FoodCategory()
         food_category.save()
 
@@ -99,14 +102,13 @@ def sign_in(request):
             cur_user = Profile.objects.get(user=user)
             cur_user.search_location.x = loc_x
             cur_user.search_location.y = loc_y
-            print("d")
-            # url = f'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x={loc_x}&y={loc_y}'
-            # headers = {"Authorization": "KakaoAK aac06354b765df501b09c92813259058"}
-            # api_test = requests.get(url,headers=headers)
-            # url_text = json.loads(api_test.text)
-            # address_name = url_text['documents'][0]['address_name']
-            # print(address_name)
-            # cur_user.search_location.address_name = address_name
+            url = f'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x={loc_x}&y={loc_y}'
+            headers = {"Authorization": "KakaoAK aac06354b765df501b09c92813259058"}
+            api_test = requests.get(url,headers=headers)
+            url_text = json.loads(api_test.text)
+            address_name = url_text['documents'][0]['address_name']
+            print(address_name)
+            cur_user.search_location.address_name = address_name
             cur_user.search_location.save()
 
             for attr in get_preference_attributes(cur_user.food_category):

@@ -12,16 +12,8 @@ const getMyReviews_ = (reviews) => ({
 
 export const getMyReviews = (restaurantID) => (dispatch) => axios
   .get(`/atm/restaurant/detail/${restaurantID}/my-review/`)
-  .then(res => 
-    dispatch(getMyReviews_(res.data))
-  )
-  .catch(err => {
-    if (err.response == null) {
-      return alert('getMyReviews Error')
-    }
-    return alert('getMyReviews Error'+err.response.status)
-  }
-  )
+  .then((res) => dispatch(getMyReviews_(res.data)))
+  .catch((err) => alert(`getMyReviews Error${err.response.status}`));
 const getOtherReviews_ = (reviews) => ({
   type: actionTypes.GET_OTHER_REVIEWS,
   target: reviews,
@@ -29,12 +21,8 @@ const getOtherReviews_ = (reviews) => ({
 
 export const getOtherReviews = (id) => (dispatch) => axios
   .get(`/atm/restaurant/detail/${id}/other-review/`)
-  .then(res => 
-    dispatch(getOtherReviews_(res.data))
-  )
-  .catch(err => 
-    alert('getOtherReviews Error'+err.response.status)
-  )
+  .then((res) => dispatch(getOtherReviews_(res.data)))
+  .catch((err) => alert(`getOtherReviews Error${err.response.status}`));
 
 const postMyReview_ = (reviewInfo) => ({
   type: actionTypes.POST_MY_REVIEW,
@@ -66,5 +54,5 @@ export const deleteMyReview = (reviewID) => (dispatch) => axios.delete(`/atm/my-
     dispatch(deleteMyReview_(res.data.id));
   })
   .catch((res) => {
-    console.log('error in deleteMyReview')
+    console.log('error in deleteMyReview');
   });

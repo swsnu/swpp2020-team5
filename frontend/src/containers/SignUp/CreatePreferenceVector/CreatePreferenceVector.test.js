@@ -61,7 +61,7 @@ describe('<CreatePreferenceVector />', () => {
       username: 'TEST_NAME',
       email: 'TEST_EMAIL',
       password: 'TEST_PW',
-      selectedFoods: [false, false, false, false, false, false],
+      selectedFoods: [],
     });
     expect(spyHistoryPush).toHaveBeenCalledWith('/');
   });
@@ -69,11 +69,25 @@ describe('<CreatePreferenceVector />', () => {
   it('should toggle food', () => {
     const component = mount(createPreferenceVector);
     let wrapper = component.find('CreatePreferenceVector');
+    const spyPostSignUp = jest.spyOn(actionCreators, 'postSignUp')
+      .mockImplementation((userInfo) => (dispatch) => {});
 
-    wrapper.find('.image-and-caption').at(0).find('img').simulate('click');
+    wrapper.find('.food-image-wrapper').at(0).find('img').simulate('click');
     expect(wrapper.state().selectedFoods[0]).toBe(true);
     wrapper = component.find('CreatePreferenceVector');
-    wrapper.find('.image-and-caption').find('.check-image').simulate('click');
+    wrapper.find('.food-image-wrapper').find('.check-image').simulate('click');
     expect(wrapper.state().selectedFoods[0]).toBe(false);
+    wrapper = component.find('CreatePreferenceVector');
+    wrapper.find('.food-image-wrapper').at(0).find('img').simulate('click');
+    expect(wrapper.state().selectedFoods[0]).toBe(true);
+
+    wrapper.find('#confirm-button').simulate('click');
+    expect(spyPostSignUp).toHaveBeenCalledTimes(1);
+    expect(spyPostSignUp).toHaveBeenCalledWith({
+      username: 'TEST_NAME',
+      email: 'TEST_EMAIL',
+      password: 'TEST_PW',
+      selectedFoods: ['짜장면'],
+    });
   });
 });
