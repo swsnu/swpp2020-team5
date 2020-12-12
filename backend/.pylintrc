@@ -22,6 +22,8 @@ init-hook=
     sys.path.append(os.getcwd());
     from pylint_ignore import PylintIgnorePaths;
     PylintIgnorePaths('ATM/migrations')
+    PylintIgnorePaths('ATM/embedding')
+    PylintIgnorePaths('ATM/restaurant/resource')
     PylintIgnorePaths('data_getting')
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
@@ -64,7 +66,8 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
-disable=too-few-public-methods,
+disable=pointless-string-statement,
+        too-few-public-methods,
         duplicate-code,
         import-error,
         missing-module-docstring,

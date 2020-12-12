@@ -1,20 +1,21 @@
 '''
 restaurant backend
 '''
-from django.http import (
-    HttpResponse, HttpResponseNotAllowed, JsonResponse,
-    HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
-)
-from json import JSONDecodeError
 import json
+import math
+from json import JSONDecodeError
 from datetime import datetime
 from haversine import haversine
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.http import (
+    HttpResponse, HttpResponseNotAllowed, JsonResponse,
+    HttpResponseBadRequest
+)
 from ..models import Restaurant, Profile, Review, Author
 from ..utils import cos_sim_word
 from ..review.utils import prefvec_update
-from django.views.decorators.csrf import ensure_csrf_cookie
+from .resource import link
 
-import math
 # preferencVector
 scale = 3
 pivot = 1.5
@@ -138,8 +139,8 @@ def restaurant_detail(request, restaurant_id):
                 response_dict['img_url'] = restaurant.thumbnail[0]
                 response_dict['img_url_list'] = restaurant.thumbnail
             else:
-                response_dict['img_url'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
-                response_dict['img_url_list'] = 'https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'
+                response_dict['img_url'] = link.default_image
+                response_dict['img_url_list'] = [link.default_image]
             response_dict['menu'] = restaurant.menu
             response_dict['time'] = restaurant.openTime
             response_dict['keywords'] = restaurant.keyword
