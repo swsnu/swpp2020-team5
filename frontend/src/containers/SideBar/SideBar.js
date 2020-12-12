@@ -96,7 +96,7 @@ class SideBar extends Component {
         });
         newState.selectAllCategory = false;
       }
-      newState.foodCategory[cat] = !this.state.foodCategory[cat];
+      newState.foodCategory[category] = !this.state.foodCategory[category];
     }
     this.setState(newState);
   }
