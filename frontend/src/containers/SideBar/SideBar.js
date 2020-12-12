@@ -73,6 +73,7 @@ class SideBar extends Component {
         };
       }
     }
+    return {};
   }
 
   postClickFoodCategoryHandler = (category) => {
