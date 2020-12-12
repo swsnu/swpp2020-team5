@@ -78,7 +78,7 @@ class MainPage extends Component {
       return (
         <div>
           <SideBar restaurantID={-1} 
-            onReload={() => this.props.onGetRestaurantList(searchKeyword)}
+            onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
           />
           <div className="mainPage">
             <div className="no-result">현재 조건에 맞는 결과가 없습니다.</div>
