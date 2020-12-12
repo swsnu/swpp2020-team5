@@ -101,8 +101,9 @@ class MainPage extends Component {
             {headerContent}
             에 대한 검색 결과입니다.
           </div>
-          <div className="header-help" onClick={() => MainPage.onClickHelpHandler()}>
-            <span className="questionmark">?</span>
+          <div className="header-help" >
+            <span className="questionmark" onMouseOver={() => MainPage.onClickHelpHandler()}
+                                           onMouseLeave={() => MainPage.onClickHelpHandler()}>?</span>
             <div className="header-help-content" style={{ display: 'none' }}>
               <span className="red-text">사용자의 취향</span>
               은 회원가입 시 입력한 정보로 정해집니다.
