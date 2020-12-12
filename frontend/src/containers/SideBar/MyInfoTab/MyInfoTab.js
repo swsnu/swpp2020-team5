@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../../store/actions/index';
 import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
-import createHistory from 'history/createBrowserHistory'
-const history = createHistory();
+import createHistory from 'history/createBrowserHistory';
 
+const history = createHistory();
 
 class MyInfoTab extends Component {
   constructor(props) {
@@ -80,9 +80,9 @@ class MyInfoTab extends Component {
 
     // if current page is not Mainpage, myInfoTab should show onDetailPage.
     // Otherwise, should show onMainPage
-    console.log(this.props.myReviewList)
+    console.log(this.props.myReviewList);
     if (this.props.restaurantID !== -1) {
-      myReview = this.props.myReviewList.map((review) => ( 
+      myReview = this.props.myReviewList.map((review) => (
         <MyReview
           className="Review"
           reviewID={review.id}
@@ -136,7 +136,6 @@ class MyInfoTab extends Component {
     } else {
       myInfo = onMainPage;
     }
-
 
     return (
       <div className="tab" id="my-info">

@@ -37,7 +37,7 @@ const mockGeolocation = {
           longitude: 45.3,
         },
       }));
-  }),
+    }),
   watchPosition: jest.fn(),
 };
 

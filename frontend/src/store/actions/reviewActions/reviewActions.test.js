@@ -48,31 +48,31 @@ const stubReviewList = [
     id: 1,
     content: 'TEST_CONTENT',
     rating: 3,
-    //site: 'naver'
-  }
-]
+    // site: 'naver'
+  },
+];
 
 const stubOtherReviewList = {
-  naver:[
+  naver: [
     {
       id: 1,
       content: 'TEST_CONTENT',
       rating: 3,
-    }
+    },
   ],
-  kakao:[
+  kakao: [
     {
       id: 1,
       content: 'TEST_CONTENT',
       rating: 3,
-    }
+    },
   ],
-  atm:[
+  atm: [
     {
       id: 1,
       content: 'TEST_CONTENT',
       rating: 3,
-    }
+    },
   ],
 };
 
@@ -81,7 +81,7 @@ const stubReview = {
   content: 'TEST_REVIEW',
   rating: 1.5,
   date: '',
-}
+};
 
 describe('review actionCreators ', () => {
   afterEach(() => {
@@ -109,7 +109,7 @@ describe('review actionCreators ', () => {
         const result = {
           response: {
             status: 401,
-          }
+          },
         };
         reject(result);
       }));
@@ -165,8 +165,8 @@ describe('review actionCreators ', () => {
       }));
     store.dispatch(actionCreators.postMyReview(stubReview)).then(() => {
       expect(spy).toHaveBeenCalledTimes(1);
-      //const newState = store.getState();
-      //expect(newState.rv.myReviews).toBe([stubReview])
+      // const newState = store.getState();
+      // expect(newState.rv.myReviews).toBe([stubReview])
       done();
     });
   });
@@ -181,8 +181,8 @@ describe('review actionCreators ', () => {
       }));
     store.dispatch(actionCreators.editMyReview(stubReview)).then(() => {
       expect(spy).toHaveBeenCalledTimes(1);
-      //const newState = store.getState();
-      //expect(newState.rv.myReviews).toBe([stubReview])
+      // const newState = store.getState();
+      // expect(newState.rv.myReviews).toBe([stubReview])
       done();
     });
   });
@@ -197,8 +197,8 @@ describe('review actionCreators ', () => {
       }));
     store.dispatch(actionCreators.deleteMyReview(stubReview.id)).then(() => {
       expect(spy).toHaveBeenCalledTimes(1);
-      //const newState = store.getState();
-      //expect(newState.rv.myReviews).toBe([stubReview])
+      // const newState = store.getState();
+      // expect(newState.rv.myReviews).toBe([stubReview])
       done();
     });
   });

@@ -34,14 +34,14 @@ class CreatePreferenceVector extends Component {
     for (let i = 0; i < selectedFoods.length; i++) {
       if (selectedFoods[i]) {
         selectedFoodNames.push(foodCaptionList[i]);
-      } 
+      }
     }
     this.props.onPostSignUp({
       username,
       email,
       password,
-      selectedFoods: selectedFoodNames, 
-      //selectedFoods,
+      selectedFoods: selectedFoodNames,
+      // selectedFoods,
     });
     this.props.history.push('/');
   }
@@ -67,7 +67,7 @@ class CreatePreferenceVector extends Component {
             {this.state.selectedFoods[i] ? <img alt="check" className="check-image" src={checkImage} /> : <></> }
           </div>
           <div>{foodCaptionList[i]}</div>
-        </div>
+        </div>,
       );
       if (i % 3 === 2) {
         foodImages.push(<br />);
@@ -90,9 +90,9 @@ class CreatePreferenceVector extends Component {
           <div className="images">
             {foodImages}
           </div>
-      
-          <div className="survey"/>
-            
+
+          <div className="survey" />
+
           <div
             id="confirm-button"
             onClick={() => {

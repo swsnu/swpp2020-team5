@@ -22,7 +22,7 @@ const stubOtherReview = {
   kakao: [
   ],
   atm: [
-  ]
+  ],
 };
 
 let stubInitialState = {
@@ -39,7 +39,7 @@ describe('Review reducer', () => {
 
     expect(newState).toEqual({
       myReviews: [],
-      otherReviews: stubOtherReview 
+      otherReviews: stubOtherReview,
     });
   });
 

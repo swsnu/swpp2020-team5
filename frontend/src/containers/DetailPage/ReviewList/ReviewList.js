@@ -26,70 +26,73 @@ class ReviewList extends Component {
   }
 
   componentDidMount() {
-    //this.props.onGetReviews(this.props.restaurantID);
+    // this.props.onGetReviews(this.props.restaurantID);
   }
 
   onClickTabHandler = (index) => {
     this.setState({ tab_index: index });
-    this.setState({curr_review_cnt: 10});
+    this.setState({ curr_review_cnt: 10 });
   }
 
   onClickShowMoreHandler = () => {
-    let increased_cnt = this.state.curr_review_cnt + 10;
-    this.setState({curr_review_cnt: increased_cnt});
+    const increased_cnt = this.state.curr_review_cnt + 10;
+    this.setState({ curr_review_cnt: increased_cnt });
   }
 
   render() {
     // TODO other review 분류작업? + <OtherReview> 로 렌더링
-    
+
     let showCnt = 0;
     const naverReview = this.props.otherReviews.naver.map((review) => {
-        if (showCnt < this.state.curr_review_cnt) {
-          showCnt++;
-          return (
-            <OtherReview
-              content={review.content}
-              author={review.author_name}
-              date={review.date}
-              rating={review.rating}
-            />)
-        }
-      });
+      if (showCnt < this.state.curr_review_cnt) {
+        showCnt++;
+        return (
+          <OtherReview
+            content={review.content}
+            author={review.author_name}
+            date={review.date}
+            rating={review.rating}
+          />
+        );
+      }
+    });
     showCnt = 0;
 
     const kakaoReview = this.props.otherReviews.kakao.map((review) => {
-        if (showCnt < this.state.curr_review_cnt) {
-          showCnt++;
-          return (
-            <OtherReview
-              content={review.content}
-              author={review.author_name}
-              date={review.date}
-              rating={review.rating}
-            />)
-        }
-      });
+      if (showCnt < this.state.curr_review_cnt) {
+        showCnt++;
+        return (
+          <OtherReview
+            content={review.content}
+            author={review.author_name}
+            date={review.date}
+            rating={review.rating}
+          />
+        );
+      }
+    });
 
     showCnt = 0;
-    
+
     const atmReview = this.props.otherReviews.atm.map((review) => {
-        if (showCnt < this.state.curr_review_cnt) {
-          showCnt++;
-          return (
-            <OtherReview
-              content={review.content}
-              author={review.author_name}
-              date={review.date}
-              rating={review.rating}
-            />)
-        }
-      });
+      if (showCnt < this.state.curr_review_cnt) {
+        showCnt++;
+        return (
+          <OtherReview
+            content={review.content}
+            author={review.author_name}
+            date={review.date}
+            rating={review.rating}
+          />
+        );
+      }
+    });
     const naverCnt = naverReview.length;
     const kakaoCnt = kakaoReview.length;
     const atmCnt = atmReview.length;
-    
+
     const showMoreButton = (
-            <button id="show-more" onClick={this.onClickShowMoreHandler}>Show more</button>
+      <button id="show-more" onClick={this.onClickShowMoreHandler}>Show more</button>
     );
 
     return (
@@ -135,11 +138,11 @@ class ReviewList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  //otherReviews: state.rv.otherReviews,
+  // otherReviews: state.rv.otherReviews,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  //onGetReviews: (restaurantID) => dispatch(actionCraetors.getOtherReviews(restaurantID)),
+  // onGetReviews: (restaurantID) => dispatch(actionCraetors.getOtherReviews(restaurantID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);

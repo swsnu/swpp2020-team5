@@ -28,19 +28,18 @@ class SignIn extends Component {
     const { email, password } = this.state;
     const { currLoc } = this.state;
     navigator.geolocation.getCurrentPosition((loc) => {
-        currLoc.x = loc.coords.longitude;
-        currLoc.y = loc.coords.latitude;
-        this.setState({ currLoc });
-        onPostSignIn({ email, password, currLoc });
-        console.log(currLoc.x);
-        console.log(currLoc.y);
-    },(err) => {
+      currLoc.x = loc.coords.longitude;
+      currLoc.y = loc.coords.latitude;
+      this.setState({ currLoc });
+      onPostSignIn({ email, password, currLoc });
+      console.log(currLoc.x);
+      console.log(currLoc.y);
+    }, (err) => {
       currLoc.y = 37.47835220754036;
       currLoc.x = 126.95631398408709;
       this.setState({ currLoc });
       onPostSignIn({ email, password, currLoc });
     });
-    
   }
 
   render() {

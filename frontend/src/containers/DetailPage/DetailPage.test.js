@@ -49,14 +49,14 @@ const stubInitialState = {
       title: '안녕베트남',
       rate: 4.78,
       menu: {
-        쌀국수:'12000',
+        쌀국수: '12000',
         분짜: null,
       },
       time: {
-        "영업 시간": {
-          "일요일": '9:00-21:00'
+        '영업 시간': {
+          일요일: '9:00-21:00',
         },
-        "휴무일": []
+        휴무일: [],
       },
       keywords: ['맵다', '짜다', '분위기가 좋다'],
       category: ['베트남음식'],
@@ -75,7 +75,7 @@ const stubInitialState = {
       naver: [],
       kakao: [],
       atm: [],
-    }
+    },
   },
   user: null,
 };
@@ -108,14 +108,14 @@ describe('<DetailPage />', () => {
           title: '안녕베트남',
           rate: 4.78,
           menu: {
-            쌀국수:'12000',
+            쌀국수: '12000',
             분짜: null,
           },
           time: {
-            "영업 시간": {
-              "일요일": '9:00-21:00'
+            '영업 시간': {
+              일요일: '9:00-21:00',
             },
-            "휴무일": ['우리우리설날']
+            휴무일: ['우리우리설날'],
           },
           keywords: ['맵다', '짜다', '분위기가 좋다'],
           category: ['베트남음식'],
@@ -134,7 +134,7 @@ describe('<DetailPage />', () => {
           naver: [],
           kakao: [],
           atm: [],
-        }
+        },
       },
       user: null,
     };
@@ -206,7 +206,7 @@ describe('<DetailPage />', () => {
     expect(wrapper.length).toBe(1);
   });
   it('should render properly when difference is 0', () => {
-    const testState = {...stubInitialState};
+    const testState = { ...stubInitialState };
     testState.restaurant.selectedRestaurant.difference = 0;
     const testMockStore = getMockStore(testState);
     const otherdetailpage = (
@@ -227,7 +227,7 @@ describe('<DetailPage />', () => {
     expect(wrapper.at(0).text()).toEqual('변동없음!');
   });
   it('should call images', () => {
-    const testState = {...stubInitialState};
+    const testState = { ...stubInitialState };
     testState.restaurant.selectedRestaurant.img_url_list = [
       LOAD_FAILURE_SRC,
     ];
@@ -250,14 +250,14 @@ describe('<DetailPage />', () => {
     const image = component.find('.restaurant-image');
     const event = {
       target: {
-        src: "",
+        src: '',
         style: {
-          display: "haha"
-        }
-      }
+          display: 'haha',
+        },
+      },
     };
-    thumbnail.prop("onError").call(null,event);
-    image.prop("onError").call(null,event);
+    thumbnail.prop('onError').call(null, event);
+    image.prop('onError').call(null, event);
   });
 });
 it('should show NoImage', () => {
@@ -280,8 +280,8 @@ it('should show NoImage', () => {
   const thumbnail = component.find('.restaurant-details .thumbnail');
   const event = {
     target: {
-      src: "",
-    }
+      src: '',
+    },
   };
-  thumbnail.prop("onError").call(null,event);
-})
+  thumbnail.prop('onError').call(null, event);
+});

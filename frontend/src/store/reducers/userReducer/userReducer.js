@@ -29,7 +29,7 @@ const initialState = {
     y: '37.4783683761333',
   },
   checkUserStatus: 'NotYet',
-  isGetUserCalled: false, 
+  isGetUserCalled: false,
 };
 
 // preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
@@ -40,22 +40,22 @@ const reducer = (state = initialState, action) => {
     case actionTypes.CHECK_USER:
       return { ...state, checkUserStatus: action.target };
     case actionTypes.RESET_CHECK_USER:
-      return { ...state, checkUserStatus: 'NotYet'};
+      return { ...state, checkUserStatus: 'NotYet' };
     case actionTypes.GET_FOOD_CATEGORY:
     case actionTypes.EDIT_FOOD_CATEGORY:
       return { ...state, foodCategory: action.target };
     case actionTypes.GET_SEARCH_LOCATION:
-      return {...state, searchLocation: action.target};
+      return { ...state, searchLocation: action.target };
     case actionTypes.EDIT_SEARCH_LOCATION:
       return { ...state, searchLocation: action.target };
     case actionTypes.GET_PREFERENCE_VECTOR:
-      return {...state, preferenceVector: action.target };
+      return { ...state, preferenceVector: action.target };
     case actionTypes.EDIT_PREFERENCE_VECTOR:
-      return {...state, preferenceVector: action.target };
+      return { ...state, preferenceVector: action.target };
     case actionTypes.GET_SIGN_OUT:
-      return {...state, isGetUserCalled: false};
+      return { ...state, isGetUserCalled: false };
     case actionTypes.POST_SIGN_IN:
-      return {...state, isGetUserCalled: false};
+      return { ...state, isGetUserCalled: false };
     default:
       break;
   }

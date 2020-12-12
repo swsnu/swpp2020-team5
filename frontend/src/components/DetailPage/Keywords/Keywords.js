@@ -5,11 +5,11 @@ import './Keywords.css';
 // eslint-disable-next-line react/prefer-stateless-function
 class Keywords extends Component {
   render() {
-    const words = []
+    const words = [];
     Object.keys(this.props.keywords).forEach((el) => {
-      words.push({text: el, value: this.props.keywords[el]})
-    })
-    
+      words.push({ text: el, value: this.props.keywords[el] });
+    });
+
     const options = {
       rotations: 0,
       rotationAngles: [0, 0],
@@ -26,9 +26,9 @@ class Keywords extends Component {
     });
     const callbacks = {
       getWordColor: (word) => (word.value > Math.log(maxKeywordValue / 2) ? '#000000' : '#AAAAAA'),
-      onWordClick: word => {},
-      onWordMouseOver: word => {},
-      getWordTooltip: word => {},
+      onWordClick: (word) => {},
+      onWordMouseOver: (word) => {},
+      getWordTooltip: (word) => {},
     };
     // const expandRatio = 50;
     const expandedWords = [];

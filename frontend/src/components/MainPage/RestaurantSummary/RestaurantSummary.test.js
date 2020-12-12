@@ -42,7 +42,7 @@ describe('<RestaurantSummary />', () => {
                                 }
                               }
                   img_url_list={
-                    ["a","b"]
+                    ['a', 'b']
                   }
                 />
               )}
@@ -77,10 +77,10 @@ describe('<RestaurantSummary />', () => {
     expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
     const event = {
       target: {
-        src: "",
-      }
+        src: '',
+      },
     };
-    wrapper.prop("onError").call(null,event);
+    wrapper.prop('onError').call(null, event);
     restaurantSummary = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
@@ -114,6 +114,6 @@ describe('<RestaurantSummary />', () => {
     );
     const anotherComponent = mount(restaurantSummary);
     wrapper = anotherComponent.find('.image').at(0);
-    wrapper.prop("onError").call(null,event);
+    wrapper.prop('onError').call(null, event);
   });
 });

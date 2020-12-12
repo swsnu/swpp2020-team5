@@ -29,13 +29,13 @@ class RestaurantSummary extends Component {
         </div>
         <img
           alt="restautantThumbnail"
-          onError={ev => {
+          onError={(ev) => {
             i += 1;
             if (i > urlListLength) ev.target.src = NoImage;
-            else ev.target.src = "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src="+this.props.img_url_list[i];
+            else ev.target.src = `https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src=${this.props.img_url_list[i]}`;
           }}
           src={
-            urlListLength === 0 ? NoImage : "https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src="+this.props.img_url_list[0]
+            urlListLength === 0 ? NoImage : `https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src=${this.props.img_url_list[0]}`
           }
           className="image"
           onClick={() => this.onClickRestaurantHandler(this.props.id)}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './RestaurantMenu.css'
+import './RestaurantMenu.css';
 
 class RestaurantMenu extends Component {
   render() {
@@ -10,9 +10,9 @@ class RestaurantMenu extends Component {
           {name}
         </div>
         <div className="menu-price">
-          {price === null ? "(정보없음)" : price}
+          {price === null ? '(정보없음)' : price}
         </div>
-        <div className="menu-line"/>
+        <div className="menu-line" />
       </div>
     );
   }

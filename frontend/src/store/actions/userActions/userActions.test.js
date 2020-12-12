@@ -70,7 +70,7 @@ describe('actionCreators', () => {
         };
         resolve(result);
       }));
-    store.dispatch(actionCreators.checkUser('sug','sug_email')).then(() => {
+    store.dispatch(actionCreators.checkUser('sug', 'sug_email')).then(() => {
       expect(spy).toHaveBeenCalledTimes(1);
       const newState = store.getState();
       expect(newState.us.checkUserStatus).toBe('NotExist');
@@ -81,13 +81,13 @@ describe('actionCreators', () => {
     const spy = jest.spyOn(axios, 'get')
       .mockImplementation((username, email) => new Promise((resolve, reject) => {
         const result = {
-          response:{
+          response: {
             status: 401,
-          }
+          },
         };
         reject(result);
       }));
-    store.dispatch(actionCreators.checkUser('sug','sug_email')).then(() => {
+    store.dispatch(actionCreators.checkUser('sug', 'sug_email')).then(() => {
       expect(spy).toHaveBeenCalledTimes(1);
       const newState = store.getState();
       expect(newState.us.checkUserStatus).toBe('Exist');
@@ -98,14 +98,14 @@ describe('actionCreators', () => {
     const spy = jest.spyOn(axios, 'get')
       .mockImplementation((username, email) => new Promise((resolve, reject) => {
         const result = {
-          response:{
+          response: {
             status: 404,
-          }
+          },
         };
         reject(result);
       }));
     const spyAlert = jest.spyOn(window, 'alert').mockImplementation((message) => {});
-    store.dispatch(actionCreators.checkUser('sug','sug_email')).then(() => {
+    store.dispatch(actionCreators.checkUser('sug', 'sug_email')).then(() => {
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spyAlert).toHaveBeenCalledTimes(1);
       expect(spyAlert).toHaveBeenCalledWith('checkUser error');
@@ -136,7 +136,7 @@ describe('actionCreators', () => {
         const response = {
           response: {
             status: 409,
-          }
+          },
         };
         reject(response);
       }));
@@ -153,7 +153,7 @@ describe('actionCreators', () => {
         const response = {
           response: {
             status: 401,
-          }
+          },
         };
         reject(response);
       }));

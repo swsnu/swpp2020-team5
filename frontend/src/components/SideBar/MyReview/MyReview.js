@@ -54,28 +54,32 @@ class MyReview extends Component {
   render() {
     const changeRatingStar = (
       this.state.isEdit
-        ? <ReactStars
-              id="rate-star"
-              value={this.props.rating}
-              count={5}
-              size={20}
-              isHalf
-              onChange={this.onChangeRatingHandler}
-            />
+        ? (
+          <ReactStars
+            id="rate-star"
+            value={this.props.rating}
+            count={5}
+            size={20}
+            isHalf
+            onChange={this.onChangeRatingHandler}
+          />
+        )
         : <></>
-    )
+    );
     const ratingStar = (
       this.state.isEdit
         ? <></>
-        : <ReactStars
-              id="rate-star"
-              value={this.props.rating}
-              count={5}
-              size={20}
-              isHalf
-              edit={false}
-            />
-    )
+        : (
+          <ReactStars
+            id="rate-star"
+            value={this.props.rating}
+            count={5}
+            size={20}
+            isHalf
+            edit={false}
+          />
+        )
+    );
 
     const EditOrDone = (
       this.state.isEdit
@@ -152,13 +156,13 @@ class MyReview extends Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  
+
   onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.editMyReview({
     id: reviewID,
     ...reviewInfo,
   })),
   onDeleteReview: (reviewID) => dispatch(actionCreators.deleteMyReview(reviewID)),
-  
+
 });
 
 export default connect(null, mapDispatchToProps)(withRouter(MyReview));

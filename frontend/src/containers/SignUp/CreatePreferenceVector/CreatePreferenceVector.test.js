@@ -89,6 +89,5 @@ describe('<CreatePreferenceVector />', () => {
       password: 'TEST_PW',
       selectedFoods: ['짜장면'],
     });
-
   });
 });

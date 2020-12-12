@@ -36,12 +36,12 @@ describe('App', () => {
       },
       review: {},
     });
-    history.location.pathname='/';
-    let spyGetUser = jest.spyOn(actionCreators, 'getUser')
-      .mockImplementation(() => dispatch => {})
+    history.location.pathname = '/';
+    const spyGetUser = jest.spyOn(actionCreators, 'getUser')
+      .mockImplementation(() => (dispatch) => {});
     const app = (
       <Provider store={mockStore}>
-        <App history={history}  />
+        <App history={history} />
       </Provider>
     );
     const component = mount(app);
@@ -57,10 +57,10 @@ describe('App', () => {
       },
       review: {},
     });
-    history.location.pathname='/';
+    history.location.pathname = '/';
     const app = (
       <Provider store={mockStore}>
-        <App history={history}  />
+        <App history={history} />
       </Provider>
     );
     const component = mount(app);
@@ -77,7 +77,7 @@ describe('App', () => {
       },
       review: {},
     });
-    history.location.pathname='/sign-in/';
+    history.location.pathname = '/sign-in/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
@@ -97,7 +97,7 @@ describe('App', () => {
       },
       review: {},
     });
-    history.location.pathname='/sign-up/';
+    history.location.pathname = '/sign-up/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
@@ -117,7 +117,7 @@ describe('App', () => {
       },
       review: {},
     });
-    history.location.pathname='/main/hi_vietnam/';
+    history.location.pathname = '/main/hi_vietnam/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />
@@ -137,7 +137,7 @@ describe('App', () => {
       },
       review: {},
     });
-    history.location.pathname='/detail/1/';
+    history.location.pathname = '/detail/1/';
     const app = (
       <Provider store={mockStore}>
         <App history={history} />

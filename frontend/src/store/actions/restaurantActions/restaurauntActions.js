@@ -1,6 +1,6 @@
 import axios from 'axios';
-import * as actionTypes from '../actionTypes';
 import { push } from 'connected-react-router';
+import * as actionTypes from '../actionTypes';
 
 // Handling CSRF-Token
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -12,13 +12,10 @@ export const getRestaurantList_ = (restaurantlist) => ({
 
 export const getRestaurantList = (name) => (dispatch) => axios
   .get(`/atm/restaurant/search/${name}`)
-  .then((res) => {
-    return dispatch(getRestaurantList_(res.data));
-  })
+  .then((res) => dispatch(getRestaurantList_(res.data)))
   .catch((err) => {
     alert('Not Logined');
   });
-
 
 // export const getRestaurantName_ = (searchedlist) => ({
 //   type: actionTypes.GET_RESTAURANTNAME, searchedlist
@@ -31,10 +28,7 @@ export const getRestaurantDetail_ = (selectedRestaurant) => ({
 });
 export const getRestaurantDetail = (restaurantID) => (dispatch) => axios
   .get(`/atm/restaurant/detail/${restaurantID}`)
-  .then((res) => {
-    return dispatch(getRestaurantDetail_(res.data));
-  })
+  .then((res) => dispatch(getRestaurantDetail_(res.data)))
   .catch((err) => {
     alert('Not Logined');
   });
-

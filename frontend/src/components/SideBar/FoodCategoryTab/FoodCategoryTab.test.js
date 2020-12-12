@@ -38,7 +38,7 @@ const stubFoodCategory = {
   분식: false,
   디저트: true,
   주점: false,
-}
+};
 const mockPostHandler = jest.fn();
 
 const mockStore = getMockStore(stubInitialState);
@@ -53,24 +53,25 @@ describe('<FoodCategoryTab/>', () => {
             <Route
               path="/"
               exact
-              render={() => <FoodCategoryTab 
-                              foodCategory={stubFoodCategory} 
-                              postClickFoodCategoryHandler={mockPostHandler}
-                              selectAll = {true}
-                            />}
+              render={() => (
+                <FoodCategoryTab
+                  foodCategory={stubFoodCategory}
+                  postClickFoodCategoryHandler={mockPostHandler}
+                  selectAll
+                />
+              )}
             />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
-   // spyGetFoodCategory = spyOn(actionCreators, 'getFoodCategory')
+    // spyGetFoodCategory = spyOn(actionCreators, 'getFoodCategory')
     //  .mockImplementation(() => {return dispatch => {}; });
   });
   it('should render properly', () => {
     const component = mount(foodcategory);
     const wrapper = component.find('.category');
     expect(wrapper.length).toBe(11);
-    
   });
   it('should click image properly', () => {
     const component = mount(foodcategory);
@@ -93,16 +94,18 @@ describe('<FoodCategoryTab/>', () => {
             <Route
               path="/"
               exact
-              render={() => <FoodCategoryTab 
-                              foodCategory={stubFoodCategory} 
-                              postClickFoodCategoryHandler={mockPostHandler}
-                              selectAll = {false}
-                            />}
+              render={() => (
+                <FoodCategoryTab
+                  foodCategory={stubFoodCategory}
+                  postClickFoodCategoryHandler={mockPostHandler}
+                  selectAll={false}
+                />
+              )}
             />
           </Switch>
         </ConnectedRouter>
       </Provider>
-    )
+    );
     const component = mount(stubcategory);
     let wrapper = component.find('.checked');
     const firstimg = wrapper.at(0);
