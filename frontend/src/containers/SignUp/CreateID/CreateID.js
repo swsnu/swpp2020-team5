@@ -30,7 +30,7 @@ class CreateID extends Component {
       shouldCheck: false,
     };
   }
-
+  
   componentDidMount() {
     this.props.onResetCheckUser();
     // 'NotYet' is not checked yet
@@ -174,4 +174,4 @@ const mapDispatchToProps = (dispatch) => ({
   onResetCheckUser: () => dispatch(actionCreators.resetCheckUser()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withAlert()(withRouter(CreateID)));
+export default connect(mapStateToProps, mapDispatchToProps)((withRouter(CreateID)));
