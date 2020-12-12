@@ -259,7 +259,9 @@ const mapDispatchToProps = (dispatch) => ({
   onGetSearchLocation: () => dispatch(actionCreators.getSearchLocation()),
   onEditFoodCategory: (foodCategory) => dispatch(actionCreators.editFoodCategory(foodCategory)),
   onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),
-  onEditPreferenceVector: (preferenceVector) => dispatch(actionCreators.editPreferenceVector(preferenceVector)),
+  onEditPreferenceVector: (preferenceVector) => dispatch(
+    actionCreators.editPreferenceVector(preferenceVector),
+  ),
   onGetPreferenceVector: () => dispatch(actionCreators.getPreferenceVector()),
 });
 

@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './LoadingScreen.css';
 
 class LoadingScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     return (
       <div className="loading-screen">

@@ -32,8 +32,6 @@ class SignIn extends Component {
       currLoc.y = loc.coords.latitude;
       this.setState({ currLoc });
       onPostSignIn({ email, password, currLoc });
-      console.log(currLoc.x);
-      console.log(currLoc.y);
     }, (err) => {
       currLoc.y = 37.47835220754036;
       currLoc.x = 126.95631398408709;

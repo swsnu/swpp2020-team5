@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './RestaurantMenu.css';
 
 class RestaurantMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     const { name, price } = this.props;
     return (
