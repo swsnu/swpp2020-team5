@@ -83,6 +83,7 @@ class MyInfoTab extends Component {
     if (this.props.restaurantID !== -1) {
       myReview = this.props.myReviewList.map((review) => (
         <MyReview
+          key={review.id}
           className="Review"
           reviewID={review.id}
           content={review.content}
@@ -101,7 +102,7 @@ class MyInfoTab extends Component {
             {' '}
             평가하기
           </p>
-          <div>{rateStar}</div>
+          <div className='review-input-star'>{rateStar}</div>
           <div className="review-input-set">
             {reviewInput}
             {reviewConfirmButton}

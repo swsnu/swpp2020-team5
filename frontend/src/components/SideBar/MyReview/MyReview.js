@@ -5,6 +5,11 @@ import ReactStars from 'react-rating-stars-component';
 import * as actionCreators from '../../../store/actions/index';
 import './MyReview.css';
 
+const constStars = [];
+for (let i=0; i<11; i++) {
+  constStars.push(
+  )
+};
 class MyReview extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +30,8 @@ class MyReview extends Component {
   }
 
   onClickEditDoneHandler = () => {
-    this.props.onPutReview(this.props.reviewID, {
+    this.props.onPutReview({
+      id: this.props.reviewID,
       content: this.state.content,
       rating: this.state.rating,
       date: new Date(),
@@ -69,8 +75,8 @@ class MyReview extends Component {
     const ratingStar = (
       this.state.isEdit
         ? <></>
-        : (
-          <ReactStars
+        : <ReactStars
+            key={this.props.rating}
             id="rate-star"
             value={this.props.rating}
             count={5}
@@ -78,7 +84,6 @@ class MyReview extends Component {
             isHalf
             edit={false}
           />
-        )
     );
 
     const EditOrDone = (
@@ -133,12 +138,13 @@ class MyReview extends Component {
     );
     return (
       <div className="MyReview">
+        <hr color='#EAEAEA'/>
         <div className="review-info">
-          <div className="review-rating-stars">
+          <span className="review-rating-stars">
             {changeRatingStar}
             {ratingStar}
-          </div>
-          <div className="review-detail">
+          </span>
+          <span className="review-detail">
             <text id="rating-text">{this.props.rating}</text>
             <text> | </text>
             <text id="modified-time-text">{this.props.date}</text>
@@ -146,7 +152,7 @@ class MyReview extends Component {
             {EditOrDone}
             <text> | </text>
             {DeleteOrCancel}
-          </div>
+          </span>
         </div>
         <div className="review-content">
           {TextOrInput}
@@ -157,8 +163,7 @@ class MyReview extends Component {
 }
 const mapDispatchToProps = (dispatch) => ({
 
-  onPutReview: (reviewID, reviewInfo) => dispatch(actionCreators.editMyReview({
-    id: reviewID,
+  onPutReview: (reviewInfo) => dispatch(actionCreators.editMyReview({
     ...reviewInfo,
   })),
   onDeleteReview: (reviewID) => dispatch(actionCreators.deleteMyReview(reviewID)),

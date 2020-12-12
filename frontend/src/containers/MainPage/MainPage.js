@@ -13,6 +13,8 @@ class MainPage extends Component {
     this.state = {
       curPage: 1,
       isLoading: true,
+      scrollX: 0,
+      scrollY: 0,
     };
   }
 
@@ -24,14 +26,20 @@ class MainPage extends Component {
 
   onClickHandler() {
     const { curPage } = this.state;
-    this.setState({ curPage: curPage + 1 });
+    let scrollX = window.scrollX || document.documentElement.scrollLeft;
+    let scrollY = window.scrollY || document.documentElement.scrollTop;
+    this.setState({ curPage: curPage + 1, scrollX, scrollY });
   }
 
   static onClickHelpHandler() {
     const helpContent = document.getElementsByClassName('header-help-content')[0];
-    //    helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
+    helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    window.scrollTo(this.state.scrollX, this.state.scrollY);
+  }
+  
   render() {
     const { curPage, isLoading } = this.state;
     let order = 0;
@@ -115,14 +123,8 @@ class MainPage extends Component {
               <br />
               <span className="red-text">음식점의 평점</span>
               은 음식점의 성향과 사용자의 취향의 유사도를 반영하여
-              기존 음식점의 평점에서 조정하여 정해집니다.
-              <br />
-              음식점의 성향과 사용자의 취향의 요소들은 모두 동일합니다.
-              <br />
-              <br />
-              <span className="red-text">음식점의 순위</span>
-              는 취향이 반영된 평점과
-              음식점의 대중적인 인기를 모두 반영하여 정해집니다.
+              기존 음식점의 평점에서 조정하고, 최종적으로 음식점의 대중적인 
+              인기를 반영하여 정해집니다.
               <br />
               <br />
             </div>

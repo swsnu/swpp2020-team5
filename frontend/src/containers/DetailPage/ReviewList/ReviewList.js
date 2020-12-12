@@ -14,19 +14,15 @@ class ReviewList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // NOT USED YET
-      // currentReviews: {
-      //   naver: [],
-      //   kakao: [],
-      //   atm: [],
-      // },
       tabIndex: 0,
       currReviewCnt: 10,
+      scrollX: 0,
+      scrollY: 0,
     };
   }
 
-  componentDidMount() {
-    // this.props.onGetReviews(this.props.restaurantID);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    window.scrollTo(this.state.scrollX, this.state.scrollY);
   }
 
   onClickTabHandler = (index) => {
@@ -37,7 +33,10 @@ class ReviewList extends Component {
   onClickShowMoreHandler = () => {
     const { currReviewCnt } = this.state;
     const increasedCnt = currReviewCnt + 10;
-    this.setState({ currReviewCnt: increasedCnt });
+    let scrollX = window.scrollX || document.documentElement.scrollLeft;
+    let scrollY = window.scrollY || document.documentElement.scrollTop;
+
+    this.setState({ currReviewCnt: increasedCnt, scrollX, scrollY });
   }
 
   render() {
@@ -67,7 +66,7 @@ class ReviewList extends Component {
     const atmCnt = otherReviews.atm.length;
 
     const showMoreButton = (
-      <button id="show-more" onClick={this.onClickShowMoreHandler}>Show more</button>
+      <button id="show-more" onClick={this.onClickShowMoreHandler}>리뷰 더보기</button>
     );
 
     return (

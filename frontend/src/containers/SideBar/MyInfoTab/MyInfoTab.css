@@ -14,7 +14,12 @@ input::placeholder {
   text-align: center;
 }
 .second-line {
+  margin-top: 10px;
+  margin-left: 30px;
   margin-bottom: 0px;
+}
+.review-input-star {
+  margin-left: 20px;
 }
 #restaurantName {
   color: #E44142;
@@ -22,28 +27,38 @@ input::placeholder {
 .review-input-set {
   display: flex;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   border-bottom: 1px gray solid;
   padding-bottom: 20px;
 }
 
 #review-input {
-  width: 70%;
+  width: 65%;
   height: 65px;
+  border-radius: 10px;
+  margin-left: 10px;
 }
 
 #review-confirm {
-  width: 30%;
+  margin-left: 10px;
+  width: 28%;
   height: 70px;
   text-align: center;
   background-color: #E44142;
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 20px;
+}
+
+.my-review-count-text {
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 #review-padding{
   width: 50%;
   min-height: 30px;
   display: inline-block;
+  margin-left: 30px;
 }

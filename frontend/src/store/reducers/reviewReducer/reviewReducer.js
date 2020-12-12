@@ -17,16 +17,19 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GET_OTHER_REVIEWS:
       return { ...state, otherReviews: action.target };
     case actionTypes.GET_MY_REVIEWS:
-      return { ...state, myReviews: action.target };
+      const newReviewList = [...action.target];
+      newReviewList.sort((a,b) => b.id-a.id);
+      return { ...state, myReviews: newReviewList };
     case actionTypes.EDIT_MY_REVIEW: {
-      const deleted = state.myReviews.filter((review) => review.id !== action.id);
-      const newReview = {
-        id: action.id,
-        content: action.content,
-        rating: action.rating,
-        date: action.date,
-      };
-      return { ...state, myReviews: [...deleted, newReview] };
+      const newReviewList = [...state.myReviews];
+      newReviewList.forEach(review => {
+        if (review.id === action.target.id) {
+          review.content = action.target.content;
+          review.rating = action.target.rating;
+          review.date = action.target.date;
+        }
+      });
+      return { ...state, myReviews: newReviewList };
     }
     case actionTypes.POST_MY_REVIEW: {
       const newReview = {
@@ -35,11 +38,12 @@ const reducer = (state = initialState, action) => {
         rating: action.rating,
         date: action.date,
       };
-      return { ...state, myReviews: [...state.myReviews, newReview] };
+      return { ...state, myReviews: [newReview, ...state.myReviews] };
     }
     case actionTypes.DELETE_MY_REVIEW: {
-      const deleted = state.myReviews.filter((review) => review.id !== action.target);
-      return { ...state, myReviews: [...deleted] };
+      const newReviewList = [...state.myReviews];
+      const deleted = newReviewList.filter((review) => review.id !== action.target);
+      return { ...state, myReviews: deleted };
     }
     default:
       break;
