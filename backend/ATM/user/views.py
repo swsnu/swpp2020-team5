@@ -31,6 +31,8 @@ def check(request):
         except User.DoesNotExist:
             return HttpResponse(status=204)
         return HttpResponse(status=401)
+    else:
+        return HttpResponseNotAllowed(['GET'])
 
 @ensure_csrf_cookie
 def preference_vector(request):
