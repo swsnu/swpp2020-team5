@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
 import './FoodCategoryTab.css';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import * as actionCreators from '../../../store/actions/index';
-import img from '../../../images/logo.png';
 
 class FoodCategoryTab extends Component {
+    constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     const categorylist = [];
-    let id = 0;
     Object.keys(this.props.foodCategory).forEach((category) => {
       categorylist.push(
         <div className="category">
@@ -22,7 +21,6 @@ class FoodCategoryTab extends Component {
           </button>
         </div>,
       );
-      id += 1;
     });
     return (
       <div className="tab" id="filter">

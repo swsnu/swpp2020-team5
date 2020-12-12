@@ -31,7 +31,7 @@ class CreatePreferenceVector extends Component {
     const { username, email, password } = this.props;
     const { selectedFoods, foodCaptionList } = this.state;
     const selectedFoodNames = [];
-    for (let i = 0; i < selectedFoods.length; i++) {
+    for (let i = 0; i < selectedFoods.length; i += 1) {
       if (selectedFoods[i]) {
         selectedFoodNames.push(foodCaptionList[i]);
       }

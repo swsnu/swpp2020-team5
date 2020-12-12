@@ -1,9 +1,7 @@
 /* global kakao */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import * as actionCreators from '../../../store/actions/index';
 import SearchResult from '../SearchResult/SearchResult';
 
 import searchIcon from '../../../images/searchIcon_red.png';

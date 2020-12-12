@@ -31,8 +31,9 @@ class RestaurantSummary extends Component {
           alt="restautantThumbnail"
           onError={(ev) => {
             i += 1;
-            if (i > urlListLength) ev.target.src = NoImage;
-            else ev.target.src = `https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src=${this.props.img_url_list[i]}`;
+            const component = ev.target;
+            if (i > urlListLength) component.src = NoImage;
+            else component.src = `https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src=${this.props.img_url_list[i]}`;
           }}
           src={
             urlListLength === 0 ? NoImage : `https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src=${this.props.img_url_list[0]}`
