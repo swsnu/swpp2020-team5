@@ -57,6 +57,8 @@ class PreferenceVectorTab extends Component {
       <div className="tab" id="preference">
         <div className="tab-header">
           <span>나의 취향 조정하기</span>
+          <button className="tab-header-button" id="preference-confirm" onClick={() => this.props.onClickSave()}>적용</button>
+      
         </div>
         <div className="tab-content">
           {prefVecList}

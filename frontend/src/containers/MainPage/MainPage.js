@@ -62,6 +62,7 @@ class MainPage extends Component {
       idx += 1;
       list.push(
         <RestaurantSummary
+          key={el.id}
           title={el.title}
           id={el.id}
           img_url_list={el.img_url_list}
@@ -72,10 +73,13 @@ class MainPage extends Component {
         />,
       );
     }
+    const searchKeyword = this.props.match.params.name === undefined ? '' : this.props.match.params.name;
     if (list.length === 0) {
       return (
         <div>
-          <SideBar restaurantID={-1} />
+          <SideBar restaurantID={-1} 
+            onReload={() => this.props.onGetRestaurantList(searchKeyword)}
+          />
           <div className="mainPage">
             <div className="no-result">현재 조건에 맞는 결과가 없습니다.</div>
           </div>
@@ -96,7 +100,9 @@ class MainPage extends Component {
     }
     return (
       <div>
-        <SideBar restaurantID={-1} />
+        <SideBar restaurantID={-1} 
+          onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
+        />
         <div className="main-page-header">
           <div className="header-text">
             {headerContent}

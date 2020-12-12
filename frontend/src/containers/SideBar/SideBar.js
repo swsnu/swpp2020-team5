@@ -118,6 +118,16 @@ class SideBar extends Component {
     this.props.history.push(`/main/${searchWord}`);
   }
 
+  onSaveHandler = () => {
+    const {
+      searchWord, searchLocation, foodCategory, preferenceVector,
+    } = this.state;
+    this.props.onEditSearchLocation(searchLocation);
+    this.props.onEditFoodCategory(foodCategory);
+    this.props.onEditPreferenceVector(preferenceVector);
+    this.props.onReloadHandler();
+  }
+
   onClickTabButtonHandler = (tabMode) => {
     this.setState({ tabMode });
   }
@@ -160,6 +170,7 @@ class SideBar extends Component {
                   (category) => this.postClickFoodCategoryHandler(category)
                 }
             selectAll={this.state.selectAllCategory}
+            onClickSave={this.onSaveHandler}
           />
         );
         break;
@@ -169,6 +180,7 @@ class SideBar extends Component {
             id="preference-vector-tab"
             preferenceVector={this.state.preferenceVector}
             onChangeFactor={this.onChangeVectorHandler}
+            onClickSave={this.onSaveHandler}
           />
         );
         break;

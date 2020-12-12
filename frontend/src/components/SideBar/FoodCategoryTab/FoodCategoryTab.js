@@ -27,6 +27,7 @@ class FoodCategoryTab extends Component {
       <div className="tab" id="filter">
         <div className="tab-header">
           <span>음식 카테고리</span>
+          <button className="tab-header-button" id="foodcategory-confirm" onClick={() => this.props.onClickSave()}>적용</button>
         </div>
         <div className="tab-content">
           <div className="category-list">
