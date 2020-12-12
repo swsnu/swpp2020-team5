@@ -3,14 +3,14 @@ import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import {
+  Tab, Tabs, TabList, TabPanel,
+} from 'react-tabs';
 import ReviewList from './ReviewList';
 import * as reviewActionCreator from '../../../store/actions/reviewActions/reviewActions';
 import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
 import OtherReview from '../../../components/DetailPage/OtherReview/OtherReview';
-import {
-  Tab, Tabs, TabList, TabPanel,
-} from 'react-tabs';
 
 const stubInitialState = {
   user: {
@@ -44,16 +44,36 @@ const stubInitialState = {
           date: '',
           authorName: '사용자4',
         },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
       ],
       kakao: [
         {
@@ -62,21 +82,51 @@ const stubInitialState = {
           date: '',
           authorName: '사용자2',
         },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
       ],
       atm: [
         {
@@ -91,16 +141,36 @@ const stubInitialState = {
           date: '',
           authorName: '사용자3',
         },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
-        { content: 'for show more', rating: 4.0, date: '', authorName: 'test' },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
+        {
+          content: 'for show more', rating: 4.0, date: '', authorName: 'test',
+        },
       ],
     },
   },
@@ -120,7 +190,6 @@ describe('<ReviewList /', () => {
         </ConnectedRouter>
       </Provider>
     );
-
   });
 
   afterEach(() => { jest.clearAllMocks(); });
@@ -131,7 +200,6 @@ describe('<ReviewList /', () => {
 
     expect(wrapper.length).toBe(1);
   });
-
 
   it('should handle Other Reviews', () => {
     const component = mount(reviewList);
@@ -154,7 +222,5 @@ describe('<ReviewList /', () => {
     expect(tempInstance.state.curr_review_cnt).toBe(10);
     const showMoreButton = component.find('#show-more');
     expect(showMoreButton.length).toBe(1);
-
   });
-
 });

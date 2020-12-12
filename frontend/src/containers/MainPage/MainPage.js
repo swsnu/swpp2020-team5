@@ -49,8 +49,8 @@ class MainPage extends Component {
     }
     while (order < curPage * 10 && idx < this.props.storedList.length) {
       const el = this.props.storedList[idx];
-      order++;
-      idx++;
+      order += 1;
+      idx += 1;
       list.push(
         <RestaurantSummary
           title={el.title}
@@ -102,7 +102,7 @@ class MainPage extends Component {
               음식점에 리뷰를 남기면 해당 리뷰의 평점과 리뷰를 남긴 음식점의 성향을 반영하여
               사용자의 취향을 갱신합니다.
               <br />
-              "나의 취향" 탭에서 이를 확인하고 임의로 조정할 수 있습니다.
+              &quot;나의 취향&quot; 탭에서 이를 확인하고 임의로 조정할 수 있습니다.
               <br />
               <br />
               <span className="red-text">음식점의 성향</span>

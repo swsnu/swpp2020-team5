@@ -79,20 +79,20 @@ class SideBar extends Component {
     const newState = { ...this.state };
     if (category === 'total') {
       if (newState.selectAllCategory === false) {
-        Object.keys(this.state.foodCategory).forEach((category) => {
-          newState.foodCategory[category] = true;
+        Object.keys(this.state.foodCategory).forEach((cat) => {
+          newState.foodCategory[cat] = true;
         });
         newState.selectAllCategory = true;
       } else {
-        Object.keys(this.state.foodCategory).forEach((category) => {
-          newState.foodCategory[category] = false;
+        Object.keys(this.state.foodCategory).forEach((cat) => {
+          newState.foodCategory[cat] = false;
         });
         newState.selectAllCategory = false;
       }
     } else {
       if (newState.selectAllCategory) {
-        Object.keys(this.state.foodCategory).forEach((category) => {
-          newState.foodCategory[category] = false;
+        Object.keys(this.state.foodCategory).forEach((cat) => {
+          newState.foodCategory[cat] = false;
         });
         newState.selectAllCategory = false;
       }
@@ -146,7 +146,7 @@ class SideBar extends Component {
           <LocationTab
             id="location-tab"
             searchLocation={this.state.searchLocation}
-            onChangeLocation={(searchLocation) => this.setState({ searchLocation })}
+            onChangeLocation={(newLocation) => this.setState({ searchLocation: newLocation })}
           />
         );
         break;

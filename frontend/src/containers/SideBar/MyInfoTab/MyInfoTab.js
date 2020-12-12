@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { connect } from 'react-redux';
+import createHistory from 'history/createBrowserHistory';
 import * as actionCreators from '../../../store/actions/index';
 import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
-import createHistory from 'history/createBrowserHistory';
 
 const history = createHistory();
 
