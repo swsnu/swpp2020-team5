@@ -2,12 +2,11 @@ import json
 from datetime import datetime
 from json import JSONDecodeError
 from django.http import (
-    HttpResponse, HttpResponseNotAllowed, JsonResponse,
+    HttpResponse, HttpResponseNotAllowed,
     HttpResponseBadRequest, HttpResponseNotFound, HttpResponseForbidden
 )
 from django.views.decorators.csrf import ensure_csrf_cookie
-from ATM.models import Review, Restaurant, Profile
-from .utils import prefvec_update
+from ATM.models import Review
 
 
 @ensure_csrf_cookie

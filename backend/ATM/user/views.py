@@ -2,9 +2,9 @@ import json
 from json import JSONDecodeError
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .utils import get_preference_attributes
 from django.db.models import Q
 from django.contrib.auth.models import User
+from .utils import get_preference_attributes
 
 
 @ensure_csrf_cookie

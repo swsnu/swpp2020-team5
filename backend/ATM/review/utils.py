@@ -1,4 +1,3 @@
-from ATM.models import (PreferenceVector)
 from ..user.utils import get_preference_attributes
 from ..utils import cos_sim_word
 
@@ -17,7 +16,6 @@ def prefvec_update(restaurant_prefvec, user_prefvec, avg_diff):
             sim = cos_sim_word(res_key, user_key)
             adjust += (restaurant_prefvec[res_key] -
                        user_prefvec[user_key]) * sim
-        # TODO 상수값 조정(스케일 조정) 해야함.
 
         user_prefvec[user_key] += (adjust * avg_diff)
         if user_prefvec[user_key] > max_value:

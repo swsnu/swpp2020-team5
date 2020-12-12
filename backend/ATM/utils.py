@@ -1,7 +1,7 @@
-from numpy import dot
-from numpy.linalg import norm
 import json
 import numpy as np
+from numpy import dot
+from numpy.linalg import norm
 # import numpy as np
 
 embedding = {}
