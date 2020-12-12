@@ -54,6 +54,15 @@ const stubInitialState = {
   checkUserStatus: 'NotYet',
 };
 
+const stubUserExistState = {
+  selectedUser: null,
+  preferenceVector: null,
+  foodCategory: null,
+  searchLocation: null,
+  isGetUserCalled: false,
+  checkUserStatus: 'Exist',
+};
+
 describe('user reducer', () => {
   it('should render properly', () => {
     const newState = reducer(stubInitialState, {});
@@ -188,7 +197,7 @@ describe('user reducer', () => {
   });
 
   it('should reset checkUserStatus properly', () => {
-    const newState = reducer(stubInitialState, {
+    const newState = reducer(stubUserExistState, {
       type: actionTypes.RESET_CHECK_USER,
     });
     expect(newState).toEqual({
@@ -202,7 +211,7 @@ describe('user reducer', () => {
   });
 
   it('should call sign_out properly', () => {
-    const newState = reducer(stubInitialState, {
+    const newState = reducer(stubUserExistState, {
       type: actionTypes.GET_SIGN_OUT,
     });
     expect(newState).toEqual({
@@ -215,8 +224,8 @@ describe('user reducer', () => {
     });
   });
 
-  it('should call sign_out properly', () => {
-    const newState = reducer(stubInitialState, {
+  it('should call sign_in properly', () => {
+    const newState = reducer(stubUserExistState, {
       type: actionTypes.POST_SIGN_IN,
     });
     expect(newState).toEqual({

@@ -44,7 +44,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, myReviews: [...deleted] };
     }
     default:
-      console.log('HI')
       break;
   }
   return { ...state };

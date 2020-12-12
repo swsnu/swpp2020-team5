@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../../store/actions/index';
 import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
+import createHistory from 'history/createBrowserHistory'
+const history = createHistory();
+
 
 class MyInfoTab extends Component {
   constructor(props) {
