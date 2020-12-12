@@ -100,13 +100,13 @@ def sign_in(request):
             cur_user.search_location.x = loc_x
             cur_user.search_location.y = loc_y
             print("d")
-            url = f'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x={loc_x}&y={loc_y}'
-            headers = {"Authorization": "KakaoAK aac06354b765df501b09c92813259058"}
-            api_test = requests.get(url,headers=headers)
-            url_text = json.loads(api_test.text)
-            address_name = url_text['documents'][0]['address_name']
-            print(address_name)
-            cur_user.search_location.address_name = address_name
+            # url = f'https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x={loc_x}&y={loc_y}'
+            # headers = {"Authorization": "KakaoAK aac06354b765df501b09c92813259058"}
+            # api_test = requests.get(url,headers=headers)
+            # url_text = json.loads(api_test.text)
+            # address_name = url_text['documents'][0]['address_name']
+            # print(address_name)
+            # cur_user.search_location.address_name = address_name
             cur_user.search_location.save()
 
             for attr in get_preference_attributes(cur_user.food_category):
