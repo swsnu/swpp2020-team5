@@ -38,8 +38,11 @@ class DetailPage extends Component {
       <img
         src={`https://search.pstatic.net/common/?autoRotate=true&quality=95&type=f180_180&src=${el}`}
         className="restaurant-image"
-        alt="restaurant image"
-        onError={(ev) => ev.target.style.display = 'none'}
+        alt="restaurant"
+        onError={(ev) => {
+          const component = ev.target;
+          component.style.display = 'none';
+        }}
       />
     ));
     const ratingDiffWrapper = () => {
@@ -139,8 +142,9 @@ class DetailPage extends Component {
             <img
               onError={(ev) => {
                 i += 1;
-                if (i > urlListLength) ev.target.src = NoImage;
-                else ev.target.src = selectedRestaurant.img_url_list[i];
+                const component = ev.target;
+                if (i > urlListLength) component.src = NoImage;
+                else component.src = selectedRestaurant.img_url_list[i];
               }}
               src={
                 urlListLength === 0 ? NoImage : selectedRestaurant.img_url_list[0]
@@ -179,7 +183,10 @@ class DetailPage extends Component {
           </div>
           <div className="info-type">방문자 리뷰 ㅣ</div>
           <div className="reviewlist">
-            <ReviewList restaurantID={selectedRestaurant.id} otherReviews={this.props.otherReviews} />
+            <ReviewList
+              restaurantID={selectedRestaurant.id}
+              otherReviews={this.props.otherReviews}
+            />
           </div>
         </div>
       </div>

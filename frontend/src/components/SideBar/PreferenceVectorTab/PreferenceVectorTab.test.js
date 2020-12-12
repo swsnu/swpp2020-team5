@@ -13,9 +13,21 @@ const stubInitialState = {
   user: {
     id: 0,
     username: '',
-    preferenceVector: {'매운': 0, '느끼한': 0, '짭짤한': 0, '달달한': 0, '고소한': 0,
-        '싱거운': 0, '담백한': 0, '바삭바삭한': 0, '부드러운': 0, '저렴한': 0,
-        '웨이팅이있는': 0, '혼밥하기좋은': 0, '불친절한': 0},
+    preferenceVector: {
+      매운: 0,
+      느끼한: 0,
+      짭짤한: 0,
+      달달한: 0,
+      고소한: 0,
+      싱거운: 0,
+      담백한: 0,
+      바삭바삭한: 0,
+      부드러운: 0,
+      저렴한: 0,
+      웨이팅이있는: 0,
+      혼밥하기좋은: 0,
+      불친절한: 0,
+    },
     foodCategory: null,
     searchLocation: null,
     selectedUser: { name: 'TEST_USER' },
@@ -44,14 +56,17 @@ const mockStore = getMockStore(stubInitialState);
 
 describe('<PreferenceVectorTab /', () => {
   let preVecTab;
-  let spyGetUser; 
-  let spyHandler = jest.fn(()=>{});
+  let spyGetUser;
+  const spyHandler = jest.fn(() => {});
 
   beforeEach(() => {
     preVecTab = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
-          <PreferenceVectorTab onChangeFactor={spyHandler} preferenceVector={stubInitialState.user.preferenceVector}/>
+          <PreferenceVectorTab
+            onChangeFactor={spyHandler}
+            preferenceVector={stubInitialState.user.preferenceVector}
+          />
         </ConnectedRouter>
       </Provider>
     );
@@ -70,10 +85,10 @@ describe('<PreferenceVectorTab /', () => {
   });
 
   it('should render empty DOM', () => {
-    let emptyTab = (
+    const emptyTab = (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
-          <PreferenceVectorTab onChangeFactor={spyHandler} preferenceVector={null}/>
+          <PreferenceVectorTab onChangeFactor={spyHandler} preferenceVector={null} />
         </ConnectedRouter>
       </Provider>
     );
@@ -82,7 +97,6 @@ describe('<PreferenceVectorTab /', () => {
     const wrapper = component.find('#preference');
     expect(wrapper.length).toBe(0);
   });
-
 
 /*  it('should handle changing factor', () => {
     const component = mount(preVecTab);

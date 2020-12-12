@@ -9,7 +9,7 @@ class PreferenceVectorTab extends Component {
     super(props);
     // adjustedVector is the vector that will be submitted.
     this.state = {
-      factor_list: [
+      factorList: [
         '매운', '느끼한', '짭짤한', '달달한', '고소한',
         '싱거운', '담백한', '바삭바삭한', '부드러운', '저렴한',
         '웨이팅이있는', '혼밥하기좋은', '불친절한',
@@ -18,17 +18,17 @@ class PreferenceVectorTab extends Component {
   }
 
   render() {
-    const { factor_list } = this.state;
+    const { factorList } = this.state;
     const { preferenceVector } = this.props;
     if (preferenceVector === null) return (<div />);
-    const num = [0, 1, 2, 3, 4, 5];
-    const factorIndicator = num.map((num) => {
+    const numList = [0, 1, 2, 3, 4, 5];
+    const factorIndicator = numList.map((num) => {
       const marginLeft = `calc( ${(num * 20).toString()}% - ${(num * 10).toString()}px )`;
       return (
         <div className="factor-indicator" style={{ marginLeft }}>{num}</div>
       );
     });
-    const prefVecList = factor_list.map((factor) => {
+    const prefVecList = factorList.map((factor) => {
       const width = `calc((100% - 60px)*${(preferenceVector[factor] / 5).toString()})`;
       return (
         <div className="slider-wrapper">

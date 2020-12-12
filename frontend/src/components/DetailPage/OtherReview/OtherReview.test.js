@@ -10,14 +10,14 @@ describe('</OtherReview />', () => {
   });
 
   it('should open/close the content when clicked', () => {
-    
     const longContent = `This must be summarized. 
     Because the length of this content is too~~~~~ too~~~~~ 
     too~~~~~too~~~~~too~~~~~too~~~~~too~~~~~too~~~~~too~~~~~
     too~~~~~too~~~~~too~~~~long to ibe fit`;
 
-    const component = shallow(<OtherReview 
-      content={longContent}/>);
+    const component = shallow(<OtherReview
+      content={longContent}
+    />);
     const wrapper = component.find('.other-review-content');
 
     // initially rendered as summary

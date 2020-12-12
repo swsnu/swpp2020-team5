@@ -20,8 +20,8 @@ class ReviewList extends Component {
       //   kakao: [],
       //   atm: [],
       // },
-      tab_index: 0,
-      curr_review_cnt: 10,
+      tabIndex: 0,
+      currReviewCnt: 10,
     };
   }
 
@@ -30,22 +30,24 @@ class ReviewList extends Component {
   }
 
   onClickTabHandler = (index) => {
-    this.setState({ tab_index: index });
-    this.setState({ curr_review_cnt: 10 });
+    this.setState({ tabIndex: index });
+    this.setState({ currReviewCnt: 10 });
   }
 
   onClickShowMoreHandler = () => {
-    const increased_cnt = this.state.curr_review_cnt + 10;
-    this.setState({ curr_review_cnt: increased_cnt });
+    const { currReviewCnt } = this.state;
+    const increasedCnt = currReviewCnt + 10;
+    this.setState({ currReviewCnt: increasedCnt });
   }
 
   render() {
     // TODO other review 분류작업? + <OtherReview> 로 렌더링
-
+    const { currReviewCnt } = this.state;
+    const { otherReviews } = this.props;
     let showCnt = 0;
-    const naverReview = this.props.otherReviews.naver.map((review) => {
-      if (showCnt < this.state.curr_review_cnt) {
-        showCnt++;
+    const naverReview = otherReviews.naver.map((review) => {
+      if (showCnt < currReviewCnt) {
+        showCnt += 1;
         return (
           <OtherReview
             content={review.content}
@@ -58,9 +60,9 @@ class ReviewList extends Component {
     });
     showCnt = 0;
 
-    const kakaoReview = this.props.otherReviews.kakao.map((review) => {
-      if (showCnt < this.state.curr_review_cnt) {
-        showCnt++;
+    const kakaoReview = otherReviews.kakao.map((review) => {
+      if (showCnt < currReviewCnt) {
+        showCnt += 1;
         return (
           <OtherReview
             content={review.content}
@@ -74,9 +76,9 @@ class ReviewList extends Component {
 
     showCnt = 0;
 
-    const atmReview = this.props.otherReviews.atm.map((review) => {
-      if (showCnt < this.state.curr_review_cnt) {
-        showCnt++;
+    const atmReview = otherReviews.atm.map((review) => {
+      if (showCnt < currReviewCnt) {
+        showCnt += 1;
         return (
           <OtherReview
             content={review.content}
@@ -97,7 +99,7 @@ class ReviewList extends Component {
 
     return (
       <div className="ReviewList">
-        <Tabs id="review-tab" selectedIndex={this.state.tab_index} onSelect={this.onClickTabHandler}>
+        <Tabs id="review-tab" selectedIndex={this.state.tabIndex} onSelect={this.onClickTabHandler}>
           <TabList>
             <Tab>네이버 리뷰</Tab>
             <Tab>카카오 리뷰</Tab>
@@ -111,7 +113,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {naverReview}
-            {(naverCnt > 10 && naverCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
+            {(naverCnt > 10 && naverCnt > this.state.currReviewCnt) ? showMoreButton : ''}
           </TabPanel>
           <TabPanel className="tabcontent" id="kakao-content">
             <p>
@@ -120,7 +122,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {kakaoReview}
-            {(kakaoCnt > 10 && kakaoCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
+            {(kakaoCnt > 10 && kakaoCnt > this.state.currReviewCnt) ? showMoreButton : ''}
           </TabPanel>
           <TabPanel className="tabcontent" id="atm-content">
             <p>
@@ -129,7 +131,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {atmReview}
-            {(atmCnt > 10 && atmCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
+            {(atmCnt > 10 && atmCnt > this.state.currReviewCnt) ? showMoreButton : ''}
           </TabPanel>
         </Tabs>
       </div>

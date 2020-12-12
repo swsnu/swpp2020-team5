@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import './FoodCategoryTab.css';
 
 class FoodCategoryTab extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
     const categorylist = [];
     Object.keys(this.props.foodCategory).forEach((category) => {
