@@ -54,6 +54,7 @@ class CreateID extends Component {
         };
       }
     }
+    return {};
   }
 
   onClickConfirmHandler() {
