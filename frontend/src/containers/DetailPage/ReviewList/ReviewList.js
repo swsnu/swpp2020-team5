@@ -49,6 +49,7 @@ class ReviewList extends Component {
         const review = reviewList[i];
         loadedList.push(
           <OtherReview
+            key={review.id}
             content={review.content}
             author={review.author_name}
             date={review.date}

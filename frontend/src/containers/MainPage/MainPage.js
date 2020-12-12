@@ -20,8 +20,9 @@ class MainPage extends Component {
 
   componentDidMount() {
     const searchKeyword = this.props.match.params.name === undefined ? '' : this.props.match.params.name;
-    this.props.onGetRestaurantList(searchKeyword);
-    this.setState({ isLoading: false });
+    this.props.onGetRestaurantList(searchKeyword).then(res =>
+      this.setState({ isLoading: false })
+    );
   }
 
   onClickHandler() {
