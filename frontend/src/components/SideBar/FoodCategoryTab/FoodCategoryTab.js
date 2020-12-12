@@ -34,7 +34,7 @@ class FoodCategoryTab extends Component {
             {categorylist}
           </div>
           <div className="category">
-            <button
+            <button id="total-button"
               className={this.props.selectAll
                 ? 'checked' : 'unchecked'}
                 onClick={() => this.props.postClickFoodCategoryHandler('total')}

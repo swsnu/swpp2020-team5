@@ -57,6 +57,7 @@ def searched_restaurants(request, word=''):
                 # print(haversine(cur, res_loc))
                 if haversine(cur, res_loc) >= 10:
                     continue
+                print(restaurant.food_category)
                 if not author_food_category[restaurant.food_category]:
                     continue
                 response_dict = {}
@@ -83,7 +84,7 @@ def searched_restaurants(request, word=''):
                 response_dict['rate'] = get_customized_rating(restaurant_pref_dict,\
                                     author_pref_dict, restaurant.avg_rating, review_cnt)
                 if debug_min < response_dict['rate']:
-                   debug_min = response_dict['rate'];
+                   debug_min = response_dict['rate']
             
                 response_list.append(response_dict)
             #response list sorted by rate
@@ -189,8 +190,6 @@ def other_reviews(request, restaurant_id):
             return HttpResponseNotAllowed(['GET'])
     else:
         return HttpResponse(status=401)
-
-
 
 @ensure_csrf_cookie
 def my_reviews(request, restaurant_id):

@@ -18,7 +18,8 @@ class MainPage extends Component {
   
   componentDidMount() {
     const searchKeyword = this.props.match.params.name === undefined ? "" : this.props.match.params.name;
-    this.props.onGetRestaurantList(searchKeyword).then(()=>{this.setState({isLoading: false})});
+    this.props.onGetRestaurantList(searchKeyword)
+    this.setState({isLoading: false});
   }
   onClickHandler() {
     const {curPage} = this.state
@@ -26,7 +27,7 @@ class MainPage extends Component {
   }
   onClickHelpHandler() {
     const helpContent = document.getElementsByClassName('header-help-content')[0];
-    helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
+//    helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
   }
   render() {
     const{ curPage, isLoading } = this.state;
@@ -128,7 +129,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)).then(),
+  onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)),
   
 });
 

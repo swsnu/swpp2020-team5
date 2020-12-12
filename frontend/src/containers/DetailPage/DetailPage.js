@@ -34,7 +34,6 @@ class DetailPage extends Component {
         </div>
       )
     }
-    console.log(selectedRestaurant.id)
     const ratingDiff = selectedRestaurant.difference.toFixed(2);
     const imgList = selectedRestaurant.img_url_list.map((el) => {
       return (
@@ -57,7 +56,7 @@ class DetailPage extends Component {
         image = <img src={DownArrow} id="arrow" alt="downArrow" />;
       }
       else {
-        text = <div className="rating-unchanged">'변동없음!'</div>;
+        text = <div className="rating-unchanged">변동없음!</div>;
       }
       return (
         <div className="rating-diff-wrapper">
