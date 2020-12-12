@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from ATM.models import Review, Restaurant, Profile, Location, PreferenceVector
+from ATM.models import Review, Restaurant, Profile, Location, PreferenceVector, Author, FoodCategory
 
 
 class ReviewTestCase(TestCase):
@@ -18,10 +18,10 @@ class ReviewTestCase(TestCase):
             email='testerB@tester.com')
         userA = User.objects.get(username='testerA')
         userB = User.objects.get(username='testerB')
-        profileA = Profile(user=userA)
-        profileA.save()
-        profileB = Profile(user=userB)
-        profileB.save()
+        authorA = Author(user=userA, nickname='userA')
+        authorA.save()
+        authorB = Author(user=userB, nickname='userB')
+        authorB.save()
 
         mock_location = Location(x=0, y=0, address_name='')
         mock_location.save()
@@ -30,26 +30,52 @@ class ReviewTestCase(TestCase):
             느끼한=0,
             짭짤한=0,
             달달한=0,
-            기름진=0,
             고소한=0,
             싱거운=0,
-            신맛이나는=0,
             담백한=0,
             바삭바삭한=0,
             부드러운=0,
             저렴한=0,
-            푸짐한=0,
             웨이팅이있는=0,
-            혼밥하기좋은=0)
+            혼밥하기좋은=0,
+            불친절한=0)
         mock_prevec.save()
+        food_category= FoodCategory(
+            한식=True,
+            일식= True,
+            중식= False,
+            양식= True,
+            분식= True,
+            술집= True,
+            카페= True,
+            치킨= True,
+            간식= True,
+            퓨전요리= True,
+            아시아음식= True,
+            패스트푸드= True
+        )
+        food_category.save()
+ 
+        profileA = Profile(user=userA, search_location=mock_location, food_category=food_category, preference_vector=mock_prevec);
+        profileA.save()
+        profileB = Profile(user=userB, search_location=mock_location, food_category=food_category, preference_vector=mock_prevec)
+        profileB.save()
+
+
         restaurantA = Restaurant(
             name='restaurantA',
             location=mock_location,
             avg_rating=4,
             preference_vector=mock_prevec,
             food_category='',
+            menu='',
+            openTime='',
+            thumbnail='',
+            keyword='',
+            kakao_link='',
             naver_link='',
-            kakao_link='')
+            map_link='',
+            search_string='')
         restaurantA.save()
 
         restaurantB = Restaurant(
@@ -58,13 +84,19 @@ class ReviewTestCase(TestCase):
             avg_rating=4,
             preference_vector=mock_prevec,
             food_category='',
+            menu='',
+            openTime='',
+            thumbnail='',
+            keyword='',
+            kakao_link='',
             naver_link='',
-            kakao_link='')
+            map_link='',
+            search_string='')
         restaurantB.save()
 
         review = Review(
             restaurant=restaurantA,
-            author=profileA,
+            author=authorA,
             content='A wrote this',
             rating=3,
             date=datetime.now(),
@@ -72,7 +104,7 @@ class ReviewTestCase(TestCase):
         review.save()
         review = Review(
             restaurant=restaurantA,
-            author=profileB,
+            author=authorB,
             content='B wrote this',
             rating=5,
             date=datetime.now(),
@@ -89,87 +121,90 @@ class ReviewTestCase(TestCase):
         client = Client()
 
         ### Without login case ###
-        response = client.get('/atm/restaurant/1/other-review/')
+        response = client.get('/atm/restaurant/detail/1/other-review/')
         self.assertEqual(response.status_code, 401)
 
+        location_info = {'x': 25, 'y': 37}
         ### Login successfully ###
+        request_body = {
+            "email": 'testerA@tester.com',
+            "password": '123123',
+            "currLoc": location_info
+        }
         response = client.post('/atm/sign-in/',
-                               json.dumps({'email': 'testerA@tester.com',
-                                           'password': '123123',
-                                           'x': '',
-                                           'y': ''}),
+                               request_body,
                                content_type='application/json')
         self.assertEqual(response.status_code, 204)
 
         ### Not allowed request ###
-        response = client.post('/atm/restaurant/1/other-review/')
+        response = client.post('/atm/restaurant/detail/1/other-review/')
         self.assertEqual(response.status_code, 405)
-        response = client.put('/atm/restaurant/1/other-review/')
+        response = client.put('/atm/restaurant/detail/1/other-review/')
         self.assertEqual(response.status_code, 405)
-        response = client.delete('/atm/restaurant/1/other-review/')
+        response = client.delete('/atm/restaurant/detail/1/other-review/')
         self.assertEqual(response.status_code, 405)
 
         # GET OTHER REVIEW
 
         # The ideal case
-        response = client.get('/atm/restaurant/1/other-review/')
+        response = client.get('/atm/restaurant/detail/1/other-review/')
         self.assertEqual(response.status_code, 200)
 
         # Restaurant doesn't exist
-        response = client.get('/atm/restaurant/75/other-review/')
+        response = client.get('/atm/restaurant/detail/75/other-review/')
         self.assertEqual(response.status_code, 404)
 
     def test_get_post_my_review(self):
         client = Client()
 
         ### Without login case ###
-        response = client.get('/atm/restaurant/1/my-review/')
+        response = client.get('/atm/restaurant/detail/1/my-review/')
         self.assertEqual(response.status_code, 401)
-        response = client.post('/atm/restaurant/1/my-review/')
+        response = client.post('/atm/restaurant/detail/1/my-review/')
         self.assertEqual(response.status_code, 401)
 
         ### Login successfully ###
         response = client.post('/atm/sign-in/',
                                json.dumps({'email': 'testerA@tester.com',
                                            'password': '123123',
-                                           'x': '',
-                                           'y': ''}),
+                                           'currLoc':{'x': 30, 'y': 30}
+                                           }),
                                content_type='application/json')
         self.assertEqual(response.status_code, 204)
 
         ### Not allowed request ###
-        response = client.put('/atm/restaurant/1/my-review/')
+        response = client.put('/atm/restaurant/detail/1/my-review/')
         self.assertEqual(response.status_code, 405)
-        response = client.delete('/atm/restaurant/1/my-review/')
+        response = client.delete('/atm/restaurant/detail/1/my-review/')
         self.assertEqual(response.status_code, 405)
 
         ### GET MY REVIEW ###
         # The ideal case
-        response = client.get('/atm/restaurant/1/my-review/')
+        response = client.get('/atm/restaurant/detail/1/my-review/')
         self.assertEqual(response.status_code, 200)
 
         # Restaurant doesn't exist
-        response = client.get('/atm/restaurant/75/my-review/')
+        response = client.get('/atm/restaurant/detail/75/my-review/')
         self.assertEqual(response.status_code, 404)
 
         ### PORST MY REVIEW ###
 
         # The ideal case
-        response = client.post('/atm/restaurant/1/my-review/',
+        response = client.post('/atm/restaurant/detail/1/my-review/',
                                json.dumps({'content': 'posted successfully',
                                            'rating': 1}),
                                content_type='application/json')
         self.assertEqual(response.status_code, 201)
 
         # Restaurant doesn't exist
-        response = client.post('/atm/restaurant/75/my-review/',
+        response = client.post('/atm/restaurant/detail/75/my-review/',
                                json.dumps({'content': 'no restaurant',
                                            'rating': 4}),
                                content_type='application/json')
         self.assertEqual(response.status_code, 404)
 
         # Wrong data (Bad request)
-        response = client.post('/atm/restaurant/75/my-review/',
+        response = client.post('/atm/restaurant/detail/75/my-review/',
                                json.dumps({'WRONG_CONTENT': 'no restaurant',
                                            'rating': 4}),
                                content_type='application/json')
@@ -188,8 +223,8 @@ class ReviewTestCase(TestCase):
         response = client.post('/atm/sign-in/',
                                json.dumps({'email': 'testerA@tester.com',
                                            'password': '123123',
-                                           'x': '',
-                                           'y': ''}),
+                                           'currLoc': {'x': 30, 'y': 30}
+                                           }),
                                content_type='application/json')
         self.assertEqual(response.status_code, 204)
 

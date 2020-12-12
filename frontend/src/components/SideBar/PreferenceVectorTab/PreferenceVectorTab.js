@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import * as actionCreators from '../../../store/actions/index';
 import './PreferenceVectorTab.css';
 
-function isEmptyObject(param) {
+/*function isEmptyObject(param) {
     return Object.keys(param).length === 0 && param.constructor === Object;
 }
-
+*/
 class PreferenceVectorTab extends Component {
   constructor(props) {
     super(props);

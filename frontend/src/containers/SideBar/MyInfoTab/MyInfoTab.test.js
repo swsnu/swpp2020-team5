@@ -72,9 +72,8 @@ describe('<MyInfoTab /', () => {
     spyGetUser = jest.spyOn(userActionCreator, 'getUser')
       .mockImplementation(() => (dispatch) => {});
 
-    // TODO SignOut should be implemented!!!
-    // spyGetSignOut = jest.spyOn(userActionCreator, 'getSignOut')
-    //    .mockImplementation(() => {return dispatch => {};});
+    spyGetSignOut = jest.spyOn(userActionCreator, 'getSignOut')
+      .mockImplementation(() => {return dispatch => {};});
     spyGetReviews = jest.spyOn(reviewActionCreator, 'getOtherReviews')
       .mockImplementation(() => (dispatch) => {});
     spyPostReview = jest.spyOn(reviewActionCreator, 'postMyReview')
@@ -85,7 +84,7 @@ describe('<MyInfoTab /', () => {
 
   it('should render without errors', () => {
     const component = mount(myInfoTabOnMainPage);
-    const wrapper = component.find('.MyInfoTab');
+    const wrapper = component.find('#my-info');
 
     expect(wrapper.length).toBe(1);
   });
@@ -134,6 +133,9 @@ describe('<MyInfoTab /', () => {
 
   it('should handle signout', () => {
     const component = mount(myInfoTabOnMainPage);
+    const wrapper = component.find('#sign-out');
+    wrapper.simulate('click');
+    expect(spyGetSignOut).toBeCalledTimes(1);
   });
 
   it('should handle rating', () => {
