@@ -27,7 +27,7 @@ class MainPage extends Component {
     this.setState({ curPage: curPage + 1 });
   }
 
-  onClickHelpHandler() {
+  static onClickHelpHandler() {
     const helpContent = document.getElementsByClassName('header-help-content')[0];
     //    helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
   }
@@ -93,7 +93,7 @@ class MainPage extends Component {
             {headerContent}
             에 대한 검색 결과입니다.
           </div>
-          <div className="header-help" onClick={() => this.onClickHelpHandler()}>
+          <div className="header-help" onClick={() => MainPage.onClickHelpHandler()}>
             <span className="questionmark">?</span>
             <div className="header-help-content" style={{ display: 'none' }}>
               <span className="red-text">사용자의 취향</span>

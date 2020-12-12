@@ -9,6 +9,7 @@ import { history } from '../../../store/store';
 import getMockStore from '../../../test-utils/mocks';
 import CreateID from './CreateID';
 import * as actionCreators from '../../../store/actions/userActions/userActions';
+
 const stubInitialState = {
   keyword: null,
   review: null,
@@ -63,7 +64,7 @@ describe('<CreateID/>', () => {
       </Provider>
     );
     spyResetCheckUser = jest.spyOn(actionCreators, 'resetCheckUser')
-      .mockImplementation(() => {return dispatch => {}; });
+      .mockImplementation(() => (dispatch) => {});
   });
   it('should render properly', () => {
     const component = mount(createid);
@@ -85,7 +86,7 @@ describe('<CreateID/>', () => {
     emailwrapper.simulate('change', { target: { value: mockemail } });
     instance = component.find(CreateID.WrappedComponent).instance();
     expect(instance.state.userInfo.email).toEqual(mockemail);
-    emailwrapper.simulate('change', {target: {value:'ddd@ddd'}})
+    emailwrapper.simulate('change', { target: { value: 'ddd@ddd' } });
     const passwordwrapper = component.find('#password-input');
     passwordwrapper.simulate('change', { target: { value: mockpassword } });
     instance = component.find(CreateID.WrappedComponent).instance();
@@ -97,21 +98,21 @@ describe('<CreateID/>', () => {
     const clickwrapper = component.find('#sign-up-button');
     clickwrapper.simulate('click');
 
-    const spyCheckUser= jest.spyOn(actionCreators, 'checkUser')
-      .mockImplementation((email,password) => {return dispatch => {}; });
+    const spyCheckUser = jest.spyOn(actionCreators, 'checkUser')
+      .mockImplementation((email, password) => (dispatch) => {});
     instance = component.find(CreateID.WrappedComponent).instance();
     expect(instance.state.shouldCheck).toEqual(true);
     expect(spyCheckUser).toBeCalledTimes(0);
   });
   it('should check email duplicated', () => {
-    let initialState = {
+    const initialState = {
       keyword: null,
       review: null,
       user: 'Exist',
       restaurant: null,
-    }
-    let stubMockStore = getMockStore(initialState);
-    let stubCreateId = (
+    };
+    const stubMockStore = getMockStore(initialState);
+    const stubCreateId = (
       <Provider store={stubMockStore}>
         <ConnectedRouter history={history}>
           <Switch>
@@ -123,23 +124,22 @@ describe('<CreateID/>', () => {
           </Switch>
         </ConnectedRouter>
       </Provider>
-    )
+    );
     const component = mount(stubCreateId);
-    let changeHandler = component.find('#username-input')
+    let changeHandler = component.find('#username-input');
     changeHandler.simulate('change', { target: { value: 'dd' } });
     changeHandler = component.find('#email-input');
     changeHandler.simulate('change', { target: { value: 'aaa@aaa' } });
     changeHandler = component.find('#password-input');
-    changeHandler.simulate('change',{ target: { value: '123' } });
+    changeHandler.simulate('change', { target: { value: '123' } });
     changeHandler = component.find('#verify-password-input');
-    changeHandler.simulate('change',{ target: { value: '123' } });
+    changeHandler.simulate('change', { target: { value: '123' } });
     changeHandler = component.find('#sign-up-button');
     changeHandler.simulate('click');
-    let instance = component.find(CreateID.WrappedComponent).instance();
+    const instance = component.find(CreateID.WrappedComponent).instance();
     expect(instance.state.shouldCheck).toEqual(true);
-    changeHandler.simulate('click')
+    changeHandler.simulate('click');
     changeHandler = component.find('#email-input');
     changeHandler.simulate('change', { target: { value: 'aaa@aaa' } });
-
   });
 });

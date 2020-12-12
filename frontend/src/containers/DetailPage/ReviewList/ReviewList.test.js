@@ -212,14 +212,14 @@ describe('<ReviewList /', () => {
     const wrapper = component.find('#show-more');
     wrapper.simulate('click');
     const tempInstance = component.find(ReviewList.WrappedComponent).instance();
-    expect(tempInstance.state.curr_review_cnt).toBe(20);
+    expect(tempInstance.state.currReviewCnt).toBe(20);
   });
 
   it('should handle tab change', () => {
     const component = mount(reviewList);
     const wrapper = component.find(Tab).at(1).simulate('click');
     const tempInstance = component.find(ReviewList.WrappedComponent).instance();
-    expect(tempInstance.state.curr_review_cnt).toBe(10);
+    expect(tempInstance.state.currReviewCnt).toBe(10);
     const showMoreButton = component.find('#show-more');
     expect(showMoreButton.length).toBe(1);
   });

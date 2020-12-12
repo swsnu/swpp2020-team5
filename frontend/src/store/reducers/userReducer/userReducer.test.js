@@ -220,7 +220,7 @@ describe('user reducer', () => {
       foodCategory: null,
       searchLocation: null,
       isGetUserCalled: false,
-      checkUserStatus: 'NotYet',
+      checkUserStatus: 'Exist',
     });
   });
 
@@ -234,7 +234,7 @@ describe('user reducer', () => {
       foodCategory: null,
       searchLocation: null,
       isGetUserCalled: false,
-      checkUserStatus: 'NotYet',
+      checkUserStatus: 'Exist',
     });
   });
 

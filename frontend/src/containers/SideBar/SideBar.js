@@ -55,7 +55,7 @@ class SideBar extends Component {
     if (prevState.initFoodCategory === false) {
       if (!isEmptyObject(nextProps.foodCategory)) {
         let isAllTrue = true;
-        Object.keys(prevState.foodCategory).forEach((category) => {
+        Object.keys(nextProps.foodCategory).forEach((category) => {
           isAllTrue = isAllTrue && nextProps.foodCategory[category];
         });
         return {

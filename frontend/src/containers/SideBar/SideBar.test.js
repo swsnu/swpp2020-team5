@@ -215,43 +215,24 @@ describe('<SideBar />', () => {
     expect(wrapper.state().foodCategory).toEqual({
       한식: false,
     });
-    const mockStoreForAll = getMockStore({
-      keyword: {},
-      restaurant: {},
-      user: {
-        searchLocation: {
-          address_name: '서울 관악구',
-        },
-        foodCategory: {
-          한식: false,
-        },
-        preferenceVector: {
-          매운: 3,
-        },
 
-      },
-      review: {},
+    wrapper.find('#spy-button-for-all').simulate('click');
+    expect(wrapper.state().foodCategory).toEqual({
+      한식: true,
     });
-    const givenProps = {
-      foodCategory: {
-        한식: true,
-      },
-    };
-    const givenState = {
-      foodCategory: {},
-      selectAllCategory: false,
-    };
+    expect(wrapper.state().selectAllCategory).toBe(true);
 
-    const result = wrapper.instance().constructor.getDerivedStateFromProps(givenProps, givenState);
+    wrapper.find('#spy-button').simulate('click');
+    expect(wrapper.state().foodCategory).toEqual({
+      한식: true,
+    });
+    expect(wrapper.state().selectAllCategory).toBe(false);
 
-    /*
-    expect(result).toEqual({
-      foodCategory: {
-        '한식': true,
-      },
-      selectAllCategory: true,
-    })
-    */
+    wrapper.find('#spy-button-for-all').simulate('click');
+    expect(wrapper.state().foodCategory).toEqual({
+      한식: true,
+    });
+    expect(wrapper.state().selectAllCategory).toBe(true);
   });
 
   it('should change factor at tab', () => {
@@ -273,5 +254,35 @@ describe('<SideBar />', () => {
       '매운': 1,
     });
     */
+  });
+  it('should pass when nextProps is empty object', () => {
+    const mockStore = getMockStore({
+      keyword: {},
+      restaurant: {},
+      user: {
+        searchLocation: {
+        },
+        foodCategory: {
+        },
+        preferenceVector: {
+        },
+
+      },
+      review: {},
+    });
+    const sideBarLoc = (
+      <Provider store={mockStore}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() => <SideBar searchLocation={{}} />}
+            />
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
+    );
+    const component = mount(sideBar);
   });
 });
