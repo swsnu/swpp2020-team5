@@ -19,18 +19,16 @@ class CreatePreferenceVector extends Component {
     this.state = {
       selectedFoods: [false, false, false, false, false, false],
       foodCaptionList: ['짜장면', '쌀국수', '떡볶이', '후라이드치킨', '김치찌개', '티라미수'],
-      selectedOptionArray: [null, null, null, null],
+      serviceOptionList: [null, null, null, null],
     };
   }
 
   handleRadio(event) {
     const numbers = event.target.value.split('_');
-    const newOptions = [...this.state.selectedOptionArray];
-    newOptions[numbers[0]] = numbers[1];
-    this.setState({ selectedOptionArray: newOptions });
+    const newOptions = [...this.state.serviceOptionList];
+    newOptions[numbers[0]] = Number(numbers[1]);
+    this.setState({ serviceOptionList: newOptions });
   }
-
-    
 
   onClickFoodHandler = (foodIndex) => {
     const { selectedFoods } = this.state;
@@ -39,9 +37,16 @@ class CreatePreferenceVector extends Component {
   }
 
   onClickConfirmHandler = () => {
-    const { username, email, password } = this.props;
-    const { selectedFoods, foodCaptionList } = this.state;
+    const { username, email, password, alert } = this.props;
+    const { selectedFoods, foodCaptionList, serviceOptionList } = this.state;
     const selectedFoodNames = [];
+    for (let i = 0; i < serviceOptionList.length; i += 1) {
+      if (serviceOptionList[i] === null) {
+        alert.error('설문을 완료해주세요!');
+        console.log(serviceOptionList)
+        return
+      }
+    }
     for (let i = 0; i < selectedFoods.length; i += 1) {
       if (selectedFoods[i]) {
         selectedFoodNames.push(foodCaptionList[i]);
@@ -52,15 +57,16 @@ class CreatePreferenceVector extends Component {
       email,
       password,
       selectedFoods: selectedFoodNames,
-      // selectedFoods,
+      serviceOptionList,
     });
     this.props.history.push('/');
+    alert.show('가입 완료!');
   }
 
   onChangeRadioOption = (index, option) => {
-    const { selectedOptionArray } = this.state;
-    selectedOptionArray[index] = option;
-    return this.setState({ selectedOptionArray });
+    const { serviceOptionList } = this.state;
+    serviceOptionList[index] = option;
+    return this.setState({ serviceOptionList });
   }
 
   // image selection is not complete
@@ -95,27 +101,27 @@ class CreatePreferenceVector extends Component {
     // 저렴한 혼밥 웨이팅 친절한
     radioOptionsArray.push([
       '가격이 저렴한 것을 중요시 하시나요?',
-      {id: 2, label: '중요해요.'},
-      {id: 1, label: '보통이에요.'},
-      {id: 0, label: '상관없어요.'},
+      { label: '중요해요.'},
+      { label: '보통이에요.'},
+      { label: '상관없어요.'},
     ]);
     radioOptionsArray.push([
       '혼밥을 자주 하시나요?',
-      {id: 2, label: '자주해요.'},
-      {id: 1, label: '보통이에요.'},
-      {id: 0, label: '거의안해요.'},
+      { label: '자주해요.'},
+      { label: '보통이에요.'},
+      { label: '거의안해요.'},
     ]);
     radioOptionsArray.push([
       '웨이팅이 있어도 괜찮으신가요?',
-      {id: 2, label: '괜찮아요.'},
-      {id: 1, label: '보통이에요.'},
-      {id: 0, label: '없으면좋아요.'},
+      { label: '괜찮아요.'},
+      { label: '보통이에요.'},
+      { label: '없으면좋아요.'},
     ]);
     radioOptionsArray.push([
       '친절한 서비스를 중요시 하시나요?',
-      {id: 2, label: '중요해요.'},
-      {id: 1, label: '보통이에요.'},
-      {id: 0, label: '상관없어요.'},
+      { label: '중요해요.'},
+      { label: '보통이에요.'},
+      { label: '상관없어요.'},
     ]);
     let i = -1;
     let j = -1;
@@ -172,7 +178,7 @@ class CreatePreferenceVector extends Component {
           <div
             id="confirm-button"
             onClick={() => {
-              this.onClickConfirmHandler(); alert.show('가입 완료!');
+              this.onClickConfirmHandler(); 
             }}
           >
             가입 완료

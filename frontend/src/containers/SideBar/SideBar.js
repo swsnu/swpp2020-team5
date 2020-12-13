@@ -125,10 +125,28 @@ class SideBar extends Component {
     this.props.onEditSearchLocation(searchLocation);
     this.props.onEditFoodCategory(foodCategory);
     this.props.onEditPreferenceVector(preferenceVector);
-    this.props.onReloadHandler();
+    if (this.props.restaurantID === -1) {
+      this.props.onReloadHandler();
+    }
   }
 
   onClickTabButtonHandler = (tabMode) => {
+    if (tabMode === 'Location') {
+      this.props.onGetSearchLocation().then(res => { 
+        const { searchLocation } = this.props;
+        this.setState({searchLocation});
+      });
+    } else if (tabMode === 'FoodCategory') {
+      this.props.onGetFoodCategory().then(res => {
+        const { foodCategory } = this.props;
+        this.setState({foodCategory});
+      });
+    } else if (tabMode === 'PreferenceVector') {
+      this.props.onGetPreferenceVector().then(res => {
+        const { preferenceVector } = this.props;
+        this.setState({preferenceVector});
+      });
+    }
     this.setState({ tabMode });
   }
 

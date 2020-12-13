@@ -9,7 +9,7 @@
 }
 
 .SideBar .sidebar-header {
-  height: 319px;
+  height: 322.5px;
 }
 
 .SideBar .tab {
@@ -171,6 +171,7 @@
   position: relative;
   cursor: pointer;
   font-size: 15pt;
+  margin-top: 5px;
 }
 
 .SideBar .tab-button-name-line .tab-button {

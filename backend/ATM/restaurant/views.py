@@ -12,9 +12,11 @@ from django.http import (
     HttpResponseBadRequest
 )
 from ..models import Restaurant, Profile, Review, Author
-from ..utils import cos_sim_word
+from ..utils import cos_sim_word, Constants
 from ..review.utils import prefvec_update
 from .resource import link
+
+service_pref_list = Constants.service_pref_list
 
 # preferencVector
 scale = 3
@@ -292,15 +294,24 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating, review_cnt):
     '''
     diff = 0
     for restaurant_factor in restaurant_pref:
+        if restaurant_factor in service_pref_list:
+            continue
         if restaurant_pref[restaurant_factor] == 0:
             continue
         for user_factor in user_pref:
+            if user_factor in service_pref_list:
+                continue
             similarity = cos_sim_word(user_factor, restaurant_factor)
             diff += similarity * \
                 (pivot - abs(restaurant_pref[restaurant_factor] - user_pref[user_factor]))
     review_cnt_truncated = MAX_REVIEW_COUNT \
         if review_cnt > MAX_REVIEW_COUNT \
         else review_cnt
+
+    for factor in ['저렴한', '혼밥하기좋은']:
+        diff += pivot * (user_pref[factor] * restaurant_pref[factor]) / 25
+    for factor in ['웨이팅이있는', '불친절한']:
+        diff -= pivot * (user_pref[factor] * restaurant_pref[factor]) / 25
     return scale_rating(
         avg_rating +
         scale *

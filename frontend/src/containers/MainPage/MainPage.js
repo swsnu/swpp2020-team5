@@ -49,7 +49,9 @@ class MainPage extends Component {
     if (isLoading) {
       return (
         <div>
-          <SideBar restaurantID={-1} />
+          <SideBar restaurantID={-1} 
+            onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
+          />
           <div className="mainPage">
             <LoadingScreen loadingQuote="음식점 목록을 불러오는 중입니다..." />
           </div>

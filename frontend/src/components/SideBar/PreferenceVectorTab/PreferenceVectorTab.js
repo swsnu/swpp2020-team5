@@ -33,7 +33,7 @@ class PreferenceVectorTab extends Component {
     const tastePrefVecList = tasteFactorList.map((factor) => {
       const width = `calc((100% - 60px)*${(preferenceVector[factor] / 5).toString()})`;
       return (
-        <div className="slider-wrapper">
+        <div key={factor} className="slider-wrapper">
           <div className="user-factor">
             {factor}
           </div>
@@ -58,7 +58,7 @@ class PreferenceVectorTab extends Component {
     const servicePrefVecList = serviceFactorList.map((factor) => {
       const width = `calc((100% - 60px)*${(preferenceVector[factor] / 5).toString()})`;
       return (
-        <div className="slider-wrapper">
+        <div key={factor} className="slider-wrapper">
           <div className="user-factor">
             {factor}
           </div>
