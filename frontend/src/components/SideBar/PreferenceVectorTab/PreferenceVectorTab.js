@@ -19,6 +19,11 @@ class PreferenceVectorTab extends Component {
     };
   }
 
+  static onClickHelpHandler(index) {
+    const helpContent = document.getElementsByClassName('pref-help-content')[index];
+    helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
+  }
+
   render() {
     const { tasteFactorList, serviceFactorList } = this.state;
     const { preferenceVector } = this.props;
@@ -55,12 +60,29 @@ class PreferenceVectorTab extends Component {
       );
     });
 
+    const helpContentKind = [' 저렴한 ', ' 혼밥하기 좋은 ', ' 웨이팅이 많은 ', ' 불친절한 '];
+    const helpContentUpdown = [' 증가', ' 증가', ' 감소', ' 감소'];
+    let service_factor_index = -1;
     const servicePrefVecList = serviceFactorList.map((factor) => {
+      service_factor_index += 1;
+      const index = service_factor_index;
       const width = `calc((100% - 60px)*${(preferenceVector[factor] / 5).toString()})`;
       return (
         <div key={factor} className="slider-wrapper">
           <div className="user-factor">
-            {factor}
+            <span>{factor}</span>
+            <span className="pref-help">
+              <span className="questionmark" onMouseOver={() => PreferenceVectorTab.onClickHelpHandler(index)}
+                                            onMouseLeave={() => PreferenceVectorTab.onClickHelpHandler(index)}>?</span>
+              <div className="pref-help-content" style={{ display: 'none' }}>
+                높을수록 
+                <span className="red-text">{helpContentKind[service_factor_index]}</span>
+                식당의 평점이 
+                <span className="red-text">{helpContentUpdown[service_factor_index]}</span>
+                합니다.
+                <br />
+              </div>
+            </span>
           </div>
           <div className="slider">
             <input
