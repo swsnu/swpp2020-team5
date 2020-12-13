@@ -138,7 +138,7 @@ class MyReview extends Component {
     );
     return (
       <div className="MyReview">
-        <hr color='#EAEAEA'/>
+        <hr color='#EAEAEA' width="90%"/>
         <div className="review-info">
           <span className="review-rating-stars">
             {changeRatingStar}

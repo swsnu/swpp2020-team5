@@ -123,7 +123,7 @@ class LocationTab extends Component {
       <div className="tab" id="location">
         <div className="tab-header">
           현재 위치ㅣ
-          <strong className="current-location">
+          <strong key={locationString} className="current-location">
             {locationString}
           </strong>
         </div>

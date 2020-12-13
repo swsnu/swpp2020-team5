@@ -15,11 +15,22 @@ import './CreatePreferenceVector.css';
 class CreatePreferenceVector extends Component {
   constructor(props) {
     super(props);
+    this.handleRadio = this.handleRadio.bind(this);
     this.state = {
       selectedFoods: [false, false, false, false, false, false],
       foodCaptionList: ['짜장면', '쌀국수', '떡볶이', '후라이드치킨', '김치찌개', '티라미수'],
+      selectedOptionArray: [null, null, null, null],
     };
   }
+
+  handleRadio(event) {
+    const numbers = event.target.value.split('_');
+    const newOptions = [...this.state.selectedOptionArray];
+    newOptions[numbers[0]] = numbers[1];
+    this.setState({ selectedOptionArray: newOptions });
+  }
+
+    
 
   onClickFoodHandler = (foodIndex) => {
     const { selectedFoods } = this.state;
@@ -44,6 +55,12 @@ class CreatePreferenceVector extends Component {
       // selectedFoods,
     });
     this.props.history.push('/');
+  }
+
+  onChangeRadioOption = (index, option) => {
+    const { selectedOptionArray } = this.state;
+    selectedOptionArray[index] = option;
+    return this.setState({ selectedOptionArray });
   }
 
   // image selection is not complete
@@ -74,6 +91,59 @@ class CreatePreferenceVector extends Component {
       }
     }
 
+    const radioOptionsArray = [];
+    // 저렴한 혼밥 웨이팅 친절한
+    radioOptionsArray.push([
+      '가격이 저렴한 것을 중요시 하시나요?',
+      {id: 2, label: '중요해요.'},
+      {id: 1, label: '보통이에요.'},
+      {id: 0, label: '상관없어요.'},
+    ]);
+    radioOptionsArray.push([
+      '혼밥을 자주 하시나요?',
+      {id: 2, label: '자주해요.'},
+      {id: 1, label: '보통이에요.'},
+      {id: 0, label: '거의안해요.'},
+    ]);
+    radioOptionsArray.push([
+      '웨이팅이 있어도 괜찮으신가요?',
+      {id: 2, label: '괜찮아요.'},
+      {id: 1, label: '보통이에요.'},
+      {id: 0, label: '없으면좋아요.'},
+    ]);
+    radioOptionsArray.push([
+      '친절한 서비스를 중요시 하시나요?',
+      {id: 2, label: '중요해요.'},
+      {id: 1, label: '보통이에요.'},
+      {id: 0, label: '상관없어요.'},
+    ]);
+    let i = -1;
+    let j = -1;
+    const surveyList = radioOptionsArray.map(option => {
+      i = i+1;
+      j = -1;
+      return (<p>
+        {option[0]}
+        <br/>
+        {
+          option.slice(1).map(radioButton => {
+            j = j+1;
+            return (
+            <div class="checks small">
+              <input 
+                type="radio" 
+                id={`rd${i}_${j}`} 
+                name={`rds_${i}`} 
+                value={`${i}_${j}`}
+                onChange={this.handleRadio}
+              /> 
+              <label for={`rd${i}_${j}`}>{option[j+1].label}</label> 
+            </div>)
+          })
+        }
+      </p>)
+    });
+
     return (
       <div className="CreatePreferenceVector">
         <div className="box">
@@ -83,16 +153,22 @@ class CreatePreferenceVector extends Component {
             <text className="name-text">{this.props.username}</text>
             &nbsp;님, 환영합니다!
             <br />
-            마지막으로 아래의 목록에서 선호하시는 음식을 모두 골라주시면,
+            마지막으로 아래의 목록에서 선호하시는 음식을 모두 고르고 설문을 해주시면,
             <br />
             준비 완료입니다!
           </p>
-          <div className="images">
+          <hr/>
+          <div className="images-and-surveys">
+            <div id="foods">
             {foodImages}
+            </div>
+            <hr width="93%"/>
+            <div className="survey">
+              <div className="survey-line">
+                {surveyList}
+              </div>
+            </div>
           </div>
-
-          <div className="survey" />
-
           <div
             id="confirm-button"
             onClick={() => {

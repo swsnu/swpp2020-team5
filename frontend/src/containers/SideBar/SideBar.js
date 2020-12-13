@@ -156,7 +156,7 @@ class SideBar extends Component {
         tab = (
           <LocationTab
             id="location-tab"
-            searchLocation={this.state.searchLocation}
+            searchLocation={this.props.searchLocation}
             onChangeLocation={(newLocation) => this.setState({ searchLocation: newLocation })}
           />
         );
