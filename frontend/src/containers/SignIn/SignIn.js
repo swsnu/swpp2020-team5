@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import Geolocation from "react-native-geolocation-service";
 import * as actionCreators from '../../store/actions/index';
 
 import logo from '../../images/logo.png';
@@ -27,9 +27,11 @@ class SignIn extends Component {
     const { onPostSignIn, history } = this.props;
     const { email, password } = this.state;
     const { currLoc } = this.state;
-    navigator.geolocation.getCurrentPosition((loc) => {
+    Geolocation.getCurrentPosition((loc) => {
       currLoc.x = loc.coords.longitude;
       currLoc.y = loc.coords.latitude;
+      console.log(currLoc.x);
+      console.log(currLoc.y);
       this.setState({ currLoc });
       onPostSignIn({ email, password, currLoc });
     }, (err) => {

@@ -81,6 +81,7 @@ def search_location(request):
             response_dict = {}
             for attr in attr_list:
                 response_dict[attr] = search_loc[attr]
+            response_dict['radius'] = user.radius
             return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)
@@ -93,12 +94,19 @@ def search_location(request):
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
                     user.search_location[attr] = req_data[attr]
+                    print(attr)
+                    print(req_data[attr])
+                user.radius = req_data['radius']
             except (KeyError, JSONDecodeError):
                 return HttpResponse(status=400)
             user.search_location.save()
+            user.save()
             response_dict = {}
             for attr in attr_list:
+                print(attr)
+                print(user.search_location[attr])
                 response_dict[attr] = user.search_location[attr]
+            response_dict['radius'] = user.radius
             return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)

@@ -28,6 +28,7 @@ class SideBar extends Component {
       searchWord: '',
       tabMode: 'MyInfo',
       searchLocation: {},
+      radius:10,
       initSearchLocation: false,
       foodCategory: {},
       initFoodCategory: false,
@@ -156,8 +157,8 @@ class SideBar extends Component {
         tab = (
           <LocationTab
             id="location-tab"
-            searchLocation={this.state.searchLocation}
-            onChangeLocation={(newLocation) => this.setState({ searchLocation: newLocation })}
+            searchLocation={this.props.searchLocation}
+            onChangeLocation={(newLocation, radius) => this.setState({ searchLocation: newLocation})}
           />
         );
         break;
@@ -268,7 +269,7 @@ class SideBar extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onEditSearchLocation: (location) => dispatch(actionCreators.editSearchLocation(location)),
+  onEditSearchLocation: (location, radius) => dispatch(actionCreators.editSearchLocation(location, radius)),
   onGetSearchLocation: () => dispatch(actionCreators.getSearchLocation()),
   onEditFoodCategory: (foodCategory) => dispatch(actionCreators.editFoodCategory(foodCategory)),
   onGetFoodCategory: () => dispatch(actionCreators.getFoodCategory()),

@@ -99,6 +99,7 @@ class Profile(models.Model):
         null=True,
         default='',
     )
+    radius = models.FloatField(default=10)
 
 
 class Restaurant(models.Model):
