@@ -99,6 +99,7 @@ class Profile(models.Model):
         null=True,
         default='',
     )
+    current_tab = models.CharField(max_length=20, default='MyInfo')
 
 
 class Restaurant(models.Model):

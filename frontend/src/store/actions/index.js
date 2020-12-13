@@ -8,9 +8,11 @@ export {
   getSearchLocation,
   getFoodCategory,
   getPreferenceVector,
+  getCurrentTab,
   editSearchLocation,
   editFoodCategory,
   editPreferenceVector,
+  editCurrentTab,
 } from './userActions/userActions';
 
 export {

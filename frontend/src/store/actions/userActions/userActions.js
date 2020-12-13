@@ -144,3 +144,29 @@ export const getPreferenceVector = () => (dispatch) => axios
   .catch((err) => {
     alert(`${err}Not Logined`);
   });
+
+const getCurrentTab_ = (tabMode) => ({
+  type: actionTypes.GET_CURRENT_TAB,
+  target: tabMode,
+});
+
+export const getCurrentTab = () => (dispatch) => axios
+  .get('/atm/user/current-tab/')
+  .then((res) => dispatch(getCurrentTab_(res.data.tabMode)))
+  .catch((err) => {
+    alert(`${err}Not Logined`);
+  });
+
+const editCurrentTab_ = (tabMode) => ({
+  type: actionTypes.EDIT_CURRENT_TAB,
+  target: tabMode,
+});
+
+export const editCurrentTab = (tabMode) => (dispatch) => axios
+  .put('/atm/user/current-tab/', { tabMode })
+  .then((res) => 
+    dispatch(editCurrentTab_(res.data.tabMode))
+  )
+  .catch((err) => 
+    alert('Not Logined')
+  );

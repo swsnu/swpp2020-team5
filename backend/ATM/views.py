@@ -118,6 +118,9 @@ def sign_in(request):
                 cur_user.food_category[attr] = True
             cur_user.food_category.save()
 
+            cur_user.current_tab = 'MyInfo'
+            cur_user.save()
+
             return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)
