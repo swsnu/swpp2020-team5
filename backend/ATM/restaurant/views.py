@@ -60,7 +60,7 @@ def searched_restaurants(request, word=''):
                 # print(haversine(cur, res_loc))
                 if haversine(cur, res_loc) >= 10:
                     continue
-                #print(restaurant.food_category)
+                # print(restaurant.food_category)
                 if not author_food_category[restaurant.food_category]:
                     continue
                 response_dict = {}

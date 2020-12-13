@@ -9,6 +9,7 @@ max_value = 5
 min_value = 0
 pivot = 0.1
 
+
 def prefvec_update(restaurant_prefvec, user_prefvec, avg_diff):
     # attribute 순서가 고정되어 있다면...
     for user_key in get_preference_attributes(user_prefvec):
@@ -25,16 +26,17 @@ def prefvec_update(restaurant_prefvec, user_prefvec, avg_diff):
         user_prefvec[user_key] += (adjust * avg_diff) * pivot
         truncate_pref_val(user_prefvec, user_key)
     for factor in ['저렴한', '혼밥하기좋은']:
-        user_prefvec[factor] += (restaurant_prefvec[factor] - 
-                                user_prefvec[factor]) * avg_diff * pivot
+        user_prefvec[factor] += (restaurant_prefvec[factor] -
+                                 user_prefvec[factor]) * avg_diff * pivot
         truncate_pref_val(user_prefvec, factor)
-        
+
     for factor in ['웨이팅이있는', '불친절한']:
-        user_prefvec[factor] -= (restaurant_prefvec[factor] - 
-                                user_prefvec[factor]) * avg_diff * pivot
+        user_prefvec[factor] -= (restaurant_prefvec[factor] -
+                                 user_prefvec[factor]) * avg_diff * pivot
         truncate_pref_val(user_prefvec, factor)
-    
+
     user_prefvec.save()
+
 
 def truncate_pref_val(vec, key):
     if vec[key] > max_value:
