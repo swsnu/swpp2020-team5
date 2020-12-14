@@ -20,7 +20,8 @@ class LocationTab extends Component {
         y: null,
         address_name: null,
         radius: null,
-      }
+      },
+      marker: null,
     };
   }
 
@@ -44,8 +45,16 @@ class LocationTab extends Component {
           level: 4,
         };
         this.setState({ map: new window.kakao.maps.Map(container, options) });
+        let markerPosition  = new kakao.maps.LatLng(searchLocation.y, searchLocation.x); 
+        // 마커를 생성합니다
+        this.setState({marker : new kakao.maps.Marker({
+          position: markerPosition
+        })})
+        
+        this.state.marker.setMap(this.state.map);
       });
     };
+    
     // load location list
     this.setState({
       locationListWrapper: document.getElementById('location-list'),
@@ -88,7 +97,15 @@ class LocationTab extends Component {
     this.onToggleListHandler(0);
 
     // show new location on map
+    this.state.marker.setMap(null);
+    let markerPosition  = new kakao.maps.LatLng(location.y, location.x); 
+    let newMarker = new kakao.maps.Marker({position: markerPosition});
+    this.setState({
+      marker : newMarker
+    });
     map.setCenter(new kakao.maps.LatLng(location.y, location.x));
+    newMarker.setMap(map);
+
   }
   //
   // list the locations found from the current input
@@ -155,14 +172,15 @@ class LocationTab extends Component {
               radius : ev.target.value}})
           }}
         />
-        <button onClick={()=> {
+        <button id='save-radius-button' onClick={()=> {
           console.log(this.state.searchLocation);
           this.props.onChangeLocation(this.state.searchLocation)}}>
           확인
         </button>
-        현재 반경 {radius}
+        검색 반경: {radius} km
         <div className="tab-content">
-          검색하고 있는 위치: {this.state.searchLocation.address_name}
+          <p>검색하고 있는 위치: {this.state.searchLocation.address_name}</p>
+          
           <div id="search-box" className="box">
             <img src={searchIcon} alt="searchIcon" className="search-icon" />
             <input

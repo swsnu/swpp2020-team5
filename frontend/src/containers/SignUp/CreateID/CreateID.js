@@ -144,7 +144,7 @@ class CreateID extends Component {
               this.setState({ verifyPassword: ev.target.value });
             }}
           />
-          {this.state.userInfo.password === null ? '' : isverified}
+          <p>{this.state.userInfo.password === null ? '' : isverified}</p>
 
           <button
             id="sign-up-button"
