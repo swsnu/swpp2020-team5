@@ -36,9 +36,8 @@ class SideBar extends Component {
       preferenceVector: {},
       initPreferenceVector: false,
     };
-    props.onGetCurrentTab().then(res => 
-      this.setState({
-        tabMode: this.props.tabMode, 
+    props.onGetCurrentTab().then((res) => this.setState({
+      tabMode: this.props.tabMode,
     }));
   }
 
@@ -115,12 +114,12 @@ class SideBar extends Component {
 
   onSearchHandler = () => {
     const {
-      searchWord, searchLocation, foodCategory, preferenceVector, tabMode
+      searchWord, searchLocation, foodCategory, preferenceVector, tabMode,
     } = this.state;
     this.props.onEditSearchLocation(searchLocation);
     this.props.onEditFoodCategory(foodCategory);
     this.props.onEditPreferenceVector(preferenceVector);
-    this.props.history.push(`/main/${searchWord}`)
+    this.props.history.push(`/main/${searchWord}`);
   }
 
   onSaveHandler = () => {
@@ -137,19 +136,19 @@ class SideBar extends Component {
 
   onClickTabButtonHandler = (tabMode) => {
     if (tabMode === 'Location') {
-      this.props.onGetSearchLocation().then(res => { 
+      this.props.onGetSearchLocation().then((res) => {
         const { searchLocation } = this.props;
-        this.setState({searchLocation});
+        this.setState({ searchLocation });
       });
     } else if (tabMode === 'FoodCategory') {
-      this.props.onGetFoodCategory().then(res => {
+      this.props.onGetFoodCategory().then((res) => {
         const { foodCategory } = this.props;
-        this.setState({foodCategory});
+        this.setState({ foodCategory });
       });
     } else if (tabMode === 'PreferenceVector') {
-      this.props.onGetPreferenceVector().then(res => {
+      this.props.onGetPreferenceVector().then((res) => {
         const { preferenceVector } = this.props;
-        this.setState({preferenceVector});
+        this.setState({ preferenceVector });
       });
     }
     this.setState({ tabMode });
@@ -158,12 +157,10 @@ class SideBar extends Component {
 
   onClickLogoButtonHandler = () => {
     const {
-      tabMode
+      tabMode,
     } = this.state;
     this.setState({ searchWord: '' });
-    this.props.onEditCurrentTab(tabMode).then(res => 
-      this.props.history.push('/main/')
-    );
+    this.props.onEditCurrentTab(tabMode).then((res) => this.props.history.push('/main/'));
   }
 
   // SubComponent
@@ -214,11 +211,10 @@ class SideBar extends Component {
         );
         break;
       default:
-        console.log(tabMode)
-        //throw new Error('Invalid tabMode');
+        // throw new Error('Invalid tabMode');
         tab = (
           <BlankTab id="blank-tab" />
-        )
+        );
     }
     return (
       <div className="SideBar">

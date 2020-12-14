@@ -10,7 +10,7 @@ import * as actionCreators from '../../../store/actions/index';
 
 describe('<BlankTab/>', () => {
   it('should render properly', () => {
-    const component = mount(<BlankTab/>);
+    const component = mount(<BlankTab />);
     const wrapper = component.find('.BlankTab');
     expect(wrapper.length).toBe(1);
   });

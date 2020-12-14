@@ -6,10 +6,10 @@ import * as actionCreators from '../../../store/actions/index';
 import './MyReview.css';
 
 const constStars = [];
-for (let i=0; i<11; i++) {
+for (let i = 0; i < 11; i += 1) {
   constStars.push(
-  )
-};
+  );
+}
 class MyReview extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +75,8 @@ class MyReview extends Component {
     const ratingStar = (
       this.state.isEdit
         ? <></>
-        : <ReactStars
+        : (
+          <ReactStars
             key={this.props.rating}
             id="rate-star"
             value={this.props.rating}
@@ -84,6 +85,7 @@ class MyReview extends Component {
             isHalf
             edit={false}
           />
+        )
     );
 
     const EditOrDone = (
@@ -138,7 +140,7 @@ class MyReview extends Component {
     );
     return (
       <div className="MyReview">
-        <hr color='#EAEAEA' width="90%"/>
+        <hr color="#EAEAEA" width="90%" />
         <div className="review-info">
           <span className="review-rating-stars">
             {changeRatingStar}

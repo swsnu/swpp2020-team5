@@ -36,7 +36,7 @@ export const postMyReview = (reviewInfo) => (dispatch) => axios.post(`/atm/resta
 
 const editMyReview_ = (reviewInfo) => ({
   type: actionTypes.EDIT_MY_REVIEW,
-  target: {...reviewInfo},
+  target: { ...reviewInfo },
 });
 
 export const editMyReview = (reviewInfo) => (dispatch) => axios.put(`/atm/my-review/${reviewInfo.id}/`, reviewInfo)

@@ -164,9 +164,5 @@ const editCurrentTab_ = (tabMode) => ({
 
 export const editCurrentTab = (tabMode) => (dispatch) => axios
   .put('/atm/user/current-tab/', { tabMode })
-  .then((res) => 
-    dispatch(editCurrentTab_(res.data.tabMode))
-  )
-  .catch((err) => 
-    alert('Not Logined')
-  );
+  .then((res) => dispatch(editCurrentTab_(res.data.tabMode)))
+  .catch((err) => alert('Not Logined'));

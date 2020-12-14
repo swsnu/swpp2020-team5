@@ -33,8 +33,8 @@ class ReviewList extends Component {
   onClickShowMoreHandler = () => {
     const { currReviewCnt } = this.state;
     const increasedCnt = currReviewCnt + 10;
-    let scrollX = window.scrollX || document.documentElement.scrollLeft;
-    let scrollY = window.scrollY || document.documentElement.scrollTop;
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
 
     this.setState({ currReviewCnt: increasedCnt, scrollX, scrollY });
   }

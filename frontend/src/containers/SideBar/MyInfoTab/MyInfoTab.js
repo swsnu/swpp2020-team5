@@ -102,7 +102,7 @@ class MyInfoTab extends Component {
             {' '}
             평가하기
           </p>
-          <div className='review-input-star'>{rateStar}</div>
+          <div className="review-input-star">{rateStar}</div>
           <div className="review-input-set">
             {reviewInput}
             {reviewConfirmButton}

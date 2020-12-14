@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { connectRouter, ConnectedRouter } from 'connected-react-router';
@@ -81,7 +82,7 @@ const stubInitialState = {
         },
       },
       {
-        id: 1,
+        id: 11,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -96,7 +97,7 @@ const stubInitialState = {
         category: '베트남음식',
         difference: 0.43,
       }, {
-        id: 1,
+        id: 111,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -112,7 +113,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 1111,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -128,7 +129,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 111111,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -144,7 +145,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 14,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -160,7 +161,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 15,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -176,7 +177,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 16,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -192,7 +193,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 17,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -208,7 +209,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 18,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -224,7 +225,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 19,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -240,7 +241,7 @@ const stubInitialState = {
         difference: 0.43,
       },
       {
-        id: 1,
+        id: 113,
         title: '안녕베트남',
         rate: 4.78,
         img_url_list: ['https://img1.daumcdn.net/thumb/R1920x0.q100/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2Freview%2F2ce1e5c563f8149350b8e65fe1acab0da2ed287c7f7cca248b17784268585dd0'],
@@ -282,6 +283,7 @@ const mockStore = getMockStore(stubInitialState);
 describe('<MainPage />', () => {
   let mainpage;
   let spyGetRestaurantList;
+  let spyScrollTo;
   let mockFn;
   beforeEach(() => {
     mainpage = (
@@ -297,17 +299,18 @@ describe('<MainPage />', () => {
         </ConnectedRouter>
       </Provider>
     );
-    mockFn = jest.fn();
-    mockFn.mockResolvedValue("I will be a mock!");
     spyGetRestaurantList = jest.spyOn(actionCreators, 'getRestaurantList')
-      .mockImplementation((searchWord) => (dispatch) => mockFn());
+      .mockImplementation((searchWord) => (dispatch) => {});
+
+    spyScrollTo = jest.spyOn(window, 'scrollTo')
+      .mockImplementation((x, y) => {});
+
     // spyGetFoodCategory = jest.spyOn(actionCreators, 'getFoodCategory')
     //   .mockImplemetation(() => {return dispatch => {}; });
   });
   it('should render main page properly', () => {
     const component = mount(mainpage);
     expect(spyGetRestaurantList).toBeCalledTimes(1);
-    console.log(component.find('MainPage').state());
     const wrapper = component.find('.spySummary');
     expect(component.find('.spyLoading').length).toBe(0);
     expect(wrapper.length).toBe(10);
