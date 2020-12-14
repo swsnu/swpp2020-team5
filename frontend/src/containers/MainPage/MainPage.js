@@ -101,7 +101,7 @@ class MainPage extends Component {
       headerContent = `"${this.props.match.params.name}"`;
     }
     return (
-      <div>
+      <div className="MainPage">
         <SideBar restaurantID={-1} 
           onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
         />

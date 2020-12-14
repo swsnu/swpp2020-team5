@@ -282,6 +282,7 @@ const mockStore = getMockStore(stubInitialState);
 describe('<MainPage />', () => {
   let mainpage;
   let spyGetRestaurantList;
+  let mockFn;
   beforeEach(() => {
     mainpage = (
       <Provider store={mockStore}>
@@ -296,13 +297,17 @@ describe('<MainPage />', () => {
         </ConnectedRouter>
       </Provider>
     );
+    mockFn = jest.fn();
+    mockFn.mockResolvedValue("I will be a mock!");
     spyGetRestaurantList = jest.spyOn(actionCreators, 'getRestaurantList')
-      .mockImplementation(() => (dispatch) => {});
+      .mockImplementation((searchWord) => (dispatch) => mockFn());
     // spyGetFoodCategory = jest.spyOn(actionCreators, 'getFoodCategory')
     //   .mockImplemetation(() => {return dispatch => {}; });
   });
   it('should render main page properly', () => {
     const component = mount(mainpage);
+    expect(spyGetRestaurantList).toBeCalledTimes(1);
+    console.log(component.find('MainPage').state());
     const wrapper = component.find('.spySummary');
     expect(component.find('.spyLoading').length).toBe(0);
     expect(wrapper.length).toBe(10);

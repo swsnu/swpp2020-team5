@@ -32,7 +32,7 @@ class PreferenceVectorTab extends Component {
     const factorIndicator = numList.map((num) => {
       const marginLeft = `calc( ${(num * 20).toString()}% - ${(num * 10).toString()}px )`;
       return (
-        <div className="factor-indicator" style={{ marginLeft }}>{num}</div>
+        <div key={num} className="factor-indicator" style={{ marginLeft }}>{num}</div>
       );
     });
     const tastePrefVecList = tasteFactorList.map((factor) => {

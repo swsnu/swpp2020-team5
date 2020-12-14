@@ -6,6 +6,8 @@ import { withAlert } from 'react-alert';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import { history } from '../../../store/store';
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 import getMockStore from '../../../test-utils/mocks';
 import CreateID from './CreateID';
 import * as actionCreators from '../../../store/actions/userActions/userActions';
@@ -52,6 +54,7 @@ describe('<CreateID/>', () => {
   beforeEach(() => {
     createid = (
       <Provider store={mockStore}>
+        <AlertProvider template={AlertTemplate}>
         <ConnectedRouter history={history}>
           <Switch>
             <Route
@@ -61,6 +64,7 @@ describe('<CreateID/>', () => {
             />
           </Switch>
         </ConnectedRouter>
+        </AlertProvider>
       </Provider>
     );
     spyResetCheckUser = jest.spyOn(actionCreators, 'resetCheckUser')
@@ -114,6 +118,7 @@ describe('<CreateID/>', () => {
     const stubMockStore = getMockStore(initialState);
     const stubCreateId = (
       <Provider store={stubMockStore}>
+        <AlertProvider template={AlertTemplate}>
         <ConnectedRouter history={history}>
           <Switch>
             <Route
@@ -123,6 +128,7 @@ describe('<CreateID/>', () => {
             />
           </Switch>
         </ConnectedRouter>
+        </AlertProvider>
       </Provider>
     );
     const component = mount(stubCreateId);

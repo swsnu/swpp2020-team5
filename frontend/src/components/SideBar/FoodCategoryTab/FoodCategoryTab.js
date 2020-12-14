@@ -12,7 +12,7 @@ class FoodCategoryTab extends Component {
     const categorylist = [];
     Object.keys(this.props.foodCategory).forEach((category) => {
       categorylist.push(
-        <div className="category">
+        <div key={category} className="category">
           <button
             className={this.props.foodCategory[category] && !this.props.selectAll
               ? 'checked' : 'unchecked'}
