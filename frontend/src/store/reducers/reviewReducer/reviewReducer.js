@@ -22,8 +22,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, myReviews: newReviewList };
     }
     case actionTypes.EDIT_MY_REVIEW: {
-      const newReviewList = [...state.myReviews];
-      newReviewList.map((review) => {
+      const newReviewList = state.myReviews.map((review) => {
         const newReview = { ...review };
         if (review.id === action.target.id) {
           newReview.content = action.target.content;
