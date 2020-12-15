@@ -14,7 +14,7 @@ debug_sum = 0
 debug_max = 0
 debug_min = 0
 debug_count = 0
-debug_10 = [0, 0, 0, 0, 0, 0]
+debug_10 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 
 with open('./ATM/embedding/word_to_pref.json', "r", encoding="utf-8") as json_file:
