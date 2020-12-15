@@ -6,7 +6,6 @@ total_count_dict = {}
 with open('./ATM/embedding/word_to_pref.json', "r", encoding="utf-8") as json_file:
     pref_dict = json.load(json_file)
 
-
 with open('./crawling/reviews_tokenized.json', "r", encoding="utf-8") as json_file:
     keywords = json.load(json_file)
     for res in keywords:

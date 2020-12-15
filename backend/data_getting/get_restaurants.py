@@ -1,6 +1,9 @@
 from ATM.models import *
 
 import json
+import django
+django.setup()
+
 
 pref_dict = {}
 total_count_dict = {}
