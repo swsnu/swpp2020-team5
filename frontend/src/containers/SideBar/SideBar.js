@@ -275,7 +275,7 @@ class SideBar extends Component {
             >
               {tabMode === 'Location'
                 ? '위치'
-                : searchLocation.address_name.split(' ')[1]}
+                : searchLocation.address_name.split(' ')[1] || searchLocation.address_name}
             </div>
             <div
               id="food-category-tab-name-button"
