@@ -43,14 +43,15 @@ class LocationTab extends Component {
           center: new kakao.maps.LatLng(searchLocation.y, searchLocation.x),
           level: 4,
         };
-        this.setState({ map: new window.kakao.maps.Map(container, options) });
-        let markerPosition  = new kakao.maps.LatLng(searchLocation.y, searchLocation.x); 
         // 마커를 생성합니다
-        this.setState({marker : new kakao.maps.Marker({
-          position: markerPosition
-        })})
-        
-        this.state.marker.setMap(this.state.map);
+        let markerPosition  = new kakao.maps.LatLng(searchLocation.y, searchLocation.x); 
+        this.setState({ 
+          map: new window.kakao.maps.Map(container, options), 
+          marker : new kakao.maps.Marker({
+            position: markerPosition
+          })
+        }, () => this.state.marker.setMap(this.state.map));
+                
       });
     };
     

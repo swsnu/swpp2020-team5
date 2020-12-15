@@ -186,8 +186,11 @@ class SideBar extends Component {
             onChangeLocation={(newLocation) => 
               this.setState({ searchLocation: newLocation }, () => {
                 this.props.onEditSearchLocation(newLocation);
-                this.props.onReloadHandler();
-            })}
+                if (this.props.restaurantID === -1) {
+                  this.props.onReloadHandler();
+                }
+              })
+            }
           />
         );
         break;
