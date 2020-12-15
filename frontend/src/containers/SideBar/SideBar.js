@@ -184,12 +184,13 @@ class SideBar extends Component {
             id="location-tab"
             searchLocation={this.state.searchLocation}
             onChangeLocation={(newLocation) => 
-              this.setState({ searchLocation: newLocation }, () => {
-                this.props.onEditSearchLocation(newLocation);
-                if (this.props.restaurantID === -1) {
-                  this.props.onReloadHandler();
-                }
-              })
+              this.setState({ searchLocation: newLocation }, () => 
+                this.props.onEditSearchLocation(newLocation).then(() => {
+                  if (this.props.restaurantID === -1) {
+                    this.props.onReloadHandler();
+                  }
+                })
+              )
             }
           />
         );
@@ -200,10 +201,16 @@ class SideBar extends Component {
             id="food-category-tab"
             foodCategory={this.state.foodCategory}
             postClickFoodCategoryHandler={
-                  (category) => this.postClickFoodCategoryHandler(category)
-                }
+              (category) => this.postClickFoodCategoryHandler(category)
+            }
             selectAll={this.state.selectAllCategory}
-            onClickSave={this.onSaveHandler}
+            onClickSave={() =>
+              this.props.onEditFoodCategory(this.state.foodCategory).then(() => {
+                if (this.props.restaurantID === -1) {
+                  this.props.onReloadHandler();
+                }
+              })
+            }
           />
         );
         break;
@@ -213,7 +220,13 @@ class SideBar extends Component {
             id="preference-vector-tab"
             preferenceVector={this.state.preferenceVector}
             onChangeFactor={this.onChangeVectorHandler}
-            onClickSave={this.onSaveHandler}
+            onClickSave={() => 
+              this.props.onEditPreferenceVector(this.state.preferenceVector).then(() => {
+                if (this.props.restaurantID === -1) {
+                  this.props.onReloadHandler();
+                }
+              })
+            }
           />
         );
         break;

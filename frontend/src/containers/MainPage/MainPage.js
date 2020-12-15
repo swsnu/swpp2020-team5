@@ -111,7 +111,10 @@ class MainPage extends Component {
       <div className="MainPage">
         <SideBar
           restaurantID={-1}
-          onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
+          onReloadHandler={() => {
+            this.props.onGetRestaurantList(searchKeyword);
+            this.setState({ curPage: 1, scrollX: 0, scrollY: 0 });
+          }}
         />
         <div className="main-page-header">
           <div className="header-text">
