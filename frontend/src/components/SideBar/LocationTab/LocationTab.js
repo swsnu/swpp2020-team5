@@ -38,7 +38,6 @@ class LocationTab extends Component {
         if(this.state.searchLocation.x === null)
           this.setState({searchLocation:this.props.searchLocation});
         const { searchLocation } = this.state;
-        console.log(searchLocation)
         const container = document.getElementById('current-location-map');
         const options = {
           center: new kakao.maps.LatLng(searchLocation.y, searchLocation.x),
@@ -75,7 +74,7 @@ class LocationTab extends Component {
   // close the location list and change searchLocation
   //
   onClickLocationHandler(location) {
-    const {onChangeLocation} =this.props
+    const { onChangeLocation, onClickSave } =this.props
     const { map } = this.state;
     const {searchLocation} =this.state;
     this.setState({searchLocation:
@@ -83,11 +82,14 @@ class LocationTab extends Component {
         x: location.x, 
         y: location.y, 
         address_name: location.address_name
-        
       }
     });
-    console.log(location);
-    const newSearchLoction = {...location, radius: this.state.searchLocation.radius}
+    const newSearchLoction = {
+      x: location.x,
+      y: location.y,
+      address_name: location.address_name,
+      radius: searchLocation.radius,
+    }
     onChangeLocation(newSearchLoction);
     
     // reset searchbox
@@ -158,7 +160,7 @@ class LocationTab extends Component {
     return (
       <div className="tab" id="location">
         <div className="tab-header">
-          현재 위치ㅣ
+          검색 위치ㅣ
           <strong className="current-location">
             {locationString}
           </strong>
@@ -173,14 +175,11 @@ class LocationTab extends Component {
           }}
         />
         <button id='save-radius-button' onClick={()=> {
-          console.log(this.state.searchLocation);
           this.props.onChangeLocation(this.state.searchLocation)}}>
           확인
         </button>
         검색 반경: {radius} km
         <div className="tab-content">
-          <p>검색하고 있는 위치: {this.state.searchLocation.address_name}</p>
-          
           <div id="search-box" className="box">
             <img src={searchIcon} alt="searchIcon" className="search-icon" />
             <input

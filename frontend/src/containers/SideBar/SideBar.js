@@ -28,7 +28,6 @@ class SideBar extends Component {
       searchWord: '',
       tabMode: 'MyInfo',
       searchLocation: {},
-      radius:10,
       initSearchLocation: false,
       foodCategory: {},
       initFoodCategory: false,
@@ -157,8 +156,12 @@ class SideBar extends Component {
         tab = (
           <LocationTab
             id="location-tab"
-            searchLocation={this.props.searchLocation}
-            onChangeLocation={(newLocation, radius) => this.setState({ searchLocation: newLocation})}
+            searchLocation={this.state.searchLocation}
+            onChangeLocation={(newLocation) => 
+              this.setState({ searchLocation: newLocation }, () => {
+                this.props.onEditSearchLocation(newLocation);
+                this.props.onReloadHandler();
+            })}
           />
         );
         break;
