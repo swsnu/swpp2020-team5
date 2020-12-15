@@ -22,9 +22,12 @@ class OtherReview extends Component {
   render() {
     let contentDisplay = this.props.content;
 
-    if (contentDisplay.length > 50 && this.state.isSummary) {
-      contentDisplay = contentDisplay.substring(0, 50).concat('...');
+    if (contentDisplay.length > 80 && this.state.isSummary) {
+      contentDisplay = contentDisplay.substring(0, 80).concat('...');
     }
+
+    const contentOpen = (<button className="open-content" onClick={() => this.onClickContentHandler()}>펼치기</button>);
+    const contentClose = (<button className="close-content" onClick={() => this.onClickContentHandler()}>접기</button>);
 
     return (
       <div className="OtherReview">
@@ -45,7 +48,10 @@ class OtherReview extends Component {
             <p id="rating-text">{this.props.rating}</p>
             <p id="createTime">{this.props.date}</p>
           </div>
-          <div className="other-review-content" id={this.props.author} onClick={() => this.onClickContentHandler()}>{contentDisplay}</div>
+          <div className="other-review-content" id={this.props.author} >{contentDisplay}
+          {(contentDisplay.length > 80 && this.state.isSummary) ? contentOpen: ''}
+          </div>
+          {(contentDisplay.length > 80 && !(this.state.isSummary)) ? contentClose: ''}
         </div>
       </div>
     );

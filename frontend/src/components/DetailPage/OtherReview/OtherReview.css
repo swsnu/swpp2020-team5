@@ -26,3 +26,27 @@
   margin-left: 10px;
 }
 
+.OtherReview .open-content {
+  border: none;
+  color: #666666;
+  background-color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 20px;
+  outline: none;
+}
+.OtherReview .close-content {
+  width:100%;
+  border: none;
+  color: #666666;
+  background-color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 20px;
+  outline: none;
+}
+
