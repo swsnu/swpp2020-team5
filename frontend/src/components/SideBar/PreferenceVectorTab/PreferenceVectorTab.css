@@ -77,13 +77,22 @@ input[type='range']::-webkit-slider-thumb {
   font-size: 25px;
   vertical-align: middle;
 }
+
+#저렴한 {
+  width: 350px;
+}
+
+#불친절한 {
+  width: 350px;
+}
+
 .pref-help-content {
   padding-left: 10px;
   font-size: 18px;
   z-index: 11;
   background-color: #FFFFFF;
   height: 30px;
-  width: 400px;
+  width: 390px;
   color: #666666;
   text-align: left;
   position: sticky;

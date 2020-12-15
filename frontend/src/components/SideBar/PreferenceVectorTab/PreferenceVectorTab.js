@@ -79,7 +79,7 @@ class PreferenceVectorTab extends Component {
               >
                 ?
               </span>
-              <div className="pref-help-content" style={{ display: 'none' }}>
+              <div id={factor} className="pref-help-content" style={{ display: 'none' }}>
                 높을수록
                 <span className="red-text">{helpContentKind[serviceFactorIndex]}</span>
                 식당의 평점이
