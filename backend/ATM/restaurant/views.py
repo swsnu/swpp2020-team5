@@ -58,9 +58,8 @@ def searched_restaurants(request, word=''):
                 cur = (author.search_location.y, author.search_location.x)
                 res_loc = (restaurant.location.y, restaurant.location.x)
                 # print(haversine(cur, res_loc))
-                if haversine(cur, res_loc) >= 10:
+                if haversine(cur, res_loc) >= author.search_location.radius:
                     continue
-                # print(restaurant.food_category)
                 if not author_food_category[restaurant.food_category]:
                     continue
                 response_dict = {}

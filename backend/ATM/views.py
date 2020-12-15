@@ -113,14 +113,13 @@ def sign_in(request):
             print(address_name)
             cur_user.search_location.address_name = address_name
             cur_user.search_location.save()
-
+            
             for attr in get_preference_attributes(cur_user.food_category):
                 cur_user.food_category[attr] = True
             cur_user.food_category.save()
-
+            cur_user.radius = 10
             cur_user.current_tab = 'MyInfo'
             cur_user.save()
-
             return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)

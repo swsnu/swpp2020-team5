@@ -41,6 +41,7 @@ class Location(models.Model):
     x = models.FloatField(default=0.0)
     y = models.FloatField(default=0.0)
     address_name = models.CharField(max_length=100)
+    radius = models.FloatField(default=10)
 
 
 class PreferenceVector(models.Model):

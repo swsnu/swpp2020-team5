@@ -15,6 +15,13 @@ class LocationTab extends Component {
       locationListWrapper: null,
       locationList: [],
       map: null,
+      searchLocation: {
+        x: null,
+        y: null,
+        address_name: null,
+        radius: null,
+      },
+      marker: null,
     };
   }
 
@@ -24,19 +31,29 @@ class LocationTab extends Component {
     script.src = '//dapi.kakao.com/v2/maps/sdk.js?appkey=f4eda0526e95ec9c05400d0a69066c5a&libraries=services&autoload=false';
     script.async = true;
     document.head.appendChild(script);
-
     // load map
     script.onload = () => {
       kakao.maps.load(() => {
-        const { searchLocation } = this.props;
+        
+        if(this.state.searchLocation.x === null)
+          this.setState({searchLocation:this.props.searchLocation});
+        const { searchLocation } = this.state;
         const container = document.getElementById('current-location-map');
         const options = {
           center: new kakao.maps.LatLng(searchLocation.y, searchLocation.x),
           level: 4,
         };
         this.setState({ map: new window.kakao.maps.Map(container, options) });
+        let markerPosition  = new kakao.maps.LatLng(searchLocation.y, searchLocation.x); 
+        // 마커를 생성합니다
+        this.setState({marker : new kakao.maps.Marker({
+          position: markerPosition
+        })})
+        
+        this.state.marker.setMap(this.state.map);
       });
     };
+    
     // load location list
     this.setState({
       locationListWrapper: document.getElementById('location-list'),
@@ -57,25 +74,45 @@ class LocationTab extends Component {
   // close the location list and change searchLocation
   //
   onClickLocationHandler(location) {
-    const { onChangeLocation } = this.props;
+    const { onChangeLocation, onClickSave } =this.props
     const { map } = this.state;
-
-    onChangeLocation(location);
-
+    const {searchLocation} =this.state;
+    this.setState({searchLocation:
+      {...searchLocation,
+        x: location.x, 
+        y: location.y, 
+        address_name: location.address_name
+      }
+    });
+    const newSearchLoction = {
+      x: location.x,
+      y: location.y,
+      address_name: location.address_name,
+      radius: searchLocation.radius,
+    }
+    onChangeLocation(newSearchLoction);
+    
     // reset searchbox
     document.getElementById('location-input').value = '';
     this.setState({ locationList: [] });
-
     // always close the list
     this.onToggleListHandler(0);
 
     // show new location on map
+    this.state.marker.setMap(null);
+    let markerPosition  = new kakao.maps.LatLng(location.y, location.x); 
+    let newMarker = new kakao.maps.Marker({position: markerPosition});
+    this.setState({
+      marker : newMarker
+    });
     map.setCenter(new kakao.maps.LatLng(location.y, location.x));
-  }
+    newMarker.setMap(map);
 
+  }
   //
   // list the locations found from the current input
   //
+  
   onChangeLocationInputHandler(location) {
     // absolutely redundant, but included to satisfy the all mighty eslinter-sama
     const { script } = this.state;
@@ -119,10 +156,11 @@ class LocationTab extends Component {
 
     // set the displayed name on the button to searchLocation
     const locationString = searchLocation.address_name;
+    const {radius} = this.state.searchLocation;
     return (
       <div className="tab" id="location">
         <div className="tab-header">
-          현재 위치ㅣ
+          검색 위치ㅣ
           <strong key={locationString} className="current-location">
             {locationString}
           </strong>
