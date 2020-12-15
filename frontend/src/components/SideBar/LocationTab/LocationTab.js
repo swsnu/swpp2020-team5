@@ -165,20 +165,6 @@ class LocationTab extends Component {
             {locationString}
           </strong>
         </div>
-        <input 
-          id='radius-input'  
-          type='text' 
-          value={radius} 
-          onChange={(ev) => {
-            this.setState({searchLocation:{...searchLocation, 
-              radius : ev.target.value}})
-          }}
-        />
-        <button id='save-radius-button' onClick={()=> {
-          this.props.onChangeLocation(this.state.searchLocation)}}>
-          확인
-        </button>
-        검색 반경: {radius} km
         <div className="tab-content">
           <div id="search-box" className="box">
             <img src={searchIcon} alt="searchIcon" className="search-icon" />
