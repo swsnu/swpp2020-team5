@@ -79,6 +79,7 @@ class MainPage extends Component {
           category={el.category}
           order={order}
           preferenceVector={el.preferenceVector}
+          onClickSummary={() => this.props.onEditCurrentTab('MyInfo')}
         />,
       );
     }
@@ -173,7 +174,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)),
-
+  onEditCurrentTab: tabMode => dispatch(actionCreators.editCurrentTab(tabMode)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPage));
