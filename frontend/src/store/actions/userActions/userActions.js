@@ -12,38 +12,34 @@ const getUser_ = (user) => ({
 });
 
 // isExist is boolean
-const checkUser_ = isExist => ({
+const checkUser_ = (isExist) => ({
   type: actionTypes.CHECK_USER,
-  target: isExist
-})
+  target: isExist,
+});
 
 export const checkUser = (username, email) => (dispatch) => axios
   .get(`/atm/user/check/?username=${username}&email=${email}/`)
-  .then(res => dispatch(checkUser_('NotExist')))
-  .catch(err => {
+  .then((res) => dispatch(checkUser_('NotExist')))
+  .catch((err) => {
     if (err.response.status === 401) {
-      return dispatch(checkUser_('Exist'))
-    } else {
-      return alert('checkUser error')
+      return dispatch(checkUser_('Exist'));
     }
-  })
-
-export const resetCheckUser = () => (dispatch) => {
-  return dispatch({
-    type: resetCheckUser,
+    return alert('checkUser error');
   });
-}
+
+export const resetCheckUser = () => (dispatch) => dispatch({
+  type: actionTypes.RESET_CHECK_USER,
+});
 
 export const getUser = () => (dispatch) => axios
   .get('/atm/user/me/')
   .then((res) => dispatch(getUser_(res.data)))
-  .catch((err) => dispatch(getUser_(null))); 
-
+  .catch((err) => dispatch(getUser_(null)));
 
 export const postSignIn = (userInfo) => (dispatch) => axios
   .post('/atm/sign-in/', userInfo)
   .then((res) => {
-    dispatch({type: actionTypes.POST_SIGN_IN});
+    dispatch({ type: actionTypes.POST_SIGN_IN });
     return dispatch(replace('/'));
   })
   .catch((err) => alert('Login failed'));
@@ -52,19 +48,17 @@ export const postSignUp = (userInfo) => (dispatch) => axios
   .post('/atm/sign-up/', userInfo)
   .then((res) => {})
   .catch((err) => {
-    if (err.response.status == 409){
-      alert('이미 등록된 회원입니다!')
+    if (err.response.status === 409) {
+      alert('이미 등록된 회원입니다!');
+    } else {
+      alert('SignUp Failed');
     }
-    else {
-      alert('SignUp Failed')
-      }
-    });
-
+  });
 
 export const getSignOut = () => (dispatch) => axios
   .get('/atm/sign-out/')
   .then((res) => {
-    dispatch({type: actionTypes.GET_SIGN_OUT});
+    dispatch({ type: actionTypes.GET_SIGN_OUT });
     return dispatch(replace('/'));
   })
   .catch((err) => {
@@ -146,10 +140,29 @@ const getPreferenceVector_ = (preferenceVector) => ({
 
 export const getPreferenceVector = () => (dispatch) => axios
   .get('/atm/user/preference-vector/')
-  .then((res) => {
-    console.log(res.data)
-    return dispatch(getPreferenceVector_(res.data));
-  })
+  .then((res) => dispatch(getPreferenceVector_(res.data)))
   .catch((err) => {
-    alert(err + 'Not Logined');
+    alert(`${err}Not Logined`);
   });
+
+const getCurrentTab_ = (tabMode) => ({
+  type: actionTypes.GET_CURRENT_TAB,
+  target: tabMode,
+});
+
+export const getCurrentTab = () => (dispatch) => axios
+  .get('/atm/user/current-tab/')
+  .then((res) => dispatch(getCurrentTab_(res.data.tabMode)))
+  .catch((err) => {
+    alert(`${err}Not Logined`);
+  });
+
+const editCurrentTab_ = (tabMode) => ({
+  type: actionTypes.EDIT_CURRENT_TAB,
+  target: tabMode,
+});
+
+export const editCurrentTab = (tabMode) => (dispatch) => axios
+  .put('/atm/user/current-tab/', { tabMode })
+  .then((res) => dispatch(editCurrentTab_(res.data.tabMode)))
+  .catch((err) => alert('Not Logined'));

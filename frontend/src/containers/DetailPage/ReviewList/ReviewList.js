@@ -14,87 +14,66 @@ class ReviewList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // NOT USED YET
-      // currentReviews: {
-      //   naver: [],
-      //   kakao: [],
-      //   atm: [],
-      // },
-      tab_index: 0,
-      curr_review_cnt: 10,
+      tabIndex: 0,
+      currReviewCnt: 10,
+      scrollX: 0,
+      scrollY: 0,
     };
   }
 
-  componentDidMount() {
-    //this.props.onGetReviews(this.props.restaurantID);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    window.scrollTo(this.state.scrollX, this.state.scrollY);
   }
 
   onClickTabHandler = (index) => {
-    this.setState({ tab_index: index });
-    this.setState({curr_review_cnt: 10});
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    this.setState({ tabIndex: index, currReviewCnt: 10, scrollX, scrollY });
   }
 
   onClickShowMoreHandler = () => {
-    let increased_cnt = this.state.curr_review_cnt + 10;
-    this.setState({curr_review_cnt: increased_cnt});
+    const { currReviewCnt } = this.state;
+    const increasedCnt = currReviewCnt + 10;
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+    this.setState({ currReviewCnt: increasedCnt, scrollX, scrollY });
   }
 
   render() {
     // TODO other review 분류작업? + <OtherReview> 로 렌더링
-    
-    let showCnt = 0;
-    const naverReview = this.props.otherReviews.naver.map((review) => {
-        if (showCnt < this.state.curr_review_cnt) {
-          showCnt++;
-          return (
-            <OtherReview
-              content={review.content}
-              author={review.author_name}
-              date={review.date}
-              rating={review.rating}
-            />)
-        }
-      });
-    showCnt = 0;
+    const { currReviewCnt } = this.state;
+    const { otherReviews } = this.props;
+    function loadReview(reviewList) {
+      const loadedList = [];
+      for (let i = 0; i < Math.min(currReviewCnt, reviewList.length); i += 1) {
+        const review = reviewList[i];
+        loadedList.push(
+          <OtherReview
+            key={review.id}
+            content={review.content}
+            author={review.author_name}
+            date={review.date}
+            rating={review.rating}
+          />,
+        );
+      }
+      return (loadedList);
+    }
+    const naverReview = loadReview(otherReviews.naver);
+    const kakaoReview = loadReview(otherReviews.kakao);
+    const atmReview = loadReview(otherReviews.atm);
+    const naverCnt = otherReviews.naver.length;
+    const kakaoCnt = otherReviews.kakao.length;
+    const atmCnt = otherReviews.atm.length;
 
-    const kakaoReview = this.props.otherReviews.kakao.map((review) => {
-        if (showCnt < this.state.curr_review_cnt) {
-          showCnt++;
-          return (
-            <OtherReview
-              content={review.content}
-              author={review.author_name}
-              date={review.date}
-              rating={review.rating}
-            />)
-        }
-      });
-
-    showCnt = 0;
-    
-    const atmReview = this.props.otherReviews.atm.map((review) => {
-        if (showCnt < this.state.curr_review_cnt) {
-          showCnt++;
-          return (
-            <OtherReview
-              content={review.content}
-              author={review.author_name}
-              date={review.date}
-              rating={review.rating}
-            />)
-        }
-      });
-    const naverCnt = naverReview.length;
-    const kakaoCnt = kakaoReview.length;
-    const atmCnt = atmReview.length;
-    
     const showMoreButton = (
-            <button id="show-more" onClick={this.onClickShowMoreHandler}>Show more</button>
+      <button id="show-more" onClick={this.onClickShowMoreHandler}>리뷰 더보기</button>
     );
 
     return (
       <div className="ReviewList">
-        <Tabs selectedIndex={this.state.tab_index} onSelect={this.onClickTabHandler}>
+        <Tabs id="review-tab" selectedIndex={this.state.tabIndex} onSelect={this.onClickTabHandler}>
           <TabList>
             <Tab>네이버 리뷰</Tab>
             <Tab>카카오 리뷰</Tab>
@@ -108,7 +87,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {naverReview}
-            {(naverCnt > 10 && naverCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
+            {(naverCnt > 10 && naverCnt > this.state.currReviewCnt) ? showMoreButton : ''}
           </TabPanel>
           <TabPanel className="tabcontent" id="kakao-content">
             <p>
@@ -117,7 +96,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {kakaoReview}
-            {(kakaoCnt > 10 && kakaoCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
+            {(kakaoCnt > 10 && kakaoCnt > this.state.currReviewCnt) ? showMoreButton : ''}
           </TabPanel>
           <TabPanel className="tabcontent" id="atm-content">
             <p>
@@ -126,7 +105,7 @@ class ReviewList extends Component {
               개의 리뷰를 남겼습니다.
             </p>
             {atmReview}
-            {(atmCnt > 10 && atmCnt > this.state.curr_review_cnt) ? showMoreButton : ''}
+            {(atmCnt > 10 && atmCnt > this.state.currReviewCnt) ? showMoreButton : ''}
           </TabPanel>
         </Tabs>
       </div>
@@ -135,11 +114,11 @@ class ReviewList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  //otherReviews: state.rv.otherReviews,
+  // otherReviews: state.rv.otherReviews,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  //onGetReviews: (restaurantID) => dispatch(actionCraetors.getOtherReviews(restaurantID)),
+  // onGetReviews: (restaurantID) => dispatch(actionCraetors.getOtherReviews(restaurantID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewList);

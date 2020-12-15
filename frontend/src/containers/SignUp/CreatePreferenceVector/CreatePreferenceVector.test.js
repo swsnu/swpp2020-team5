@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+// import { render, fireEvent  } from "react-testing-library";
 
 import CreatePreferenceVector from './CreatePreferenceVector';
 import getMockStore from '../../../test-utils/mocks';
@@ -56,12 +57,19 @@ describe('<CreatePreferenceVector />', () => {
     const wrapper = component.find('CreatePreferenceVector');
 
     wrapper.find('#confirm-button').simulate('click');
+    expect(spyPostSignUp).toHaveBeenCalledTimes(0);
+    wrapper.find('#rd0_0').simulate('change', { target: { checked: true, value: '0_0' } });
+    wrapper.find('#rd1_0').simulate('change', { target: { checked: true, value: '1_0' } });
+    wrapper.find('#rd2_0').simulate('change', { target: { checked: true, value: '2_0' } });
+    wrapper.find('#rd3_0').simulate('change', { target: { checked: true, value: '3_0' } });
+    wrapper.find('#confirm-button').simulate('click');
     expect(spyPostSignUp).toHaveBeenCalledTimes(1);
     expect(spyPostSignUp).toHaveBeenCalledWith({
       username: 'TEST_NAME',
       email: 'TEST_EMAIL',
       password: 'TEST_PW',
-      selectedFoods: [false, false, false, false, false, false],
+      selectedFoods: [],
+      serviceOptionList: [0, 0, 0, 0],
     });
     expect(spyHistoryPush).toHaveBeenCalledWith('/');
   });
@@ -69,11 +77,35 @@ describe('<CreatePreferenceVector />', () => {
   it('should toggle food', () => {
     const component = mount(createPreferenceVector);
     let wrapper = component.find('CreatePreferenceVector');
+    const spyPostSignUp = jest.spyOn(actionCreators, 'postSignUp')
+      .mockImplementation((userInfo) => (dispatch) => {});
 
-    wrapper.find('.image-and-caption').at(0).find('img').simulate('click');
+    wrapper.find('.food-image-wrapper').at(0).find('img').simulate('click');
     expect(wrapper.state().selectedFoods[0]).toBe(true);
     wrapper = component.find('CreatePreferenceVector');
-    wrapper.find('.image-and-caption').find('.check-image').simulate('click');
+    wrapper.find('.food-image-wrapper').find('.check-image').simulate('click');
     expect(wrapper.state().selectedFoods[0]).toBe(false);
+    wrapper = component.find('CreatePreferenceVector');
+    wrapper.find('.food-image-wrapper').at(0).find('img').simulate('click');
+    expect(wrapper.state().selectedFoods[0]).toBe(true);
+
+    wrapper.find('#confirm-button').simulate('click');
+    expect(spyPostSignUp).toHaveBeenCalledTimes(0);
+
+    // Survey done.
+
+    wrapper.find('#rd0_0').simulate('change', { target: { checked: true, value: '0_0' } });
+    wrapper.find('#rd1_0').simulate('change', { target: { checked: true, value: '1_0' } });
+    wrapper.find('#rd2_0').simulate('change', { target: { checked: true, value: '2_0' } });
+    wrapper.find('#rd3_0').simulate('change', { target: { checked: true, value: '3_0' } });
+    wrapper.find('#confirm-button').simulate('click');
+    expect(spyPostSignUp).toHaveBeenCalledTimes(1);
+    expect(spyPostSignUp).toHaveBeenCalledWith({
+      username: 'TEST_NAME',
+      email: 'TEST_EMAIL',
+      password: 'TEST_PW',
+      selectedFoods: ['짜장면'],
+      serviceOptionList: [0, 0, 0, 0],
+    });
   });
 });

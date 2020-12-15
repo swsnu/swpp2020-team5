@@ -27,6 +27,19 @@ const stubInitialState = {
   restaurant: null,
   keyword: null,
 };
+const stubFoodCategory = {
+  한식: true,
+  양식: true,
+  중식: true,
+  일식: true,
+  카페: true,
+  패스트푸드: true,
+  베트남음식: true,
+  분식: false,
+  디저트: true,
+  주점: false,
+};
+const mockPostHandler = jest.fn();
 
 const mockStore = getMockStore(stubInitialState);
 
@@ -40,75 +53,66 @@ describe('<FoodCategoryTab/>', () => {
             <Route
               path="/"
               exact
-              render={() => <FoodCategoryTab />}
+              render={() => (
+                <FoodCategoryTab
+                  foodCategory={stubFoodCategory}
+                  postClickFoodCategoryHandler={mockPostHandler}
+                  selectAll
+                />
+              )}
             />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
     // spyGetFoodCategory = spyOn(actionCreators, 'getFoodCategory')
-    //   .mockImplementation(() => {return dispatch => {}; });
+    //  .mockImplementation(() => {return dispatch => {}; });
   });
   it('should render properly', () => {
     const component = mount(foodcategory);
     const wrapper = component.find('.category');
-    expect(wrapper.length).toBe(10);
-    const instance = component.find(FoodCategoryTab.WrappedComponent).instance();
-    expect(instance.state.foodCategory['분식']).toEqual(false);
-  });
-  it('should click properly', () => {
-    // const spyEditUserFoodCategory = jest.spyOn(actionCreators, 'editUserFoodCategory')
-    //   .mockImplementation(foodCategory => {return dispatch => {}; });
-    const component = mount(foodcategory);
-    const wrapper = component.find('#savebutton');
-    wrapper.simulate('click');
-  //  expect(spyEditUserFoodCategory).toBeCalledTimes(1);
+    expect(wrapper.length).toBe(11);
   });
   it('should click image properly', () => {
     const component = mount(foodcategory);
     const wrapper = component.find('.checked');
     const firstimg = wrapper.at(0);
     firstimg.simulate('click');
-
-    const instance = component.find(FoodCategoryTab.WrappedComponent).instance();
-    expect(instance.state.foodCategory['한식']).toEqual(false);
+    expect(mockPostHandler).toHaveBeenCalledTimes(1);
   });
-  it('should render properly when user foodcategory are all true', () => {
-    const tempStubInitialState = {
-      user: {
-        foodCategory: {
-          한식: true,
-          양식: true,
-          중식: true,
-          일식: true,
-          카페: true,
-          패스트푸드: true,
-          베트남음식: true,
-          분식: true,
-          디저트: true,
-          주점: true,
-        },
-      },
-      review: null,
-      restaurant: null,
-      keyword: null,
-    };
-    const tempMockStore = getMockStore(tempStubInitialState);
-    const otherfoodcategory = (
-      <Provider store={tempMockStore}>
+  it('should click total button properly', () => {
+    const component = mount(foodcategory);
+    const wrapper = component.find('#total-button');
+    wrapper.simulate('click');
+    expect(mockPostHandler).toHaveBeenCalledTimes(2);
+  });
+  it('should click total button properly', () => {
+    const stubcategory = (
+      <Provider store={mockStore}>
         <ConnectedRouter history={history}>
           <Switch>
             <Route
               path="/"
               exact
-              render={() => <FoodCategoryTab />}
+              render={() => (
+                <FoodCategoryTab
+                  foodCategory={stubFoodCategory}
+                  postClickFoodCategoryHandler={mockPostHandler}
+                  selectAll={false}
+                />
+              )}
             />
           </Switch>
         </ConnectedRouter>
       </Provider>
     );
-    const component = mount(otherfoodcategory);
-    const wrapper = component.find(FoodCategoryTab.WrappedComponent).instance();
-    expect(wrapper.state.foodCategory['분식']).toEqual(false);
+    const component = mount(stubcategory);
+    let wrapper = component.find('.checked');
+    const firstimg = wrapper.at(0);
+    firstimg.simulate('click');
+    expect(mockPostHandler).toHaveBeenCalledTimes(3);
+    wrapper = component.find('#total-button');
+    wrapper.simulate('click');
+    expect(mockPostHandler).toHaveBeenCalledTimes(4);
   });
 });

@@ -15,6 +15,9 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    if sys.argv[1] == 'get_restaurants':
+        exec(open('./data_getting/get_restaurants.py').read())
+        exit(0)
     execute_from_command_line(sys.argv)
 
 

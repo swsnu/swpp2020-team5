@@ -41,6 +41,9 @@ describe('<RestaurantSummary />', () => {
                                   심심: 3,
                                 }
                               }
+                  img_url_list={
+                    ['a', 'b']
+                  }
                 />
               )}
             />
@@ -72,5 +75,45 @@ describe('<RestaurantSummary />', () => {
     wrapper = component.find('.image').at(0);
     wrapper.simulate('click');
     expect(spyHistoryPush).toHaveBeenCalledWith('/detail/1');
+    const event = {
+      target: {
+        src: '',
+      },
+    };
+    wrapper.prop('onError').call(null, event);
+    restaurantSummary = (
+      <Provider store={mockStore}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <RestaurantSummary
+                  id={1}
+                  category={[
+                    '한식',
+                    '두식',
+                  ]}
+                  preferenceVector={
+                                {
+                                  삼삼: 1,
+                                  슴슴: 2,
+                                  심심: 3,
+                                }
+                              }
+                  img_url_list={
+                    []
+                  }
+                />
+              )}
+            />
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
+    );
+    const anotherComponent = mount(restaurantSummary);
+    wrapper = anotherComponent.find('.image').at(0);
+    wrapper.prop('onError').call(null, event);
   });
 });

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions/actionTypes';
+import createHistory from 'history/createBrowserHistory';
 import * as actionCreators from '../../../store/actions/index';
-import welcomeImage from '../../../images/that_bonobono.jpg';
 import MyReview from '../../../components/SideBar/MyReview/MyReview';
 import './MyInfoTab.css';
+
+const history = createHistory();
 
 class MyInfoTab extends Component {
   constructor(props) {
@@ -80,8 +81,9 @@ class MyInfoTab extends Component {
     // if current page is not Mainpage, myInfoTab should show onDetailPage.
     // Otherwise, should show onMainPage
     if (this.props.restaurantID !== -1) {
-      myReview = this.props.myReviewList.map((review) => ( 
+      myReview = this.props.myReviewList.map((review) => (
         <MyReview
+          key={review.id}
           className="Review"
           reviewID={review.id}
           content={review.content}
@@ -100,7 +102,7 @@ class MyInfoTab extends Component {
             {' '}
             평가하기
           </p>
-          <div>{rateStar}</div>
+          <div className="review-input-star">{rateStar}</div>
           <div className="review-input-set">
             {reviewInput}
             {reviewConfirmButton}
@@ -120,7 +122,13 @@ class MyInfoTab extends Component {
             {' '}
             개의 리뷰를 남겼습니다.
           </div>
-          {myReview}
+          <div className="my-review-list">
+            {myReview}
+            <div className="review-padding">
+              <br />
+              {' '}
+            </div>
+          </div>
         </div>
       );
 
@@ -128,7 +136,6 @@ class MyInfoTab extends Component {
     } else {
       myInfo = onMainPage;
     }
-
 
     return (
       <div className="tab" id="my-info">

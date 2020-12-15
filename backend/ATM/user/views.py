@@ -2,9 +2,9 @@ import json
 from json import JSONDecodeError
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.views.decorators.csrf import ensure_csrf_cookie
-from .utils import get_preference_attributes
 from django.db.models import Q
 from django.contrib.auth.models import User
+from .utils import get_preference_attributes
 
 
 @ensure_csrf_cookie
@@ -21,16 +21,20 @@ def me_info(request):
     else:
         return HttpResponseNotAllowed(['GET'])
 
+
 @ensure_csrf_cookie
 def check(request):
     if request.method == 'GET':
-        username = request.GET.get('username','')
-        email = request.GET.get('email','')
+        username = request.GET.get('username', '')
+        email = request.GET.get('email', '')
         try:
             User.objects.get(Q(username=username) | Q(email__contains=email))
         except User.DoesNotExist:
             return HttpResponse(status=204)
         return HttpResponse(status=401)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
 
 @ensure_csrf_cookie
 def preference_vector(request):
@@ -89,11 +93,16 @@ def search_location(request):
                 req_data = json.loads(request.body.decode())
                 for attr in attr_list:
                     user.search_location[attr] = req_data[attr]
+                    print(attr)
+                    print(req_data[attr])
             except (KeyError, JSONDecodeError):
                 return HttpResponse(status=400)
             user.search_location.save()
+            user.save()
             response_dict = {}
             for attr in attr_list:
+                print(attr)
+                print(user.search_location[attr])
                 response_dict[attr] = user.search_location[attr]
             return JsonResponse(response_dict, status=200)
         else:
@@ -130,6 +139,32 @@ def food_category(request):
             response_dict = {}
             for attr in attr_list:
                 response_dict[attr] = user.food_category[attr]
+            return JsonResponse(response_dict, status=200)
+        else:
+            return HttpResponse(status=401)
+    else:
+        return HttpResponseNotAllowed(['GET', 'PUT'])
+
+
+@ensure_csrf_cookie
+def current_tab(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            user = request.user.profile
+            response_dict = {'tabMode': user.current_tab}
+            return JsonResponse(response_dict, status=200)
+        else:
+            return HttpResponse(status=401)
+    elif request.method == 'PUT':
+        if request.user.is_authenticated:
+            user = request.user.profile
+            try:
+                req_data = json.loads(request.body.decode())
+            except (KeyError, JSONDecodeError):
+                return HttpResponse(status=400)
+            user.current_tab = req_data['tabMode']
+            user.save()
+            response_dict = {'tabMode': user.current_tab}
             return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)

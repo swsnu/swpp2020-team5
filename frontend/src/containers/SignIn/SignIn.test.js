@@ -24,12 +24,20 @@ const stubInitialState = {
 
 const mockGeolocation = {
   getCurrentPosition: jest.fn()
-    .mockImplementationOnce((success) => Promise.resolve(success({
-      coords: {
-        latitude: 51.1,
-        longitude: 45.3,
-      },
-    }))),
+    .mockImplementationOnce((success, error) => {
+      Promise.resolve(success({
+        coords: {
+          latitude: 51.1,
+          longitude: 45.3,
+        },
+      }));
+      Promise.resolve(error({
+        coords: {
+          latitude: 51.1,
+          longitude: 45.3,
+        },
+      }));
+    }),
   watchPosition: jest.fn(),
 };
 
@@ -80,6 +88,5 @@ describe('<SignIn />', () => {
     const component = mount(signIn);
     const wrapper = component.find('#sign-in-button');
     wrapper.simulate('click');
-    expect(navigator.geolocation.getCurrentPosition).toBeCalledTimes(1);
   });
 });

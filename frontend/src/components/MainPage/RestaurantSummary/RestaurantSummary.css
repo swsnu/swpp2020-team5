@@ -30,13 +30,14 @@
 .text .head {
     height: 50px;
     padding-bottom: 10px;
+    display: flex;
 }
 .text .rate {
     font-size: 25px;
-    color: #FFCA59;
+    color: #FF8A59;
     cursor: pointer;
     float: left;
-    margin-top: 20px;
+    margin-top: 18px;
     margin-left: 10px;
 }
 
@@ -46,6 +47,7 @@
     float: left;
     max-width: calc(100% - 50px);
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 .text .category {

@@ -1,40 +1,40 @@
 .MyReview {
   width: 100%;
-  margin-left: 30px;
 }
+
 
 .MyReview .review-info {
   height: 30px;
+  display: inline-block;
 }
 .MyReview .review-info .review-rating-stars {
+  margin-left: 110px;
+  margin-right: 10px;
+  display: inline-block;
   vertical-align: middle;
-  width: 50%;
 }
 .MyReview .review-info .review-detail {
   color: #444444;
-  text-align: right;
-  align-items: end;
+  display: inline-block;
   vertical-align: middle;
-  width: 50%;
 }
 
 .MyReview .review-content {
+  margin-left: 30px;
   width: 400px;
   font-size: 13pt;
-  margin-top: 20px;
 }
 .MyReview #content-text {
   width: 400px;
   font-size: 13pt;
-  margin-top: 20px;
   word-break:break-all;
 }
 .MyReview .review-input {
   background-color: transparent;
   width: 100%;
   font-size: 13pt;
-  margin-top: 20px;
   word-break:break-all;
+  border-radius: 10px;
 }
 .MyReview #review-edit-done-button {
   cursor: pointer;

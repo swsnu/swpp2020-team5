@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import './RestaurantDetail.css'
+import './RestaurantDetail.css';
 
 class RestaurantDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     const { detailType, detailData } = this.props;
     return (

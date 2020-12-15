@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 #from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
+
+
 class FoodCategory(models.Model):
     """
     Below function is for using model like this.
@@ -15,7 +17,6 @@ class FoodCategory(models.Model):
 
     def __setitem__(self, key, value):
         return setattr(self, key, value)
-
 
     한식 = models.BooleanField(default=True)
     일식 = models.BooleanField(default=True)
@@ -40,6 +41,7 @@ class Location(models.Model):
     x = models.FloatField(default=0.0)
     y = models.FloatField(default=0.0)
     address_name = models.TextField()
+    radius = models.FloatField(default=10)
 
 
 class PreferenceVector(models.Model):
@@ -61,15 +63,12 @@ class PreferenceVector(models.Model):
     짭짤한 = models.FloatField(default=0.0)
     달달한 = models.FloatField(default=0.0)
     고소한 = models.FloatField(default=0.0)
-    싱거운 = models.FloatField(default=0.0)
-    담백한 = models.FloatField(default=0.0)
     바삭바삭한 = models.FloatField(default=0.0)
     부드러운 = models.FloatField(default=0.0)
     저렴한 = models.FloatField(default=0.0)
     웨이팅이있는 = models.FloatField(default=0.0)
     혼밥하기좋은 = models.FloatField(default=0.0)
     불친절한 = models.FloatField(default=0.0)
-
 
 
 class Profile(models.Model):
@@ -99,6 +98,7 @@ class Profile(models.Model):
         null=True,
         default='',
     )
+    current_tab = models.CharField(max_length=20, default='MyInfo')
 
 
 class Restaurant(models.Model):
@@ -124,13 +124,15 @@ class Restaurant(models.Model):
     search_string = models.TextField()
 
 # This can be ATM or other-sites' user so user can be null.
+
+
 class Author(models.Model):
     user = models.ForeignKey(
-            User,
-            on_delete=models.CASCADE,
-            related_name='author',
-            null=True,
-            )
+        User,
+        on_delete=models.CASCADE,
+        related_name='author',
+        null=True,
+    )
     nickname = models.TextField()
 
 

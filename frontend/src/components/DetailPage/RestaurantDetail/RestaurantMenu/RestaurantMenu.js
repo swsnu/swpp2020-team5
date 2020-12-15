@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import './RestaurantMenu.css'
+import './RestaurantMenu.css';
 
 class RestaurantMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     const { name, price } = this.props;
     return (
@@ -10,9 +15,9 @@ class RestaurantMenu extends Component {
           {name}
         </div>
         <div className="menu-price">
-          {price}
+          {price === null ? '(정보없음)' : price}
         </div>
-        <div className="menu-line"/>
+        <div className="menu-line" />
       </div>
     );
   }

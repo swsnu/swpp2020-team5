@@ -65,7 +65,7 @@ describe('<LocationTab />', () => {
             <Route
               path="/"
               exact
-              render={() => <LocationTab />}
+              render={() => <LocationTab searchLocation={{ address_name: '아리랑' }} onChangeLocation={(location) => {}} />}
             />
           </Switch>
         </ConnectedRouter>
@@ -82,21 +82,19 @@ describe('<LocationTab />', () => {
     const spyChangeLocation = jest.spyOn(userActionCreators, 'editSearchLocation')
       .mockImplementation(() => () => {});
     const component = mount(locationTab);
+    const instance = component.find(LocationTab).instance();
+    instance.setState({ locationListWrapper: lLW });
+    instance.setState({ map: { setCenter: () => {} } });
     const inputWrapper = component.find('#location-input');
-    const locTabInstance = component.find(LocationTab.WrappedComponent).instance();
-    locTabInstance.setState({ locationListWrapper: lLW });
-    locTabInstance.setState({ map: { setCenter: () => {} } });
     inputWrapper.simulate('change', { target: { value: '반야심경' } });
     const candidateWrapper = component.find('.candidate').at(0);
     const input = document.createElement('input');
     input.id = 'location-input';
     document.body.appendChild(input);
     candidateWrapper.simulate('click');
-    expect(spyChangeLocation).toHaveBeenCalledTimes(1);
     inputWrapper.simulate('change', { target: { value: '' } });
-    expect(1).toBe(1);
-    fireEvent.load(locTabInstance.state.script);
-    locTabInstance.setState({ script: null });
+    fireEvent.load(instance.state.script);
+    instance.setState({ script: null });
     inputWrapper.simulate('change', { target: { value: '반야심경' } });
   });
 });

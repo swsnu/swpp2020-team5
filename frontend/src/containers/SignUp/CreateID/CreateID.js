@@ -2,7 +2,7 @@ import { withRouter } from 'react-router';
 import { withAlert } from 'react-alert';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../../../store/actions/index'
+import * as actionCreators from '../../../store/actions/index';
 import CreatePreferenceVector from '../CreatePreferenceVector/CreatePreferenceVector';
 import './CreateID.css';
 
@@ -13,6 +13,8 @@ const backgroundStyle = {
   height: '650px',
   backgroundImage: `url(${Background})`,
 };
+
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
 
 class CreateID extends Component {
   constructor(props) {
@@ -31,28 +33,28 @@ class CreateID extends Component {
 
   componentDidMount() {
     this.props.onResetCheckUser();
-      // 'NotYet' is not checked yet
-      // 'NotExist' is checked but not exist
-      // 'Exist' is checked and exist
+    // 'NotYet' is not checked yet
+    // 'NotExist' is checked but not exist
+    // 'Exist' is checked and exist
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.shouldCheck) {
       if (nextProps.checkUserStatus === 'NotExist') {
-        return { 
+        return {
           mode: 'Preference',
           shouldCheck: false,
-        }
-      } else if (nextProps.checkUserStatus === 'Exist') {
-        const { alert } = nextProps; 
+        };
+      } if (nextProps.checkUserStatus === 'Exist') {
+        const { alert } = nextProps;
         alert.show('이미 가입된 회원입니다!');
         nextProps.onResetCheckUser();
         return {
           shouldCheck: false,
-        }
+        };
       }
-      
     }
+    return {};
   }
 
   onClickConfirmHandler() {
@@ -60,14 +62,16 @@ class CreateID extends Component {
     this.props.onCheckUser(username, email);
     this.setState({
       shouldCheck: true,
-    })
+    });
   }
 
   onChangeButtonHandler() {
     const { userInfo } = this.state;
-    if (userInfo.username === null || userInfo.password === null
-            || userInfo.email === null) return true;
-    if (userInfo.password === this.state.verifyPassword) return false;
+    if (userInfo.username && userInfo.password
+        && emailRegex.test(userInfo.email)
+        && userInfo.password
+        && (userInfo.password === this.state.verifyPassword)) return false;
+
     return true;
   }
 
@@ -81,18 +85,27 @@ class CreateID extends Component {
     // );
     let isverified;
     if (userInfo.password === null
+        || userInfo.password === ''
         || userInfo.password !== this.state.verifyPassword) {
-      isverified = 'Password not verified';
-    } else isverified = 'Ok';
+      isverified = '일치하지 않습니다.';
+    } else isverified = '';
+
+    const validEmail = emailRegex.test(this.state.userInfo.email)
+      ? '' : '잘못된 형식입니다!';
+
     return (
 
     // <div className='createID' style={ backgroundStyle} >
       <div className="createID">
+        <div className="phrase">나만의 입맛, 나만의 평점.</div>
         <div className="box">
-          <text className="signup">회원가입</text>
-          <text className="step1">STEP1</text>
-
-          <p>이름</p>
+          <h1 className="signup">
+            회원가입
+            <div className="step1">
+              Step 1
+            </div>
+          </h1>
+          <div className="box-text">이름</div>
           <input
             id="username-input"
             type="text"
@@ -102,7 +115,11 @@ class CreateID extends Component {
             }}
           />
 
-          <p>이메일</p>
+          <div className="box-text">이메일
+            <span className="check-email">
+              {this.state.userInfo.email === null ? '' : validEmail}
+            </span>
+          </div>
           <input
             id="email-input"
             type="text"
@@ -112,7 +129,7 @@ class CreateID extends Component {
             }}
           />
 
-          <p>비밀번호</p>
+          <div className="box-text">비밀번호</div>
           <input
             id="password-input"
             type="password"
@@ -121,7 +138,10 @@ class CreateID extends Component {
               this.setState({ userInfo: { ...userInfo, password: ev.target.value } });
             }}
           />
-          <p>비밀번호확인</p>
+          <div className="box-text">비밀번호확인
+            <span className='check-password'>{this.state.userInfo.password === null ? '' : isverified}
+            </span>
+          </div>
           <input
             id="verify-password-input"
             type="password"
@@ -130,16 +150,19 @@ class CreateID extends Component {
               this.setState({ verifyPassword: ev.target.value });
             }}
           />
-          <p id="verified">{isverified}</p>
 
           <button
-            id="confirm-button"
+            id="sign-up-button"
             disabled={this.onChangeButtonHandler()}
             onClick={() => this.onClickConfirmHandler()}
           >
             확인
           </button>
-
+          <div className="ask-sign-in">
+            이미 계정이 있으신가요?
+            {' '}
+            <a id="sign-in-link" className="link" href="/sign-in">로그인</a>
+          </div>
         </div>
 
       </div>
@@ -153,7 +176,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onCheckUser: (username, email) => dispatch(actionCreators.checkUser(username, email)),
-  onResetCheckUser: () => dispatch(actionCreators.resetCheckUser())
+  onResetCheckUser: () => dispatch(actionCreators.resetCheckUser()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAlert()(withRouter(CreateID)));

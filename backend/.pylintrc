@@ -14,7 +14,7 @@ ignore=
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
-ignore-patterns=
+ignore-patterns=get*.py
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
@@ -22,6 +22,9 @@ init-hook=
     sys.path.append(os.getcwd());
     from pylint_ignore import PylintIgnorePaths;
     PylintIgnorePaths('ATM/migrations')
+    PylintIgnorePaths('ATM/embedding')
+    PylintIgnorePaths('ATM/restaurant/resource')
+    PylintIgnorePaths('data_getting')
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use.
@@ -63,7 +66,8 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
-disable=too-few-public-methods,
+disable=pointless-string-statement,
+        too-few-public-methods,
         duplicate-code,
         import-error,
         missing-module-docstring,

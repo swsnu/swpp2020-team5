@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import Geolocation from "react-native-geolocation-service";
 import * as actionCreators from '../../store/actions/index';
 
 import logo from '../../images/logo.png';
@@ -27,21 +27,19 @@ class SignIn extends Component {
     const { onPostSignIn, history } = this.props;
     const { email, password } = this.state;
     const { currLoc } = this.state;
-    navigator.geolocation.getCurrentPosition((loc) => {
-        currLoc.x = loc.coords.longitude;
-        currLoc.y = loc.coords.latitude;
-        this.setState({ currLoc });
-        onPostSignIn({ email, password, currLoc });
-        console.log(currLoc.x);
-        console.log(currLoc.y);
-        
-    },(err) => {
+    Geolocation.getCurrentPosition((loc) => {
+      currLoc.x = loc.coords.longitude;
+      currLoc.y = loc.coords.latitude;
+      console.log(currLoc.x);
+      console.log(currLoc.y);
+      this.setState({ currLoc });
+      onPostSignIn({ email, password, currLoc });
+    }, (err) => {
       currLoc.y = 37.47835220754036;
       currLoc.x = 126.95631398408709;
       this.setState({ currLoc });
       onPostSignIn({ email, password, currLoc });
     });
-    
   }
 
   render() {
@@ -69,16 +67,14 @@ class SignIn extends Component {
             value={password}
             onChange={(event) => this.setState({ password: event.target.value })}
           />
-          <div>
-            <button
-              type="button"
-              id="sign-in-button"
-              onClick={() => this.onClickSignInHandler()}
-            >
-              로그인
-            </button>
-          </div>
-          <div className="sign-up">
+          <button
+            type="button"
+            id="sign-in-button"
+            onClick={() => this.onClickSignInHandler()}
+          >
+            로그인
+          </button>
+          <div className="ask-sign-up">
             아직 회원이 아니신가요?
             {' '}
             <a id="sign-up-link" className="link" href="/sign-up">회원 가입</a>

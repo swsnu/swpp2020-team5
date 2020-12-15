@@ -12,9 +12,8 @@ class UserTestCase(TestCase):
             "username": "sug",
             "email": 'sug@sug.com',
             'password': 'sug',
-            'selectedFoods': {
-                '과자': True
-            }
+            'selectedFoods': ['짜장면'],
+            "serviceOptionList": [0,0,0,0],
         }
         response = client.post('/atm/sign-up/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -32,7 +31,11 @@ class UserTestCase(TestCase):
         self.assertEqual(401, response.status_code)
         request_body = {
             "email": 'sug@sug.com',
-            'password': 'sug'
+            'password': 'sug',
+            "currLoc": {
+                'x': '126',
+                'y': '37',
+            }
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -55,7 +58,11 @@ class UserTestCase(TestCase):
         self.assertEqual(401, response.status_code)
         request_body = {
             "email": 'sug@sug.com',
-            'password': 'sug'
+            'password': 'sug',
+            "currLoc": {
+                'x': '126',
+                'y': '37',
+            }
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -97,7 +104,11 @@ class UserTestCase(TestCase):
         self.assertEqual(401, response.status_code)
         request_body = {
             "email": 'sug@sug.com',
-            'password': 'sug'
+            'password': 'sug',
+            "currLoc": {
+                'x': '126',
+                'y': '37',
+            }
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -139,7 +150,11 @@ class UserTestCase(TestCase):
         self.assertEqual(401, response.status_code)
         request_body = {
             "email": 'sug@sug.com',
-            'password': 'sug'
+            'password': 'sug',
+            "currLoc": {
+                'x': '126',
+                'y': '37',
+            }
         }
         response = client.post('/atm/sign-in/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,
@@ -166,3 +181,43 @@ class UserTestCase(TestCase):
                               HTTP_X_CSRFTOKEN=csrftoken,
                               content_type='application/json')
         self.assertEqual(200, response.status_code)
+
+    def test_check(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.get('/atm/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/atm/user/me/',
+                               HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(405, response.status_code)
+        response = client.get('/atm/user/me/')
+        self.assertEqual(401, response.status_code)
+        request_body = {
+            "email": 'sug@sug.com',
+            'password': 'sug',
+            "currLoc": {
+                'x': '126',
+                'y': '37',
+            }
+        }
+        response = client.post('/atm/sign-in/', request_body,
+                               HTTP_X_CSRFTOKEN=csrftoken,
+                               content_type='application/json')
+        self.assertEqual(204, response.status_code)
+        response = client.get(
+            '/atm/user/check/?username=sug&email=sug@sug.com')
+        self.assertEqual(401, response.status_code)
+        response = client.get('/atm/user/check/?username=sug&email=wrong')
+        self.assertEqual(401, response.status_code)
+        response = client.get(
+            '/atm/user/check/?username=wrong&email=sug@sug.com')
+        self.assertEqual(401, response.status_code)
+        response = client.get('/atm/user/check/?username=wrong&email=wrong')
+        self.assertEqual(204, response.status_code)
+        response = client.get('/atm/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post(
+            '/atm/user/check/?username=wrong&email=wrong',
+            {},
+            HTTP_X_CSRFTOKEN=csrftoken,
+            content_type='application/json')
+        self.assertEqual(405, response.status_code)
