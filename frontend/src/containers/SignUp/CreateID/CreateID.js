@@ -14,7 +14,7 @@ const backgroundStyle = {
   backgroundImage: `url(${Background})`,
 };
 
-const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
 
 class CreateID extends Component {
   constructor(props) {

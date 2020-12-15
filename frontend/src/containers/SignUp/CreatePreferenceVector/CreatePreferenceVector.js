@@ -60,6 +60,7 @@ class CreatePreferenceVector extends Component {
       selectedFoods: selectedFoodNames,
       serviceOptionList,
     });
+    // This would be better in useractions.
     this.props.history.push('/');
     alert.show('가입 완료!');
   }
@@ -172,14 +173,14 @@ class CreatePreferenceVector extends Component {
                 {surveyList}
               </div>
             </div>
-          </div>
-          <div
-            id="confirm-button"
-            onClick={() => {
-              this.onClickConfirmHandler();
-            }}
-          >
-            가입 완료
+            <div
+              id="confirm-button"
+              onClick={() => {
+                this.onClickConfirmHandler();
+              }}
+            >
+              가입 완료
+            </div>
           </div>
         </div>
       </div>

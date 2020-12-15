@@ -10,8 +10,8 @@ class PreferenceVectorTab extends Component {
     // adjustedVector is the vector that will be submitted.
     this.state = {
       tasteFactorList: [
-        '매운', '느끼한', '짭짤한', '달달한', '고소한',
-        '싱거운', '담백한', '바삭바삭한', '부드러운',
+        '매운', '느끼한', '짭짤한', '달달한', 
+        '고소한', '바삭바삭한', '부드러운',
       ],
       serviceFactorList: [
         '저렴한', '혼밥하기좋은', '웨이팅이있는', '불친절한',

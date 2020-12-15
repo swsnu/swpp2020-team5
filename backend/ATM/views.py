@@ -44,13 +44,13 @@ def sign_up(request):
                     max_cos = cos_sim_word(attr, food)
                 if cos_sim_word(attr, food) < min_cos:
                     min_cos = cos_sim_word(attr, food)
+            weight /= len(selected_foods)
+            print(weight)
             weight = 2.5 + 10 * weight
-            """
             if weight > max_weight:
                 weight = max_weight
             if weight < min_weight:
                 weight = min_weight
-            """
             pref_vec[attr] = weight
         set_service_pref(pref_vec, service_option_list)
         pref_vec.save()

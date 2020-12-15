@@ -8,9 +8,8 @@ from numpy.linalg import norm
 class Constants:
     service_pref_list = ['저렴한', '혼밥하기좋은', '웨이팅이있는', '불친절한']
 
-
 embedding = {}
-with open("./ATM/embedding/embedding_first_1.json", "r", encoding="utf-8") as fp:
+with open("./ATM/embedding/embedding_first_0R.json", "r", encoding="utf-8") as fp:
     embedding = json.load(fp)
 
 

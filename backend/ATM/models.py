@@ -63,8 +63,6 @@ class PreferenceVector(models.Model):
     짭짤한 = models.FloatField(default=0.0)
     달달한 = models.FloatField(default=0.0)
     고소한 = models.FloatField(default=0.0)
-    싱거운 = models.FloatField(default=0.0)
-    담백한 = models.FloatField(default=0.0)
     바삭바삭한 = models.FloatField(default=0.0)
     부드러운 = models.FloatField(default=0.0)
     저렴한 = models.FloatField(default=0.0)
