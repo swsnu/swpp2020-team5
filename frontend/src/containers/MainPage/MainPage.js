@@ -20,15 +20,24 @@ class MainPage extends Component {
 
   componentDidMount() {
     const searchKeyword = this.props.match.params.name === undefined ? '' : this.props.match.params.name;
-    this.props.onGetRestaurantList(searchKeyword).then(res =>
-      this.setState({ isLoading: false })
-    );
+    this.props.onGetRestaurantList(searchKeyword);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.storedList) {
+      return { isLoading: false };
+    }
+    return {};
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    window.scrollTo(this.state.scrollX, this.state.scrollY);
   }
 
   onClickHandler() {
     const { curPage } = this.state;
-    let scrollX = window.scrollX || document.documentElement.scrollLeft;
-    let scrollY = window.scrollY || document.documentElement.scrollTop;
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
     this.setState({ curPage: curPage + 1, scrollX, scrollY });
   }
 
@@ -37,11 +46,8 @@ class MainPage extends Component {
     helpContent.style.display = helpContent.style.display === 'none' ? 'block' : 'none';
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    window.scrollTo(this.state.scrollX, this.state.scrollY);
-  }
-  
   render() {
+    const searchKeyword = this.props.match.params.name === undefined ? '' : this.props.match.params.name;
     const { curPage, isLoading } = this.state;
     let order = 0;
     const list = [];
@@ -49,7 +55,10 @@ class MainPage extends Component {
     if (isLoading) {
       return (
         <div>
-          <SideBar restaurantID={-1} />
+          <SideBar
+            restaurantID={-1}
+            onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
+          />
           <div className="mainPage">
             <LoadingScreen loadingQuote="음식점 목록을 불러오는 중입니다..." />
           </div>
@@ -73,11 +82,11 @@ class MainPage extends Component {
         />,
       );
     }
-    const searchKeyword = this.props.match.params.name === undefined ? '' : this.props.match.params.name;
     if (list.length === 0) {
       return (
         <div>
-          <SideBar restaurantID={-1} 
+          <SideBar
+            restaurantID={-1}
             onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
           />
           <div className="mainPage">
@@ -99,8 +108,9 @@ class MainPage extends Component {
       headerContent = `"${this.props.match.params.name}"`;
     }
     return (
-      <div>
-        <SideBar restaurantID={-1} 
+      <div className="MainPage">
+        <SideBar
+          restaurantID={-1}
           onReloadHandler={() => this.props.onGetRestaurantList(searchKeyword)}
         />
         <div className="main-page-header">
@@ -108,9 +118,14 @@ class MainPage extends Component {
             {headerContent}
             에 대한 검색 결과입니다.
           </div>
-          <div className="header-help" >
-            <span className="questionmark" onMouseOver={() => MainPage.onClickHelpHandler()}
-                                           onMouseLeave={() => MainPage.onClickHelpHandler()}>?</span>
+          <div className="header-help">
+            <span
+              className="questionmark"
+              onMouseOver={() => MainPage.onClickHelpHandler()}
+              onMouseLeave={() => MainPage.onClickHelpHandler()}
+            >
+              ?
+            </span>
             <div className="header-help-content" style={{ display: 'none' }}>
               <span className="red-text">사용자의 취향</span>
               은 회원가입 시 입력한 정보로 정해집니다.
@@ -131,7 +146,7 @@ class MainPage extends Component {
               <br />
               <span className="red-text">음식점의 평점</span>
               은 음식점의 성향과 사용자의 취향의 유사도를 반영하여
-              기존 음식점의 평점에서 조정하고, 최종적으로 음식점의 대중적인 
+              기존 음식점의 평점에서 조정하고, 최종적으로 음식점의 대중적인
               인기를 반영하여 정해집니다.
               <br />
               <br />

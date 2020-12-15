@@ -20,6 +20,10 @@ urlpatterns = [
         views.food_category,
         name='food_category'),
     path(
+        'current-tab/',
+        views.current_tab,
+        name='current_tab'),
+    path(
         'check/',
         views.check,
         name='check'),

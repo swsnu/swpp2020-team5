@@ -26,15 +26,16 @@ class ReviewList extends Component {
   }
 
   onClickTabHandler = (index) => {
-    this.setState({ tabIndex: index });
-    this.setState({ currReviewCnt: 10 });
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    this.setState({ tabIndex: index, currReviewCnt: 10, scrollX, scrollY });
   }
 
   onClickShowMoreHandler = () => {
     const { currReviewCnt } = this.state;
     const increasedCnt = currReviewCnt + 10;
-    let scrollX = window.scrollX || document.documentElement.scrollLeft;
-    let scrollY = window.scrollY || document.documentElement.scrollTop;
+    const scrollX = window.scrollX || document.documentElement.scrollLeft;
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
 
     this.setState({ currReviewCnt: increasedCnt, scrollX, scrollY });
   }

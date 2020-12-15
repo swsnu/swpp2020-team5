@@ -16,18 +16,20 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_OTHER_REVIEWS:
       return { ...state, otherReviews: action.target };
-    case actionTypes.GET_MY_REVIEWS:
+    case actionTypes.GET_MY_REVIEWS: {
       const newReviewList = [...action.target];
-      newReviewList.sort((a,b) => b.id-a.id);
+      newReviewList.sort((a, b) => b.id - a.id);
       return { ...state, myReviews: newReviewList };
+    }
     case actionTypes.EDIT_MY_REVIEW: {
-      const newReviewList = [...state.myReviews];
-      newReviewList.forEach(review => {
+      const newReviewList = state.myReviews.map((review) => {
+        const newReview = { ...review };
         if (review.id === action.target.id) {
-          review.content = action.target.content;
-          review.rating = action.target.rating;
-          review.date = action.target.date;
+          newReview.content = action.target.content;
+          newReview.rating = action.target.rating;
+          newReview.date = action.target.date;
         }
+        return newReview;
       });
       return { ...state, myReviews: newReviewList };
     }

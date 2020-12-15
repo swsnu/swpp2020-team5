@@ -13,6 +13,7 @@ class UserTestCase(TestCase):
             "email": 'sug@sug.com',
             'password': 'sug',
             'selectedFoods': ['짜장면'],
+            "serviceOptionList": [0,0,0,0],
         }
         response = client.post('/atm/sign-up/', request_body,
                                HTTP_X_CSRFTOKEN=csrftoken,

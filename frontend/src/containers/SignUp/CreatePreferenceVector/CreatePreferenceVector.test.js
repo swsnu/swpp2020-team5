@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+// import { render, fireEvent  } from "react-testing-library";
 
 import CreatePreferenceVector from './CreatePreferenceVector';
 import getMockStore from '../../../test-utils/mocks';
@@ -56,12 +57,19 @@ describe('<CreatePreferenceVector />', () => {
     const wrapper = component.find('CreatePreferenceVector');
 
     wrapper.find('#confirm-button').simulate('click');
+    expect(spyPostSignUp).toHaveBeenCalledTimes(0);
+    wrapper.find('#rd0_0').simulate('change', { target: { checked: true, value: '0_0' } });
+    wrapper.find('#rd1_0').simulate('change', { target: { checked: true, value: '1_0' } });
+    wrapper.find('#rd2_0').simulate('change', { target: { checked: true, value: '2_0' } });
+    wrapper.find('#rd3_0').simulate('change', { target: { checked: true, value: '3_0' } });
+    wrapper.find('#confirm-button').simulate('click');
     expect(spyPostSignUp).toHaveBeenCalledTimes(1);
     expect(spyPostSignUp).toHaveBeenCalledWith({
       username: 'TEST_NAME',
       email: 'TEST_EMAIL',
       password: 'TEST_PW',
       selectedFoods: [],
+      serviceOptionList: [0, 0, 0, 0],
     });
     expect(spyHistoryPush).toHaveBeenCalledWith('/');
   });
@@ -82,12 +90,22 @@ describe('<CreatePreferenceVector />', () => {
     expect(wrapper.state().selectedFoods[0]).toBe(true);
 
     wrapper.find('#confirm-button').simulate('click');
+    expect(spyPostSignUp).toHaveBeenCalledTimes(0);
+
+    // Survey done.
+
+    wrapper.find('#rd0_0').simulate('change', { target: { checked: true, value: '0_0' } });
+    wrapper.find('#rd1_0').simulate('change', { target: { checked: true, value: '1_0' } });
+    wrapper.find('#rd2_0').simulate('change', { target: { checked: true, value: '2_0' } });
+    wrapper.find('#rd3_0').simulate('change', { target: { checked: true, value: '3_0' } });
+    wrapper.find('#confirm-button').simulate('click');
     expect(spyPostSignUp).toHaveBeenCalledTimes(1);
     expect(spyPostSignUp).toHaveBeenCalledWith({
       username: 'TEST_NAME',
       email: 'TEST_EMAIL',
       password: 'TEST_PW',
       selectedFoods: ['짜장면'],
+      serviceOptionList: [0, 0, 0, 0],
     });
   });
 });

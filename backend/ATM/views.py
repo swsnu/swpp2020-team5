@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
 import requests
 from .models import PreferenceVector, FoodCategory, Location, Profile, Author
-from .utils import cos_sim_word
+from .utils import cos_sim_word, set_service_pref
 from .user.utils import get_preference_attributes
 
 # Create your views here.
@@ -23,6 +23,7 @@ def sign_up(request):
             email = req_data['email']
             password = req_data['password']
             selected_foods = req_data['selectedFoods']
+            service_option_list = req_data['serviceOptionList']
         except (KeyError, JSONDecodeError):
             return HttpResponse(status=400)
         # This checks duplicated user
@@ -51,6 +52,7 @@ def sign_up(request):
                 weight = min_weight
             """
             pref_vec[attr] = weight
+        set_service_pref(pref_vec, service_option_list)
         pref_vec.save()
         """
         print('max', max_cos)
@@ -116,6 +118,7 @@ def sign_in(request):
                 cur_user.food_category[attr] = True
             cur_user.food_category.save()
             cur_user.radius = 10
+            cur_user.current_tab = 'MyInfo'
             cur_user.save()
             return HttpResponse(status=204)
         else:

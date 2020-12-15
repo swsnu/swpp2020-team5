@@ -98,7 +98,7 @@ describe('review actionCreators ', () => {
       }));
     store.dispatch(actionCreators.getMyReviews(1)).then(() => {
       const newState = store.getState();
-      expect(newState.rv.myReviews).toBe(stubReviewList);
+      expect(newState.rv.myReviews).toEqual(stubReviewList);
       expect(spy).toHaveBeenCalledTimes(1);
       done();
     });

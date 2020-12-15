@@ -43,6 +43,12 @@ input[type='range']::-webkit-slider-thumb {
   font-size: 20px;
   color:  #666666;
 }
+.factor-type {
+  margin-left: 40px;
+  font-size: 25px;
+  font-weight: bold;
+  color:  #666666;
+}
 .factor-indicator-wrapper {
   padding-top: 5px;
   margin-left: 40px;
@@ -57,3 +63,33 @@ input[type='range']::-webkit-slider-thumb {
   display: flex;
 
 }
+.pref-help {
+  background-color: #CCCCCC;
+  text-align: center;
+  color: #FFFFFF;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  float: left;
+  cursor: pointer;
+}
+.pref-help .questionmark {
+  font-size: 25px;
+  vertical-align: middle;
+}
+.pref-help-content {
+  padding-left: 10px;
+  font-size: 18px;
+  z-index: 11;
+  background-color: #FFFFFF;
+  height: 30px;
+  width: 400px;
+  color: #666666;
+  text-align: left;
+  position: sticky;
+  box-shadow: 5px 0px 15px rgba(0,0,0,0.4);
+}
+.pref-help-content .red-text {
+  color: #E44142;
+}
+

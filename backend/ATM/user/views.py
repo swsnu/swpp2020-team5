@@ -144,3 +144,29 @@ def food_category(request):
             return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['GET', 'PUT'])
+
+
+@ensure_csrf_cookie
+def current_tab(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            user = request.user.profile
+            response_dict = {'tabMode': user.current_tab}
+            return JsonResponse(response_dict, status=200)
+        else:
+            return HttpResponse(status=401)
+    elif request.method == 'PUT':
+        if request.user.is_authenticated:
+            user = request.user.profile
+            try:
+                req_data = json.loads(request.body.decode())
+            except (KeyError, JSONDecodeError):
+                return HttpResponse(status=400)
+            user.current_tab = req_data['tabMode']
+            user.save()
+            response_dict = {'tabMode': user.current_tab}
+            return JsonResponse(response_dict, status=200)
+        else:
+            return HttpResponse(status=401)
+    else:
+        return HttpResponseNotAllowed(['GET', 'PUT'])

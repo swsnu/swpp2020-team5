@@ -39,6 +39,7 @@
     "react-star-rating-input": "^8.0.1",
     "react-star-ratings": "^2.3.0",
     "react-tabs": "^3.1.1",
+    "react-testing-library": "^8.0.1",
     "react-wordcloud": "^1.2.7",
     "reactjs-popup": "^2.0.4",
     "redux": "^4.0.5",

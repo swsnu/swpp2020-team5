@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { withAlert } from 'react-alert';
+import { withAlert, Provider as AlertProvider } from 'react-alert';
 
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
+import AlertTemplate from 'react-alert-template-basic';
 import { history } from '../../../store/store';
+
 import getMockStore from '../../../test-utils/mocks';
 import CreateID from './CreateID';
 import * as actionCreators from '../../../store/actions/userActions/userActions';
@@ -52,15 +54,17 @@ describe('<CreateID/>', () => {
   beforeEach(() => {
     createid = (
       <Provider store={mockStore}>
-        <ConnectedRouter history={history}>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={() => <CreateID onChangeStageHandler={mockChangeStage} />}
-            />
-          </Switch>
-        </ConnectedRouter>
+        <AlertProvider template={AlertTemplate}>
+          <ConnectedRouter history={history}>
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={() => <CreateID onChangeStageHandler={mockChangeStage} />}
+              />
+            </Switch>
+          </ConnectedRouter>
+        </AlertProvider>
       </Provider>
     );
     spyResetCheckUser = jest.spyOn(actionCreators, 'resetCheckUser')
@@ -80,27 +84,27 @@ describe('<CreateID/>', () => {
     const component = mount(createid);
     const userwrapper = component.find('#username-input');
     userwrapper.simulate('change', { target: { value: mockusername } });
-    let instance = component.find(CreateID.WrappedComponent).instance();
+    let instance = component.find('CreateID').instance();
     expect(instance.state.userInfo.username).toEqual(mockusername);
     const emailwrapper = component.find('#email-input');
     emailwrapper.simulate('change', { target: { value: mockemail } });
-    instance = component.find(CreateID.WrappedComponent).instance();
+    instance = component.find('CreateID').instance();
     expect(instance.state.userInfo.email).toEqual(mockemail);
     emailwrapper.simulate('change', { target: { value: 'ddd@ddd' } });
     const passwordwrapper = component.find('#password-input');
     passwordwrapper.simulate('change', { target: { value: mockpassword } });
-    instance = component.find(CreateID.WrappedComponent).instance();
+    instance = component.find('CreateID').instance();
     expect(instance.state.userInfo.password).toEqual(mockpassword);
     const verifywrapper = component.find('#verify-password-input');
     verifywrapper.simulate('change', { target: { value: mockverify } });
-    instance = component.find(CreateID.WrappedComponent).instance();
+    instance = component.find('CreateID').instance();
     expect(instance.state.verifyPassword).toEqual(mockverify);
     const clickwrapper = component.find('#sign-up-button');
     clickwrapper.simulate('click');
 
     const spyCheckUser = jest.spyOn(actionCreators, 'checkUser')
       .mockImplementation((email, password) => (dispatch) => {});
-    instance = component.find(CreateID.WrappedComponent).instance();
+    instance = component.find('CreateID').instance();
     expect(instance.state.shouldCheck).toEqual(true);
     expect(spyCheckUser).toBeCalledTimes(0);
   });
@@ -114,15 +118,17 @@ describe('<CreateID/>', () => {
     const stubMockStore = getMockStore(initialState);
     const stubCreateId = (
       <Provider store={stubMockStore}>
-        <ConnectedRouter history={history}>
-          <Switch>
-            <Route
-              path="/"
-              exact
-              render={() => <CreateID onChangeStageHandler={mockChangeStage} />}
-            />
-          </Switch>
-        </ConnectedRouter>
+        <AlertProvider template={AlertTemplate}>
+          <ConnectedRouter history={history}>
+            <Switch>
+              <Route
+                path="/"
+                exact
+                render={() => <CreateID onChangeStageHandler={mockChangeStage} />}
+              />
+            </Switch>
+          </ConnectedRouter>
+        </AlertProvider>
       </Provider>
     );
     const component = mount(stubCreateId);
@@ -136,7 +142,7 @@ describe('<CreateID/>', () => {
     changeHandler.simulate('change', { target: { value: '123' } });
     changeHandler = component.find('#sign-up-button');
     changeHandler.simulate('click');
-    const instance = component.find(CreateID.WrappedComponent).instance();
+    const instance = component.find('CreateID').instance();
     expect(instance.state.shouldCheck).toEqual(true);
     changeHandler.simulate('click');
     changeHandler = component.find('#email-input');

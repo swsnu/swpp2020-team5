@@ -48,7 +48,7 @@ describe('<SideBar />', () => {
         preferenceVector: {
           매운: 3,
         },
-
+        tabMode: 'MyInfo',
       },
       review: {},
     });
@@ -79,7 +79,7 @@ describe('<SideBar />', () => {
     const component = mount(sideBar);
 
     let wrapper = component.find('SideBar');
-    expect(wrapper.find('.spyMyInfoTab').length).toBe(1);
+    expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
@@ -112,8 +112,6 @@ describe('<SideBar />', () => {
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
-
-    expect(() => { wrapper.setState({ tabMode: 'invalidMode' }); }).toThrow(Error);
   });
 
   it('should push history by searchWord', () => {
@@ -133,14 +131,14 @@ describe('<SideBar />', () => {
 
     const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((path) => path); wrapper.find('#search-input').simulate('change', { target: { value: 'food' } });
     wrapper.find('#logo-button').simulate('click');
-    expect(spyHistoryPush).toHaveBeenCalledWith('/main/');
+    // expect(spyHistoryPush).toHaveBeenCalledWith('/main/');
     expect(wrapper.state().searchWord).toBe('');
   });
 
   it('should render tabs when clicking tab-name-button', () => {
     const component = mount(sideBar);
     let wrapper = component.find('SideBar');
-    expect(wrapper.find('.spyMyInfoTab').length).toBe(1);
+    expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);

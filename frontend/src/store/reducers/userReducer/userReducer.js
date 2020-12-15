@@ -15,6 +15,7 @@ const initialState = {
   },
   checkUserStatus: 'NotYet',
   isGetUserCalled: false,
+  tabMode: null,
 };
 
 // preferenceVector form should be like {'factorOne': 3, 'factorTwo': 4}
@@ -37,6 +38,10 @@ const reducer = (state = initialState, action) => {
       return { ...state, preferenceVector: action.target };
     case actionTypes.EDIT_PREFERENCE_VECTOR:
       return { ...state, preferenceVector: action.target };
+    case actionTypes.GET_CURRENT_TAB:
+      return { ...state, tabMode: action.target };
+    case actionTypes.EDIT_CURRENT_TAB:
+      return { ...state, tabMode: action.target };
     case actionTypes.GET_SIGN_OUT:
       return { ...state, isGetUserCalled: false };
     case actionTypes.POST_SIGN_IN:

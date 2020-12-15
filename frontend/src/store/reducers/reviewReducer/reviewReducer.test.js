@@ -65,10 +65,13 @@ describe('Review reducer', () => {
 
     const newState = reducer(stubInitialState, {
       type: actionTypes.EDIT_MY_REVIEW,
-      id: 2,
-      content: '아주 맛이 좋다',
-      rating: 5,
-      date: 'test',
+      target: {
+        id: 2,
+        content: '아주 맛이 좋다',
+        rating: 5,
+        date: 'test',
+
+      },
     });
 
     expect(newState).toEqual({

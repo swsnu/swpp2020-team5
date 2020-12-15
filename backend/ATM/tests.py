@@ -25,7 +25,8 @@ class HomeTestCase(TestCase):
             "BADname": "sug",
             "email": "sug@sug.com",
             "password": "sug",
-            "selectedFoods": ["짜장면"]
+            "selectedFoods": ["짜장면"],
+            "serviceOptionList": [0,0,0,0],
         }
         response = client.get('/atm/token/')
         csrftoken = response.cookies['csrftoken'].value
@@ -37,7 +38,8 @@ class HomeTestCase(TestCase):
             "username": "sug",
             "email": "sug@sug.com",
             "password": "sug",
-            "selectedFoods": ["짜장면"]
+            "selectedFoods": ["짜장면"],
+            "serviceOptionList": [0,0,0,0],
         }
         response = client.post('/atm/sign-up/', request_body,
                                content_type="application/json",
@@ -86,7 +88,8 @@ class HomeTestCase(TestCase):
             "username": "sug",
             "email": "sug@sug.com",
             "password": "sug",
-            "selectedFoods": ["짜장면"]
+            "selectedFoods": ["짜장면"],
+            "serviceOptionList": [0,0,0,0],
         }
         response = client.post('/atm/sign-up/', request_body,
                                content_type="application/json",
@@ -134,7 +137,8 @@ class HomeTestCase(TestCase):
             "username": "sug",
             "email": "sug@sug.com",
             "password": "sug",
-            "selectedFoods": ["짜장면"]
+            "selectedFoods": ["짜장면"],
+            "serviceOptionList": [0,0,0,0],
         }
         response = client.post('/atm/sign-up/', request_body,
                                content_type="application/json",
