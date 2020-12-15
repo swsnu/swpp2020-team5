@@ -87,11 +87,11 @@ class CreateID extends Component {
     if (userInfo.password === null
         || userInfo.password === ''
         || userInfo.password !== this.state.verifyPassword) {
-      isverified = 'Password not verified';
-    } else isverified = 'Ok';
+      isverified = '일치하지 않습니다.';
+    } else isverified = '';
 
     const validEmail = emailRegex.test(this.state.userInfo.email)
-      ? '' : 'Invalid form!';
+      ? '' : '잘못된 형식입니다!';
 
     return (
 
@@ -115,7 +115,11 @@ class CreateID extends Component {
             }}
           />
 
-          <div className="box-text">이메일</div>
+          <div className="box-text">이메일
+            <span className="check-email">
+              {this.state.userInfo.email === null ? '' : validEmail}
+            </span>
+          </div>
           <input
             id="email-input"
             type="text"
@@ -124,7 +128,6 @@ class CreateID extends Component {
               this.setState({ userInfo: { ...userInfo, email: ev.target.value } });
             }}
           />
-          {this.state.userInfo.email === null ? '' : validEmail}
 
           <div className="box-text">비밀번호</div>
           <input
@@ -135,7 +138,10 @@ class CreateID extends Component {
               this.setState({ userInfo: { ...userInfo, password: ev.target.value } });
             }}
           />
-          <div className="box-text">비밀번호확인</div>
+          <div className="box-text">비밀번호확인
+            <span className='check-password'>{this.state.userInfo.password === null ? '' : isverified}
+            </span>
+          </div>
           <input
             id="verify-password-input"
             type="password"
@@ -144,7 +150,6 @@ class CreateID extends Component {
               this.setState({ verifyPassword: ev.target.value });
             }}
           />
-          <p>{this.state.userInfo.password === null ? '' : isverified}</p>
 
           <button
             id="sign-up-button"

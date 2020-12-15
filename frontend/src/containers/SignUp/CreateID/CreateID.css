@@ -1,6 +1,16 @@
 .createID {
   min-width: 1000px;
 }
+.createID .check-email{
+  color: red;
+  font-size: 17px;
+  margin-left: 10px;
+}
+.createID .check-password{
+  color: red;
+  font-size: 17px;
+  margin-left: 10px;
+}
 .createID .box {
   background-color: #FFFFFF;
   border-radius: 20px;
@@ -10,8 +20,6 @@
   text-align: center;
   margin: 10px auto 0px auto;
   padding: 1px 50px 30px 50px;
-  overflow-y: scroll;
-  height: 350px;
 }
 .box input {
   width: calc(100% - 15px);
@@ -30,7 +38,7 @@
   background-color: #E44142;
   border-radius: 10px;
   color: #FFFFFF;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-bottom: 10px;
   font-size: 17px;
   width: 100px;
