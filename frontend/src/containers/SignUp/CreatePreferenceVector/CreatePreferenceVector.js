@@ -104,13 +104,13 @@ class CreatePreferenceVector extends Component {
       '혼밥을 자주 하시나요?',
       { label: '자주해요.' },
       { label: '보통이에요.' },
-      { label: '거의안해요.' },
+      { label: '거의 안해요.' },
     ]);
     radioOptionsArray.push([
       '웨이팅이 있어도 괜찮으신가요?',
       { label: '괜찮아요.' },
       { label: '보통이에요.' },
-      { label: '없으면좋아요.' },
+      { label: '없으면 좋아요.' },
     ]);
     radioOptionsArray.push([
       '친절한 서비스를 중요시 하시나요?',
