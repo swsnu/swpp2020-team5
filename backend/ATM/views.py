@@ -45,7 +45,7 @@ def sign_up(request):
                 if cos_sim_word(attr, food) < min_cos:
                     min_cos = cos_sim_word(attr, food)
             weight /= len(selected_foods)
-            print(weight)
+            #print(weight)
             weight = 2.5 + 10 * weight
             if weight > max_weight:
                 weight = max_weight
@@ -110,7 +110,7 @@ def sign_in(request):
             api_test = requests.get(url, headers=headers)
             url_text = json.loads(api_test.text)
             address_name = url_text['documents'][0]['address_name']
-            print(address_name)
+            #print(address_name)
             cur_user.search_location.address_name = address_name
             cur_user.search_location.save()
             

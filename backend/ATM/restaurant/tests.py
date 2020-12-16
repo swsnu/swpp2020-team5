@@ -29,7 +29,7 @@ class RestaurantTestCase(TestCase):
         mock_location_b.save()
         # preferenceVector
         mock_prevec = PreferenceVector(매운=3, 느끼한=0, 짭짤한=0, 달달한=0,
-                                       고소한=0, 싱거운=0, 담백한=1, 바삭바삭한=0, 부드러운=0,
+                                       고소한=0, 바삭바삭한=0, 부드러운=0,
                                        저렴한=0, 웨이팅이있는=0, 혼밥하기좋은=2, 불친절한=0)
         mock_prevec.save()
         # food_category
