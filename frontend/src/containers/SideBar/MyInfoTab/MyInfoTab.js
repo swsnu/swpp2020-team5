@@ -3,7 +3,7 @@ import ReactStars from 'react-rating-stars-component';
 import { connect } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import * as actionCreators from '../../../store/actions/index';
-import MyReview from '../../../components/SideBar/MyReview/MyReview';
+import MyReview from '../../../components/SideBar/MyInfoTab/MyReview/MyReview';
 import './MyInfoTab.css';
 
 const history = createHistory();

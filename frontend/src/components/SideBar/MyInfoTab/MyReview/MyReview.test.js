@@ -5,9 +5,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 import MyReview from './MyReview';
-import getMockStore from '../../../test-utils/mocks';
-import { history } from '../../../store/store';
-import * as actionCreators from '../../../store/actions/reviewActions/reviewActions';
+import getMockStore from '../../../../test-utils/mocks';
+import { history } from '../../../../store/store';
+import * as actionCreators from '../../../../store/actions/reviewActions/reviewActions';
 
 describe('<MyReview />', () => {
   let myReview;

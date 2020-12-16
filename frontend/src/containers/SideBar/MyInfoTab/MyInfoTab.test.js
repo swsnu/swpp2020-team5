@@ -9,7 +9,7 @@ import * as reviewActionCreator from '../../../store/actions/reviewActions/revie
 import getMockStore from '../../../test-utils/mocks';
 import { history } from '../../../store/store';
 
-jest.mock('../../../components/SideBar/MyReview/MyReview', () => jest.fn((props) => (
+jest.mock('../../../components/SideBar/MyInfoTab/MyReview/MyReview', () => jest.fn((props) => (
   <div className="MyReview">
     <p>{props.restaurantID}</p>
   </div>
