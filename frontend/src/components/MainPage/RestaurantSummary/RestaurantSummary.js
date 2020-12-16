@@ -7,9 +7,8 @@ import VectorFactor from '../VectorFactor/VectorFactor';
 
 class RestaurantSummary extends Component {
   onClickRestaurantHandler(restaurantID) {
-    this.props.onClickSummary().then(() => 
-      this.props.history.push(`/detail/${restaurantID}`)
-    )
+    this.props.onClickSummary();
+    this.props.history.push(`/detail/${restaurantID}`);
   }
 
   render() {

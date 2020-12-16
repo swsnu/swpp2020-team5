@@ -90,7 +90,7 @@ describe('<CreateID/>', () => {
     emailwrapper.simulate('change', { target: { value: mockemail } });
     instance = component.find('CreateID').instance();
     expect(instance.state.userInfo.email).toEqual(mockemail);
-    emailwrapper.simulate('change', { target: { value: 'ddd@ddd' } });
+    emailwrapper.simulate('change', { target: { value: 'ddd@ddd.com' } });
     const passwordwrapper = component.find('#password-input');
     passwordwrapper.simulate('change', { target: { value: mockpassword } });
     instance = component.find('CreateID').instance();
@@ -135,7 +135,7 @@ describe('<CreateID/>', () => {
     let changeHandler = component.find('#username-input');
     changeHandler.simulate('change', { target: { value: 'dd' } });
     changeHandler = component.find('#email-input');
-    changeHandler.simulate('change', { target: { value: 'aaa@aaa' } });
+    changeHandler.simulate('change', { target: { value: 'aaa@aaa.com' } });
     changeHandler = component.find('#password-input');
     changeHandler.simulate('change', { target: { value: '123' } });
     changeHandler = component.find('#verify-password-input');
@@ -146,6 +146,6 @@ describe('<CreateID/>', () => {
     expect(instance.state.shouldCheck).toEqual(true);
     changeHandler.simulate('click');
     changeHandler = component.find('#email-input');
-    changeHandler.simulate('change', { target: { value: 'aaa@aaa' } });
+    changeHandler.simulate('change', { target: { value: 'aaa@aaa.com' } });
   });
 });

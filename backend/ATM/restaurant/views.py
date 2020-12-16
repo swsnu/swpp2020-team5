@@ -98,7 +98,7 @@ def searched_restaurants(request, word=''):
                 response_list,
                 key=lambda x: x['rate'],
                 reverse=True)
-            print('min ', debug_min)
+            #print('min ', debug_min)
             return JsonResponse(result_list, safe=False, status=200)
         return HttpResponse(status=401)
     return HttpResponseNotAllowed(['GET'])

@@ -2,9 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 #from django.contrib.postgres.fields import ArrayField
 
-# Create your models here.
-
-
 class FoodCategory(models.Model):
     """
     Below function is for using model like this.

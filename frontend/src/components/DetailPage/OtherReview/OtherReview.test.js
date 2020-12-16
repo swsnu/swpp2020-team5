@@ -22,17 +22,17 @@ describe('</OtherReview />', () => {
 
     // initially rendered as summary
     expect(wrapper.text()).toBe(`This must be summarized. 
-    Because the length o...`);
+    Because the length of this content is too~~~~~ too...펼치기`);
 
     // should open the content.
-    wrapper.simulate('click');
+    component.find('.open-content').simulate('click');
     const wrapper1 = component.find('.other-review-content');
     expect(wrapper1.text()).toBe(longContent);
 
     // should close the content
-    wrapper.simulate('click');
+    component.find('.close-content').simulate('click');
     const wrapper2 = component.find('.other-review-content');
     expect(wrapper2.text()).toBe(`This must be summarized. 
-    Because the length o...`);
+    Because the length of this content is too~~~~~ too...펼치기`);
   });
 });

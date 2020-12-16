@@ -27,7 +27,6 @@ class SideBar extends Component {
     super(props);
     this.state = {
       searchWord: '',
-      tabMode: null,
       searchLocation: {},
       initSearchLocation: false,
       foodCategory: {},
@@ -36,15 +35,10 @@ class SideBar extends Component {
       preferenceVector: {},
       initPreferenceVector: false,
     };
-    props.onGetCurrentTab().then((res) => this.setState({
-      tabMode: this.props.tabMode,
-    }));
-  }
-
-  componentDidMount() {
-    this.props.onGetSearchLocation();
-    this.props.onGetFoodCategory();
-    this.props.onGetPreferenceVector();
+    props.onGetCurrentTab();
+    props.onGetSearchLocation();
+    props.onGetFoodCategory();
+    props.onGetPreferenceVector();
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -81,29 +75,29 @@ class SideBar extends Component {
   }
 
   postClickFoodCategoryHandler = (category) => {
-    const newState = { ...this.state };
+    let { foodCategory, selectAllCategory } = this.state;
     if (category === 'total') {
-      if (newState.selectAllCategory === false) {
-        Object.keys(this.state.foodCategory).forEach((cat) => {
-          newState.foodCategory[cat] = true;
+      if (selectAllCategory === false) {
+        Object.keys(foodCategory).forEach((cat) => {
+          foodCategory[cat] = true;
         });
-        newState.selectAllCategory = true;
+        selectAllCategory = true;
       } else {
-        Object.keys(this.state.foodCategory).forEach((cat) => {
-          newState.foodCategory[cat] = false;
+        Object.keys(foodCategory).forEach((cat) => {
+          foodCategory[cat] = false;
         });
-        newState.selectAllCategory = false;
+        selectAllCategory = false;
       }
     } else {
-      if (newState.selectAllCategory) {
-        Object.keys(this.state.foodCategory).forEach((cat) => {
-          newState.foodCategory[cat] = false;
+      if (selectAllCategory) {
+        Object.keys(foodCategory).forEach((cat) => {
+          foodCategory[cat] = false;
         });
-        newState.selectAllCategory = false;
+        selectAllCategory = false;
       }
-      newState.foodCategory[category] = !this.state.foodCategory[category];
+      foodCategory[category] = !foodCategory[category];
     }
-    this.setState(newState);
+    this.setState({ foodCategory, selectAllCategory });
   }
 
   onChangeVectorHandler = (id, event) => {
@@ -114,7 +108,7 @@ class SideBar extends Component {
 
   onSearchHandler = () => {
     const {
-      searchWord, searchLocation, foodCategory, preferenceVector, tabMode,
+      searchWord, searchLocation, foodCategory, preferenceVector,
     } = this.state;
     this.props.onEditSearchLocation(searchLocation);
     this.props.onEditFoodCategory(foodCategory);
@@ -151,23 +145,18 @@ class SideBar extends Component {
         this.setState({ preferenceVector });
       });
     }
-    this.setState({ tabMode });
     this.props.onEditCurrentTab(tabMode);
   }
 
   onClickLogoButtonHandler = () => {
-    const {
-      tabMode,
-    } = this.state;
-    this.setState({ searchWord: '' });
-    this.props.onEditCurrentTab(tabMode).then((res) => this.props.history.push('/main/'));
+    this.setState({ searchWord: '' }, () => this.props.history.push('/main/'));
   }
 
   // SubComponent
   render() {
     let tab;
-    const { tabMode, searchWord } = this.state;
-    const { searchLocation } = this.props;
+    const { searchWord } = this.state;
+    const { tabMode, searchLocation } = this.props;
 
     switch (tabMode) {
       case 'MyInfo':

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import SearchResult from '../SearchResult/SearchResult';
+import SearchResult from './SearchResult/SearchResult';
 
 import searchIcon from '../../../images/searchIcon_red.png';
 import './LocationTab.css';
@@ -100,7 +100,10 @@ class LocationTab extends Component {
     this.onToggleListHandler(0);
 
     // show new location on map
-    this.state.marker.setMap(null);
+    const { marker } = this.state;
+    if (marker) {
+      marker.setMap(null);
+    }
     let markerPosition  = new kakao.maps.LatLng(location.y, location.x); 
     let newMarker = new kakao.maps.Marker({position: markerPosition});
     this.setState({

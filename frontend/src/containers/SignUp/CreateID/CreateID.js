@@ -109,7 +109,7 @@ class CreateID extends Component {
           <input
             id="username-input"
             type="text"
-            value={userInfo.username}
+            value={userInfo.username || ''}
             onChange={(ev) => {
               this.setState({ userInfo: { ...userInfo, username: ev.target.value } });
             }}
@@ -123,7 +123,7 @@ class CreateID extends Component {
           <input
             id="email-input"
             type="text"
-            value={userInfo.email}
+            value={userInfo.email || ''}
             onChange={(ev) => {
               this.setState({ userInfo: { ...userInfo, email: ev.target.value } });
             }}
@@ -133,7 +133,7 @@ class CreateID extends Component {
           <input
             id="password-input"
             type="password"
-            value={userInfo.password}
+            value={userInfo.password || ''}
             onChange={(ev) => {
               this.setState({ userInfo: { ...userInfo, password: ev.target.value } });
             }}
@@ -145,7 +145,7 @@ class CreateID extends Component {
           <input
             id="verify-password-input"
             type="password"
-            value={this.state.verifyPassword}
+            value={this.state.verifyPassword || ''}
             onChange={(ev) => {
               this.setState({ verifyPassword: ev.target.value });
             }}

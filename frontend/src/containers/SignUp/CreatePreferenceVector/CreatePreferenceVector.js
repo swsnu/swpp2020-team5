@@ -8,7 +8,7 @@ import food2 from '../../../images/sign_up_food_쌀국수.jpeg';
 import food3 from '../../../images/sign_up_food_떡볶이.jpg';
 import food4 from '../../../images/sign_up_food_후라이드치킨.png';
 import food5 from '../../../images/sign_up_food_김치찌개.jpeg';
-import food6 from '../../../images/sign_up_food_티라미수.jpg';
+import food6 from '../../../images/sign_up_food_초콜릿케이크.jpg';
 import checkImage from '../../../images/check.png';
 import './CreatePreferenceVector.css';
 
@@ -18,7 +18,7 @@ class CreatePreferenceVector extends Component {
     this.handleRadio = this.handleRadio.bind(this);
     this.state = {
       selectedFoods: [false, false, false, false, false, false],
-      foodCaptionList: ['짜장면', '쌀국수', '떡볶이', '후라이드치킨', '김치찌개', '티라미수'],
+      foodCaptionList: ['짜장면', '쌀국수', '떡볶이', '후라이드치킨', '김치찌개', '초콜릿케이크'],
       serviceOptionList: [null, null, null, null],
     };
   }

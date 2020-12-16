@@ -23,7 +23,20 @@ def prefvec_update(restaurant_prefvec, user_prefvec, avg_diff):
             adjust += (restaurant_prefvec[res_key] -
                        user_prefvec[user_key]) * sim
 
-        user_prefvec[user_key] += (adjust * avg_diff) * pivot
+        # To resemble res_vec, there are two ways.
+        if avg_diff > 0:
+            # if res > user and updated user > res, truncate user.
+            if restaurant_prefvec[user_key] > user_prefvec[user_key]:
+                user_prefvec[user_key] += (adjust * avg_diff) * pivot
+                if user_prefvec[user_key] > restaurant_prefvec[user_key]:
+                    user_prefvec[user_key] = restaurant_prefvec[user_key]
+            # if res < user and updated user < res, truncate user.
+            else:
+                user_prefvec[user_key] += (adjust * avg_diff) * pivot
+                if user_prefvec[user_key] < restaurant_prefvec[user_key]:
+                    user_prefvec[user_key] = restaurant_prefvec[user_key]
+
+        # This is for situation when user vec becomes a lot farther from res_vec.
         truncate_pref_val(user_prefvec, user_key)
     for factor in ['저렴한', '혼밥하기좋은']:
         user_prefvec[factor] += (restaurant_prefvec[factor] -
