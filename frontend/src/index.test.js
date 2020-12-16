@@ -7,6 +7,7 @@ import store, { history } from './store/store';
 import App from './App';
 
 jest.mock('react-dom', () => ({ render: jest.fn() }));
+jest.mock('./containers/SignIn/SignIn', () => (<div></div> ));
 
 test('render with App and root div', () => {
   const root = document.createElement('div');
