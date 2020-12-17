@@ -174,7 +174,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGetRestaurantList: (name) => dispatch(actionCreators.getRestaurantList(name)),
-  onEditCurrentTab: tabMode => dispatch(actionCreators.editCurrentTab(tabMode)),
+  onEditCurrentTab: (tabMode) => dispatch(actionCreators.editCurrentTab(tabMode)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPage));

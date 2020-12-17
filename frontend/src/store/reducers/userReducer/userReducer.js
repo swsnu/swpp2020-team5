@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GET_SEARCH_LOCATION:
       return { ...state, searchLocation: action.target };
     case actionTypes.EDIT_SEARCH_LOCATION:
-      return { ...state, searchLocation: action.target};
+      return { ...state, searchLocation: action.target };
     case actionTypes.GET_PREFERENCE_VECTOR:
       return { ...state, preferenceVector: action.target };
     case actionTypes.EDIT_PREFERENCE_VECTOR:

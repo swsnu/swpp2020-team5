@@ -48,10 +48,11 @@ class OtherReview extends Component {
             <p id="rating-text">{this.props.rating}</p>
             <p id="createTime">{this.props.date}</p>
           </div>
-          <div className="other-review-content" id={this.props.author} >{contentDisplay}
-          {(contentDisplay.length > 80 && this.state.isSummary) ? contentOpen: ''}
+          <div className="other-review-content" id={this.props.author}>
+            {contentDisplay}
+            {(contentDisplay.length > 80 && this.state.isSummary) ? contentOpen : ''}
           </div>
-          {(contentDisplay.length > 80 && !(this.state.isSummary)) ? contentClose: ''}
+          {(contentDisplay.length > 80 && !(this.state.isSummary)) ? contentClose : ''}
         </div>
       </div>
     );

@@ -44,13 +44,13 @@ describe('<RestaurantSummary />', () => {
                   img_url_list={
                     ['a', 'b']
                   }
-                onClickSummary={() => new Promise((resolve, reject) => {
-                  const result = {
-                    status: 200,
-                    data: null,
-                  };
-                  resolve(result);
-                })}
+                  onClickSummary={() => new Promise((resolve, reject) => {
+                    const result = {
+                      status: 200,
+                      data: null,
+                    };
+                    resolve(result);
+                  })}
                 />
               )}
             />

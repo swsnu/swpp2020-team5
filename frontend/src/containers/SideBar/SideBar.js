@@ -75,7 +75,8 @@ class SideBar extends Component {
   }
 
   postClickFoodCategoryHandler = (category) => {
-    let { foodCategory, selectAllCategory } = this.state;
+    const { foodCategory } = this.state;
+    let { selectAllCategory } = this.state;
     if (category === 'total') {
       if (selectAllCategory === false) {
         Object.keys(foodCategory).forEach((cat) => {
@@ -172,15 +173,11 @@ class SideBar extends Component {
           <LocationTab
             id="location-tab"
             searchLocation={this.state.searchLocation}
-            onChangeLocation={(newLocation) => 
-              this.setState({ searchLocation: newLocation }, () => 
-                this.props.onEditSearchLocation(newLocation).then(() => {
-                  if (this.props.restaurantID === -1) {
-                    this.props.onReloadHandler();
-                  }
-                })
-              )
-            }
+            onChangeLocation={(newLocation) => this.setState({ searchLocation: newLocation }, () => this.props.onEditSearchLocation(newLocation).then(() => {
+              if (this.props.restaurantID === -1) {
+                this.props.onReloadHandler();
+              }
+            }))}
           />
         );
         break;
@@ -193,13 +190,11 @@ class SideBar extends Component {
               (category) => this.postClickFoodCategoryHandler(category)
             }
             selectAll={this.state.selectAllCategory}
-            onClickSave={() =>
-              this.props.onEditFoodCategory(this.state.foodCategory).then(() => {
-                if (this.props.restaurantID === -1) {
-                  this.props.onReloadHandler();
-                }
-              })
-            }
+            onClickSave={() => this.props.onEditFoodCategory(this.state.foodCategory).then(() => {
+              if (this.props.restaurantID === -1) {
+                this.props.onReloadHandler();
+              }
+            })}
           />
         );
         break;
@@ -209,13 +204,11 @@ class SideBar extends Component {
             id="preference-vector-tab"
             preferenceVector={this.state.preferenceVector}
             onChangeFactor={this.onChangeVectorHandler}
-            onClickSave={() => 
-              this.props.onEditPreferenceVector(this.state.preferenceVector).then(() => {
-                if (this.props.restaurantID === -1) {
-                  this.props.onReloadHandler();
-                }
-              })
-            }
+            onClickSave={() => this.props.onEditPreferenceVector(this.state.preferenceVector).then(() => {
+              if (this.props.restaurantID === -1) {
+                this.props.onReloadHandler();
+              }
+            })}
           />
         );
         break;

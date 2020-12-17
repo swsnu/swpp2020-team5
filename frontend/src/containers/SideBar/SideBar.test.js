@@ -38,25 +38,24 @@ describe('<SideBar />', () => {
   let makeMockStore;
   let makeSideBar;
   beforeEach(() => {
-    makeMockStore = (tabMode) => 
-      getMockStore({
-        keyword: {},
-        restaurant: {},
-        user: {
-          searchLocation: {
-            address_name: '서울 관악구',
-          },
-          foodCategory: {
-            한식: false,
-          },
-          preferenceVector: {
-            매운: 3,
-          },
-          tabMode: tabMode,
+    makeMockStore = (tabMode) => getMockStore({
+      keyword: {},
+      restaurant: {},
+      user: {
+        searchLocation: {
+          address_name: '서울 관악구',
         },
-        review: {},
-      });
-    const mockStore = getMockStore({
+        foodCategory: {
+          한식: false,
+        },
+        preferenceVector: {
+          매운: 3,
+        },
+        tabMode,
+      },
+      review: {},
+    });
+    const initMockStore = getMockStore({
       keyword: {},
       restaurant: {},
       user: {
@@ -73,7 +72,7 @@ describe('<SideBar />', () => {
       },
       review: {},
     });
-    makeSideBar = mockStore => (
+    makeSideBar = (mockStore) => (
       <Provider store={mockStore}>
         <ConnectedRouter history={history}>
           <Switch>
@@ -87,7 +86,7 @@ describe('<SideBar />', () => {
       </Provider>
     );
     sideBar = (
-      <Provider store={mockStore}>
+      <Provider store={initMockStore}>
         <ConnectedRouter history={history}>
           <Switch>
             <Route
@@ -112,7 +111,7 @@ describe('<SideBar />', () => {
   it('should render tabs when clicking tab-image-button', () => {
     let component = mount(sideBar);
 
-    let spyEditCurrentTab = jest.spyOn(actionCreators, 'editCurrentTab')
+    const spyEditCurrentTab = jest.spyOn(actionCreators, 'editCurrentTab')
       .mockImplementation((dispatch) => () => {});
     let wrapper = component.find('SideBar');
     expect(wrapper.find('.spyMyInfoTab').length).toBe(1);
@@ -150,7 +149,6 @@ describe('<SideBar />', () => {
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(1);
-
   });
 
   it('should push history by searchWord', () => {
@@ -175,9 +173,9 @@ describe('<SideBar />', () => {
   });
 
   it('should render tabs when clicking tab-name-button', () => {
-    let component = mount(sideBar);
-    let wrapper = component.find('SideBar');
-    let spyEditCurrentTab = jest.spyOn(actionCreators, 'editCurrentTab')
+    const component = mount(sideBar);
+    const wrapper = component.find('SideBar');
+    const spyEditCurrentTab = jest.spyOn(actionCreators, 'editCurrentTab')
       .mockImplementation((dispatch) => () => {});
     expect(wrapper.find('.spyMyInfoTab').length).toBe(1);
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
@@ -197,7 +195,7 @@ describe('<SideBar />', () => {
 
   it('should change location at tab', () => {
     const component = mount(makeSideBar(makeMockStore('Location')));
-    let wrapper = component.find('SideBar');
+    const wrapper = component.find('SideBar');
     expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
     expect(wrapper.find('.spyLocationTab').length).toBe(1);
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(0);
@@ -210,14 +208,14 @@ describe('<SideBar />', () => {
 
   it('should change category at tab', () => {
     const component = mount(makeSideBar(makeMockStore('FoodCategory')));
-    let wrapper = component.find('SideBar');
+    const wrapper = component.find('SideBar');
     wrapper.find('.tab-button').at(2).simulate('click');
     expect(wrapper.find('.spyMyInfoTab').length).toBe(0);
     expect(wrapper.find('.spyLocationTab').length).toBe(0);
     expect(wrapper.find('.spyFoodCategoryTab').length).toBe(1);
     expect(wrapper.find('.spyPreferenceVectorTab').length).toBe(0);
     const tabWrapper = component.find('.spyFoodCategoryTab');
-    let spyGetFoodCategory = jest.spyOn(actionCreators, 'getFoodCategory')
+    const spyGetFoodCategory = jest.spyOn(actionCreators, 'getFoodCategory')
       .mockImplementation((dispatch) => () => {});
 
     // this is dummy for calling getDerivedStateFromProps

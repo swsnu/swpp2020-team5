@@ -115,7 +115,8 @@ class CreateID extends Component {
             }}
           />
 
-          <div className="box-text">이메일
+          <div className="box-text">
+            이메일
             <span className="check-email">
               {this.state.userInfo.email === null ? '' : validEmail}
             </span>
@@ -138,8 +139,10 @@ class CreateID extends Component {
               this.setState({ userInfo: { ...userInfo, password: ev.target.value } });
             }}
           />
-          <div className="box-text">비밀번호확인
-            <span className='check-password'>{this.state.userInfo.password === null ? '' : isverified}
+          <div className="box-text">
+            비밀번호확인
+            <span className="check-password">
+              {this.state.userInfo.password === null ? '' : isverified}
             </span>
           </div>
           <input

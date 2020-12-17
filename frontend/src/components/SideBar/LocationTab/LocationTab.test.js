@@ -35,9 +35,9 @@ global.kakao = {
     },
     Marker: function Marker(position) {
       return {
-        setMap: (map) => {}
-      }
-    }
+        setMap: (map) => {},
+      };
+    },
   },
 };
 const lLW = {

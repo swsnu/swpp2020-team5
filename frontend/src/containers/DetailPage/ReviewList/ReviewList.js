@@ -28,7 +28,9 @@ class ReviewList extends Component {
   onClickTabHandler = (index) => {
     const scrollX = window.scrollX || document.documentElement.scrollLeft;
     const scrollY = window.scrollY || document.documentElement.scrollTop;
-    this.setState({ tabIndex: index, currReviewCnt: 10, scrollX, scrollY });
+    this.setState({
+      tabIndex: index, currReviewCnt: 10, scrollX, scrollY,
+    });
   }
 
   onClickShowMoreHandler = () => {

@@ -5,7 +5,7 @@
   background-color: white;
   margin: auto;
   position: absolute;
-  top: 5%;
+  top: 100px;
   left: calc(50% - 500px);
   border-radius: 2em;
 }

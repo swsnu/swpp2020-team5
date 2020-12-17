@@ -22,6 +22,7 @@ module.exports = {
   ],
   ignorePatterns: ["serviceWorker.js", "index.js", "index.test.js"],
   rules: {
+    "max-len": "off",
     "jsx-a11y/mouse-events-have-key-events": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"]  }],
     "jsx-a11y/click-events-have-key-events": "off",

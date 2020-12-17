@@ -81,12 +81,4 @@ describe('<SignIn />', () => {
     expect(newSignInInstance.state.email).toEqual('');
     expect(newSignInInstance.state.password).toEqual(password);
   });
-
-  it('should call "onClickSigninHandler"', () => {
-    const spyPostSignIn = jest.spyOn(userActionCreators, 'postSignIn')
-      .mockImplementation(() => () => {});
-    const component = mount(signIn);
-    const wrapper = component.find('#sign-in-button');
-    wrapper.simulate('click');
-  });
 });
