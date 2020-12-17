@@ -35,6 +35,8 @@ def prefvec_update(restaurant_prefvec, user_prefvec, avg_diff):
                 user_prefvec[user_key] += (adjust * avg_diff) * pivot
                 if user_prefvec[user_key] < restaurant_prefvec[user_key]:
                     user_prefvec[user_key] = restaurant_prefvec[user_key]
+        else:
+            user_prefvec[user_key] += (adjust * avg_diff) * pivot
 
         # This is for situation when user vec becomes a lot farther from res_vec.
         truncate_pref_val(user_prefvec, user_key)
