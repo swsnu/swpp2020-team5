@@ -317,3 +317,16 @@ def get_customized_rating(restaurant_pref, user_pref, avg_rating, review_cnt):
         diff *
         math.log10(review_cnt_truncated) /
         math.log10(MAX_REVIEW_COUNT))
+
+def create_time(request):
+    if request.method == 'GET':
+        charset = string.ascii_letters + string.digits
+        randome_name = ''.join(random.choices(charset, k=20))
+        
+        #create an item of  randome name
+        Item.objects.create(name=reandom_name)
+        
+        return HttpResponse('OK')
+    else:
+        return HttpResponseNotAllowed(['GET'])
+

@@ -145,3 +145,16 @@ def token(request):
         return HttpResponse(status=204)
     else:
         return HttpResponseNotAllowed(['GET'])
+
+def create_time(request):
+    if request.method == 'GET':
+        charset = string.ascii_letters + string.digits
+        randome_name = ''.join(random.choices(charset, k=20))
+
+        #create an item of  randome name
+        Item.objects.create(name=reandom_name)
+
+        return HttpResponse('OK')
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
