@@ -5,7 +5,7 @@
  
 ## How to run
 
-So far, the project isn't deployed on an actual server-it could be only run by the local server using yarn.
+AllTastesMatter is deployed on https://altama.shop.
 
 ### Running the frontend on local ennvironments
 
