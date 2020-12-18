@@ -45,7 +45,8 @@ class CreateID extends Component {
           mode: 'Preference',
           shouldCheck: false,
         };
-      } if (nextProps.checkUserStatus === 'Exist') {
+      }
+      if (nextProps.checkUserStatus === 'Exist') {
         const { alert } = nextProps;
         alert.show('이미 가입된 회원입니다!');
         nextProps.onResetCheckUser();
