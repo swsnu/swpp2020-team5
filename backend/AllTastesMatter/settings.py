@@ -74,18 +74,6 @@ WSGI_APPLICATION = 'AllTastesMatter.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db.postgresql',
-        'USER': 'root',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '8000',
-    }
-}
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
