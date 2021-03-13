@@ -26,3 +26,26 @@ yarn start
 ```
 to start up the frontend server on your local machine.
 When the server is ready, it would automatically load the initial frontend state(the sign-in page).
+
+### Running the backend on local ennvironments
+
+Sign up is needed if you want to check the real services. However, you will run into 'CheckUser Error' when trying to sign up with only frontend running. 
+
+Now you need to run the backend. To run backend, follow these steps.
+
+1. Activate your django environment
+2. Open the swpp2020-team5/backend/AllTastesMatter/setting.py with editor
+3. Change the ALLOWED_HOSTS = [] to ALLOWED_HOSTS = ['local host'] and save.
+4. move to swpp2020-team5/backend/ and run:
+```
+python manage.py runserver
+```
+5. If it requires to install some package, install the package and try it again.  
+For example, if you are required to install django_extensions, run:
+```
+pip install django_extension
+```
+
+### After the Frontend and Backend run
+
+Now you can sign up from the site and test the services. Enjoy!
