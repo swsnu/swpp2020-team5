@@ -5,7 +5,10 @@
  
 ## How to run
 
-AllTastesMatter is deployed on https://altama.shop.
+AllTastesMatter was deployed on https://altama.shop.
+
+(The server is not currently running. Pleaes run it on local environment!)
+
 
 ### Running the frontend on local ennvironments
 
